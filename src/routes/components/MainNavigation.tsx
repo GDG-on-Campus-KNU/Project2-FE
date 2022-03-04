@@ -8,7 +8,7 @@ const MainNavigation = () => {
   return (
     <div>
       <Header />
-      <div style={{ display: "flex", backgroundColor: "#eee" }}>
+      <div style={{ display: "flex" }}>
         <SideNavigationContainer />
         <Routes>
           <Route path="/home" element={<ScrollViewContainer />} />

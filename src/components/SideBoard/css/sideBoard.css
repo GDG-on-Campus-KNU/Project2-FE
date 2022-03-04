@@ -2,6 +2,34 @@
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
-  background-color: #aaa;
+}
+
+.side-board-wrap .side-board-container {
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: #fff;
+  border: 1px solid #aaa;
+  border-radius: 0.5rem;
+}
+
+.side-board-wrap .side-board-container h2 {
+  font-size: 21px;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  padding-left: 4px;
+}
+
+.side-board-wrap .side-board-container .post-list .post-item {
+  padding-left: 8px;
+  border-radius: 6px;
+}
+
+.side-board-wrap .side-board-container .post-list .post-item:hover {
+  background-color: #eee;
+}
+
+.side-board-wrap .side-board-container .post-list .post-item button {
+  line-height: 32px;
 }
 /*# sourceMappingURL=sideBoard.css.map */

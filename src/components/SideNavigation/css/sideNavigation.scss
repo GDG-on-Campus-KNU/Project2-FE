@@ -1,9 +1,8 @@
 .side-navigation-wrap {
-  width: 300px;
-  padding: 0.5rem;
-  background-color: #ccc;
+  flex: 1;
 
   .side-navigation-container {
+    max-width: 300px;
     margin: 0 auto;
     padding: 1rem;
     background-color: #fff;
