@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,gBAAgB,CAAC;EACf,IAAI,EAAE,CAAC;EACP,gBAAgB,EAAE,IAAI;CACvB",
+    "sources": [
+        "sideBoard.scss"
+    ],
+    "names": [],
+    "file": "sideBoard.css"
+}
