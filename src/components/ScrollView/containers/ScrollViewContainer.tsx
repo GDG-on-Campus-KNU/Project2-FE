@@ -1,8 +1,46 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ScrollView from "../ScrollView";
+import dummyBlocks from "../dummyData";
+
+let index = 0;
+
+const getBlocks = (index: number) => {
+  return dummyBlocks.slice(index, index + 10);
+};
 
 const ScrollViewContainer = () => {
-  return <ScrollView />;
+  const [target, setTarget] = useState<HTMLElement | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [itemList, setItemList] = useState([]);
+
+  const addItemList = () => {
+    const blocks = getBlocks(index);
+
+    setItemList((itemList) => [...itemList, ...blocks]);
+    index += 10;
+  };
+
+  const callback = async ([entry]: any, observer: any) => {
+    if (entry.isIntersecting) {
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      setLoading(true);
+      addItemList();
+      setLoading(false);
+    } else {
+    }
+  };
+
+  const observer = new IntersectionObserver(callback, { threshold: 0.4 });
+
+  useEffect(() => {
+    if (!target) return;
+
+    observer.observe(target);
+  }, [target]);
+
+  return (
+    <ScrollView setTarget={setTarget} loading={loading} itemList={itemList} />
+  );
 };
 
 export default ScrollViewContainer;
