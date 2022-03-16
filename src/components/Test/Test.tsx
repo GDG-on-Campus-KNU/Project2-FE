@@ -1,16 +1,14 @@
-import React from "react";
-import { PropsType } from "../../typedef/common/common.types";
+import React, { useCallback } from "react";
+import usePopUp from "../../hooks/usePopUp";
 
 type Props = {
-  setTitle: React.Dispatch<React.SetStateAction<string>>;
-  content: PropsType[];
+  testPopup: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-const Test = ({ setTitle }: Props) => {
+const Test = ({ testPopup }: Props) => {
   return (
     <div>
-      test
-      <input type="text" onChange={(e) => setTitle(e.target.value)} />
+      <button onClick={testPopup}>팝업띄우기</button>
     </div>
   );
 };

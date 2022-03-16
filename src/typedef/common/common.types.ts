@@ -11,3 +11,8 @@ export type OtherType = {
   con: string;
   char: number;
 };
+
+export type PopUpTypes = {
+  popUp: React.ReactNode;
+  isShown: boolean;
+};
