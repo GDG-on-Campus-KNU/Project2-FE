@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,iBAAiB,CAAC;EAChB,IAAI,EAAE,CAAC;CACR",
+    "sources": [
+        "scrollView.scss"
+    ],
+    "names": [],
+    "file": "scrollView.css"
+}

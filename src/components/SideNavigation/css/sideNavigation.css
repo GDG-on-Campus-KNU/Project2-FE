@@ -1,0 +1,35 @@
+.side-navigation-wrap {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.side-navigation-wrap .side-navigation-container {
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: #fff;
+  border: 1px solid #aaa;
+  border-radius: 0.5rem;
+}
+
+.side-navigation-wrap .side-navigation-container h2 {
+  font-size: 21px;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  padding-left: 4px;
+}
+
+.side-navigation-wrap .side-navigation-container .category-list .category-item {
+  padding-left: 8px;
+  border-radius: 6px;
+}
+
+.side-navigation-wrap .side-navigation-container .category-list .category-item:hover {
+  background-color: #eee;
+}
+
+.side-navigation-wrap .side-navigation-container .category-list .category-item button {
+  line-height: 32px;
+}
+/*# sourceMappingURL=sideNavigation.css.map */

@@ -10,12 +10,14 @@ const MainNavigation = () => {
     <div>
       <Header />
       <div className="not-Header" style={{ display: "flex", backgroundColor: "#eee" }}>
-        <SideNavigationContainer />
-        <Routes>
-          <Route path="/" element={<ScrollViewContainer />} />
-        </Routes>
+        <div style={{ display: "flex" }}>
+          <SideNavigationContainer />
+          <Routes>
+            <Route path="/" element={<ScrollViewContainer />} />
+          </Routes>
 
-        <SideBoardContainer />
+          <SideBoardContainer />
+        </div>
       </div>
     </div>
   );
