@@ -1,0 +1,24 @@
+.searchBar {
+  border: solid 1px;
+  display: inline;
+  border-radius: 3px;
+  font-size: 15px;
+  line-height: 80px;
+  vertical-align: center;
+}
+
+.searchDiv {
+  text-align: center;
+}
+
+.searchBar input {
+  width: 80%;
+  
+}
+
+.searchBar button {
+  text-align: center;
+  padding: 0 1px;
+  background-color: #F9A03A;
+  color: white;
+}

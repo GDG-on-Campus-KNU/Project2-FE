@@ -4,14 +4,15 @@ import Header from "../../components/Header/Header";
 import ScrollViewContainer from "../../components/ScrollView/containers/ScrollViewContainer";
 import SideBoardContainer from "../../components/SideBoard/containers/SideBoardContainer";
 import SideNavigationContainer from "../../components/SideNavigation/containers/SideNavigationContainer";
+import "../../styles/css/not-Header.css"
 const MainNavigation = () => {
   return (
     <div>
       <Header />
-      <div style={{ display: "flex", backgroundColor: "#eee" }}>
+      <div className="not-Header" style={{ display: "flex", backgroundColor: "#eee" }}>
         <SideNavigationContainer />
         <Routes>
-          <Route path="/home" element={<ScrollViewContainer />} />
+          <Route path="/" element={<ScrollViewContainer />} />
         </Routes>
 
         <SideBoardContainer />
