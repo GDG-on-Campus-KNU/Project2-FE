@@ -1,0 +1,18 @@
+#root .popup-backdrop {
+  width: 100vw;
+  height: 100vh;
+  background-color: #23232388;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+/*# sourceMappingURL=popUp.css.map */
