@@ -1,7 +1,13 @@
 import React from "react";
+import { getBlockType } from "../../../typedef/common/common.types";
 import "./css/Block.css";
 
-const Block = ({ block }) => {
+type Props = {
+  block: getBlockType;
+  loadPopUp: React.MouseEventHandler<HTMLButtonElement>;
+};
+
+const Block = ({ block, loadPopUp }: Props) => {
   return (
     <div className="block">
       <div className="user-area">
@@ -25,16 +31,21 @@ const Block = ({ block }) => {
       </div>
       <div className="comment-area">
         <div>
-          {block.images.map((image: any) => (
-            <img className="SamplePicture" src={image} alt="sampleImage" />
+          {block.images.map((image, index) => (
+            <img
+              className="SamplePicture"
+              src={image}
+              alt="sampleImage"
+              key={index}
+            />
           ))}
         </div>
         <div>
           <div>
-            <div className="icon"></div>37
+            <button>공감</button>
           </div>
           <div>
-            <div className="icon"></div>21
+            <button onClick={loadPopUp}>덧글</button>
           </div>
         </div>
       </div>

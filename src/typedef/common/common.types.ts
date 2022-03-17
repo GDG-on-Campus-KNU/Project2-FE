@@ -23,8 +23,8 @@ export type getBlockType = {
     nickname: string;
     profile: string;
   };
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
   category: string;
   content: string;
   images: string[];
