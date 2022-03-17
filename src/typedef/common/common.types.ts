@@ -16,3 +16,27 @@ export type PopUpTypes = {
   popUp: React.ReactNode;
   isShown: boolean;
 };
+
+export type getBlockType = {
+  uid: string;
+  author: {
+    nickname: string;
+    profile: string;
+  };
+  createdAt: Date;
+  updatedAt: Date;
+  category: string;
+  content: string;
+  images: string[];
+  recomment: number;
+};
+
+export type postBlockType = {
+  author: {
+    nickname: string;
+    profile: string;
+  };
+  category: string;
+  content: string;
+  images: string[];
+};
