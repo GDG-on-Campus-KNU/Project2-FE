@@ -1,0 +1,107 @@
+.HeaderContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 72px;
+  background-color: #eee;
+  overflow: hidden;
+}
+
+.left {
+  -webkit-box-flex: 0.25;
+      -ms-flex: 0.25;
+          flex: 0.25;
+  /* background-color: aqua; */
+}
+
+.middle {
+  -webkit-box-flex: 0.5;
+      -ms-flex: 0.5;
+          flex: 0.5;
+  /* background-color: beige;*/
+}
+
+.right-empty {
+  -webkit-box-flex: 0.1;
+      -ms-flex: 0.1;
+          flex: 0.1;
+  /* background-color: lightblue; */
+}
+
+.right-alarm {
+  -webkit-box-flex: 0.075;
+      -ms-flex: 0.075;
+          flex: 0.075;
+}
+
+.right-profile {
+  -webkit-box-flex: 0.075;
+      -ms-flex: 0.075;
+          flex: 0.075;
+}
+
+.logo {
+  width: 50%;
+  margin: 10px;
+  padding: 10px;
+}
+
+.not-Header {
+  padding-top: 15%;
+  background-color: brown;
+}
+
+.profile-button {
+  display: inline;
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.profile-button li {
+  width: 100%;
+  margin-right: 10px;
+  display: block;
+  background-color: tomato;
+  border: solid gray 1px;
+  font-size: 50%;
+}
+
+.close {
+  display: none;
+}
+
+.open {
+  display: inline;
+}
+
+.searchBar {
+  border: solid 1px;
+  display: inline;
+  border-radius: 3px;
+  font-size: 15px;
+  line-height: 80px;
+  vertical-align: center;
+}
+
+.searchDiv {
+  text-align: center;
+}
+
+.searchBar input {
+  width: 80%;
+}
+
+.searchBar button {
+  text-align: center;
+  padding: 0 1px;
+  background-color: #f9a03a;
+  color: white;
+}
+
+.alarm {
+  font-size: 30px;
+  margin-right: 10px;
+  text-align: right;
+  vertical-align: center;
+}
+/*# sourceMappingURL=header.css.map */
