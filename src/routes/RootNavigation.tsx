@@ -8,7 +8,7 @@ const RootNavigation = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LoginNavigationContainer />} />
-        <Route path="*" element={<MainNavigationContainer />} />
+        <Route path="/home" element={<MainNavigationContainer />} />
       </Routes>
     </BrowserRouter>
   );
