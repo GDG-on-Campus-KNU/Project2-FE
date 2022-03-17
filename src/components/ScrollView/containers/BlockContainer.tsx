@@ -4,7 +4,9 @@ import Block from "../components/Block";
 import BlockPoppUpContainer from "./BlockPopUpContainer";
 import usePopUp from "../../../hooks/usePopUp";
 
-type Props = { block: getBlockType };
+type Props = {
+  block: getBlockType;
+};
 
 const BlockContainer = ({ block }: Props) => {
   const { __showPopUpFromHooks } = usePopUp();
