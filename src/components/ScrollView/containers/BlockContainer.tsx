@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import { getBlockType } from "../../../typedef/common/common.types";
 import Block from "../components/Block";
 import BlockPoppUpContainer from "./BlockPopUpContainer";
@@ -9,11 +9,31 @@ type Props = {
 };
 
 const BlockContainer = ({ block }: Props) => {
-  const { __showPopUpFromHooks } = usePopUp();
+  const { __showPopUpFromHooks, __hidePopUpFromHooks } = usePopUp();
+  const [expand, setExpand] = useState(false);
+
   const loadPopUp = useCallback(() => {
-    __showPopUpFromHooks(<BlockPoppUpContainer block={block} />);
+    __showPopUpFromHooks(
+      <BlockPoppUpContainer block={block} closePopUp={closePopUp} />
+    );
   }, []);
-  return <Block block={block} loadPopUp={loadPopUp} />;
+
+  const closePopUp = useCallback(() => {
+    __hidePopUpFromHooks();
+  }, []);
+
+  const reverseExpand = () => {
+    setExpand(!expand);
+  };
+
+  return (
+    <Block
+      block={block}
+      loadPopUp={loadPopUp}
+      expand={expand}
+      reverseExpand={reverseExpand}
+    />
+  );
 };
 
 export default BlockContainer;

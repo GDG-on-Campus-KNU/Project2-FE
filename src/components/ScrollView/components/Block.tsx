@@ -1,13 +1,16 @@
 import React from "react";
 import { getBlockType } from "../../../typedef/common/common.types";
 import "./css/Block.css";
+import VoteView from "./VoteView";
 
 type Props = {
   block: getBlockType;
   loadPopUp: React.MouseEventHandler<HTMLButtonElement>;
+  expand: boolean;
+  reverseExpand: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-const Block = ({ block, loadPopUp }: Props) => {
+const Block = ({ block, loadPopUp, expand, reverseExpand }: Props) => {
   return (
     <div className="block">
       <div className="user-area">
@@ -22,31 +25,25 @@ const Block = ({ block, loadPopUp }: Props) => {
         </div>
       </div>
       <div className="content-area">
-        <div className="content-box">{block.content}</div>
-        <div className="vote-container">
-          <div className="vote-box">VOTE1</div>
-          <div className="vote-box">VOTE2</div>
-          <div>1920명 참가</div>
+        <div className={expand ? "content-view-expand" : "content-view"}>
+          {block.content}
         </div>
+        {block.content.length > 300 ? (
+          <button onClick={reverseExpand}>{expand ? "▲" : "▼"}</button>
+        ) : null}
+        <VoteView isVote={block.isVote} />
       </div>
-      <div className="comment-area">
+      <div className="etc-area">
         <div>
           {block.images.map((image, index) => (
-            <img
-              className="SamplePicture"
-              src={image}
-              alt="sampleImage"
-              key={index}
-            />
+            <button key={index}>
+              <img src={image} alt="sampleImage" />
+            </button>
           ))}
         </div>
         <div>
-          <div>
-            <button>공감</button>
-          </div>
-          <div>
-            <button onClick={loadPopUp}>덧글</button>
-          </div>
+          <button>공감</button>
+          <button onClick={loadPopUp}>덧글</button>
         </div>
       </div>
     </div>

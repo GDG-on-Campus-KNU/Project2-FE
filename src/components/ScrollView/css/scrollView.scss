@@ -1,8 +1,25 @@
-.scroll-view-wrap {
-  width: 100vw;
-  height: 100vh;
-  flex: 2;
-  overflow: scroll;
+.wrapper {
+  width: 50vw;
+  height: calc(100vh - 72px);
+  position: relative;
+
+  .scroll-view-wrap {
+    width: 100%;
+    height: 100%;
+    flex: 2;
+    overflow-y: scroll;
+  }
+
+  .write-btn {
+    position: absolute;
+    right: 40px;
+    bottom: 40px;
+    background-color: orange;
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    box-shadow: 5px 5px 5px black;
+  }
 }
 
 .target {
