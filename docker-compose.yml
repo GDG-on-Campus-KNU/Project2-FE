@@ -1,0 +1,10 @@
+version: "3"
+services:
+  fe:
+    image: seyoung8239/boat-vote-fe
+    ports:
+      - 3000:3000
+  be:
+    image: seyoung8239/boat-vote-be
+    ports:
+      - 8000:8000
