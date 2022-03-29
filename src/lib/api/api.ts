@@ -4,7 +4,6 @@ import axios, { AxiosError } from "axios";
 export const apiOrigin = "localhost:8000";
 
 export const apiRoute = {
-  login: "/login",
   board: "/boards",
   comment: "/comments",
   user: "/users",
