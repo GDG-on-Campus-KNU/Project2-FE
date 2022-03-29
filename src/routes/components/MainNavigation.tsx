@@ -18,7 +18,7 @@ const MainNavigation = ({ popUp }: Props) => {
       <div style={{ display: "flex" }}>
         <SideNavigationContainer />
         <Routes>
-          <Route path="/home" element={<ScrollViewContainer />} />
+          <Route path="/" element={<ScrollViewContainer />} />
         </Routes>
         <SideBoardContainer />
       </div>
