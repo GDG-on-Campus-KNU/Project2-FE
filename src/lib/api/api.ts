@@ -1,12 +1,14 @@
 import axios, { AxiosError } from "axios";
 
 //메인배너
-export const apiOrigin = "localhost:8000";
+export const apiOrigin = "http://localhost:8000";
 
 export const apiRoute = {
   board: "/boards",
   comment: "/comments",
   user: "/users",
+  login: "/api/token",
+  register: "/register",
 };
 
 export function requestGet<T>(url: string, header: object) {
