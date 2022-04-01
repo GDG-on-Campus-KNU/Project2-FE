@@ -2,74 +2,168 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  height: 72px;
-  background-color: #eee;
-  overflow: hidden;
+  padding: 0 72px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 62px;
+  -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+          box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 .header-container h1 {
-  height: 72px;
-  width: 120px;
+  height: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  font-size: 24px;
+}
+
+.header-container h1:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
 }
 
 .header-container h1 .logo {
-  height: 72px;
-  width: 120px;
+  height: 40px;
+  width: 40px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  margin-right: 8px;
+}
+
+.header-container .search-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #fff;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1px solid #000;
+}
+
+.header-container .search-container .searchInput {
+  width: 300px;
+  height: 40px;
+  font-size: 12px;
+  margin-right: 16px;
+}
+
+.header-container .search-container .search-button {
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  border-radius: 12px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.header-container .search-container .search-button:hover {
+  -webkit-transform: translate3d(1px, -1px, 0);
+          transform: translate3d(1px, -1px, 0);
+}
+
+.header-container .search-container .search-button img {
+  width: 100%;
+  height: 100%;
   -o-object-fit: contain;
      object-fit: contain;
 }
 
-.profile-button {
-  display: inline;
-  margin-right: 10px;
-  font-size: 20px;
+.header-container .right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
-.profile-button li {
+.header-container .right .alarm {
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.header-container .right .alarm:hover {
+  background-color: #eee;
+}
+
+.header-container .right .alarm:active {
+  background-color: #ddd;
+}
+
+.header-container .right .alarm img {
   width: 100%;
-  margin-right: 10px;
-  display: block;
-  background-color: tomato;
-  border: solid gray 1px;
-  font-size: 50%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
-.close {
+.header-container .right .profile-area {
+  position: relative;
+  margin-left: 12px;
+}
+
+.header-container .right .profile-area .profile-button {
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.header-container .right .profile-area .profile-button:hover {
+  background-color: #eee;
+}
+
+.header-container .right .profile-area .profile-button:active {
+  background-color: #ddd;
+}
+
+.header-container .right .profile-area .profile-button img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.header-container .right .profile-area .sub-menu {
+  position: absolute;
+  right: 0;
+  width: 120px;
+  padding: 8px;
+  font-size: 12px;
+  z-index: 9;
+  background-color: #fff;
+  border-radius: 6px;
+  -webkit-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+          box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.header-container .right .profile-area .sub-menu.open {
+  display: block;
+}
+
+.header-container .right .profile-area .sub-menu.close {
   display: none;
 }
 
-.open {
-  display: inline;
+.header-container .right .profile-area .sub-menu li {
+  padding: 4px 8px;
+  border-radius: 4px;
 }
 
-.searchBar {
-  border: solid 1px;
-  display: inline;
-  border-radius: 3px;
-  font-size: 15px;
-  line-height: 80px;
-  vertical-align: center;
-}
-
-.searchDiv {
-  text-align: center;
-}
-
-.searchBar input {
-  width: 80%;
-}
-
-.searchBar button {
-  text-align: center;
-  padding: 0 1px;
-  background-color: #f9a03a;
-  color: white;
-}
-
-.alarm {
-  font-size: 30px;
-  margin-right: 10px;
-  text-align: right;
-  vertical-align: center;
+.header-container .right .profile-area .sub-menu li:hover {
+  background-color: #eee;
 }
 /*# sourceMappingURL=header.css.map */

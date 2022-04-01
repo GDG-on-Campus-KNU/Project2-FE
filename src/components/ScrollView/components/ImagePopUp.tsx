@@ -5,9 +5,17 @@ type Props = {
   focusImage: string;
   onPrev: React.MouseEventHandler<HTMLButtonElement>;
   onNext: React.MouseEventHandler<HTMLButtonElement>;
+  images: string[];
+  imageRef: number;
 };
 
-const ImagePopUp = ({ focusImage, onPrev, onNext }: Props) => {
+const ImagePopUp = ({
+  focusImage,
+  onPrev,
+  onNext,
+  images,
+  imageRef,
+}: Props) => {
   return (
     <div className="image-popup-wrap">
       <div className="image-area">
@@ -21,7 +29,17 @@ const ImagePopUp = ({ focusImage, onPrev, onNext }: Props) => {
           next
         </button>
       </div>
-      <div className="indigator-container"></div>
+      <div className="indigator-container">
+        {images.map((item, index) => (
+          <div>
+            <button
+              className={`indicator ${imageRef === index ? "active" : ""}`}
+            >
+              {index}
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

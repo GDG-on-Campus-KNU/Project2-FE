@@ -31,7 +31,15 @@ const ImagePopUpContainer = ({ images, index }: Props) => {
     onload();
   }, [imageRef]);
 
-  return <ImagePopUp focusImage={focusImage} onPrev={onPrev} onNext={onNext} />;
+  return (
+    <ImagePopUp
+      focusImage={focusImage}
+      onPrev={onPrev}
+      onNext={onNext}
+      images={images}
+      imageRef={imageRef}
+    />
+  );
 };
 
 export default ImagePopUpContainer;
