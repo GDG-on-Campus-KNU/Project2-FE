@@ -1,4 +1,4 @@
-.HeaderContainer {
+.header-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -7,48 +7,16 @@
   overflow: hidden;
 }
 
-.left {
-  -webkit-box-flex: 0.25;
-      -ms-flex: 0.25;
-          flex: 0.25;
-  /* background-color: aqua; */
+.header-container h1 {
+  height: 72px;
+  width: 120px;
 }
 
-.middle {
-  -webkit-box-flex: 0.5;
-      -ms-flex: 0.5;
-          flex: 0.5;
-  /* background-color: beige;*/
-}
-
-.right-empty {
-  -webkit-box-flex: 0.1;
-      -ms-flex: 0.1;
-          flex: 0.1;
-  /* background-color: lightblue; */
-}
-
-.right-alarm {
-  -webkit-box-flex: 0.075;
-      -ms-flex: 0.075;
-          flex: 0.075;
-}
-
-.right-profile {
-  -webkit-box-flex: 0.075;
-      -ms-flex: 0.075;
-          flex: 0.075;
-}
-
-.logo {
-  width: 50%;
-  margin: 10px;
-  padding: 10px;
-}
-
-.not-Header {
-  padding-top: 15%;
-  background-color: brown;
+.header-container h1 .logo {
+  height: 72px;
+  width: 120px;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .profile-button {

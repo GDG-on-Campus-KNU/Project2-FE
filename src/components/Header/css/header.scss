@@ -1,43 +1,22 @@
-.HeaderContainer {
+.header-container {
   display: flex;
   height: 72px;
   background-color: #eee;
   overflow: hidden;
+
+  h1 {
+    height: 72px;
+      width: 120px;
+    .logo {
+      height: 72px;
+      width: 120px;
+     object-fit: contain;
+    }
+  }
+
 }
 
-.left {
-  flex: 0.25;
-  /* background-color: aqua; */
-}
 
-.middle {
-  flex: 0.5;
-  /* background-color: beige;*/
-}
-
-.right-empty {
-  flex: 0.1;
-  /* background-color: lightblue; */
-}
-
-.right-alarm {
-  flex: 0.075;
-}
-
-.right-profile {
-  flex: 0.075;
-}
-
-.logo {
-  width: 50%;
-  margin: 10px;
-  padding: 10px;
-}
-
-.not-Header {
-  padding-top: 15%;
-  background-color: brown;
-}
 .profile-button {
   display: inline;
   margin-right: 10px;
