@@ -5,9 +5,10 @@ import "./css/Block.css";
 type Props = {
   block: getBlockType;
   loadPopUp: React.MouseEventHandler<HTMLButtonElement>;
+  onClickImage: (index: number) => void;
 };
 
-const Block = ({ block, loadPopUp }: Props) => {
+const Block = ({ block, loadPopUp, onClickImage }: Props) => {
   return (
     <div className="block">
       <div className="user-area">
@@ -37,6 +38,7 @@ const Block = ({ block, loadPopUp }: Props) => {
               src={image}
               alt="sampleImage"
               key={index}
+              onClick={() => onClickImage(index)}
             />
           ))}
         </div>
