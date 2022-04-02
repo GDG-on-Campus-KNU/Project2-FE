@@ -1,5 +1,30 @@
 import React from "react";
 
+export type BasicAPIResponseType<T> = {
+  data: T;
+  status: number;
+  statusText: string;
+  config: {
+    url: string;
+  };
+  headers: object;
+  request: object;
+};
+
+export type LoginTokenType = {
+  refresh: string;
+  access: string;
+};
+
+export type SignUpType = {
+  username: string;
+  email: string;
+  profile: {
+    count: number;
+    boardList: null;
+  };
+};
+
 export type PropsType<OtherType> = {
   name: string;
   con: string;

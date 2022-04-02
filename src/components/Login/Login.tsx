@@ -1,5 +1,6 @@
 import React from "react";
 import "./css/login.css";
+import { Link } from "react-router-dom";
 
 type Props = {
   setId: React.Dispatch<React.SetStateAction<string>>;
@@ -27,6 +28,7 @@ const Login = ({ setId, setPassword, onSubmit }: Props) => {
             Sign In
           </button>
         </form>
+        <p>아직 계정이 없으신가요?  <Link className="link" to="signup">회원가입</Link></p>
       </div>
     </div>
   );

@@ -6,11 +6,10 @@ import VoteView from "./VoteView";
 type Props = {
   block: getBlockType;
   loadPopUp: React.MouseEventHandler<HTMLButtonElement>;
-  expand: boolean;
-  reverseExpand: React.MouseEventHandler<HTMLButtonElement>;
+  onClickImage: (index: number) => void;
 };
 
-const Block = ({ block, loadPopUp, expand, reverseExpand }: Props) => {
+const Block = ({ block, loadPopUp, onClickImage }: Props) => {
   return (
     <div className="block">
       <div className="user-area">
@@ -36,9 +35,13 @@ const Block = ({ block, loadPopUp, expand, reverseExpand }: Props) => {
       <div className="etc-area">
         <div>
           {block.images.map((image, index) => (
-            <button key={index}>
-              <img src={image} alt="sampleImage" />
-            </button>
+            <img
+              className="SamplePicture"
+              src={image}
+              alt="sampleImage"
+              key={index}
+              onClick={() => onClickImage(index)}
+            />
           ))}
         </div>
         <div>
