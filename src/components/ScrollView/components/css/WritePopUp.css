@@ -1,0 +1,33 @@
+.pop-up .pop-up-left .category {
+  height: 15%;
+}
+
+.pop-up .pop-up-left .textarea {
+  width: 100%;
+  height: 85%;
+  resize: none;
+  overflow-y: scroll;
+  padding: 15px;
+}
+
+.pop-up .pop-up-right .tab {
+  background-color: green;
+  height: 15%;
+}
+
+.pop-up .pop-up-right .tab button {
+  font-size: 20px;
+  margin-left: 20px;
+}
+
+.pop-up .pop-up-right .info-area {
+  background-color: red;
+  height: 70%;
+}
+
+.pop-up .pop-up-right .button {
+  background-color: purple;
+  width: 100%;
+  height: 15%;
+}
+/*# sourceMappingURL=WritePopUp.css.map */

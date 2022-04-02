@@ -43,18 +43,23 @@
   margin: 2px 2%;
 }
 
-.block .content-area .content-box {
+.block .content-area .content-view {
   height: auto;
   max-height: 95px;
   overflow: hidden;
 }
 
-.block .content-area .vote-container {
+.block .content-area .content-view-expand {
+  height: auto;
+  overflow: hidden;
+}
+
+.block .content-area .vote-view {
   height: 55%;
   margin: 15px 0;
 }
 
-.block .content-area .vote-container .vote-box {
+.block .content-area .vote-view .vote-box {
   width: 100%;
   height: 50px;
   border-radius: 5px;
@@ -69,11 +74,11 @@
           align-items: center;
 }
 
-.block .content-area .vote-container .vote-box:hover {
+.block .content-area .vote-view .vote-box:hover {
   background: #eee;
 }
 
-.block .comment-area {
+.block .etc-area {
   width: 100%;
   height: 15%;
   display: -webkit-box;
@@ -86,7 +91,7 @@
   padding-right: 15px;
 }
 
-.block .comment-area div {
+.block .etc-area div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -96,14 +101,19 @@
   font-size: 20px;
 }
 
-.block .comment-area div .SamplePicture {
+.block .etc-area div button {
+  height: 100%;
+  height: 60px;
+}
+
+.block .etc-area div button img {
   width: 70px;
   height: 60px;
   -o-object-fit: cover;
      object-fit: cover;
 }
 
-.block .comment-area div .icon {
+.block .etc-area div .icon {
   width: 40px;
   height: 40px;
   background-color: #929292;
