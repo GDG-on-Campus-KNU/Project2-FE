@@ -44,14 +44,17 @@
 }
 
 .block .content-area .content-view {
-  height: auto;
-  max-height: 95px;
+  word-wrap: break-word;
+  word-break: keep-all;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .block .content-area .content-view-expand {
   height: auto;
-  overflow: hidden;
 }
 
 .block .content-area .vote-view {
@@ -101,23 +104,31 @@
   font-size: 20px;
 }
 
-.block .etc-area div button {
-  height: 100%;
+.block .etc-area div .attached-image {
+  height: 60px;
+  border-radius: 4px;
+}
+
+.block .etc-area div .attached-image img {
+  width: 70px;
   height: 60px;
 }
 
-.block .etc-area div button img {
-  width: 70px;
-  height: 60px;
+.block .etc-area div .icon {
+  width: 32px;
+  height: 32px;
+  margin-left: 10px;
+  margin-top: 5px;
+  padding: 5px;
+}
+
+.block .etc-area div .icon .image {
   -o-object-fit: cover;
      object-fit: cover;
 }
 
-.block .etc-area div .icon {
-  width: 40px;
-  height: 40px;
-  background-color: #929292;
-  border-radius: 100%;
-  margin: 5px;
+.block .etc-area div .icon:hover {
+  background-color: #eee;
+  border-radius: 4px;
 }
 /*# sourceMappingURL=Block.css.map */

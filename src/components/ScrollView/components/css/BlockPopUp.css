@@ -181,5 +181,12 @@
 .pop-up .pop-up-right .comment-view .comment-input-box:focus {
   background-color: red;
   height: 50%;
+  padding: 15px;
+}
+
+.pop-up .pop-up-right .comment-view button {
+  position: absolute;
+  bottom: 0px;
+  z-index: 2;
 }
 /*# sourceMappingURL=BlockPopUp.css.map */

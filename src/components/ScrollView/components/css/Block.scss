@@ -40,14 +40,17 @@
     margin: 2px 2%;
 
     .content-view {
-      height: auto;
-      max-height: 95px;
+      word-wrap: break-word;
+      word-break: keep-all;
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
       overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .content-view-expand {
       height: auto;
-      overflow: hidden;
     }
 
     .vote-view {
@@ -83,23 +86,31 @@
       align-items: center;
       font-size: 20px;
 
-      button {
-        height: 100%;
+      .attached-image {
         height: 60px;
+        border-radius: 4px;
 
         img {
           width: 70px;
           height: 60px;
-          object-fit: cover;
         }
       }
 
       .icon {
-        width: 40px;
-        height: 40px;
-        background-color: rgb(146, 146, 146);
-        border-radius: 100%;
-        margin: 5px;
+        width: 32px;
+        height: 32px;
+        margin-left: 10px;
+        margin-top: 5px;
+        padding: 5px;
+
+        .image {
+          object-fit: cover;
+        }
+      }
+
+      .icon:hover {
+        background-color: #eee;
+        border-radius: 4px;
       }
     }
   }

@@ -64,6 +64,7 @@ const BlockPopUp = ({
           <button onClick={closePopUp}>X</button>
         </div>
         <div className="comment-view">
+          <button>작성</button>
           <div className="comment-scroll">
             <CommentScrollViewContainer />
           </div>

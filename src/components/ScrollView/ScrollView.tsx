@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./css/scrollView.css";
 import BlockContainer from "./containers/BlockContainer";
 import { getBlockType } from "../../typedef/common/common.types";
+import images from "../../assets/images";
 
 type Props = {
   setTarget: React.LegacyRef<HTMLDivElement>;
@@ -21,7 +22,7 @@ const ScrollView = ({
   return (
     <div className="wrapper">
       <button className="write-btn" onClick={loadPopUp}>
-        hello
+        <img className="icon" src={images.pencil} alt="작성" />
       </button>
       <div className="scroll-view-wrap">
         {itemList.map((block, index) => (
