@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router";
 import PopUp from "../../components/common/PopUp/PopUp";
-import Header from "../../components/Header/Header";
+import HeaderContainer from "../../components/Header/containers/HeaderContainer";
 import ScrollViewContainer from "../../components/ScrollView/containers/ScrollViewContainer";
 import SideBoardContainer from "../../components/SideBoard/containers/SideBoardContainer";
 import SideNavigationContainer from "../../components/SideNavigation/containers/SideNavigationContainer";
@@ -14,11 +14,11 @@ type Props = {
 const MainNavigation = ({ popUp }: Props) => {
   return (
     <div>
-      <Header />
-      <div style={{ display: "flex" }}>
+      <HeaderContainer />
+      <div style={{ display: "flex", marginTop: "16px" }}>
         <SideNavigationContainer />
         <Routes>
-          <Route path="/home" element={<ScrollViewContainer />} />
+          <Route path="/" element={<ScrollViewContainer />} />
         </Routes>
         <SideBoardContainer />
       </div>
