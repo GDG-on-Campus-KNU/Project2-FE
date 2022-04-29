@@ -6,6 +6,9 @@ const images = {
   notification: "assets/images/bell.png",
   user: "assets/images/user.png",
   search: "assets/images/search.png",
+  prev: "assets/images/prev.png",
+  next: "assets/images/next.png",
+  close: "assets/images/close.png",
 };
 
 export default images;

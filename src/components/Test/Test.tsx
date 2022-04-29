@@ -6,8 +6,9 @@ type Props = {
 };
 
 const Test = ({ testPopup }: Props) => {
+  const num = "16px";
   return (
-    <div>
+    <div style={{ fontSize: num }}>
       <button onClick={testPopup}>팝업띄우기</button>
     </div>
   );
