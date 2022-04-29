@@ -2,6 +2,7 @@ import React from "react";
 import { getBlockType } from "../../../typedef/common/common.types";
 import "./css/BlockPopUp.css";
 import CommentScrollViewContainer from "../containers/CommentScrollViewContainer";
+import images from "../../../assets/images";
 
 type Props = {
   block: getBlockType;
@@ -61,14 +62,16 @@ const BlockPopUp = ({
       </div>
       <div className="pop-up-right">
         <div className="header">
-          <button onClick={closePopUp}>X</button>
+          <button onClick={closePopUp}>
+            <img className="icon" src={images.popupClose} alt="닫기" />
+          </button>
         </div>
         <div className="comment-view">
-          <button>작성</button>
           <div className="comment-scroll">
             <CommentScrollViewContainer />
           </div>
           <textarea className="comment-input-box"></textarea>
+          <button>작성</button>
         </div>
       </div>
     </div>

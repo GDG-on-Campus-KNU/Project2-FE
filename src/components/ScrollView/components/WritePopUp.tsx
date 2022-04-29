@@ -2,7 +2,11 @@ import React from "react";
 import images from "../../../assets/images";
 import "./css/WritePopUp.css";
 
-const WritePopUp = () => {
+type Props = {
+  closePopUp: React.MouseEventHandler<HTMLButtonElement>;
+};
+
+const WritePopUp = ({ closePopUp }: Props) => {
   return (
     <form className="pop-up">
       <div className="pop-up-left">
@@ -16,6 +20,11 @@ const WritePopUp = () => {
         <textarea className="textarea"></textarea>
       </div>
       <div className="pop-up-right">
+        <div className="header">
+          <button onClick={closePopUp}>
+            <img className="icon" src={images.popupClose} alt="닫기" />
+          </button>
+        </div>
         <div className="info-area">
           <div className="title">투표 항목</div>
           <div className="vote-area">
