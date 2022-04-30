@@ -23,7 +23,7 @@ const Block = ({
   like,
   clickLike,
 }: Props) => {
-  const content_txt_short = block.content.substring(0,200)
+  const content_txt_short = block.content.substring(0,200) + "...";
   return (
     <div className="block">
       <div className="user-area">
