@@ -29,8 +29,8 @@ const SignUpContainer = () => {
       signupData
     );
 
-    navigate("/"); //주소 바꿨는데 왜 signup페이지에 그대로 있을까요 ㅠ ㅠ ㅠ
-  }, [id, password, email, navigate]); //email도 추가하긴 했는데 요건 무슨 의미죠 . . . ?
+    navigate("/"); 
+  }, [id, password, email, navigate]); 
 
   return (
     <SignUp
