@@ -13,9 +13,9 @@ const LoginContainer = () => {
   const navigate = useNavigate();
 
   const onSubmit = useCallback(async () => {
-    const formData = new FormData();
-    formData.append("username", id);
-    formData.append("password", password);
+    // const formData = new FormData();
+    // formData.append("username", id);
+    // formData.append("password", password);
 
     // const { data } = await requestFormPost<
     //   BasicAPIResponseType<LoginTokenType>

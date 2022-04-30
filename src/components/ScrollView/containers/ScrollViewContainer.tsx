@@ -19,12 +19,12 @@ const ScrollViewContainer = () => {
 
   const { __showPopUpFromHooks, __hidePopUpFromHooks } = usePopUp();
 
-  const loadPopUp = useCallback(() => {
-    __showPopUpFromHooks(<WritePopUpContainer />);
-  }, []);
-
   const closePopUp = useCallback(() => {
     __hidePopUpFromHooks();
+  }, []);
+
+  const loadPopUp = useCallback(() => {
+    __showPopUpFromHooks(<WritePopUpContainer closePopUp={closePopUp} />);
   }, []);
 
   const addItemList = () => {

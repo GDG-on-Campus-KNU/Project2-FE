@@ -1,40 +1,86 @@
 #root .image-popup-wrap {
   width: 50%;
-  height: 100px;
+  height: 500px;
   background-color: #fff;
+  border-radius: 8px;
+  position: relative;
+}
+
+#root .image-popup-wrap .close-button {
+  position: absolute;
+  right: 1.5vw;
+  top: 1.5vw;
+}
+
+#root .image-popup-wrap .close-button img {
+  width: 16px;
+  height: 16px;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 #root .image-popup-wrap .image-area {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   width: 100%;
   height: 100%;
+  padding: 4vw;
 }
 
-#root .image-popup-wrap .image-area .image {
+#root .image-popup-wrap .image-area img {
   width: 100%;
   height: 100%;
   -o-object-fit: contain;
      object-fit: contain;
 }
 
-#root .image-popup-wrap .image-area .image img {
+#root .image-popup-wrap .image-nav {
   width: 100%;
+  position: absolute;
+  top: calc(50% - 18px);
 }
 
 #root .image-popup-wrap .image-nav button {
-  width: 72px;
-  height: 72px;
+  width: 24px;
+  height: 24px;
   position: absolute;
-  top: calc(50%-36px);
+  top: 0;
 }
 
 #root .image-popup-wrap .image-nav button.prev-button {
-  left: 100px;
+  left: 12px;
 }
 
 #root .image-popup-wrap .image-nav button.next-button {
-  right: 100px;
+  right: 12px;
+}
+
+#root .image-popup-wrap .image-nav button img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+#root .image-popup-wrap .indigator-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: absolute;
+  bottom: 12px;
+}
+
+#root .image-popup-wrap .indigator-container .indicator {
+  width: 6px;
+  height: 6px;
+  margin-right: 6px;
+  border-radius: 3px;
+  background-color: #333;
+}
+
+#root .image-popup-wrap .indigator-container .indicator.active {
+  background-color: #ddd;
 }
 /*# sourceMappingURL=imagePopUp.css.map */
