@@ -43,18 +43,26 @@
   margin: 2px 2%;
 }
 
-.block .content-area .content-box {
-  height: auto;
-  max-height: 95px;
+.block .content-area .content-view {
+  word-wrap: break-word;
+  word-break: keep-all;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.block .content-area .vote-container {
+.block .content-area .content-view-expand {
+  height: auto;
+}
+
+.block .content-area .vote-view {
   height: 55%;
   margin: 15px 0;
 }
 
-.block .content-area .vote-container .vote-box {
+.block .content-area .vote-view .vote-box {
   width: 100%;
   height: 50px;
   border-radius: 5px;
@@ -69,11 +77,11 @@
           align-items: center;
 }
 
-.block .content-area .vote-container .vote-box:hover {
+.block .content-area .vote-view .vote-box:hover {
   background: #eee;
 }
 
-.block .comment-area {
+.block .etc-area {
   width: 100%;
   height: 15%;
   display: -webkit-box;
@@ -86,7 +94,7 @@
   padding-right: 15px;
 }
 
-.block .comment-area div {
+.block .etc-area div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -96,18 +104,31 @@
   font-size: 20px;
 }
 
-.block .comment-area div .SamplePicture {
+.block .etc-area div .attached-image {
+  height: 60px;
+  border-radius: 4px;
+}
+
+.block .etc-area div .attached-image img {
   width: 70px;
   height: 60px;
+}
+
+.block .etc-area div .icon {
+  width: 32px;
+  height: 32px;
+  margin-left: 10px;
+  margin-top: 5px;
+  padding: 5px;
+}
+
+.block .etc-area div .icon .image {
   -o-object-fit: cover;
      object-fit: cover;
 }
 
-.block .comment-area div .icon {
-  width: 40px;
-  height: 40px;
-  background-color: #929292;
-  border-radius: 100%;
-  margin: 5px;
+.block .etc-area div .icon:hover {
+  background-color: #eee;
+  border-radius: 4px;
 }
 /*# sourceMappingURL=Block.css.map */

@@ -17,13 +17,17 @@ const ImagePopUpContainer = ({ images, index }: Props) => {
 
   const onPrev = useCallback(() => {
     if (imageRef > 0) {
-      setImageRef(imageRef - 1);
+      const updateRef = imageRef - 1;
+      setImageRef(updateRef);
+      setFocusImage(images[updateRef]);
     }
   }, [imageRef]);
 
   const onNext = useCallback(() => {
-    if (imageRef < images.length) {
-      setImageRef(imageRef + 1);
+    if (imageRef < images.length - 1) {
+      const updateRef = imageRef + 1;
+      setImageRef(updateRef);
+      setFocusImage(images[updateRef]);
     }
   }, [imageRef]);
 
@@ -36,7 +40,7 @@ const ImagePopUpContainer = ({ images, index }: Props) => {
       focusImage={focusImage}
       onPrev={onPrev}
       onNext={onNext}
-      images={images}
+      files={images}
       imageRef={imageRef}
     />
   );

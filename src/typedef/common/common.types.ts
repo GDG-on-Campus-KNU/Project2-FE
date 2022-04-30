@@ -54,6 +54,7 @@ export type getBlockType = {
   content: string;
   images: string[];
   recomment: number;
+  isVote: boolean;
 };
 
 export type postBlockType = {
@@ -64,4 +65,15 @@ export type postBlockType = {
   category: string;
   content: string;
   images: string[];
+};
+
+export type getCommentType = {
+  uid: string;
+  author: {
+    nickname: string;
+    profile: string;
+  };
+  createdAt: string;
+  updatedAt: string;
+  content: string;
 };

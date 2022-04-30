@@ -15,17 +15,17 @@ const SideNavigation = () => {
           </li>
           <li className="category-item">
             <button>
-              <Link to={"/home/category"}>카테고리1</Link>
+              <Link to={"/love"}>연애</Link>
             </button>
           </li>
           <li className="category-item">
             <button>
-              <Link to={"/home"}>카테고리2</Link>
+              <Link to={"/travel"}>여행</Link>
             </button>
           </li>
           <li className="category-item">
             <button>
-              <Link to={"/home"}>카테고리3</Link>
+              <Link to={"/fashion"}>패션</Link>
             </button>
           </li>
         </ul>

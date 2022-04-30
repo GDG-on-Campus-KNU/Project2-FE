@@ -10,6 +10,7 @@ type Props = {
   onProfileClick: React.MouseEventHandler<HTMLButtonElement>;
   onSearch: React.MouseEventHandler<HTMLButtonElement>;
   setSearchContent: React.Dispatch<React.SetStateAction<string>>;
+  onSignOut: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 const Header = ({
@@ -17,6 +18,7 @@ const Header = ({
   onProfileClick,
   onSearch,
   setSearchContent,
+  onSignOut,
 }: Props) => {
   // List.filter(item => item.content.match search,,,,)
   //filter로 검색한 거 띄우기
@@ -58,7 +60,7 @@ const Header = ({
                 <a href="#">내 투표</a>
               </li>
               <li>
-                <a href="#">로그아웃</a>
+                <button onClick={onSignOut}>로그아웃</button>
               </li>
             </ul>
           </li>
