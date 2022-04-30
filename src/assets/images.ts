@@ -9,6 +9,9 @@ const images = {
   prev: "assets/images/prev.png",
   next: "assets/images/next.png",
   close: "assets/images/close.png",
+  pencil: "assets/images/pencil.png",
+  popupClose: "assets/images/popup_close.png",
+  cancle: "assets/images/cancel.png",
 };
 
 export default images;
