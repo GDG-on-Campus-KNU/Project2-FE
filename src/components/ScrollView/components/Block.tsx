@@ -23,6 +23,7 @@ const Block = ({
   like,
   clickLike,
 }: Props) => {
+  const content_txt_short = block.content.substring(0,200)
   return (
     <div className="block">
       <div className="user-area">
@@ -37,11 +38,11 @@ const Block = ({
         </div>
       </div>
       <div className="content-area">
-        <div className={expand ? "content-view-expand" : "content-view"}>
-          {block.content}
+        <div className={(expand && block.content.length > 200) ? "content-view-expand" : "content-view"}>
+          {(expand && block.content.length > 200) ? block.content : content_txt_short}
         </div>
         <button onClick={reverseExpand}>
-          {expand ? "간략히" : "자세히 보기"}
+          {(block.content.length > 200) ? (expand ?  "간략히" : "자세히 보기") : null}
         </button>
         <VoteView isVote={block.isVote} />
       </div>
