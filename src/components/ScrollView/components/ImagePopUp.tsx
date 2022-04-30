@@ -8,12 +8,20 @@ type Props = {
   onNext: React.MouseEventHandler<HTMLButtonElement>;
   files: string[];
   imageRef: number;
+  onClose: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-const ImagePopUp = ({ focusImage, onPrev, onNext, files, imageRef }: Props) => {
+const ImagePopUp = ({
+  focusImage,
+  onPrev,
+  onNext,
+  files,
+  imageRef,
+  onClose,
+}: Props) => {
   return (
     <div className="image-popup-wrap">
-      <button className="close-button">
+      <button className="close-button" onClick={onClose}>
         <img src={images.close} alt="close  " />
       </button>
       <div className="image-area">

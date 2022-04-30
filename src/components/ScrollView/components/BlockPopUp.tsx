@@ -10,6 +10,8 @@ type Props = {
   picView: boolean;
   picViewToggle: React.MouseEventHandler<HTMLButtonElement>;
   image: string;
+  commentRef: React.RefObject<HTMLTextAreaElement>;
+  onHandleHeight: React.FormEventHandler<HTMLTextAreaElement>;
 };
 
 const BlockPopUp = ({
@@ -18,6 +20,8 @@ const BlockPopUp = ({
   picView,
   picViewToggle,
   image,
+  commentRef,
+  onHandleHeight,
 }: Props) => {
   return (
     <div className="pop-up">
@@ -66,12 +70,21 @@ const BlockPopUp = ({
             <img className="icon" src={images.popupClose} alt="닫기" />
           </button>
         </div>
-        <div className="comment-view">
-          <div className="comment-scroll">
+        <div className="comment-container">
+          <div className="comment-view-box">
             <CommentScrollViewContainer />
           </div>
-          <textarea className="comment-input-box"></textarea>
-          <button>작성</button>
+          <div className="comment-write-box">
+            <textarea
+              className="comment-input"
+              placeholder="댓글 추가..."
+              ref={commentRef}
+              onInput={onHandleHeight}
+            ></textarea>
+            <div className="write-comment-box">
+              <button className="write-comment-button">작성</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
