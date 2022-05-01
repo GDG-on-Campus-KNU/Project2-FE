@@ -14,19 +14,24 @@ const LoginContainer = () => {
   const navigate = useNavigate();
   const { token, setAccess } = useAuth();
 
-  const onSubmit = useCallback(async () => {
-    const formData = new FormData();
-    formData.append("username", id);
-    formData.append("password", password);
+  const onSubmit = useCallback(
+    async (e) => {
+      e.preventDefault();
+      const formData = new FormData();
+      formData.append("username", id);
+      formData.append("password", password);
 
-    requestFormPost<BasicAPIResponseType<LoginTokenType>>(
-      `${apiOrigin}${apiRoute.login}`,
-      {},
-      formData
-    );
+      const { data } = await requestFormPost<
+        BasicAPIResponseType<LoginTokenType>
+      >(`${apiOrigin}${apiRoute.login}`, {}, formData);
 
-    navigate("/home");
-  }, [id, password, navigate]);
+      console.log(data);
+      setAccess(data.access);
+
+      navigate("/home");
+    },
+    [id, password, navigate]
+  );
 
   return <Login setId={setId} setPassword={setPassword} onSubmit={onSubmit} />;
 };
