@@ -7,7 +7,7 @@ export const apiRoute = {
   board: "/boards",
   comment: "/comments",
   user: "/users",
-  login: "/api/token",
+  login: "/api/token/",
   register: "/register",
 };
 
@@ -112,6 +112,7 @@ export function requestFormPost<T>(
         },
       })
       .then((res) => {
+        console.log(res);
         const returnVal = { ...res } as unknown;
         resolve(returnVal as T);
       })

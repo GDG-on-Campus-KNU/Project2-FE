@@ -7,9 +7,12 @@ export default function useAuth() {
     sessionStorage.getItem("@access");
   }, []);
 
-  const setAccess = useCallback(() => {
-    sessionStorage.setItem("access", token);
-  }, [token]);
+  const setAccess = useCallback(
+    (token) => {
+      sessionStorage.setItem("access", token);
+    },
+    [token]
+  );
 
-  return { token };
+  return { token, setAccess, getAccess };
 }
