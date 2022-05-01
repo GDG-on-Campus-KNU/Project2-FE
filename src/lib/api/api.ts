@@ -8,7 +8,7 @@ export const apiRoute = {
   comment: "/comments",
   user: "/users",
   login: "/api/token/",
-  register: "/register",
+  register: "/register/",
 };
 
 export function requestGet<T>(url: string, header: object) {
