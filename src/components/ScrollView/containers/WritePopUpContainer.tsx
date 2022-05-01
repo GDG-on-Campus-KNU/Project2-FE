@@ -1,4 +1,5 @@
 import React, { useCallback, useState, useEffect } from "react";
+import { createVoteType } from "../../../typedef/common/common.types";
 import WritePopUp from "../components/WritePopUp";
 
 type Props = {
@@ -10,11 +11,11 @@ const WritePopUpContainer = ({ closePopUp }: Props) => {
   const [imgEnable, setImgEnable] = useState(true);
   const [input, setInput] = useState({ id: 0, value: "" });
 
-  const changeInput = (id, e) => {
+  const changeInput = (id: number, e: React.ChangeEvent<HTMLInputElement>) => {
     setInput({ id: id, value: e.target.value });
   };
 
-  const [votes, setVotes] = useState([
+  const [votes, setVotes] = useState<createVoteType[]>([
     {
       id: new Date().valueOf(),
       vote: "",
@@ -35,7 +36,7 @@ const WritePopUpContainer = ({ closePopUp }: Props) => {
     ]);
   };
 
-  const removeVote = (id: any) => {
+  const removeVote = (id: number) => {
     setVotes(votes.filter((vote) => vote.id !== id));
   };
 

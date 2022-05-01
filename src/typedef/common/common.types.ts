@@ -77,3 +77,8 @@ export type getCommentType = {
   updatedAt: string;
   content: string;
 };
+
+export type createVoteType = {
+  id: number;
+  vote: string;
+};

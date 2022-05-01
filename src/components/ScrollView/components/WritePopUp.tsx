@@ -1,14 +1,15 @@
 import React from "react";
 import images from "../../../assets/images";
+import { createVoteType } from "../../../typedef/common/common.types";
 import "./css/WritePopUp.css";
 
 type Props = {
   closePopUp: React.MouseEventHandler<HTMLButtonElement>;
-  changeInput: any;
-  votes: Array<any>;
+  changeInput: (id: number, e: React.ChangeEvent<HTMLInputElement>) => void;
+  votes: createVoteType[];
   voteEnable: boolean;
   addVote: React.MouseEventHandler<HTMLButtonElement>;
-  removeVote: React.MouseEventHandler<HTMLButtonElement>;
+  removeVote: (id: number) => void;
   imgs: Array<any>;
   imgEnable: boolean;
   addImg: React.MouseEventHandler<HTMLButtonElement>;
@@ -48,7 +49,7 @@ const WritePopUp = ({
         <div className="info-area">
           <div className="title">투표 항목</div>
           <div className="vote-area">
-            {votes.map((vote: any, index: number) => (
+            {votes.map((vote, index) => (
               <div key={index}>
                 <input
                   className="vote-input-box"
