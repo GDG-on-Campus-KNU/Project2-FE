@@ -1,0 +1,22 @@
+.vote-view {
+  height: 55%;
+  margin: 15px 0;
+
+  .vote-box {
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    margin-top: 5px;
+
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    &:hover {
+      background: #eee;
+    }
+  }
+
+  .isvote-false {
+    padding-left: 20px;
+  }
+}

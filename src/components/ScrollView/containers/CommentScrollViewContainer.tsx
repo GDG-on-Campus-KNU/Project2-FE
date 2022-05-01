@@ -1,31 +1,45 @@
 import React, { useState, useEffect } from "react";
 import CommentScrollView from "../components/CommentScrollView";
-import dummyComments from "../dummyComments";
-import { getCommentType } from "../../../typedef/common/common.types";
+import {
+  BasicAPIResponseType,
+  getCommentResponseType,
+  getCommentType,
+  LoginTokenType,
+} from "../../../typedef/common/common.types";
+import { TypePredicateKind } from "typescript";
+import { apiOrigin, apiRoute, requestGet } from "../../../lib/api/api";
 
-let index = 0;
-
-const getComments = (index: number) => {
-  return dummyComments.slice(index, index + 10);
+type Props = {
+  blockId: number;
 };
 
-const CommentScrollViewContainer = () => {
+const CommentScrollViewContainer = ({ blockId }: Props) => {
+  const [next, setNext] = useState(
+    `${apiOrigin}${apiRoute.board}/${blockId}${apiRoute.comment}/?limit=10&offset=0`
+  );
   const [target, setTarget] = useState<HTMLElement | null>(null);
   const [end, setEnd] = useState(false);
   const [loading, setLoading] = useState(false);
   const [itemList, setItemList] = useState<getCommentType[]>([]);
 
-  const addItemList = () => {
-    const comments = getComments(index);
+  const getComments = async () => {
+    const { data } = await requestGet<
+      BasicAPIResponseType<getCommentResponseType>
+    >(next, {});
 
-    if (Array.isArray(comments) && comments.length === 0) {
+    if (data.next) {
+      setNext(data.next);
+    } else {
       setEnd(true);
-
-      return;
     }
 
+    console.log(data);
+
+    return data.results;
+  };
+
+  const addItemList = (comments: getCommentType[]) => {
     setItemList((itemList) => [...itemList, ...comments]);
-    index += 10;
   };
 
   const intersecting = async (
@@ -33,9 +47,9 @@ const CommentScrollViewContainer = () => {
     observer: IntersectionObserver
   ) => {
     if (entry.isIntersecting) {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const comments = await getComments();
       setLoading(true);
-      addItemList();
+      addItemList(comments);
       setLoading(false);
     }
   };

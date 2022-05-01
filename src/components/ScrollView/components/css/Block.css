@@ -56,33 +56,6 @@
   height: auto;
 }
 
-.block .content-area .vote-view {
-  height: 55%;
-  margin: 15px 0;
-}
-
-.block .content-area .vote-view .vote-box {
-  width: 100%;
-  height: 50px;
-  border-radius: 5px;
-  margin-top: 5px;
-  border: 1px solid black;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.block .content-area .vote-view .vote-box:hover {
-  background: #eee;
-}
-
-.block .content-area .vote-view .isvote-false {
-  padding-left: 20px;
-}
-
 .block .etc-area {
   width: 100%;
   height: 60px;

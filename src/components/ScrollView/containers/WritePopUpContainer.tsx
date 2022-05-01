@@ -1,5 +1,12 @@
 import React, { useCallback, useState, useEffect } from "react";
-import { createVoteType } from "../../../typedef/common/common.types";
+import useAuth from "../../../hooks/Auth/useAuth";
+import { apiOrigin, apiRoute, requestFormPost } from "../../../lib/api/api";
+import {
+  BasicAPIResponseType,
+  createImageType,
+  createVoteType,
+  LoginTokenType,
+} from "../../../typedef/common/common.types";
 import WritePopUp from "../components/WritePopUp";
 
 type Props = {
@@ -7,23 +14,28 @@ type Props = {
 };
 
 const WritePopUpContainer = ({ closePopUp }: Props) => {
-  const [voteEnable, setVoteEnable] = useState(true);
-  const [imgEnable, setImgEnable] = useState(true);
-  const [input, setInput] = useState({ id: 0, value: "" });
-
-  const changeInput = (id: number, e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput({ id: id, value: e.target.value });
-  };
-
+  const [formInfo, setFormInfo] = useState<{
+    category: string;
+    image: File | null;
+    content: string;
+    voteText: string;
+  }>({
+    category: "Love",
+    image: null,
+    content: "",
+    voteText: "",
+  });
+  const [imgs, setImgs] = useState<createImageType[]>([]);
+  const [voteInput, setVoteInput] = useState({ id: 0, value: "" });
   const [votes, setVotes] = useState<createVoteType[]>([
     {
       id: new Date().valueOf(),
-      vote: "",
+      content: "",
       count: 0,
     },
     {
       id: new Date().valueOf() + 1,
-      vote: "",
+      content: "",
       count: 0,
     },
   ]);
@@ -33,67 +45,112 @@ const WritePopUpContainer = ({ closePopUp }: Props) => {
       ...votes,
       {
         id: new Date().valueOf(),
-        vote: "",
+        content: "",
         count: 0,
       },
     ]);
+  };
+
+  const changeVoteInput = (
+    id: number,
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setVoteInput({ id: id, value: e.target.value });
   };
 
   const removeVote = (id: number) => {
     setVotes(votes.filter((vote) => vote.id !== id));
   };
 
-  const [imgs, setImgs] = useState<any | undefined>([]);
+  useEffect(() => {
+    const findIndex = votes.findIndex((element) => element.id === voteInput.id);
+    let newVotes = [...votes];
+    newVotes[findIndex] = { ...newVotes[findIndex], content: voteInput.value };
+    setVotes(newVotes);
+  }, [voteInput]);
 
-  const addImage = () => {
-    setImgs([
-      ...imgs,
-      {
-        id: new Date().valueOf(),
-        img: "",
-      },
-    ]);
+  const addImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let reader = new FileReader();
+
+    if (e.target.files === null) {
+      return;
+    }
+
+    if (e.target.files[0]) {
+      reader.readAsDataURL(e.target.files[0]);
+    }
+
+    reader.onloadend = () => {
+      if (e.target.files === null) return;
+
+      const base64 = reader.result;
+      setImgs([
+        ...imgs,
+        {
+          id: new Date().valueOf(),
+          imgBase64: base64,
+          imgFile: e.target.files[0],
+        },
+      ]);
+
+      e.target.value = ""; //같은 파일을 올리면 인식 못하므로 여기서 초기화
+    };
   };
 
-  const removeImg = (id: any) => {
-    setImgs(imgs.filter((img: any | undefined) => img.id !== id));
+  const removeImg = (id: number) => {
+    setImgs(imgs.filter((img: createImageType) => img.id !== id));
+  };
+
+  const onChangeCategory = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormInfo({ ...formInfo, category: e.target.value });
+  };
+
+  const onChangeContent = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormInfo({ ...formInfo, content: e.target.value });
   };
 
   useEffect(() => {
-    if (votes.length === 4) {
-      setVoteEnable(false);
-    } else if (votes.length === 3) {
-      setVoteEnable(true);
-    }
+    const stringVotes = votes.map(({ content, count }) => {
+      return [content, count];
+    });
+    setFormInfo({ ...formInfo, voteText: JSON.stringify(stringVotes) });
   }, [votes]);
 
   useEffect(() => {
-    const findIndex = votes.findIndex((element) => element.id === input.id);
-    let newVotes = [...votes];
-    newVotes[findIndex] = { ...newVotes[findIndex], vote: input.value };
-    setVotes(newVotes);
-  }, [input]);
-
-  useEffect(() => {
-    if (imgs.length === 4) {
-      setImgEnable(false);
-    } else if (imgs.length === 3) {
-      setImgEnable(true);
-    }
+    setFormInfo({ ...formInfo, image: imgs[0] ? imgs[0].imgFile : null });
   }, [imgs]);
+
+  const postBlock = async (e: React.FormEvent) => {
+    const formData = new FormData();
+    formData.append("category", formInfo.category);
+    formData.append("image", formInfo.image as File);
+    formData.append("content", formInfo.content);
+    formData.append("voteText", formInfo.voteText);
+
+    const { data } = await requestFormPost<
+      BasicAPIResponseType<LoginTokenType>
+    >(
+      `${apiOrigin}${apiRoute.board}/`,
+      {
+        Authorization: `Bearer ${apiRoute.token}`,
+      },
+      formData
+    );
+  };
 
   return (
     <WritePopUp
       closePopUp={closePopUp}
-      changeInput={changeInput}
       votes={votes}
       addVote={addVote}
-      voteEnable={voteEnable}
+      changeVoteInput={changeVoteInput}
       removeVote={removeVote}
       imgs={imgs}
       addImg={addImage}
-      imgEnable={imgEnable}
       removeImg={removeImg}
+      postBlock={postBlock}
+      onChangeCategory={onChangeCategory}
+      onChangeContent={onChangeContent}
     />
   );
 };

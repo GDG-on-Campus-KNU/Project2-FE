@@ -15,9 +15,7 @@ const CommentScrollView = ({ setTarget, loading, itemList, end }: Props) => {
       {itemList.map((comment, index) => (
         <div key={index}>
           <div className="comment">{comment.content}</div>
-          <div className="comment-info">
-            {comment.author.nickname} / {comment.updatedAt}
-          </div>
+          <div className="comment-info">{comment.owner}</div>
         </div>
       ))}
       {!end && !loading && (

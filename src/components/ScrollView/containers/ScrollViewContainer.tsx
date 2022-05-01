@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
 import ScrollView from "../ScrollView";
-import dummyBlocks from "../dummyData";
 import {
   BasicAPIResponseType,
   getBlockResponseType,
   getBlockType,
-  LoginTokenType,
 } from "../../../typedef/common/common.types";
 import usePopUp from "../../../hooks/usePopUp";
 import WritePopUpContainer from "./WritePopUpContainer";
@@ -16,7 +14,6 @@ const ScrollViewContainer = () => {
   const [target, setTarget] = useState<HTMLElement | null>(null);
   const [loading, setLoading] = useState(false);
   const [end, setEnd] = useState(false);
-  const { token, setAccess } = useAuth();
 
   const [next, setNext] = useState(
     `${apiOrigin}${apiRoute.board}?limit=10&offset=0`
@@ -45,10 +42,12 @@ const ScrollViewContainer = () => {
     }
 
     const blocks = data.results.map((block) => {
-      return (block = { ...block, image: [block.image] });
+      return (block = {
+        ...block,
+        updatedAt: block.updatedAt.split(".")[0].replace("T", " "),
+        image: [block.image],
+      });
     });
-
-    console.log(blocks);
 
     return blocks;
   };

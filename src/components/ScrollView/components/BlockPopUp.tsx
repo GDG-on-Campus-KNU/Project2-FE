@@ -3,6 +3,7 @@ import { getBlockType } from "../../../typedef/common/common.types";
 import "./css/BlockPopUp.css";
 import CommentScrollViewContainer from "../containers/CommentScrollViewContainer";
 import images from "../../../assets/images";
+import VoteViewContainer from "../containers/VoteViewContainer";
 
 type Props = {
   block: getBlockType;
@@ -28,11 +29,7 @@ const BlockPopUp = ({
       <div className="pop-up-left">
         <div className={!picView ? "content-view" : "hidden"}>
           <div className="user-area">
-            <img
-              className="profile"
-              src="http://localhost:8000/media/uploads/logo192_14PYWuv.png"
-              alt={block.owner}
-            />
+            <img className="profile" src="" alt={block.owner} />
             <div>
               <div>{block.owner}</div>
               <div>{block.updatedAt}</div>
@@ -41,12 +38,7 @@ const BlockPopUp = ({
           <div className="content-area">
             <div className="content">
               {block.content}
-              <div className="vote">
-                <button className="vote-box">VOTE1</button>
-                <button className="vote-box">VOTE2</button>
-                <button className="vote-box">VOTE3</button>
-                <div>1920명 참가</div>
-              </div>
+              <VoteViewContainer votedIndex={block.votedIndex} voteText={block.voteText} blockId={block.id} />
             </div>
           </div>
         </div>
@@ -78,7 +70,7 @@ const BlockPopUp = ({
         </div>
         <div className="comment-container">
           <div className="comment-view-box">
-            <CommentScrollViewContainer />
+            <CommentScrollViewContainer blockId={block.id} />
           </div>
           <div className="comment-write-box">
             <textarea

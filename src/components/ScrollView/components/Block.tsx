@@ -1,7 +1,7 @@
 import React from "react";
 import { getBlockType } from "../../../typedef/common/common.types";
 import "./css/Block.css";
-import VoteView from "./VoteView";
+import VoteViewContainer from "../containers/VoteViewContainer";
 import images from "../../../assets/images";
 
 type Props = {
@@ -27,11 +27,7 @@ const Block = ({
   return (
     <div className="block">
       <div className="user-area">
-        <img
-          className="profile"
-          src="http://localhost:8000/media/uploads/logo192_14PYWuv.png"
-          alt={block.owner}
-        />
+        <img className="profile" src="" alt={block.owner} />
         <div>
           <div>{block.owner}</div>
           <div>{block.updatedAt}</div>
@@ -58,7 +54,11 @@ const Block = ({
               : "자세히 보기"
             : null}
         </button>
-        <VoteView isVote={block.voteIndex} />
+        <VoteViewContainer
+          votedIndex={block.votedIndex}
+          voteText={block.voteText}
+          blockId={block.id}
+        />
       </div>
       <div className="etc-area">
         <div>

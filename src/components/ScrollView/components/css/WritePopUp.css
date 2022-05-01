@@ -47,14 +47,6 @@
   margin-top: 5px;
 }
 
-.pop-up .pop-up-right .info-area .vote-area {
-  width: 100%;
-}
-
-.pop-up .pop-up-right .info-area .image-area {
-  width: 100%;
-}
-
 .pop-up .pop-up-right .info-area .title {
   height: 10%;
   font-size: 20px;
@@ -63,7 +55,11 @@
   padding-left: 20px;
 }
 
-.pop-up .pop-up-right .info-area input {
+.pop-up .pop-up-right .info-area .vote-area {
+  width: 100%;
+}
+
+.pop-up .pop-up-right .info-area .vote-area .vote-input-box {
   width: 80%;
   height: 40px;
   margin: 5px 0px 5px 20px;
@@ -72,17 +68,55 @@
   border: 1px solid black;
 }
 
-.pop-up .pop-up-right .info-area .del-btn {
+.pop-up .pop-up-right .info-area .vote-area .more-btn {
+  width: 80%;
+  height: 40px;
+  margin: 5px 0px 5px 20px;
+  border-radius: 5px;
+  padding: 0 10px;
+  border: 1px solid black;
+}
+
+.pop-up .pop-up-right .info-area .vote-area .del-btn {
   margin-left: 10px;
 }
 
-.pop-up .pop-up-right .info-area .more-btn {
-  width: 80%;
-  height: 40px;
-  margin: 5px 0px 5px 20px;
+.pop-up .pop-up-right .info-area .image-area {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-left: 15px;
+}
+
+.pop-up .pop-up-right .info-area .image-area .img-preview {
+  position: relative;
+}
+
+.pop-up .pop-up-right .info-area .image-area .img-preview .del-btn {
+  background-color: red;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  position: absolute;
+  right: 0px;
+  color: white;
+}
+
+.pop-up .pop-up-right .info-area .image-area .img-add-btn {
+  text-align: center;
+  line-height: 55px;
+  width: 60px;
+  height: 60px;
+  margin: 5px 5px;
   border-radius: 5px;
-  padding: 0 10px;
   border: 1px solid black;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.pop-up .pop-up-right .info-area .image-area .img-input-box {
+  display: none;
 }
 
 .pop-up .pop-up-right .write-btn-area {
