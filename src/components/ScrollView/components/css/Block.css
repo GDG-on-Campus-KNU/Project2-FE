@@ -67,7 +67,6 @@
   height: 50px;
   border-radius: 5px;
   margin-top: 5px;
-  padding-left: 20px;
   border: 1px solid black;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -75,6 +74,10 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.block .content-area .vote-view .isvote-false {
+  padding-left: 20px;
 }
 
 .block .content-area .vote-view .vote-box:hover {
