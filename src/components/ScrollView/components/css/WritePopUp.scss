@@ -41,38 +41,44 @@
     }
 
     .info-area {
-      // background-color: red;
       width: 100%;
       height: 70%;
+      overflow-y: scroll;
       margin-top: 5px;
 
       .vote-area {
         width: 100%;
-        height: 40%;
-        // background-color: green;
-        text-align: center;
       }
 
       .image-area {
         width: 100%;
-        height: 40%;
-        // background-color: yellow;
-        text-align: center;
       }
 
       .title {
         height: 10%;
         font-size: 20px;
         font-weight: bold;
-        // background-color: red;
         padding-top: 5px;
         padding-left: 20px;
       }
 
       input {
-        width: 90%;
+        width: 80%;
         height: 40px;
-        margin: 5px auto;
+        margin: 5px 0px 5px 20px;
+        border-radius: 5px;
+        padding: 0 10px;
+        border: 1px solid black;
+      }
+
+      .del-btn {
+        margin-left: 10px;
+      }
+
+      .more-btn {
+        width: 80%;
+        height: 40px;
+        margin: 5px 0px 5px 20px;
         border-radius: 5px;
         padding: 0 10px;
         border: 1px solid black;
@@ -80,7 +86,6 @@
     }
 
     .write-btn-area {
-      // background-color: purple;
       width: 100%;
       height: 20%;
       position: relative;

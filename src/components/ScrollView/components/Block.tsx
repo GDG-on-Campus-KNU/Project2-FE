@@ -39,7 +39,7 @@ const Block = ({
       </div>
       <div className="content-area">
         <div className={(expand && block.content.length > 200) ? "content-view-expand" : "content-view"}>
-          {(expand && block.content.length > 200) ? block.content : content_txt_short}
+          {(expand && block.content.length > 200) ? block.content : ((block.content.length>200) ? content_txt_short : block.content)}
         </div>
         <button onClick={reverseExpand}>
           {(block.content.length > 200) ? (expand ?  "간략히" : "자세히 보기") : null}
@@ -49,7 +49,7 @@ const Block = ({
       <div className="etc-area">
         <div>
           {block.images.map((image, index) => (
-            <button className="attached-image">
+            <button className="attached-image" key={index}>
               <img
                 className="SamplePicture"
                 src={image}

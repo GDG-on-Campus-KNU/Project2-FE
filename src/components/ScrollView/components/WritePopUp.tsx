@@ -4,17 +4,37 @@ import "./css/WritePopUp.css";
 
 type Props = {
   closePopUp: React.MouseEventHandler<HTMLButtonElement>;
+  changeInput: any;
+  votes: Array<any>;
+  voteEnable: boolean;
+  addVote: React.MouseEventHandler<HTMLButtonElement>;
+  removeVote: React.MouseEventHandler<HTMLButtonElement>;
+  imgs: Array<any>;
+  imgEnable: boolean;
+  addImg: React.MouseEventHandler<HTMLButtonElement>;
+  removeImg: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-const WritePopUp = ({ closePopUp }: Props) => {
+const WritePopUp = ({
+  closePopUp,
+  changeInput,
+  votes,
+  addVote,
+  imgs,
+  addImg,
+  voteEnable,
+  imgEnable,
+  removeVote,
+  removeImg,
+}: Props) => {
   return (
     <form className="pop-up">
       <div className="pop-up-left">
         <div className="category-section">
           <select className="category">
-            <option>travel</option>
-            <option>love</option>
-            <option>fashion</option>
+            <option>연애</option>
+            <option>여행</option>
+            <option>패션</option>
           </select>
         </div>
         <textarea className="textarea"></textarea>
@@ -28,17 +48,55 @@ const WritePopUp = ({ closePopUp }: Props) => {
         <div className="info-area">
           <div className="title">투표 항목</div>
           <div className="vote-area">
-            <input className="vote-input-box" />
-            <input className="vote-input-box" />
-            <input className="vote-input-box" />
-            {/* <button className="more-btn">+</button> */}
+            {votes.map((vote: any, index: number) => (
+              <div key={index}>
+                <input
+                  className="vote-input-box"
+                  onChange={(e) => changeInput(vote.id, e)}
+                />
+                {index > 1 ? (
+                  <button
+                    className="del-btn"
+                    type="button"
+                    onClick={() => removeVote(vote.id)}
+                  >
+                    ❌
+                  </button>
+                ) : null}
+              </div>
+            ))}
+            {voteEnable ? (
+              <button type="button" className="more-btn" onClick={addVote}>
+                ✖️
+              </button>
+            ) : null}
           </div>
           <div className="title">이미지</div>
           <div className="image-area">
-            <input type="file" accept="image/*"></input>
-            <input type="file" accept="image/*"></input>
-            <input type="file" accept="image/*"></input>
-            {/* <button className="more-btn">+</button> */}
+            {imgs.map((img: any, index: number) => (
+              <div key={index}>
+                <label htmlFor={img.id}>업로드</label>
+                <input
+                  id={img.id}
+                  type="file"
+                  className="vote-input-box"
+                  key={index}
+                  value={img.img}
+                />
+                <button
+                  className="del-btn"
+                  type="button"
+                  onClick={() => removeImg(img.id)}
+                >
+                  ❌
+                </button>
+              </div>
+            ))}
+            {imgEnable ? (
+              <button type="button" className="more-btn" onClick={addImg}>
+                ✖️
+              </button>
+            ) : null}
           </div>
         </div>
         <div className="write-btn-area">
