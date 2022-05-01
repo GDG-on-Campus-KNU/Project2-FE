@@ -82,3 +82,8 @@ export type createVoteType = {
   id: number;
   vote: string;
 };
+
+export type createImageType = {
+  id: number;
+  img: string;
+};
