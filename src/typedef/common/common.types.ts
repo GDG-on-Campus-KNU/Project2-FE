@@ -42,19 +42,24 @@ export type PopUpTypes = {
   isShown: boolean;
 };
 
+export type getBlockResponseType = {
+  count: number;
+  next: string;
+  previous: string;
+  results: getBlockType[];
+};
+
 export type getBlockType = {
-  uid: string;
-  author: {
-    nickname: string;
-    profile: string;
-  };
+  id: number;
+  owner: string;
+  category: string;
+  image: any;
   createdAt: string;
   updatedAt: string;
-  category: string;
   content: string;
-  images: string[];
-  recomment: number;
-  isVote: boolean;
+  likeCount: number;
+  voteIndex: number;
+  voteText: string;
 };
 
 export type postBlockType = {
@@ -81,6 +86,7 @@ export type getCommentType = {
 export type createVoteType = {
   id: number;
   vote: string;
+  count: number;
 };
 
 export type createImageType = {

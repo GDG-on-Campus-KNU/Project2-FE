@@ -2,11 +2,11 @@ import React from "react";
 import ProgressBar from "./ProgressBar";
 
 type Props = {
-  isVote: boolean;
+  isVote: number;
 };
 
 const VoteView = ({ isVote }: Props) => {
-  return isVote ? (
+  return isVote === 1 ? (
     <div className="vote-view">
       <button className="vote-box">
         <ProgressBar bgcolor="orange" progress={30} />

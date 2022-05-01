@@ -19,10 +19,12 @@ const WritePopUpContainer = ({ closePopUp }: Props) => {
     {
       id: new Date().valueOf(),
       vote: "",
+      count: 0,
     },
     {
       id: new Date().valueOf() + 1,
       vote: "",
+      count: 0,
     },
   ]);
 
@@ -32,6 +34,7 @@ const WritePopUpContainer = ({ closePopUp }: Props) => {
       {
         id: new Date().valueOf(),
         vote: "",
+        count: 0,
       },
     ]);
   };

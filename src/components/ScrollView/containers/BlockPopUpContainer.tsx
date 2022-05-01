@@ -12,8 +12,6 @@ const BlockPopUpContainer = ({ block, closePopUp }: Props) => {
   const [picView, setPicView] = useState(false);
   const [image, setImage] = useState<string>("");
   const picViewToggle = (event: any) => {
-    console.log(event.target.tagName);
-
     if (event.target.tagName === "IMG") {
       setImage(event.target.src);
       setPicView(true);

@@ -36,7 +36,7 @@ const BlockContainer = ({ block }: Props) => {
   const onClickImage = useCallback(
     (index: number) => {
       __showPopUpFromHooks(
-        <ImagePopUpContainer images={block.images} index={index} />
+        <ImagePopUpContainer images={block.image} index={index} />
       );
     },
     [__showPopUpFromHooks]

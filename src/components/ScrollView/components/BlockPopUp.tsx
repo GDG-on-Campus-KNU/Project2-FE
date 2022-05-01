@@ -30,11 +30,11 @@ const BlockPopUp = ({
           <div className="user-area">
             <img
               className="profile"
-              src={block.author.profile}
-              alt={block.author.nickname}
+              src="http://localhost:8000/media/uploads/logo192_14PYWuv.png"
+              alt={block.owner}
             />
             <div>
-              <div>{block.author.nickname}</div>
+              <div>{block.owner}</div>
               <div>{block.updatedAt}</div>
             </div>
           </div>
@@ -56,11 +56,17 @@ const BlockPopUp = ({
         </div>
         <div className="etc-area">
           <div>
-            {block.images.map((image, index) => (
-              <button className="img-btn" onClick={picViewToggle} key={index}>
-                <img src={image} alt="sampleImage" />
-              </button>
-            ))}
+            {block.image[0] !== null
+              ? block.image.map((image: string, index: number) => (
+                  <button
+                    className="img-btn"
+                    onClick={picViewToggle}
+                    key={index}
+                  >
+                    <img src={image} alt="sampleImage" />
+                  </button>
+                ))
+              : null}
           </div>
         </div>
       </div>
@@ -92,3 +98,6 @@ const BlockPopUp = ({
 };
 
 export default BlockPopUp;
+function onClickImage(index: number): void {
+  throw new Error("Function not implemented.");
+}
