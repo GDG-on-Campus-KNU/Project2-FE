@@ -49,7 +49,7 @@ const Block = ({
       <div className="etc-area">
         <div>
           {block.images.map((image, index) => (
-            <button className="attached-image">
+            <button className="attached-image" key={index}>
               <img
                 className="SamplePicture"
                 src={image}

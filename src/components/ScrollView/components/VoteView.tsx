@@ -6,7 +6,6 @@ type Props = {
 };
 
 const VoteView = ({ isVote }: Props) => {
-  console.log(isVote);
   return isVote ? (
     <div className="vote-view">
       <button className="vote-box">VOTE1<ProgressBar bgcolor="orange" progress={30}  height={30} /></button>
