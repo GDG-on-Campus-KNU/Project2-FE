@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
+import usePopUp from "../../../hooks/usePopUp";
 import ImagePopUp from "../components/ImagePopUp";
 
 type Props = {
@@ -9,6 +10,7 @@ type Props = {
 const ImagePopUpContainer = ({ images, index }: Props) => {
   const [focusImage, setFocusImage] = useState("");
   const [imageRef, setImageRef] = useState(index);
+  const { __hidePopUpFromHooks } = usePopUp();
 
   const onload = useCallback(() => {
     const image = images[imageRef];
@@ -31,6 +33,10 @@ const ImagePopUpContainer = ({ images, index }: Props) => {
     }
   }, [imageRef]);
 
+  const onClose = useCallback(() => {
+    __hidePopUpFromHooks();
+  }, [__hidePopUpFromHooks]);
+
   useEffect(() => {
     onload();
   }, [imageRef]);
@@ -42,6 +48,7 @@ const ImagePopUpContainer = ({ images, index }: Props) => {
       onNext={onNext}
       files={images}
       imageRef={imageRef}
+      onClose={onClose}
     />
   );
 };

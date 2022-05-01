@@ -29,8 +29,8 @@ const SignUpContainer = () => {
       signupData
     );
 
-    navigate("/");
-  }, [id, password, email, navigate]); //email도 추가하긴 했는데 요건 무슨 의미죠 . . . ?
+    navigate("/"); 
+  }, [id, password, email, navigate]); 
 
   return (
     <SignUp
