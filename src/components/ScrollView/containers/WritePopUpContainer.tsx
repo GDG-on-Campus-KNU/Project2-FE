@@ -14,6 +14,7 @@ type Props = {
 };
 
 const WritePopUpContainer = ({ closePopUp }: Props) => {
+  const { token } = useAuth();
   const [formInfo, setFormInfo] = useState<{
     category: string;
     image: File | null;
@@ -132,7 +133,7 @@ const WritePopUpContainer = ({ closePopUp }: Props) => {
     >(
       `${apiOrigin}${apiRoute.board}/`,
       {
-        Authorization: `Bearer ${apiRoute.token}`,
+        Authorization: `Bearer ${token}`,
       },
       formData
     );

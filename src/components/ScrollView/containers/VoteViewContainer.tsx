@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import useAuth from "../../../hooks/Auth/useAuth";
 import { apiOrigin, apiRoute, requestPost } from "../../../lib/api/api";
 import {
   BasicAPIResponseType,
@@ -16,6 +17,7 @@ const VoteViewContainer = ({ votedIndex, voteText, blockId }: Props) => {
   const [voteList, setVoteList] = useState([]);
   const [voteTotal, setVoteTotal] = useState(0);
   const [isVote, setIsVote] = useState(votedIndex);
+  const { token } = useAuth();
 
   const changeVote = (index: number) => {
     if (isVote === index) {
@@ -57,7 +59,7 @@ const VoteViewContainer = ({ votedIndex, voteText, blockId }: Props) => {
     const { data } = await requestPost<BasicAPIResponseType<string>>(
       `${apiOrigin}${apiRoute.board}/${blockId}${apiRoute.vote}`,
       {
-        Authorization: `Bearer ${apiRoute.token}`,
+        Authorization: `Bearer ${token}`,
       },
       formData
     );

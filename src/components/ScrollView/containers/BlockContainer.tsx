@@ -47,9 +47,7 @@ const BlockContainer = ({ block }: Props) => {
 
       const { data } = await requestPost<BasicAPIResponseType<getBlockType>>(
         `${apiOrigin}${apiRoute.board}/${block.id}${apiRoute.like}`,
-        {
-          Authorization: `Bearer ${apiRoute.token}`,
-        },
+        {},
         []
       );
     }
