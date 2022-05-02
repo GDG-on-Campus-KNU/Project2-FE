@@ -12,7 +12,6 @@ const LoginContainer = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { token, setAccess } = useAuth();
 
   const onSubmit = useCallback(
     async (e) => {
@@ -25,12 +24,11 @@ const LoginContainer = () => {
         BasicAPIResponseType<LoginTokenType>
       >(`${apiOrigin}${apiRoute.login}`, {}, formData);
 
-      console.log(data);
-      setAccess(data.access);
+      sessionStorage.setItem("@access", data.access);
 
       navigate("/home");
     },
-    [id, password, navigate]
+    [id, password]
   );
 
   return <Login setId={setId} setPassword={setPassword} onSubmit={onSubmit} />;
