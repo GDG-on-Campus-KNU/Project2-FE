@@ -4,6 +4,7 @@ import dummyBlocks from "../dummyData";
 import { getBlockType } from "../../../typedef/common/common.types";
 import usePopUp from "../../../hooks/usePopUp";
 import WritePopUpContainer from "./WritePopUpContainer";
+import useAuth from "../../../hooks/Auth/useAuth";
 
 let index = 0;
 
@@ -16,9 +17,13 @@ const ScrollViewContainer = () => {
   const [loading, setLoading] = useState(false);
   const [end, setEnd] = useState(false);
   const [itemList, setItemList] = useState<getBlockType[]>([]);
+  const { token } = useAuth();
 
   const { __showPopUpFromHooks, __hidePopUpFromHooks } = usePopUp();
 
+  const onload = useCallback(() => {
+    console.log(token);
+  }, [token]);
   const closePopUp = useCallback(() => {
     __hidePopUpFromHooks();
   }, []);
@@ -59,6 +64,10 @@ const ScrollViewContainer = () => {
 
     observer.observe(target);
   }, [target]);
+
+  useEffect(() => {
+    onload();
+  }, []);
 
   return (
     <ScrollView
