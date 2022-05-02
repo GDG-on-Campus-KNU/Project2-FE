@@ -1,44 +1,53 @@
 import React from "react";
 import images from "../../../assets/images";
-import { createVoteType } from "../../../typedef/common/common.types";
+import {
+  createImageType,
+  createVoteType,
+} from "../../../typedef/common/common.types";
 import "./css/WritePopUp.css";
 
 type Props = {
   closePopUp: React.MouseEventHandler<HTMLButtonElement>;
-  changeInput: (id: number, e: React.ChangeEvent<HTMLInputElement>) => void;
   votes: createVoteType[];
-  voteEnable: boolean;
   addVote: React.MouseEventHandler<HTMLButtonElement>;
+  changeVoteInput: (id: number, e: React.ChangeEvent<HTMLInputElement>) => void;
   removeVote: (id: number) => void;
   imgs: Array<any>;
-  imgEnable: boolean;
-  addImg: React.MouseEventHandler<HTMLButtonElement>;
-  removeImg: React.MouseEventHandler<HTMLButtonElement>;
+  addImg: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  removeImg: (id: number) => void;
+  postBlock: React.FormEventHandler<HTMLFormElement>;
+  onChangeCategory: any;
+  onChangeContent: any;
 };
 
 const WritePopUp = ({
   closePopUp,
-  changeInput,
   votes,
   addVote,
+  changeVoteInput,
+  removeVote,
   imgs,
   addImg,
-  voteEnable,
-  imgEnable,
-  removeVote,
   removeImg,
+  postBlock,
+  onChangeCategory,
+  onChangeContent,
 }: Props) => {
   return (
-    <form className="pop-up">
+    <form className="pop-up" onSubmit={postBlock}>
       <div className="pop-up-left">
         <div className="category-section">
-          <select className="category">
-            <option>연애</option>
-            <option>여행</option>
-            <option>패션</option>
+          <select className="category" onChange={onChangeCategory}>
+            <option value="Love">연애</option>
+            <option value="Travel">여행</option>
+            <option value="Fashion">패션</option>
           </select>
         </div>
-        <textarea className="textarea"></textarea>
+        <textarea
+          className="textarea"
+          onChange={onChangeContent}
+          required
+        ></textarea>
       </div>
       <div className="pop-up-right">
         <div className="header">
@@ -50,10 +59,11 @@ const WritePopUp = ({
           <div className="title">투표 항목</div>
           <div className="vote-area">
             {votes.map((vote, index) => (
-              <div key={index}>
+              <div key={vote.id}>
                 <input
                   className="vote-input-box"
-                  onChange={(e) => changeInput(vote.id, e)}
+                  onChange={(e) => changeVoteInput(vote.id, e)}
+                  required
                 />
                 {index > 1 ? (
                   <button
@@ -66,7 +76,7 @@ const WritePopUp = ({
                 ) : null}
               </div>
             ))}
-            {voteEnable ? (
+            {votes.length < 4 ? (
               <button type="button" className="more-btn" onClick={addVote}>
                 ✖️
               </button>
@@ -74,29 +84,34 @@ const WritePopUp = ({
           </div>
           <div className="title">이미지</div>
           <div className="image-area">
-            {imgs.map((img: any, index: number) => (
-              <div key={index}>
-                <label htmlFor={img.id}>업로드</label>
-                <input
-                  id={img.id}
-                  type="file"
-                  className="vote-input-box"
-                  key={index}
-                  value={img.img}
+            {imgs.map((img: createImageType) => (
+              <div className="img-preview" key={img.id}>
+                <img
+                  className="img-add-btn"
+                  src={img.imgBase64 as string}
+                  alt={img.imgFile.name}
                 />
                 <button
                   className="del-btn"
                   type="button"
                   onClick={() => removeImg(img.id)}
                 >
-                  ❌
+                  X
                 </button>
               </div>
             ))}
-            {imgEnable ? (
-              <button type="button" className="more-btn" onClick={addImg}>
-                ✖️
-              </button>
+            {imgs.length < 4 ? (
+              <div>
+                <label htmlFor="temp-btn">
+                  <div className="img-add-btn">✖️</div>
+                </label>
+                <input
+                  id="temp-btn"
+                  type="file"
+                  className="img-input-box"
+                  onChange={(e) => addImg(e)}
+                />
+              </div>
             ) : null}
           </div>
         </div>

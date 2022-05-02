@@ -1,21 +1,23 @@
 import React, { useState, useEffect, useCallback } from "react";
 import ScrollView from "../ScrollView";
-import dummyBlocks from "../dummyData";
-import { getBlockType } from "../../../typedef/common/common.types";
+import {
+  BasicAPIResponseType,
+  getBlockResponseType,
+  getBlockType,
+} from "../../../typedef/common/common.types";
 import usePopUp from "../../../hooks/usePopUp";
 import WritePopUpContainer from "./WritePopUpContainer";
 import useAuth from "../../../hooks/Auth/useAuth";
-
-let index = 0;
-
-const getBlocks = (index: number) => {
-  return dummyBlocks.slice(index, index + 10);
-};
+import { apiOrigin, apiRoute, requestGet } from "../../../lib/api/api";
 
 const ScrollViewContainer = () => {
   const [target, setTarget] = useState<HTMLElement | null>(null);
   const [loading, setLoading] = useState(false);
   const [end, setEnd] = useState(false);
+
+  const [next, setNext] = useState(
+    `${apiOrigin}${apiRoute.board}?limit=10&offset=0`
+  );
   const [itemList, setItemList] = useState<getBlockType[]>([]);
   const { token } = useAuth();
 
@@ -32,17 +34,30 @@ const ScrollViewContainer = () => {
     __showPopUpFromHooks(<WritePopUpContainer closePopUp={closePopUp} />);
   }, []);
 
-  const addItemList = () => {
-    const blocks = getBlocks(index);
+  const getBlocks = async () => {
+    const { data } = await requestGet<
+      BasicAPIResponseType<getBlockResponseType>
+    >(next, {});
 
-    if (Array.isArray(blocks) && blocks.length === 0) {
+    if (data.next) {
+      setNext(data.next);
+    } else {
       setEnd(true);
-
-      return;
     }
 
+    const blocks = data.results.map((block) => {
+      return (block = {
+        ...block,
+        updatedAt: block.updatedAt.split(".")[0].replace("T", " "),
+        image: [block.image],
+      });
+    });
+
+    return blocks;
+  };
+
+  const addItemList = (blocks: getBlockType[]) => {
     setItemList((itemList) => [...itemList, ...blocks]);
-    index += 10;
   };
 
   const intersecting = async (
@@ -50,9 +65,9 @@ const ScrollViewContainer = () => {
     observer: IntersectionObserver
   ) => {
     if (entry.isIntersecting) {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const blocks = await getBlocks();
       setLoading(true);
-      addItemList();
+      addItemList(blocks);
       setLoading(false);
     }
   };

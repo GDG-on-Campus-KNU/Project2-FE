@@ -52,34 +52,11 @@
     .content-view-expand {
       height: auto;
     }
-
-    .vote-view {
-      height: 55%;
-      margin: 15px 0;
-
-      .vote-box {
-        width: 100%;
-        height: 50px;
-        border-radius: 5px;
-        margin-top: 5px;
-        
-        border: 1px solid black;
-        display: flex;
-        align-items: center;
-        &:hover {
-          background: #eee;
-        }
-      }
-
-      .isvote-false {
-        padding-left: 20px;
-      }
-    }
   }
 
   .etc-area {
     width: 100%;
-    height: 15%;
+    height: 60px;
     display: flex;
     justify-content: space-between;
     border-top: 1px solid black;

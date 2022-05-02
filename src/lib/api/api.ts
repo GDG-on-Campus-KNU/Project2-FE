@@ -7,8 +7,12 @@ export const apiRoute = {
   board: "/boards",
   comment: "/comments",
   user: "/users",
+  like: "/like/",
+  vote: "/vote/",
   login: "/api/token/",
-  register: "/register",
+  register: "/register/",
+  token:
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUxNDUzOTI3LCJpYXQiOjE2NTE0MzU5MjcsImp0aSI6IjkzY2IwYWM1ZWUxMjQxZDY4ODI5N2NiY2MxZjQyM2Y4IiwidXNlcl9pZCI6Nn0.mVBJSBw03vMF-dqCJmF0PmFZm7OryZ8Py9dwWUlzu1k",
 };
 
 export function requestGet<T>(url: string, header: object) {

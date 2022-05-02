@@ -1,16 +1,26 @@
 import React, { useState, useCallback } from "react";
-import { getBlockType } from "../../../typedef/common/common.types";
+import {
+  BasicAPIResponseType,
+  getBlockType,
+} from "../../../typedef/common/common.types";
 import Block from "../components/Block";
 import BlockPoppUpContainer from "./BlockPopUpContainer";
 import usePopUp from "../../../hooks/usePopUp";
 import ImagePopUp from "../components/ImagePopUp";
 import ImagePopUpContainer from "./ImagePopUpContainer";
+import {
+  apiOrigin,
+  apiRoute,
+  requestGet,
+  requestPost,
+} from "../../../lib/api/api";
 
 type Props = {
   block: getBlockType;
 };
 
 const BlockContainer = ({ block }: Props) => {
+  // console.log(block);
   const { __showPopUpFromHooks, __hidePopUpFromHooks } = usePopUp();
   const [expand, setExpand] = useState(false);
   const [like, setLike] = useState(false);
@@ -29,14 +39,26 @@ const BlockContainer = ({ block }: Props) => {
     setExpand((current) => !current);
   };
 
-  const clickLike = () => {
-    setLike((current) => !current);
+  const postLike = async () => {
+    if (like) {
+      alert("이미 공감하셨습니다.");
+    } else {
+      setLike((current) => !current);
+
+      const { data } = await requestPost<BasicAPIResponseType<getBlockType>>(
+        `${apiOrigin}${apiRoute.board}/${block.id}${apiRoute.like}`,
+        {
+          Authorization: `Bearer ${apiRoute.token}`,
+        },
+        []
+      );
+    }
   };
 
   const onClickImage = useCallback(
     (index: number) => {
       __showPopUpFromHooks(
-        <ImagePopUpContainer images={block.images} index={index} />
+        <ImagePopUpContainer images={block.image} index={index} />
       );
     },
     [__showPopUpFromHooks]
@@ -49,7 +71,7 @@ const BlockContainer = ({ block }: Props) => {
       expand={expand}
       reverseExpand={reverseExpand}
       like={like}
-      clickLike={clickLike}
+      clickLike={postLike}
     />
   );
 };

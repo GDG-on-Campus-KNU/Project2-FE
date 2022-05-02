@@ -4,9 +4,10 @@ import { useState, useEffect } from "react";
 type Props = {
   bgcolor: string;
   progress: number;
+  content: string;
 };
 
-const ProgressBar = ({ bgcolor, progress }: Props) => {
+const ProgressBar = ({ bgcolor, progress, content }: Props) => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -22,7 +23,7 @@ const ProgressBar = ({ bgcolor, progress }: Props) => {
     height: "100%",
     width: "100%",
     backgroundColor: "whitesmoke",
-    borderRadius: 40,
+    borderRadius: "5px",
     margin: 0,
   };
 
@@ -30,7 +31,7 @@ const ProgressBar = ({ bgcolor, progress }: Props) => {
     height: "100%",
     width: `${count}%`,
     backgroundColor: bgcolor,
-    borderRadius: 40,
+    borderRadius: "5px",
     //lineHeight: "200%",
   };
 
@@ -47,7 +48,8 @@ const ProgressBar = ({ bgcolor, progress }: Props) => {
     <div style={Parentdiv}>
       <div style={Childdiv}>
         <span style={progresstext}>
-          VOTE1<br />
+          {content}
+          <br />
           {`${progress}%`}
         </span>
       </div>
