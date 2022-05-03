@@ -29,26 +29,22 @@ const VoteViewContainer = ({ votedIndex, voteText, blockId }: Props) => {
   };
 
   const stringToVote = (voteText: string) => {
-    voteText = voteText.replace(/\\/gi, "");
-    voteText = voteText.replace(/'/gi, '"');
-    const votes = JSON.parse(voteText).map((vote: Array<string | number>) => {
-      return { content: vote[0], count: vote[1] };
-    });
-
-    let tempTotal = 0;
-
-    votes.map((vote: createVoteType) => {
-      tempTotal += vote.count;
-    });
-
-    setVoteTotal(tempTotal);
-
-    return votes;
+    // voteText = voteText.replace(/\\/gi, "");
+    // voteText = voteText.replace(/'/gi, '"');
+    // const votes = JSON.parse(voteText).map((vote: Array<string | number>) => {
+    //   return { content: vote[0], count: vote[1] };
+    // });
+    // let tempTotal = 0;
+    // votes.map((vote: createVoteType) => {
+    //   tempTotal += vote.count;
+    // });
+    // setVoteTotal(tempTotal);
+    // return votes;
   };
 
   useEffect(() => {
-    const votes = stringToVote(voteText);
-    setVoteList(votes);
+    // const votes = stringToVote(voteText);
+    // setVoteList(votes);
   }, []);
 
   const postVote = async (index: number) => {

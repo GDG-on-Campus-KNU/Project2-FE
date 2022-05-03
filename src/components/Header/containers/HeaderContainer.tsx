@@ -1,10 +1,28 @@
 import React, { useCallback, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Header from "../Header";
 
-const HeaderContainer = () => {
+type Props = {
+  searchContent: string;
+  setSearchContent: React.Dispatch<React.SetStateAction<string>>;
+};
+const dummyBlock = [
+  {
+    id: 0,
+    owner: "string",
+    category: "string",
+    image: [],
+    createdAt: "string",
+    updatedAt: "string",
+    content: "string",
+    likeCount: 0,
+    votedIndex: 0,
+    voteText: "string",
+  },
+];
+const HeaderContainer = ({ searchContent, setSearchContent }: Props) => {
   const [isDropDown, setIsDropDown] = useState(false);
-  const [searchContent, setSearchContent] = useState("");
+  const [boards, setBoards] = useState(dummyBlock);
   const navigate = useNavigate();
 
   const onProfileClick = useCallback(() => {
@@ -12,7 +30,17 @@ const HeaderContainer = () => {
   }, [isDropDown]);
 
   const onSearch = useCallback(() => {
-    console.log(searchContent);
+    setBoards(
+      boards.filter((item) => {
+        if (searchContent === "") {
+          return item;
+        } else if (
+          item.content.toLowerCase().includes(searchContent.toLowerCase())
+        ) {
+          return item;
+        }
+      })
+    );
   }, [searchContent]);
 
   const onSignOut = useCallback(() => {
