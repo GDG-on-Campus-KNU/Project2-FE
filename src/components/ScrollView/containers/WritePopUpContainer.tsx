@@ -17,7 +17,7 @@ const WritePopUpContainer = ({ closePopUp }: Props) => {
   const { token } = useAuth();
   const [formInfo, setFormInfo] = useState<{
     category: string;
-    image: File | null;
+    image: File[] | null;
     content: string;
     voteText: string;
   }>({
@@ -118,13 +118,18 @@ const WritePopUpContainer = ({ closePopUp }: Props) => {
   }, [votes]);
 
   useEffect(() => {
-    setFormInfo({ ...formInfo, image: imgs[0] ? imgs[0].imgFile : null });
+    const imgFiles = imgs.map((img) => {
+      return img.imgFile;
+    });
+    setFormInfo({ ...formInfo, image: imgFiles.length > 0 ? imgFiles : null });
   }, [imgs]);
 
   const postBlock = async (e: React.FormEvent) => {
     const formData = new FormData();
     formData.append("category", formInfo.category);
-    formData.append("image", formInfo.image as File);
+    if (formInfo.image !== null) {
+      formData.append("image", formInfo.image);
+    }
     formData.append("content", formInfo.content);
     formData.append("voteText", formInfo.voteText);
 

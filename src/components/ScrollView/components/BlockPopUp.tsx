@@ -29,7 +29,7 @@ const BlockPopUp = ({
       <div className="pop-up-left">
         <div className={!picView ? "content-view" : "hidden"}>
           <div className="user-area">
-            <img className="profile" src="" alt={block.owner} />
+            <img className="profile" src="./logo512.png" alt={block.owner} />
             <div>
               <div>{block.owner}</div>
               <div>{block.updatedAt}</div>
@@ -38,7 +38,11 @@ const BlockPopUp = ({
           <div className="content-area">
             <div className="content">
               {block.content}
-              <VoteViewContainer votedIndex={block.votedIndex} voteText={block.voteText} blockId={block.id} />
+              <VoteViewContainer
+                votedIndex={block.votedIndex}
+                voteText={block.voteText}
+                blockId={block.id}
+              />
             </div>
           </div>
         </div>

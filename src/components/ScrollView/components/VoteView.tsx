@@ -21,7 +21,7 @@ const VoteView = ({ isVote, voteList, voteTotal, postVote }: Props) => {
         >
           <ProgressBar
             bgcolor="orange"
-            progress={vote.count}
+            progress={(vote.count / voteTotal) * 100}
             content={vote.content}
           />
         </button>

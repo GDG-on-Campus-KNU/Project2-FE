@@ -27,7 +27,7 @@ const Block = ({
   return (
     <div className="block">
       <div className="user-area">
-        <img className="profile" src="" alt={block.owner} />
+        <img className="profile" src="./logo512.png" alt={block.owner} />
         <div>
           <div>{block.owner}</div>
           <div>{block.updatedAt}</div>
