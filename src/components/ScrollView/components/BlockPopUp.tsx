@@ -32,7 +32,11 @@ const BlockPopUp = ({
         <div className={!picView ? "content-view" : "hidden"}>
           <div className="user-area">
             <div className="user-profile">
-              <img className="profile" src="./logo512.png" alt={block.owner} />
+              <img
+                className="profile"
+                src={images.defaultProfile}
+                alt={block.owner}
+              />
               <div>
                 <div>{block.owner}</div>
                 <div>{block.updatedAt}</div>

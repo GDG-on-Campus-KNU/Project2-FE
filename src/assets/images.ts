@@ -12,6 +12,7 @@ const images = {
   pencil: "assets/images/pencil.png",
   popupClose: "assets/images/popup_close.png",
   cancle: "assets/images/cancel.png",
+  defaultProfile: "assets/images/defaultProfile.png",
 };
 
 export default images;
