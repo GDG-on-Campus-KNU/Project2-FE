@@ -8,16 +8,16 @@ type Props = {
   setTarget: React.LegacyRef<HTMLDivElement>;
   loading: boolean;
   itemList: getBlockType[];
-  end: boolean;
   loadPopUp: React.MouseEventHandler<HTMLButtonElement>;
+  next: string;
 };
 
 const ScrollView = ({
   setTarget,
   loading,
   itemList,
-  end,
   loadPopUp,
+  next,
 }: Props) => {
   return (
     <div className="wrapper">
@@ -28,7 +28,7 @@ const ScrollView = ({
         {itemList.map((block, index) => (
           <BlockContainer block={block} key={index} />
         ))}
-        {!end && !loading && (
+        {next && !loading && (
           <div className="target" ref={setTarget}>
             Loading...
           </div>

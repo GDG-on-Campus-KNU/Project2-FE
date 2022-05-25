@@ -1,6 +1,12 @@
 import React, { useCallback, useRef, useState } from "react";
 import BlockPopUp from "../components/BlockPopUp";
-import { getBlockType } from "../../../typedef/common/common.types";
+import {
+  BasicAPIResponseType,
+  getBlockType,
+  LoginTokenType,
+} from "../../../typedef/common/common.types";
+import { apiOrigin, apiRoute, requestDelete } from "../../../lib/api/api";
+import useAuth from "../../../hooks/Auth/useAuth";
 
 type Props = {
   block: getBlockType;
@@ -8,6 +14,7 @@ type Props = {
 };
 
 const BlockPopUpContainer = ({ block, closePopUp }: Props) => {
+  const { token } = useAuth();
   const commentRef = React.useRef<HTMLTextAreaElement>(null);
   const [picView, setPicView] = useState(false);
   const [image, setImage] = useState<string>("");
@@ -27,6 +34,17 @@ const BlockPopUpContainer = ({ block, closePopUp }: Props) => {
     }
   }, []);
 
+  const deleteBlock = async (id: number) => {
+    const { data } = await requestDelete<BasicAPIResponseType<LoginTokenType>>(
+      `${apiOrigin}${apiRoute.board}/${id}/`,
+      {
+        Authorization: `Bearer ${token}`,
+      }
+    );
+
+    window.location.replace("/home");
+  };
+
   return (
     <BlockPopUp
       block={block}
@@ -36,6 +54,7 @@ const BlockPopUpContainer = ({ block, closePopUp }: Props) => {
       image={image}
       commentRef={commentRef}
       onHandleHeight={onHandleHeight}
+      deleteBlock={deleteBlock}
     />
   );
 };

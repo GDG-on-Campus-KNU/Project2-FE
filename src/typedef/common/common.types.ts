@@ -60,6 +60,8 @@ export type getBlockType = {
   likeCount: number;
   votedIndex: number;
   voteText: string;
+  voteTotal: number;
+  currentUser: string;
 };
 
 export type postBlockType = {

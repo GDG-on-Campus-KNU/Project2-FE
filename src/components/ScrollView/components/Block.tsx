@@ -6,7 +6,7 @@ import images from "../../../assets/images";
 
 type Props = {
   block: getBlockType;
-  loadPopUp: React.MouseEventHandler<HTMLButtonElement>;
+  loadPopUp: (id: number) => Promise<void>;
   onClickImage: (index: number) => void;
   expand: boolean;
   reverseExpand: React.MouseEventHandler<HTMLButtonElement>;
@@ -84,7 +84,7 @@ const Block = ({
               <img className="icon" src={images.uncheckedLike} alt="공감" />
             )}
           </button>
-          <button onClick={loadPopUp}>
+          <button onClick={() => loadPopUp(block.id)}>
             <img className="icon" src={images.chat} alt="덧글" />
           </button>
         </div>

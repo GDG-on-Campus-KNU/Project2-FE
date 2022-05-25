@@ -1,6 +1,11 @@
 import React, { useCallback, useState, useEffect } from "react";
 import useAuth from "../../../hooks/Auth/useAuth";
-import { apiOrigin, apiRoute, requestFormPost } from "../../../lib/api/api";
+import {
+  apiOrigin,
+  apiRoute,
+  requestDelete,
+  requestFormPost,
+} from "../../../lib/api/api";
 import {
   BasicAPIResponseType,
   createImageType,
@@ -128,7 +133,9 @@ const WritePopUpContainer = ({ closePopUp }: Props) => {
     const formData = new FormData();
     formData.append("category", formInfo.category);
     if (formInfo.image !== null) {
-      formData.append("image", formInfo.image);
+      formInfo.image.map((file, index) => {
+        formData.append("image", file);
+      });
     }
     formData.append("content", formInfo.content);
     formData.append("voteText", formInfo.voteText);
@@ -142,6 +149,8 @@ const WritePopUpContainer = ({ closePopUp }: Props) => {
       },
       formData
     );
+
+    console.log("data", data);
   };
 
   return (

@@ -30,9 +30,18 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
-.pop-up .pop-up-left .content-view .user-area .profile {
+.pop-up .pop-up-left .content-view .user-area .user-profile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.pop-up .pop-up-left .content-view .user-area .user-profile .profile {
   width: 56px;
   height: 56px;
   background-color: #929292;
@@ -40,15 +49,26 @@
   margin-right: 15px;
 }
 
-.pop-up .pop-up-left .content-view .user-area div:nth-child(2) div:nth-child(1) {
+.pop-up .pop-up-left .content-view .user-area .user-profile div:nth-child(2) div:nth-child(1) {
   color: black;
   font-size: 20px;
   font-weight: bold;
 }
 
-.pop-up .pop-up-left .content-view .user-area div:nth-child(2) div:nth-child(2) {
+.pop-up .pop-up-left .content-view .user-area .user-profile div:nth-child(2) div:nth-child(2) {
   color: #929292;
   font-size: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.pop-up .pop-up-left .content-view .user-area .user-btn {
+  background-color: red;
+  font-size: 15px;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .pop-up .pop-up-left .content-view .content-area {

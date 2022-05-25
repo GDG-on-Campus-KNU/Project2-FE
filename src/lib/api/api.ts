@@ -11,6 +11,9 @@ export const apiRoute = {
   vote: "/vote/",
   login: "/api/token/",
   register: "/register/",
+  mine: "/mine/",
+  recently_voted: "/recently_voted/",
+  hot: "/hot/",
 };
 
 export function requestGet<T>(url: string, header: object) {

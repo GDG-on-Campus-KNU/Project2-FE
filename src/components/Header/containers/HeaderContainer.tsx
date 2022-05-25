@@ -6,6 +6,7 @@ type Props = {
   searchContent: string;
   setSearchContent: React.Dispatch<React.SetStateAction<string>>;
 };
+
 const dummyBlock = [
   {
     id: 0,

@@ -5,20 +5,45 @@ import HeaderContainer from "../../components/Header/containers/HeaderContainer"
 import ScrollViewContainer from "../../components/ScrollView/containers/ScrollViewContainer";
 import SideBoardContainer from "../../components/SideBoard/containers/SideBoardContainer";
 import SideNavigationContainer from "../../components/SideNavigation/containers/SideNavigationContainer";
-import { PopUpTypes } from "../../typedef/common/common.types";
+import { getBlockType, PopUpTypes } from "../../typedef/common/common.types";
 
 type Props = {
   popUp: PopUpTypes;
+  itemList: getBlockType[];
+  editItemList: any;
+  next: string;
+  editLink: any;
+  getBlocks: any;
 };
 
-const MainNavigation = ({ popUp }: Props) => {
+const MainNavigation = ({
+  popUp,
+  itemList,
+  editItemList,
+  next,
+  editLink,
+  getBlocks,
+}: Props) => {
   return (
     <div>
       <HeaderContainer />
       <div style={{ display: "flex", marginTop: "16px" }}>
-        <SideNavigationContainer />
+        <SideNavigationContainer
+          editItemList={editItemList}
+          editLink={editLink}
+        />
         <Routes>
-          <Route path="/" element={<ScrollViewContainer />} />
+          <Route
+            path="/"
+            element={
+              <ScrollViewContainer
+                itemList={itemList}
+                editItemList={editItemList}
+                next={next}
+                getBlocks={getBlocks}
+              />
+            }
+          />
         </Routes>
         <SideBoardContainer />
       </div>

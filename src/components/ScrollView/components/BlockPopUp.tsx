@@ -13,6 +13,7 @@ type Props = {
   image: string;
   commentRef: React.RefObject<HTMLTextAreaElement>;
   onHandleHeight: React.FormEventHandler<HTMLTextAreaElement>;
+  deleteBlock: any;
 };
 
 const BlockPopUp = ({
@@ -23,17 +24,31 @@ const BlockPopUp = ({
   image,
   commentRef,
   onHandleHeight,
+  deleteBlock,
 }: Props) => {
   return (
     <div className="pop-up">
       <div className="pop-up-left">
         <div className={!picView ? "content-view" : "hidden"}>
           <div className="user-area">
-            <img className="profile" src="./logo512.png" alt={block.owner} />
-            <div>
-              <div>{block.owner}</div>
-              <div>{block.updatedAt}</div>
+            <div className="user-profile">
+              <img className="profile" src="./logo512.png" alt={block.owner} />
+              <div>
+                <div>{block.owner}</div>
+                <div>{block.updatedAt}</div>
+              </div>
             </div>
+            {block.owner === block.currentUser ? (
+              <div>
+                {/* <button className="user-btn">수정</button> */}
+                <button
+                  className="user-btn"
+                  onClick={() => deleteBlock(block.id)}
+                >
+                  삭제
+                </button>
+              </div>
+            ) : null}
           </div>
           <div className="content-area">
             <div className="content">
@@ -52,17 +67,11 @@ const BlockPopUp = ({
         </div>
         <div className="etc-area">
           <div>
-            {block.image[0] !== null
-              ? block.image.map((image: string, index: number) => (
-                  <button
-                    className="img-btn"
-                    onClick={picViewToggle}
-                    key={index}
-                  >
-                    <img src={image} alt="sampleImage" />
-                  </button>
-                ))
-              : null}
+            {block.image !== null ? (
+              <button className="img-btn" onClick={picViewToggle}>
+                <img src={block.image} alt="sampleImage" />
+              </button>
+            ) : null}
           </div>
         </div>
       </div>
@@ -94,6 +103,7 @@ const BlockPopUp = ({
 };
 
 export default BlockPopUp;
+
 function onClickImage(index: number): void {
   throw new Error("Function not implemented.");
 }

@@ -4,7 +4,6 @@ import {
   getBlockType,
 } from "../../../typedef/common/common.types";
 import Block from "../components/Block";
-import BlockPoppUpContainer from "./BlockPopUpContainer";
 import usePopUp from "../../../hooks/usePopUp";
 import ImagePopUp from "../components/ImagePopUp";
 import ImagePopUpContainer from "./ImagePopUpContainer";
@@ -14,20 +13,39 @@ import {
   requestGet,
   requestPost,
 } from "../../../lib/api/api";
+import useAuth from "../../../hooks/Auth/useAuth";
+import BlockPopUpContainer from "./BlockPopUpContainer";
 
 type Props = {
   block: getBlockType;
 };
 
 const BlockContainer = ({ block }: Props) => {
-  // console.log(block);
   const { __showPopUpFromHooks, __hidePopUpFromHooks } = usePopUp();
   const [expand, setExpand] = useState(false);
   const [like, setLike] = useState(false);
+  const { token } = useAuth();
 
-  const loadPopUp = useCallback(() => {
+  const getBlockDetail = async (id: number) => {
+    const { data } = await requestGet<BasicAPIResponseType<getBlockType>>(
+      `${apiOrigin}${apiRoute.board}/${id}/`,
+      {
+        Authorization: `Bearer ${token}`,
+      }
+    );
+
+    const block = {
+      ...data,
+      updatedAt: data.updatedAt.split(".")[0].replace("T", " "),
+    };
+
+    return block;
+  };
+
+  const loadPopUp = useCallback(async (id: number) => {
+    const block = await getBlockDetail(id);
     __showPopUpFromHooks(
-      <BlockPoppUpContainer block={block} closePopUp={closePopUp} />
+      <BlockPopUpContainer block={block} closePopUp={closePopUp} />
     );
   }, []);
 
@@ -47,7 +65,9 @@ const BlockContainer = ({ block }: Props) => {
 
       const { data } = await requestPost<BasicAPIResponseType<getBlockType>>(
         `${apiOrigin}${apiRoute.board}/${block.id}${apiRoute.like}`,
-        {},
+        {
+          Authorization: `Bearer ${token}`,
+        },
         []
       );
     }
