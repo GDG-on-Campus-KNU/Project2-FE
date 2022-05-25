@@ -28,10 +28,7 @@ const MainNavigation = ({
     <div>
       <HeaderContainer />
       <div style={{ display: "flex", marginTop: "16px" }}>
-        <SideNavigationContainer
-          editItemList={editItemList}
-          editLink={editLink}
-        />
+        <SideNavigationContainer editLink={editLink} />
         <Routes>
           <Route
             path="/"

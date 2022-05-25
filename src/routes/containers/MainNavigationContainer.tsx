@@ -16,6 +16,7 @@ const MainNavigationContainer = () => {
   const [next, setNext] = useState(
     `${apiOrigin}${apiRoute.board}?limit=10&offset=0`
   );
+  const [category, setCategory] = useState("");
 
   const editItemList = (blocks: getBlockType[]) => {
     setItemList(blocks);
@@ -23,7 +24,17 @@ const MainNavigationContainer = () => {
 
   const editLink = (newcate: string) => {
     setNext(`${apiOrigin}${apiRoute.board}/${newcate}?limit=10&offset=0`);
+    setCategory(newcate);
   };
+
+  const updateCategory = async () => {
+    const blocks = await getBlocks();
+    editItemList(blocks);
+  };
+
+  useEffect(() => {
+    updateCategory();
+  }, [category]);
 
   const getBlocks = async () => {
     const { data } = await requestGet<
@@ -32,8 +43,6 @@ const MainNavigationContainer = () => {
       Authorization: `Bearer ${token}`,
     });
 
-    setNext(data.next);
-
     const blocks = data.results.map((block) => {
       return (block = {
         ...block,
@@ -41,6 +50,8 @@ const MainNavigationContainer = () => {
         image: [block.image],
       });
     });
+
+    setNext(data.next);
 
     return blocks;
   };
