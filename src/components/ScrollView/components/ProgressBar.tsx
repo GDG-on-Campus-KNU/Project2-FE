@@ -1,4 +1,3 @@
-import React, { useCallback } from "react";
 import { useState, useEffect } from "react";
 
 type Props = {
@@ -14,10 +13,12 @@ const ProgressBar = ({ bgcolor, progress, content }: Props) => {
     const interval = setInterval(() => {
       if (count < progress) {
         setCount(count + 1);
+      } else if (count > progress) {
+        setCount(count - 1);
       }
     }, 5);
     return () => clearInterval(interval);
-  }, [count]);
+  }, [count, progress]);
 
   const Parentdiv = {
     height: "100%",
@@ -25,6 +26,7 @@ const ProgressBar = ({ bgcolor, progress, content }: Props) => {
     backgroundColor: "whitesmoke",
     borderRadius: "5px",
     margin: 0,
+    // potision: "relative",
   };
 
   const Childdiv = {
@@ -32,7 +34,7 @@ const ProgressBar = ({ bgcolor, progress, content }: Props) => {
     width: `${count}%`,
     backgroundColor: bgcolor,
     borderRadius: "5px",
-    //lineHeight: "200%",
+    // position: "absolute",
   };
 
   const progresstext = {
@@ -47,11 +49,11 @@ const ProgressBar = ({ bgcolor, progress, content }: Props) => {
   return (
     <div style={Parentdiv}>
       <div style={Childdiv}>
-        <span style={progresstext}>
+        {/* <span style={progresstext}>
           {content}
           <br />
           {`${progress}%`}
-        </span>
+        </span> */}
       </div>
     </div>
   );

@@ -14,17 +14,19 @@ const VoteView = ({ isVote, voteList, voteTotal, postVote }: Props) => {
   return isVote >= 0 ? (
     <div className="vote-view">
       {voteList.map((vote, index) => (
-        <button
-          className="vote-box"
-          key={index}
-          onClick={() => postVote(index)}
-        >
+        <div className="vote-box" key={index}>
+          <button onClick={() => postVote(index)}>
+            <div className="vote-text">
+              <div>{vote.content}</div>
+              <div>{Math.round((vote.count / voteTotal) * 100)}%</div>
+            </div>
+          </button>
           <ProgressBar
             bgcolor="orange"
             progress={(vote.count / voteTotal) * 100}
             content={vote.content}
           />
-        </button>
+        </div>
       ))}
       <div>{voteTotal}명 참가</div>
     </div>

@@ -19,6 +19,7 @@
     height: 70px;
     border-radius: 100%;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    z-index: 3;
 
     &:hover {
       background-color: rgb(228, 148, 1);

@@ -5,14 +5,35 @@
   .vote-box {
     width: 100%;
     height: 50px;
-    border-radius: 5px;
+    display: flex;
+    position: relative;
     margin-top: 5px;
 
     border: 1px solid black;
-    display: flex;
+    border-radius: 5px;
     align-items: center;
     &:hover {
       background: #eee;
+    }
+
+    .vote-text {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      position: absolue;
+      z-index: 1;
+
+      div {
+        margin: 12.5px 10px;
+        height: 100%;
+      }
+    }
+
+    button {
+      width: 100%;
+      height: 100%;
+      position: absolute;
     }
   }
 
