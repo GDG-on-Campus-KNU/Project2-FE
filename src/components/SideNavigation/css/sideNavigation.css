@@ -30,6 +30,8 @@
 }
 
 .side-navigation-wrap .side-navigation-container .category-list .category-item button {
+  width: 100%;
   line-height: 32px;
+  text-align: left;
 }
 /*# sourceMappingURL=sideNavigation.css.map */

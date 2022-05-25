@@ -14,8 +14,8 @@ const LastBoard = ({ loadPopUp, itemList }: Props) => {
         {itemList.map((block) => (
           <li className="post-item" key={block.id}>
             <button onClick={() => loadPopUp(block.id)}>
-              {block.content.length > 15
-                ? block.content.slice(0, 15) + "..."
+              {block.content.length > 20
+                ? block.content.slice(0, 20) + "..."
                 : block.content}
             </button>
           </li>

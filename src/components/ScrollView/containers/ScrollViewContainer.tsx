@@ -42,7 +42,6 @@ const ScrollViewContainer = ({
   const intersecting = async ([entry]: IntersectionObserverEntry[]) => {
     if (entry.isIntersecting) {
       const blocks = await getBlocks();
-      // console.log("blocks", blocks);
       setLoading(true);
       addItemList(blocks);
       setLoading(false);

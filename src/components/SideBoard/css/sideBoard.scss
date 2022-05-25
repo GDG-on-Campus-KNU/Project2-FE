@@ -18,6 +18,9 @@
     }
 
     .post-list {
+      max-height: 207px;
+      overflow: scroll;
+
       .post-item {
         padding-left: 8px;
         border-radius: 6px;
@@ -27,7 +30,9 @@
         }
 
         button {
+          width: 100%;
           line-height: 32px;
+          text-align: left;
         }
       }
     }

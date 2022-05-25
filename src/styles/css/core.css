@@ -40,4 +40,13 @@ button {
   overflow: hidden;
   clip: rect(0 0 0 0);
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: orange;
+  border-radius: 8px;
+}
 /*# sourceMappingURL=core.css.map */

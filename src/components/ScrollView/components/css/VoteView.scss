@@ -16,25 +16,29 @@
       background: #eee;
     }
 
-    .vote-text {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: space-between;
-      position: absolue;
-      z-index: 1;
-
-      div {
-        margin: 12.5px 10px;
-        height: 100%;
-      }
-    }
-
     button {
       width: 100%;
       height: 100%;
       position: absolute;
+
+      .vote-text {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        position: absolue;
+        z-index: 1;
+
+        div {
+          margin: 14.5px 20px;
+          height: 100%;
+        }
+      }
     }
+  }
+
+  .vote-count {
+    margin-top: 10px;
   }
 
   .isvote-false {

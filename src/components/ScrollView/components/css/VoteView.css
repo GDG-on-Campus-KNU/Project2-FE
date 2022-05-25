@@ -22,7 +22,13 @@
   background: #eee;
 }
 
-.vote-view .vote-box .vote-text {
+.vote-view .vote-box button {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.vote-view .vote-box button .vote-text {
   width: 100%;
   height: 100%;
   display: -webkit-box;
@@ -35,15 +41,13 @@
   z-index: 1;
 }
 
-.vote-view .vote-box .vote-text div {
-  margin: 12.5px 10px;
+.vote-view .vote-box button .vote-text div {
+  margin: 14.5px 20px;
   height: 100%;
 }
 
-.vote-view .vote-box button {
-  width: 100%;
-  height: 100%;
-  position: absolute;
+.vote-view .vote-count {
+  margin-top: 10px;
 }
 
 .vote-view .isvote-false {

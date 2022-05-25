@@ -21,6 +21,11 @@
   padding-left: 4px;
 }
 
+.side-board-wrap .side-board-container .post-list {
+  max-height: 207px;
+  overflow: scroll;
+}
+
 .side-board-wrap .side-board-container .post-list .post-item {
   padding-left: 8px;
   border-radius: 6px;
@@ -31,6 +36,8 @@
 }
 
 .side-board-wrap .side-board-container .post-list .post-item button {
+  width: 100%;
   line-height: 32px;
+  text-align: left;
 }
 /*# sourceMappingURL=sideBoard.css.map */

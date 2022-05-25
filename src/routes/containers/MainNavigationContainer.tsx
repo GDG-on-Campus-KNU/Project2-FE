@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import useAuth from "../../hooks/Auth/useAuth";
 import usePopUp from "../../hooks/usePopUp";
 import { apiOrigin, apiRoute, requestGet } from "../../lib/api/api";
@@ -25,6 +25,9 @@ const MainNavigationContainer = () => {
   const editLink = (newcate: string) => {
     setNext(`${apiOrigin}${apiRoute.board}/${newcate}?limit=10&offset=0`);
     setCategory(newcate);
+    const scrollView = document.querySelector(".scroll-view-wrap");
+
+    if (scrollView) scrollView.scrollTop = 0;
   };
 
   const updateCategory = async () => {

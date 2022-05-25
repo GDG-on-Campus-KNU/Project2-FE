@@ -2,8 +2,9 @@
   width: 90%;
   height: auto;
   border: 1px solid black;
-  border-radius: 5px;
+  border-radius: 8px;
   margin: 0 auto 15px auto;
+  overflow: hidden;
 }
 
 .block .user-area {
@@ -68,6 +69,7 @@
           justify-content: space-between;
   border-top: 1px solid black;
   padding-right: 15px;
+  overflow: hidden;
 }
 
 .block .etc-area div {
@@ -82,12 +84,11 @@
 
 .block .etc-area div .attached-image {
   height: 60px;
-  border-radius: 4px;
 }
 
 .block .etc-area div .attached-image img {
   width: 70px;
-  height: 60px;
+  height: 100%;
 }
 
 .block .etc-area div .icon {
