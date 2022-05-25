@@ -26,7 +26,7 @@ const MainNavigation = ({
 }: Props) => {
   return (
     <div>
-      <HeaderContainer />
+      {/* <HeaderContainer /> */}
       <div style={{ display: "flex", marginTop: "16px" }}>
         <SideNavigationContainer editLink={editLink} />
         <Routes>
