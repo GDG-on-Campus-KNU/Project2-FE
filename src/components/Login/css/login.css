@@ -53,4 +53,27 @@
   font-size: 18px;
   font-weight: 700;
 }
+
+#root .login-wrap .login-container .alert-message {
+  display: none;
+  width: 100%;
+  text-align: left;
+  font-size: 12px;
+  color: #999;
+}
+
+#root .login-wrap .login-container .alert-message.active {
+  display: block;
+}
+
+#root .login-wrap .login-container p.link {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #111;
+}
+
+#root .login-wrap .login-container p.link > button {
+  font-size: 13px;
+  color: #333;
+}
 /*# sourceMappingURL=login.css.map */

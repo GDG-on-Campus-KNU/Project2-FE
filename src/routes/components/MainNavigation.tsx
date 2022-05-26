@@ -31,7 +31,7 @@ const MainNavigation = ({
         <SideNavigationContainer editLink={editLink} />
         <Routes>
           <Route
-            path="/"
+            path="/home"
             element={
               <ScrollViewContainer
                 itemList={itemList}

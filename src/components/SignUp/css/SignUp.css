@@ -1,4 +1,4 @@
-#root .login-wrap {
+#root .signup-wrap {
   width: 100%;
   height: 100vh;
   display: -webkit-box;
@@ -12,17 +12,17 @@
           justify-content: center;
 }
 
-#root .login-wrap .login-container {
+#root .signup-wrap .signup-container {
   width: 460px;
   padding: 32px 24px;
   text-align: center;
 }
 
-#root .login-wrap .login-container h1 {
+#root .signup-wrap .signup-container h1 {
   margin-bottom: 32px;
 }
 
-#root .login-wrap .login-container form {
+#root .signup-wrap .signup-container form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -32,8 +32,8 @@
           flex-direction: column;
 }
 
-#root .login-wrap .login-container form input,
-#root .login-wrap .login-container form input:focus {
+#root .signup-wrap .signup-container form input,
+#root .signup-wrap .signup-container form input:focus {
   width: 100%;
   padding: 14px 16px;
   margin-bottom: 12px;
@@ -42,7 +42,7 @@
   background-color: transparent;
 }
 
-#root .login-wrap .login-container form button {
+#root .signup-wrap .signup-container form button {
   line-height: 24px;
   padding: 13px 0 13px;
   margin-top: 16px;
@@ -53,14 +53,29 @@
   font-size: 18px;
   font-weight: 700;
 }
-/*# sourceMappingURL=login.css.map */
 
-p {
-  margin-top: 50px;
-  color: #666;
-  font-size: small;
+#root .signup-wrap .signup-container .incorrect-pw-message {
+  width: 100%;
+  text-align: left;
+  font-size: 12px;
+  color: #999;
 }
 
-.link {
-  text-decoration: underline;
+#root .signup-wrap .signup-container .correct-pw-message {
+  width: 100%;
+  text-align: left;
+  font-size: 12px;
+  color: green;
 }
+
+#root .signup-wrap .signup-container .link {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #111;
+}
+
+#root .signup-wrap .signup-container .link > button {
+  font-size: 13px;
+  color: #333;
+}
+/*# sourceMappingURL=signUp.css.map */

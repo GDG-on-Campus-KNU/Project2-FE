@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useAuth from "../../../hooks/Auth/useAuth";
-import { apiOrigin, apiRoute, requestFormPost } from "../../../lib/api/api";
+import useRootRoute from "../../../hooks/useRootRoute";
+import { apiOrigin, apiRoute, requestPost } from "../../../lib/api/api";
 import {
   BasicAPIResponseType,
   LoginTokenType,
@@ -11,27 +11,43 @@ import Login from "../Login";
 const LoginContainer = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
+  const [isFailed, setIsFailed] = useState(false);
+  const { __updateRootFromHooks } = useRootRoute();
   const navigate = useNavigate();
 
   const onSubmit = useCallback(
     async (e) => {
       e.preventDefault();
-      const formData = new FormData();
-      formData.append("username", id);
-      formData.append("password", password);
 
-      const { data } = await requestFormPost<
-        BasicAPIResponseType<LoginTokenType>
-      >(`${apiOrigin}${apiRoute.login}`, {}, formData);
+      const {
+        data: { access },
+        status,
+      } = await requestPost<BasicAPIResponseType<LoginTokenType>>(
+        apiOrigin + apiRoute.login,
+        {},
+        { username: id, password: password }
+      );
 
-      sessionStorage.setItem("@access", data.access);
-
-      navigate("/home");
+      if (status) {
+        sessionStorage.setItem("@access", access);
+        __updateRootFromHooks("main");
+        navigate("/home");
+      }
     },
-    [id, password]
+    [id, password, isFailed, __updateRootFromHooks]
   );
+  const onSignup = useCallback(() => {
+    navigate("/signup");
+  }, [navigate]);
 
-  return <Login setId={setId} setPassword={setPassword} onSubmit={onSubmit} />;
+  return (
+    <Login
+      setId={setId}
+      setPassword={setPassword}
+      onSubmit={onSubmit}
+      onSignup={onSignup}
+    />
+  );
 };
 
 export default LoginContainer;

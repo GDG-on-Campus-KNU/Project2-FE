@@ -1,14 +1,14 @@
 import React from "react";
 import "./css/login.css";
-import { Link } from "react-router-dom";
 
 type Props = {
   setId: React.Dispatch<React.SetStateAction<string>>;
   setPassword: React.Dispatch<React.SetStateAction<string>>;
   onSubmit: React.MouseEventHandler<HTMLButtonElement>;
+  onSignup: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-const Login = ({ setId, setPassword, onSubmit }: Props) => {
+const Login = ({ setId, setPassword, onSubmit, onSignup }: Props) => {
   return (
     <div className="login-wrap">
       <div className="login-container">
@@ -28,7 +28,9 @@ const Login = ({ setId, setPassword, onSubmit }: Props) => {
             Sign In
           </button>
         </form>
-        <p>아직 계정이 없으신가요?  <Link className="link" to="signup">회원가입</Link></p>
+        <p className="link">
+          아직 계정이 없으신가요? <button onClick={onSignup}>회원가입</button>
+        </p>
       </div>
     </div>
   );

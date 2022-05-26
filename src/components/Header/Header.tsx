@@ -1,11 +1,9 @@
 import React from "react";
-import { useState } from "react";
-import logo from "./logo.svg";
-import { Route, Link } from "react-router-dom";
 import "./css/header.css";
 import images from "../../assets/images";
 
 type Props = {
+  handleDropDown: React.MouseEventHandler<HTMLElement>;
   isDropDown: boolean;
   onProfileClick: React.MouseEventHandler<HTMLButtonElement>;
   onSearch: React.MouseEventHandler<HTMLButtonElement>;
@@ -14,6 +12,7 @@ type Props = {
 };
 
 const Header = ({
+  handleDropDown,
   isDropDown,
   onProfileClick,
   onSearch,

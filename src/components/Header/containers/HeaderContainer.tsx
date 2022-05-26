@@ -1,11 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useRootRoute from "../../../hooks/useRootRoute";
 import Header from "../Header";
-
-type Props = {
-  searchContent: string;
-  setSearchContent: React.Dispatch<React.SetStateAction<string>>;
-};
 
 const dummyBlock = [
   {
@@ -21,14 +17,25 @@ const dummyBlock = [
     voteText: "string",
   },
 ];
-const HeaderContainer = ({ searchContent, setSearchContent }: Props) => {
+const HeaderContainer = () => {
+  const [searchContent, setSearchContent] = useState("");
   const [isDropDown, setIsDropDown] = useState(false);
   const [boards, setBoards] = useState(dummyBlock);
   const navigate = useNavigate();
+  const { __updateRootFromHooks } = useRootRoute();
 
   const onProfileClick = useCallback(() => {
     setIsDropDown((prev) => !prev);
   }, [isDropDown]);
+
+  const handleDropDown = useCallback(
+    (e) => {
+      if (e.target === e.currentTarget) {
+        setIsDropDown(false);
+      }
+    },
+    [isDropDown]
+  );
 
   const onSearch = useCallback(() => {
     setBoards(
@@ -47,12 +54,13 @@ const HeaderContainer = ({ searchContent, setSearchContent }: Props) => {
   const onSignOut = useCallback(() => {
     const response = window.confirm("로그아웃 하시겠습니까?");
     if (response) {
-      navigate("/");
+      __updateRootFromHooks("login");
     }
   }, [navigate]);
 
   return (
     <Header
+      handleDropDown={handleDropDown}
       isDropDown={isDropDown}
       onProfileClick={onProfileClick}
       onSearch={onSearch}

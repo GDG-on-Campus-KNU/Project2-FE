@@ -2,15 +2,24 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoginNavigationContainer from "./containers/LoginNavigationContainer";
 import MainNavigationContainer from "./containers/MainNavigationContainer";
-import SignUpContainer from "../components/SignUp/containers/SignUpContainer";
 
-const RootNavigation = () => {
+type Props = {
+  root: "login" | "main";
+};
+const RootNavigation = ({ root }: Props) => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LoginNavigationContainer />} />
-        <Route path="/signup" element={<SignUpContainer />} />
-        <Route path="/home/*" element={<MainNavigationContainer />} />
+        <Route
+          path="*"
+          element={
+            root === "login" ? (
+              <LoginNavigationContainer />
+            ) : (
+              <MainNavigationContainer />
+            )
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
