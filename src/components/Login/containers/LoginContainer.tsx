@@ -11,7 +11,6 @@ import Login from "../Login";
 const LoginContainer = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
-  const [isFailed, setIsFailed] = useState(false);
   const { __updateRootFromHooks } = useRootRoute();
   const navigate = useNavigate();
 
@@ -34,7 +33,7 @@ const LoginContainer = () => {
         navigate("/home");
       }
     },
-    [id, password, isFailed, __updateRootFromHooks]
+    [id, password, __updateRootFromHooks]
   );
   const onSignup = useCallback(() => {
     navigate("/signup");

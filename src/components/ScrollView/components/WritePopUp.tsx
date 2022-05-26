@@ -78,7 +78,7 @@ const WritePopUp = ({
             ))}
             {votes.length < 4 ? (
               <button type="button" className="more-btn" onClick={addVote}>
-                ✖️
+                +
               </button>
             ) : null}
           </div>

@@ -42,7 +42,7 @@
   background-color: transparent;
 }
 
-#root .login-wrap .login-container form button {
+#root .login-wrap .login-container form .login-button {
   line-height: 24px;
   padding: 13px 0 13px;
   margin-top: 16px;
@@ -52,6 +52,8 @@
   border-radius: 4px;
   font-size: 18px;
   font-weight: 700;
+  -webkit-transition: 0.8s;
+  transition: 0.8s;
 }
 
 #root .login-wrap .login-container .alert-message {
@@ -75,5 +77,9 @@
 #root .login-wrap .login-container p.link > button {
   font-size: 13px;
   color: #333;
+}
+
+#root .login-wrap .login-container p.link > button:hover {
+  text-decoration: underline;
 }
 /*# sourceMappingURL=login.css.map */

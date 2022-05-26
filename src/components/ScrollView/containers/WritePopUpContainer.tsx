@@ -1,16 +1,12 @@
 import React, { useCallback, useState, useEffect } from "react";
 import useAuth from "../../../hooks/Auth/useAuth";
-import {
-  apiOrigin,
-  apiRoute,
-  requestDelete,
-  requestFormPost,
-} from "../../../lib/api/api";
+import usePopUp from "../../../hooks/usePopUp";
+import { apiOrigin, apiRoute, requestFormPost } from "../../../lib/api/api";
 import {
   BasicAPIResponseType,
   createImageType,
   createVoteType,
-  LoginTokenType,
+  postBlockResponseType,
 } from "../../../typedef/common/common.types";
 import WritePopUp from "../components/WritePopUp";
 
@@ -20,6 +16,7 @@ type Props = {
 
 const WritePopUpContainer = ({ closePopUp }: Props) => {
   const { token } = useAuth();
+  const { __hidePopUpFromHooks } = usePopUp();
   const [formInfo, setFormInfo] = useState<{
     category: string;
     image: File[] | null;
@@ -68,13 +65,6 @@ const WritePopUpContainer = ({ closePopUp }: Props) => {
     setVotes(votes.filter((vote) => vote.id !== id));
   };
 
-  useEffect(() => {
-    const findIndex = votes.findIndex((element) => element.id === voteInput.id);
-    let newVotes = [...votes];
-    newVotes[findIndex] = { ...newVotes[findIndex], content: voteInput.value };
-    setVotes(newVotes);
-  }, [voteInput]);
-
   const addImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     let reader = new FileReader();
 
@@ -115,21 +105,7 @@ const WritePopUpContainer = ({ closePopUp }: Props) => {
     setFormInfo({ ...formInfo, content: e.target.value });
   };
 
-  useEffect(() => {
-    const stringVotes = votes.map(({ content, count }) => {
-      return [content, count];
-    });
-    setFormInfo({ ...formInfo, voteText: JSON.stringify(stringVotes) });
-  }, [votes]);
-
-  useEffect(() => {
-    const imgFiles = imgs.map((img) => {
-      return img.imgFile;
-    });
-    setFormInfo({ ...formInfo, image: imgFiles.length > 0 ? imgFiles : null });
-  }, [imgs]);
-
-  const postBlock = async (e: React.FormEvent) => {
+  const postBlock = useCallback(async () => {
     const formData = new FormData();
     formData.append("category", formInfo.category);
     if (formInfo.image !== null) {
@@ -141,7 +117,7 @@ const WritePopUpContainer = ({ closePopUp }: Props) => {
     formData.append("voteText", formInfo.voteText);
 
     const { data } = await requestFormPost<
-      BasicAPIResponseType<LoginTokenType>
+      BasicAPIResponseType<postBlockResponseType>
     >(
       `${apiOrigin}${apiRoute.board}/`,
       {
@@ -150,8 +126,33 @@ const WritePopUpContainer = ({ closePopUp }: Props) => {
       formData
     );
 
-    console.log("data", data);
-  };
+    console.log(data);
+
+    if (data) {
+      __hidePopUpFromHooks();
+    }
+  }, [formInfo, __hidePopUpFromHooks]);
+
+  useEffect(() => {
+    const stringVotes = votes.map(({ content, count }) => {
+      return [content, count];
+    });
+    setFormInfo({ ...formInfo, voteText: JSON.stringify(stringVotes) });
+  }, [votes]);
+
+  useEffect(() => {
+    const findIndex = votes.findIndex((element) => element.id === voteInput.id);
+    let newVotes = [...votes];
+    newVotes[findIndex] = { ...newVotes[findIndex], content: voteInput.value };
+    setVotes(newVotes);
+  }, [voteInput]);
+
+  useEffect(() => {
+    const imgFiles = imgs.map((img) => {
+      return img.imgFile;
+    });
+    setFormInfo({ ...formInfo, image: imgFiles.length > 0 ? imgFiles : null });
+  }, [imgs]);
 
   return (
     <WritePopUp

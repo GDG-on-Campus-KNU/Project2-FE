@@ -5,7 +5,7 @@ import { isSetAccessor } from "typescript";
 import { apiOrigin, apiRoute, requestPost } from "../../../lib/api/api";
 import {
   BasicAPIResponseType,
-  SignUpType,
+  SignUpResponseType,
 } from "../../../typedef/common/common.types";
 import SignUp from "../SignUp";
 
@@ -15,6 +15,7 @@ const SignUpContainer = () => {
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [isMatch, setIsMatch] = useState(false);
   const [email, setEmail] = useState("");
+  const [isEmail, setIsEmail] = useState(false);
   const navigate = useNavigate();
 
   const onSubmit = useCallback(
@@ -24,15 +25,14 @@ const SignUpContainer = () => {
         username: id,
         password: password,
         email: email,
-        profile: {
-          count: 0,
-        },
+        profile: {},
       };
-      const { data } = await requestPost<BasicAPIResponseType<SignUpType>>(
-        `${apiOrigin}${apiRoute.register}`,
-        {},
-        signupData
-      );
+
+      console.log(signupData);
+
+      const { data } = await requestPost<
+        BasicAPIResponseType<SignUpResponseType>
+      >(`${apiOrigin}${apiRoute.register}`, {}, signupData);
 
       console.log(`data : ${data}`);
 
@@ -49,6 +49,21 @@ const SignUpContainer = () => {
     [isMatch, password, passwordConfirm]
   );
 
+  const onCheckEmail = useCallback(
+    (email: string) => {
+      const emailReg =
+        /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+      setEmail(email);
+
+      if (!emailReg.test(email)) {
+        setIsEmail(false);
+      } else {
+        setIsEmail(true);
+      }
+    },
+    [isEmail]
+  );
+
   const onLogin = useCallback(() => {
     navigate("/login");
   }, [navigate]);
@@ -56,12 +71,16 @@ const SignUpContainer = () => {
   return (
     <SignUp
       setId={setId}
+      id={id}
       setPassword={setPassword}
       password={password}
       passwordConfirm={passwordConfirm}
       onComparePassword={onComparePassword}
       isMatch={isMatch}
       setEmail={setEmail}
+      email={email}
+      isEmail={isEmail}
+      onCheckEmail={onCheckEmail}
       onSubmit={onSubmit}
       onLogin={onLogin}
     />

@@ -24,7 +24,8 @@ const Login = ({ setId, setPassword, onSubmit, onSignup }: Props) => {
             placeholder="비밀번호"
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button type="submit" onClick={onSubmit}>
+
+          <button className="login-button" type="submit" onClick={onSubmit}>
             Sign In
           </button>
         </form>
