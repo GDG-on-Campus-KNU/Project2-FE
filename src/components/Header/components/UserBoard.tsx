@@ -41,13 +41,15 @@ const UserBoard = ({ boards, getBlockDetail }: Props) => {
                       nulla assumenda inventore sapiente corrupti provident
                       vitae reiciendis adipisci.
                     </div>
-                    <div className="image-area">
-                      <img
-                        className="attached-image"
-                        src={board.image}
-                        alt={board.image}
-                      />
-                    </div>
+                    {board.image ? (
+                      <div className="image-area">
+                        <img
+                          className="attached-image"
+                          src={board.image}
+                          alt={board.image}
+                        />
+                      </div>
+                    ) : null}
                   </div>
                   <div className="vote-count">{board.voteTotal}명 참가</div>
                 </div>
