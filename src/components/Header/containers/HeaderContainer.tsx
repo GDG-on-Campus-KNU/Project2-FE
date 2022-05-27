@@ -33,6 +33,10 @@ const HeaderContainer = ({ setSearchContent }: Props) => {
     setSearchContent(searchInput);
   }, [searchInput]);
 
+  const goSearch = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") setSearchContent(searchInput);
+  };
+
   const onUserInfo = useCallback(() => {
     __showPopUpFromHooks(<UserInfoContainer />);
   }, [__showPopUpFromHooks]);
@@ -69,6 +73,7 @@ const HeaderContainer = ({ setSearchContent }: Props) => {
       isDropDown={isDropDown}
       onProfileClick={onProfileClick}
       onSearch={onSearch}
+      goSearch={goSearch}
       setSearchInput={setSearchInput}
       onUserInfo={onUserInfo}
       onUserBoards={onUserBoards}

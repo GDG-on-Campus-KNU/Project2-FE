@@ -6,6 +6,7 @@ type Props = {
   isDropDown: boolean;
   onProfileClick: React.MouseEventHandler<HTMLButtonElement>;
   onSearch: React.MouseEventHandler<HTMLButtonElement>;
+  goSearch: (e: React.KeyboardEvent) => void;
   setSearchInput: React.Dispatch<React.SetStateAction<string>>;
   onUserInfo: React.MouseEventHandler<HTMLButtonElement>;
   onUserBoards: React.MouseEventHandler<HTMLButtonElement>;
@@ -17,6 +18,7 @@ const Header = ({
   isDropDown,
   onProfileClick,
   onSearch,
+  goSearch,
   setSearchInput,
   onUserInfo,
   onUserBoards,
@@ -35,6 +37,7 @@ const Header = ({
           type="text"
           placeholder="검색"
           onChange={(e) => setSearchInput(e.target.value)}
+          onKeyPress={(e) => goSearch(e)}
         />
         <button className="search-button" type="submit" onClick={onSearch}>
           <img src={images.search} alt="검색" />
