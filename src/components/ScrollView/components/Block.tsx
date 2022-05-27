@@ -25,7 +25,7 @@ const Block = ({
 }: Props) => {
   const content_txt_short = block.content.substring(0, 200) + "...";
   return (
-    <div className="block">
+    <article className="block">
       <div className="user-area">
         <img
           className="profile"
@@ -93,7 +93,7 @@ const Block = ({
           </button>
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 

@@ -20,9 +20,13 @@ const UserBoard = ({ boards, getBlockDetail }: Props) => {
           게시글 <span>({boards.count})</span>
         </h3>
         <div className="board-box">
-          {boards.results.map((board) => {
+          {boards.results.map((board, index) => {
             return (
-              <article className="board" onClick={() => getBlockDetail(board)}>
+              <article
+                className="board"
+                key={index}
+                onClick={() => getBlockDetail(board)}
+              >
                 <div className="user-area">
                   <div className="profile">
                     <img src={images.defaultProfile} alt={board.owner} />

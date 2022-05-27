@@ -24,7 +24,7 @@ const ScrollView = ({
   searchContent,
 }: Props) => {
   return (
-    <div className="wrapper">
+    <section className="wrapper">
       <button className="write-btn" onClick={loadPopUp}>
         <img className="icon" src={images.pencil} alt="작성" />
       </button>
@@ -47,7 +47,7 @@ const ScrollView = ({
           <div className="end">마지막 게시글입니다.</div>
         )}
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -44,6 +44,7 @@
 .user-board-wrap .board-container .board-box .board:hover {
   background-color: #eee;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .user-board-wrap .board-container .board-box .board .user-area {

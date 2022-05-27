@@ -35,14 +35,16 @@ const BlockPopUpContainer = ({ block, closePopUp }: Props) => {
   }, []);
 
   const deleteBlock = async (id: number) => {
-    const { data } = await requestDelete<BasicAPIResponseType<LoginTokenType>>(
-      `${apiOrigin}${apiRoute.board}/${id}/`,
-      {
+    const response = window.confirm("삭제하시겠습니까?");
+    if (response) {
+      const { data } = await requestDelete<
+        BasicAPIResponseType<LoginTokenType>
+      >(`${apiOrigin}${apiRoute.board}/${id}/`, {
         Authorization: `Bearer ${token}`,
-      }
-    );
+      });
 
-    window.location.replace("/home");
+      window.location.replace("/home");
+    }
   };
 
   return (
