@@ -12,24 +12,14 @@ import Header from "../Header";
 import UserBoardContainer from "./UserBoardContainer";
 import UserInfoContainer from "./UserInfoContainer";
 
-const dummyBlock = [
-  {
-    id: 0,
-    owner: "string",
-    category: "string",
-    image: [],
-    createdAt: "string",
-    updatedAt: "string",
-    content: "string",
-    likeCount: 0,
-    votedIndex: 0,
-    voteText: "string",
-  },
-];
-const HeaderContainer = () => {
-  const [searchContent, setSearchContent] = useState("");
+type Props = {
+  setSearchContent: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const HeaderContainer = ({ setSearchContent }: Props) => {
   const [isDropDown, setIsDropDown] = useState(false);
-  const [boards, setBoards] = useState(dummyBlock);
+  const [searchInput, setSearchInput] = useState("");
+
   const navigate = useNavigate();
   const { __updateRootFromHooks } = useRootRoute();
   const { __showPopUpFromHooks } = usePopUp();
@@ -40,18 +30,8 @@ const HeaderContainer = () => {
   }, [isDropDown]);
 
   const onSearch = useCallback(() => {
-    setBoards(
-      boards.filter((item) => {
-        if (searchContent === "") {
-          return item;
-        } else if (
-          item.content.toLowerCase().includes(searchContent.toLowerCase())
-        ) {
-          return item;
-        }
-      })
-    );
-  }, [searchContent]);
+    setSearchContent(searchInput);
+  }, [searchInput]);
 
   const onUserInfo = useCallback(() => {
     __showPopUpFromHooks(<UserInfoContainer />);
@@ -89,7 +69,7 @@ const HeaderContainer = () => {
       isDropDown={isDropDown}
       onProfileClick={onProfileClick}
       onSearch={onSearch}
-      setSearchContent={setSearchContent}
+      setSearchInput={setSearchInput}
       onUserInfo={onUserInfo}
       onUserBoards={onUserBoards}
       onSignOut={onSignOut}

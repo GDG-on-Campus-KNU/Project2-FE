@@ -14,6 +14,9 @@ type Props = {
   next: string;
   editLink: any;
   getBlocks: any;
+  scrollView: any;
+  searchContent: string;
+  setSearchContent: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const MainNavigation = ({
@@ -23,10 +26,13 @@ const MainNavigation = ({
   next,
   editLink,
   getBlocks,
+  scrollView,
+  searchContent,
+  setSearchContent,
 }: Props) => {
   return (
     <div>
-      <HeaderContainer />
+      <HeaderContainer setSearchContent={setSearchContent} />
       <div style={{ display: "flex", marginTop: "16px" }}>
         <SideNavigationContainer editLink={editLink} />
         <Routes>
@@ -38,6 +44,8 @@ const MainNavigation = ({
                 editItemList={editItemList}
                 next={next}
                 getBlocks={getBlocks}
+                scrollView={scrollView}
+                searchContent={searchContent}
               />
             }
           />

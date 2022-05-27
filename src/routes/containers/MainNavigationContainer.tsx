@@ -17,17 +17,22 @@ const MainNavigationContainer = () => {
     `${apiOrigin}${apiRoute.board}?limit=10&offset=0`
   );
   const [category, setCategory] = useState("");
+  const [searchContent, setSearchContent] = useState("");
+
+  const scrollView = useRef<HTMLDivElement>(null);
 
   const editItemList = (blocks: getBlockType[]) => {
     setItemList(blocks);
   };
 
   const editLink = (newcate: string) => {
+    setSearchContent("");
     setNext(`${apiOrigin}${apiRoute.board}/${newcate}?limit=10&offset=0`);
     setCategory(newcate);
-    const scrollView = document.querySelector(".scroll-view-wrap");
 
-    if (scrollView) scrollView.scrollTop = 0;
+    if (scrollView) {
+      scrollView.current!.scrollTop = 0;
+    }
   };
 
   const updateCategory = async () => {
@@ -38,6 +43,10 @@ const MainNavigationContainer = () => {
   useEffect(() => {
     updateCategory();
   }, [category]);
+
+  useEffect(() => {
+    console.log("useEffect", searchContent);
+  }, [searchContent]);
 
   const getBlocks = async () => {
     const { data } = await requestGet<
@@ -67,6 +76,9 @@ const MainNavigationContainer = () => {
       next={next}
       editLink={editLink}
       getBlocks={getBlocks}
+      scrollView={scrollView}
+      searchContent={searchContent}
+      setSearchContent={setSearchContent}
     />
   );
 };

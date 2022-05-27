@@ -10,6 +10,8 @@ type Props = {
   itemList: getBlockType[];
   loadPopUp: React.MouseEventHandler<HTMLButtonElement>;
   next: string;
+  scrollView: any;
+  searchContent: string;
 };
 
 const ScrollView = ({
@@ -18,16 +20,24 @@ const ScrollView = ({
   itemList,
   loadPopUp,
   next,
+  scrollView,
+  searchContent,
 }: Props) => {
   return (
     <div className="wrapper">
       <button className="write-btn" onClick={loadPopUp}>
         <img className="icon" src={images.pencil} alt="작성" />
       </button>
-      <div className="scroll-view-wrap">
-        {itemList.map((block, index) => (
-          <BlockContainer block={block} key={index} />
-        ))}
+      <div className="scroll-view-wrap" ref={scrollView}>
+        {itemList.map((block, index) =>
+          searchContent.length > 0 ? (
+            block.content.includes(searchContent) ? (
+              <BlockContainer block={block} key={index} />
+            ) : null
+          ) : (
+            <BlockContainer block={block} key={index} />
+          )
+        )}
         {next && !loading && (
           <div className="target" ref={setTarget}>
             Loading...

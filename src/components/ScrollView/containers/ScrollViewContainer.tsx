@@ -10,6 +10,8 @@ type Props = {
   editItemList: any;
   next: string;
   getBlocks: any;
+  scrollView: any;
+  searchContent: string;
 };
 
 const ScrollViewContainer = ({
@@ -17,6 +19,8 @@ const ScrollViewContainer = ({
   editItemList,
   next,
   getBlocks,
+  scrollView,
+  searchContent,
 }: Props) => {
   const { token } = useAuth();
   const [target, setTarget] = useState<HTMLElement | null>(null);
@@ -66,6 +70,8 @@ const ScrollViewContainer = ({
       itemList={itemList}
       loadPopUp={loadPopUp}
       next={next}
+      scrollView={scrollView}
+      searchContent={searchContent}
     />
   );
 };
