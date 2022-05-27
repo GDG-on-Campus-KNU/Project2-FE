@@ -44,9 +44,8 @@ const BlockPopUp = ({
             </div>
             {block.owner === block.currentUser ? (
               <div>
-                {/* <button className="user-btn">수정</button> */}
                 <button
-                  className="user-btn"
+                  className="delete-btn"
                   onClick={() => deleteBlock(block.id)}
                 >
                   삭제

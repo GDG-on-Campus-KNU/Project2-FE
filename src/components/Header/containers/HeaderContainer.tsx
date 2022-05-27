@@ -52,22 +52,6 @@ const HeaderContainer = ({ setSearchContent }: Props) => {
     __showPopUpFromHooks(<UserBoardContainer />);
   }, [__showPopUpFromHooks]);
 
-  const onRemoveUser = useCallback(async () => {
-    const response = window.confirm("회원탈퇴 하시겠습니까?");
-    if (response) {
-      const { data } = await requestDelete<
-        BasicAPIResponseType<RemoveUserType>
-      >(apiOrigin + apiRoute.delete_user, {
-        Authorization: `Bearer ${token}`,
-      });
-
-      if (data) {
-        alert("회원탈퇴가 완료되었습니다.");
-      }
-      __updateRootFromHooks("login");
-    }
-  }, [__updateRootFromHooks]);
-
   return (
     <Header
       isDropDown={isDropDown}
@@ -78,7 +62,6 @@ const HeaderContainer = ({ setSearchContent }: Props) => {
       onUserInfo={onUserInfo}
       onUserBoards={onUserBoards}
       onSignOut={onSignOut}
-      onRemoveUser={onRemoveUser}
     />
   );
 };

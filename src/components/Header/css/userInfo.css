@@ -1,9 +1,10 @@
 .user-info-wrap {
-  padding: 36px 24px;
+  padding: 36px 24px 18px 24px;
   background-color: #fff;
   border: 1px solid;
   border-radius: 8px;
   text-align: center;
+  min-width: 270px;
 }
 
 .user-info-wrap h2 {
@@ -50,5 +51,14 @@
   color: #111;
   font-size: 14px;
   font-weight: normal;
+}
+
+.user-info-wrap .user-info .delete-btn {
+  background-color: red;
+  font-size: 15px;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
 }
 /*# sourceMappingURL=userInfo.css.map */

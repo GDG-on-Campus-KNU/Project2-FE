@@ -11,7 +11,6 @@ type Props = {
   onUserInfo: React.MouseEventHandler<HTMLButtonElement>;
   onUserBoards: React.MouseEventHandler<HTMLButtonElement>;
   onSignOut: React.MouseEventHandler<HTMLButtonElement>;
-  onRemoveUser: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 const Header = ({
@@ -23,7 +22,6 @@ const Header = ({
   onUserInfo,
   onUserBoards,
   onSignOut,
-  onRemoveUser,
 }: Props) => {
   return (
     <header className="header-container">
@@ -59,9 +57,6 @@ const Header = ({
               </li>
               <li>
                 <button onClick={onSignOut}>로그아웃</button>
-              </li>
-              <li>
-                <button onClick={onRemoveUser}>회원탈퇴</button>
               </li>
             </ul>
           </li>
