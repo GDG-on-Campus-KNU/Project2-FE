@@ -41,10 +41,10 @@ const VoteViewContainer = ({ votedIndex, voteText, blockId }: Props) => {
     return votes;
   };
 
-  useEffect(() => {
-    const votes = stringToVote(voteText);
-    setVoteList(votes);
-  }, []);
+  // useEffect(() => {
+  //   const votes = stringToVote(voteText);
+  //   setVoteList(votes);
+  // }, []);
 
   const postVote = async (index: number) => {
     const formData = new FormData();

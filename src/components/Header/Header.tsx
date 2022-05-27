@@ -3,33 +3,32 @@ import "./css/header.css";
 import images from "../../assets/images";
 
 type Props = {
-  handleDropDown: React.MouseEventHandler<HTMLElement>;
   isDropDown: boolean;
   onProfileClick: React.MouseEventHandler<HTMLButtonElement>;
   onSearch: React.MouseEventHandler<HTMLButtonElement>;
   setSearchContent: React.Dispatch<React.SetStateAction<string>>;
+  onUserInfo: React.MouseEventHandler<HTMLButtonElement>;
+  onUserBoards: React.MouseEventHandler<HTMLButtonElement>;
   onSignOut: React.MouseEventHandler<HTMLButtonElement>;
+  onRemoveUser: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 const Header = ({
-  handleDropDown,
   isDropDown,
   onProfileClick,
   onSearch,
   setSearchContent,
+  onUserInfo,
+  onUserBoards,
   onSignOut,
+  onRemoveUser,
 }: Props) => {
-  // List.filter(item => item.content.match search,,,,)
-  //filter로 검색한 거 띄우기
-  //로그인 버튼 누르면 로그인 화면으로 넘어가게
-
   return (
     <header className="header-container">
       <h1 onClick={(e) => e.preventDefault()}>
         <img className="logo" src={images.logo} />
         <span>VOTE</span>
       </h1>
-
       <div className="search-container">
         <input
           className="searchInput"
@@ -53,13 +52,16 @@ const Header = ({
           <li className={`sub-menu ${isDropDown ? "open" : "close"}`}>
             <ul>
               <li>
-                <a href="#">내 정보</a>
+                <button onClick={onUserInfo}>내 정보</button>
               </li>
               <li>
-                <a href="#">내 투표</a>
+                <button onClick={onUserBoards}>내 투표</button>
               </li>
               <li>
                 <button onClick={onSignOut}>로그아웃</button>
+              </li>
+              <li>
+                <button onClick={onRemoveUser}>회원탈퇴</button>
               </li>
             </ul>
           </li>

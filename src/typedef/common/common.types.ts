@@ -26,6 +26,40 @@ export type SignUpResponseType = {
   };
 };
 
+export type UserType = {
+  username: string;
+  email: string;
+  profile: {
+    count: 0;
+    votedBoards: string;
+    image: string;
+  };
+};
+
+export type UserBoardType = {
+  count: number;
+  next: null;
+  previous: null;
+  results: {
+    id: number;
+    owner: string;
+    category: string;
+    image: string;
+    createdAt: string;
+    updatedAt: string;
+    content: string;
+    likeCount: number;
+    votedIndex: number;
+    voteText: string;
+    voteTotal: number;
+    currentUser: string;
+  }[];
+};
+
+export type RemoveUserType = {
+  result: string;
+};
+
 export type PropsType<T> = {
   name: string;
   con: string;

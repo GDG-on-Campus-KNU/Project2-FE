@@ -26,7 +26,6 @@ const ScrollViewContainer = ({
   const onload = useCallback(() => {
     console.log(token);
   }, [token]);
-
   const closePopUp = useCallback(() => {
     __hidePopUpFromHooks();
   }, []);
