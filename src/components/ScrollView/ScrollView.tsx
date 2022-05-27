@@ -43,7 +43,9 @@ const ScrollView = ({
             Loading...
           </div>
         )}
-        {!next && <div className="end">마지막 게시글입니다.</div>}
+        {!next && itemList.length > 0 && (
+          <div className="end">마지막 게시글입니다.</div>
+        )}
       </div>
     </div>
   );

@@ -45,9 +45,6 @@ const Header = ({
       </div>
 
       <div className="right">
-        <button className="alarm" onClick={(e) => e.preventDefault()}>
-          <img src={images.notification} alt="알림" />
-        </button>
         <ul className="profile-area">
           <button className="profile-button" onClick={onProfileClick}>
             <img src={images.user} alt="프로필" />

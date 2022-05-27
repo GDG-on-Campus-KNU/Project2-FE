@@ -3,37 +3,46 @@ import { Link } from "react-router-dom";
 import "./css/sideNavigation.css";
 
 type Props = {
-  editLink: any;
+  selected: string;
+  setCategory: (category: string) => void;
 };
 
-const SideNavigation = ({ editLink }: Props) => {
+const SideNavigation = ({ selected, setCategory }: Props) => {
   return (
     <div className="side-navigation-wrap">
       <div className="side-navigation-container">
         <h2>카테고리</h2>
         <ul className="category-list">
           <li className="category-item">
-            <button onClick={() => editLink("")}>
+            <button
+              className={selected === "" ? "selected" : ""}
+              onClick={() => setCategory("")}
+            >
               전체
-              {/* <Link to={"/home"}>전체</Link> */}
             </button>
           </li>
           <li className="category-item">
-            <button onClick={() => editLink("Love")}>
+            <button
+              className={selected === "Love" ? "selected" : ""}
+              onClick={() => setCategory("Love")}
+            >
               연애
-              {/* <Link to={"/love"}>연애</Link> */}
             </button>
           </li>
           <li className="category-item">
-            <button onClick={() => editLink("Travel")}>
+            <button
+              className={selected === "Travel" ? "selected" : ""}
+              onClick={() => setCategory("Travel")}
+            >
               여행
-              {/* <Link to={"/travel"}>여행</Link> */}
             </button>
           </li>
           <li className="category-item">
-            <button onClick={() => editLink("Fashion")}>
+            <button
+              className={selected === "Fashion" ? "selected" : ""}
+              onClick={() => setCategory("Fashion")}
+            >
               패션
-              {/* <Link to={"/fashion"}>패션</Link> */}
             </button>
           </li>
         </ul>
