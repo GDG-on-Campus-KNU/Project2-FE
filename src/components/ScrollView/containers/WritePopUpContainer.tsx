@@ -97,11 +97,11 @@ const WritePopUpContainer = ({ closePopUp }: Props) => {
     setImgs(imgs.filter((img: createImageType) => img.id !== id));
   };
 
-  const onChangeCategory = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setFormInfo({ ...formInfo, category: e.target.value });
   };
 
-  const onChangeContent = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setFormInfo({ ...formInfo, content: e.target.value });
   };
 

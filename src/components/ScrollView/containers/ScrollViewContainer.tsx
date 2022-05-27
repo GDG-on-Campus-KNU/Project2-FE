@@ -7,10 +7,25 @@ import useAuth from "../../../hooks/Auth/useAuth";
 
 type Props = {
   itemList: getBlockType[];
-  editItemList: any;
+  editItemList: (blocks: getBlockType[]) => void;
   next: string;
-  getBlocks: any;
-  scrollView: any;
+  getBlocks: () => Promise<
+    {
+      updatedAt: string;
+      image: any[];
+      id: number;
+      owner: string;
+      category: string;
+      createdAt: string;
+      content: string;
+      likeCount: number;
+      votedIndex: number;
+      voteText: string;
+      voteTotal: number;
+      currentUser: string;
+    }[]
+  >;
+  scrollView: React.RefObject<HTMLDivElement>;
   searchContent: string;
 };
 

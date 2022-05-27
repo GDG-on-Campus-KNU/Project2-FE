@@ -16,8 +16,8 @@ type Props = {
   addImg: (e: React.ChangeEvent<HTMLInputElement>) => void;
   removeImg: (id: number) => void;
   postBlock: React.FormEventHandler<HTMLFormElement>;
-  onChangeCategory: any;
-  onChangeContent: any;
+  onChangeCategory: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChangeContent: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 };
 
 const WritePopUp = ({
@@ -37,7 +37,7 @@ const WritePopUp = ({
     <form className="pop-up" onSubmit={postBlock}>
       <div className="pop-up-left">
         <div className="category-section">
-          <select className="category" onChange={onChangeCategory}>
+          <select className="category" onChange={(e) => onChangeCategory(e)}>
             <option value="Love">연애</option>
             <option value="Travel">여행</option>
             <option value="Fashion">패션</option>
@@ -45,7 +45,7 @@ const WritePopUp = ({
         </div>
         <textarea
           className="textarea"
-          onChange={onChangeContent}
+          onChange={(e) => onChangeContent(e)}
           required
         ></textarea>
       </div>

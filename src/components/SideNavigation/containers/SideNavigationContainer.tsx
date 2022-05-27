@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import SideNavigation from "../SideNavigation";
 
 type Props = {
-  editLink: any;
+  editLink: (newcate: string) => void;
 };
 
 const SideNavigationContainer = ({ editLink }: Props) => {
@@ -13,7 +13,7 @@ const SideNavigationContainer = ({ editLink }: Props) => {
     editLink(category);
   };
 
-  return <SideNavigation selected={selected} setCategory={setCategory}/>;
+  return <SideNavigation selected={selected} setCategory={setCategory} />;
 };
 
 export default SideNavigationContainer;

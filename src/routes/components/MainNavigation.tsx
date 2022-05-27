@@ -10,11 +10,26 @@ import { getBlockType, PopUpTypes } from "../../typedef/common/common.types";
 type Props = {
   popUp: PopUpTypes;
   itemList: getBlockType[];
-  editItemList: any;
+  editItemList: (blocks: getBlockType[]) => void;
   next: string;
-  editLink: any;
-  getBlocks: any;
-  scrollView: any;
+  editLink: (newcate: string) => void;
+  getBlocks: () => Promise<
+    {
+      updatedAt: string;
+      image: any[];
+      id: number;
+      owner: string;
+      category: string;
+      createdAt: string;
+      content: string;
+      likeCount: number;
+      votedIndex: number;
+      voteText: string;
+      voteTotal: number;
+      currentUser: string;
+    }[]
+  >;
+  scrollView: React.RefObject<HTMLDivElement>;
   searchContent: string;
   setSearchContent: React.Dispatch<React.SetStateAction<string>>;
 };

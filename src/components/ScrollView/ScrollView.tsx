@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./css/scrollView.css";
 import BlockContainer from "./containers/BlockContainer";
 import { getBlockType } from "../../typedef/common/common.types";
@@ -10,7 +10,7 @@ type Props = {
   itemList: getBlockType[];
   loadPopUp: React.MouseEventHandler<HTMLButtonElement>;
   next: string;
-  scrollView: any;
+  scrollView: React.RefObject<HTMLDivElement>;
   searchContent: string;
 };
 

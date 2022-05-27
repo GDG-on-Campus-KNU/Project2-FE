@@ -13,7 +13,7 @@ type Props = {
   image: string;
   commentRef: React.RefObject<HTMLTextAreaElement>;
   onHandleHeight: React.FormEventHandler<HTMLTextAreaElement>;
-  deleteBlock: any;
+  deleteBlock: (id: number) => Promise<void>;
 };
 
 const BlockPopUp = ({
