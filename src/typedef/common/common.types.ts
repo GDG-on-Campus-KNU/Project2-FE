@@ -16,19 +16,54 @@ export type LoginTokenType = {
   access: string;
 };
 
-export type SignUpType = {
+export type SignUpResponseType = {
   username: string;
   email: string;
   profile: {
     count: number;
-    boardList: null;
+    votedBoards: string;
+    image: string;
   };
 };
 
-export type PropsType<OtherType> = {
+export type UserType = {
+  username: string;
+  email: string;
+  profile: {
+    count: 0;
+    votedBoards: string;
+    image: string;
+  };
+};
+
+export type UserBoardType = {
+  count: number;
+  next: null;
+  previous: null;
+  results: {
+    id: number;
+    owner: string;
+    category: string;
+    image: string;
+    createdAt: string;
+    updatedAt: string;
+    content: string;
+    likeCount: number;
+    votedIndex: number;
+    voteText: string;
+    voteTotal: number;
+    currentUser: string;
+  }[];
+};
+
+export type RemoveUserType = {
+  result: string;
+};
+
+export type PropsType<T> = {
   name: string;
   con: string;
-  char: OtherType;
+  char: T;
 };
 
 export type OtherType = {
@@ -72,6 +107,21 @@ export type postBlockType = {
   category: string;
   content: string;
   images: string[];
+};
+
+export type postBlockResponseType = {
+  id: number;
+  owner: string;
+  category: "Love" | "Travel" | "Hot";
+  image: "string";
+  createdAt: string;
+  updatedAt: string;
+  content: "string";
+  likeCount: number;
+  votedIndex: number;
+  voteText: "string";
+  voteTotal: number;
+  currentUser: "string";
 };
 
 export type getCommentResponseType = {

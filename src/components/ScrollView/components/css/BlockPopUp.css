@@ -64,7 +64,7 @@
   display: flex;
 }
 
-.pop-up .pop-up-left .content-view .user-area .user-btn {
+.pop-up .pop-up-left .content-view .user-area .delete-btn {
   background-color: red;
   font-size: 15px;
   color: white;

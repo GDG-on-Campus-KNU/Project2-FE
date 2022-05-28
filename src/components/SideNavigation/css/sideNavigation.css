@@ -34,4 +34,10 @@
   line-height: 32px;
   text-align: left;
 }
+
+.side-navigation-wrap .side-navigation-container .category-list .category-item .selected {
+  font-weight: bold;
+  color: orange;
+  font-size: 15px;
+}
 /*# sourceMappingURL=sideNavigation.css.map */

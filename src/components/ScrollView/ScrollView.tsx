@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./css/scrollView.css";
 import BlockContainer from "./containers/BlockContainer";
 import { getBlockType } from "../../typedef/common/common.types";
@@ -10,6 +10,8 @@ type Props = {
   itemList: getBlockType[];
   loadPopUp: React.MouseEventHandler<HTMLButtonElement>;
   next: string;
+  scrollView: React.RefObject<HTMLDivElement>;
+  searchContent: string;
 };
 
 const ScrollView = ({
@@ -18,24 +20,34 @@ const ScrollView = ({
   itemList,
   loadPopUp,
   next,
+  scrollView,
+  searchContent,
 }: Props) => {
   return (
-    <div className="wrapper">
+    <section className="wrapper">
       <button className="write-btn" onClick={loadPopUp}>
         <img className="icon" src={images.pencil} alt="작성" />
       </button>
-      <div className="scroll-view-wrap">
-        {itemList.map((block, index) => (
-          <BlockContainer block={block} key={index} />
-        ))}
+      <div className="scroll-view-wrap" ref={scrollView}>
+        {itemList.map((block, index) =>
+          searchContent.length > 0 ? (
+            block.content.includes(searchContent) ? (
+              <BlockContainer block={block} key={index} />
+            ) : null
+          ) : (
+            <BlockContainer block={block} key={index} />
+          )
+        )}
         {next && !loading && (
           <div className="target" ref={setTarget}>
             Loading...
           </div>
         )}
-        {!next && <div className="end">마지막 게시글입니다.</div>}
+        {!next && itemList.length > 0 && (
+          <div className="end">마지막 게시글입니다.</div>
+        )}
       </div>
-    </div>
+    </section>
   );
 };
 

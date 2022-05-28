@@ -10,10 +10,28 @@ import { getBlockType, PopUpTypes } from "../../typedef/common/common.types";
 type Props = {
   popUp: PopUpTypes;
   itemList: getBlockType[];
-  editItemList: any;
+  editItemList: (blocks: getBlockType[]) => void;
   next: string;
-  editLink: any;
-  getBlocks: any;
+  editLink: (newcate: string) => void;
+  getBlocks: () => Promise<
+    {
+      updatedAt: string;
+      image: any[];
+      id: number;
+      owner: string;
+      category: string;
+      createdAt: string;
+      content: string;
+      likeCount: number;
+      votedIndex: number;
+      voteText: string;
+      voteTotal: number;
+      currentUser: string;
+    }[]
+  >;
+  scrollView: React.RefObject<HTMLDivElement>;
+  searchContent: string;
+  setSearchContent: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const MainNavigation = ({
@@ -23,21 +41,26 @@ const MainNavigation = ({
   next,
   editLink,
   getBlocks,
+  scrollView,
+  searchContent,
+  setSearchContent,
 }: Props) => {
   return (
     <div>
-      <HeaderContainer />
+      <HeaderContainer setSearchContent={setSearchContent} />
       <div style={{ display: "flex", marginTop: "16px" }}>
         <SideNavigationContainer editLink={editLink} />
         <Routes>
           <Route
-            path="/"
+            path="/home"
             element={
               <ScrollViewContainer
                 itemList={itemList}
                 editItemList={editItemList}
                 next={next}
                 getBlocks={getBlocks}
+                scrollView={scrollView}
+                searchContent={searchContent}
               />
             }
           />

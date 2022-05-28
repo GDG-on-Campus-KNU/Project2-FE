@@ -7,9 +7,26 @@ import useAuth from "../../../hooks/Auth/useAuth";
 
 type Props = {
   itemList: getBlockType[];
-  editItemList: any;
+  editItemList: (blocks: getBlockType[]) => void;
   next: string;
-  getBlocks: any;
+  getBlocks: () => Promise<
+    {
+      updatedAt: string;
+      image: any[];
+      id: number;
+      owner: string;
+      category: string;
+      createdAt: string;
+      content: string;
+      likeCount: number;
+      votedIndex: number;
+      voteText: string;
+      voteTotal: number;
+      currentUser: string;
+    }[]
+  >;
+  scrollView: React.RefObject<HTMLDivElement>;
+  searchContent: string;
 };
 
 const ScrollViewContainer = ({
@@ -17,6 +34,8 @@ const ScrollViewContainer = ({
   editItemList,
   next,
   getBlocks,
+  scrollView,
+  searchContent,
 }: Props) => {
   const { token } = useAuth();
   const [target, setTarget] = useState<HTMLElement | null>(null);
@@ -26,7 +45,6 @@ const ScrollViewContainer = ({
   const onload = useCallback(() => {
     console.log(token);
   }, [token]);
-
   const closePopUp = useCallback(() => {
     __hidePopUpFromHooks();
   }, []);
@@ -67,6 +85,8 @@ const ScrollViewContainer = ({
       itemList={itemList}
       loadPopUp={loadPopUp}
       next={next}
+      scrollView={scrollView}
+      searchContent={searchContent}
     />
   );
 };

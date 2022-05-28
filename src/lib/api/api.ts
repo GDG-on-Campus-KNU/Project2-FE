@@ -11,9 +11,11 @@ export const apiRoute = {
   vote: "/vote/",
   login: "/api/token/",
   register: "/register/",
-  mine: "/mine/",
+  mine: "/boards/mine/",
   recently_voted: "/recently_voted/",
   hot: "/hot/",
+  current_user: "/users/current/",
+  delete_user: "/delete/",
 };
 
 export function requestGet<T>(url: string, header: object) {

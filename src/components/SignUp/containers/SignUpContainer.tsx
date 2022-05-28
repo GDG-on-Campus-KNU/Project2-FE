@@ -5,44 +5,84 @@ import { isSetAccessor } from "typescript";
 import { apiOrigin, apiRoute, requestPost } from "../../../lib/api/api";
 import {
   BasicAPIResponseType,
-  SignUpType,
+  SignUpResponseType,
 } from "../../../typedef/common/common.types";
 import SignUp from "../SignUp";
 
 const SignUpContainer = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [isMatch, setIsMatch] = useState(false);
   const [email, setEmail] = useState("");
+  const [isEmail, setIsEmail] = useState(false);
   const navigate = useNavigate();
-  // const {token, setAccess} = useAuth();
 
-  const onSubmit = useCallback(async (e) => {
-    e.preventDefault();
-    const signupData = {
-      username: id,
-      password: password,
-      email: email,
-      profile: {
-        count: 0,
-      },
-    };
-    //console.log(signupData);
-    const { data } = await requestPost<
-    BasicAPIResponseType<SignUpType>
-    >(`${apiOrigin}${apiRoute.register}`, {}, signupData);
+  const onSubmit = useCallback(
+    async (e) => {
+      e.preventDefault();
+      const signupData = {
+        username: id,
+        password: password,
+        email: email,
+        profile: {},
+      };
 
-    console.log(`data : ${data}`);
+      console.log(signupData);
 
-    navigate("/"); 
-    window.confirm("회원가입이 완료되었습니다.");
-  }, [id, password, email, navigate]); 
-  
+      const { data } = await requestPost<
+        BasicAPIResponseType<SignUpResponseType>
+      >(`${apiOrigin}${apiRoute.register}`, {}, signupData);
+
+      console.log(`data : ${data}`);
+
+      navigate("/");
+      window.confirm("회원가입이 완료되었습니다.");
+    },
+    [id, password, email, navigate]
+  );
+  const onComparePassword = useCallback(
+    (confirm: string) => {
+      password === confirm ? setIsMatch(true) : setIsMatch(false);
+      setPasswordConfirm(confirm);
+    },
+    [isMatch, password, passwordConfirm]
+  );
+
+  const onCheckEmail = useCallback(
+    (email: string) => {
+      const emailReg =
+        /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+      setEmail(email);
+
+      if (!emailReg.test(email)) {
+        setIsEmail(false);
+      } else {
+        setIsEmail(true);
+      }
+    },
+    [isEmail]
+  );
+
+  const onLogin = useCallback(() => {
+    navigate("/login");
+  }, [navigate]);
+
   return (
     <SignUp
       setId={setId}
+      id={id}
       setPassword={setPassword}
+      password={password}
+      passwordConfirm={passwordConfirm}
+      onComparePassword={onComparePassword}
+      isMatch={isMatch}
       setEmail={setEmail}
+      email={email}
+      isEmail={isEmail}
+      onCheckEmail={onCheckEmail}
       onSubmit={onSubmit}
+      onLogin={onLogin}
     />
   );
 };

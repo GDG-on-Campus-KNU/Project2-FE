@@ -1,8 +1,10 @@
 import React from "react";
+import useRootRoute from "../../hooks/useRootRoute";
 import RootNavigation from "../RootNavigation";
 
 const RootNavigationContainer = () => {
-  return <RootNavigation />;
+  const { root } = useRootRoute();
+  return <RootNavigation root={root} />;
 };
 
 export default RootNavigationContainer;

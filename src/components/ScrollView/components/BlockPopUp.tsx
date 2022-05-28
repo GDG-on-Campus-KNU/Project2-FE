@@ -13,7 +13,7 @@ type Props = {
   image: string;
   commentRef: React.RefObject<HTMLTextAreaElement>;
   onHandleHeight: React.FormEventHandler<HTMLTextAreaElement>;
-  deleteBlock: any;
+  deleteBlock: (id: number) => Promise<void>;
 };
 
 const BlockPopUp = ({
@@ -44,9 +44,8 @@ const BlockPopUp = ({
             </div>
             {block.owner === block.currentUser ? (
               <div>
-                {/* <button className="user-btn">수정</button> */}
                 <button
-                  className="user-btn"
+                  className="delete-btn"
                   onClick={() => deleteBlock(block.id)}
                 >
                   삭제
