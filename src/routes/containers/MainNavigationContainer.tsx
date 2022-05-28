@@ -26,6 +26,7 @@ const MainNavigationContainer = () => {
   };
 
   const editLink = (newcate: string) => {
+    setItemList([]);
     setSearchContent("");
     if (newcate === "all") {
       setNext(`${apiOrigin}${apiRoute.board}/?limit=10&offset=0`);
@@ -51,7 +52,6 @@ const MainNavigationContainer = () => {
   }, [next]);
 
   useEffect(() => {
-    setItemList([]);
     updateCategory();
   }, [category]);
 
