@@ -27,7 +27,13 @@ const MainNavigationContainer = () => {
 
   const editLink = (newcate: string) => {
     setSearchContent("");
-    setNext(`${apiOrigin}${apiRoute.board}/${newcate}?limit=10&offset=0`);
+    if (newcate === "all") {
+      setNext(`${apiOrigin}${apiRoute.board}/?limit=10&offset=0`);
+    } else {
+      setNext(
+        `${apiOrigin}${apiRoute.board}${apiRoute.categoty}/${newcate}?limit=10&offset=0`
+      );
+    }
     setCategory(newcate);
 
     if (scrollView) {
@@ -41,12 +47,13 @@ const MainNavigationContainer = () => {
   };
 
   useEffect(() => {
-    updateCategory();
-  }, [category]);
+    console.log(next);
+  }, [next]);
 
   useEffect(() => {
-    console.log("useEffect", searchContent);
-  }, [searchContent]);
+    setItemList([]);
+    updateCategory();
+  }, [category]);
 
   const getBlocks = async () => {
     const { data } = await requestGet<

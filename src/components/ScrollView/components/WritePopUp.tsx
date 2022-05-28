@@ -41,6 +41,9 @@ const WritePopUp = ({
             <option value="Love">연애</option>
             <option value="Travel">여행</option>
             <option value="Fashion">패션</option>
+            <option value="Political">정치</option>
+            <option value="Balance_Game">밸런스 게임</option>
+            <option value="Free">마음대로</option>
           </select>
         </div>
         <textarea
@@ -78,7 +81,7 @@ const WritePopUp = ({
             ))}
             {votes.length < 4 ? (
               <button type="button" className="more-btn" onClick={addVote}>
-                +
+                ✖️
               </button>
             ) : null}
           </div>
