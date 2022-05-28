@@ -10,7 +10,7 @@ import { getBlockType, PopUpTypes } from "../../typedef/common/common.types";
 type Props = {
   popUp: PopUpTypes;
   itemList: getBlockType[];
-  editItemList: (blocks: getBlockType[]) => void;
+  setItemList: React.Dispatch<React.SetStateAction<getBlockType[]>>;
   next: string;
   editLink: (newcate: string) => void;
   getBlocks: () => Promise<
@@ -37,7 +37,7 @@ type Props = {
 const MainNavigation = ({
   popUp,
   itemList,
-  editItemList,
+  setItemList,
   next,
   editLink,
   getBlocks,
@@ -56,7 +56,7 @@ const MainNavigation = ({
             element={
               <ScrollViewContainer
                 itemList={itemList}
-                editItemList={editItemList}
+                setItemList={setItemList}
                 next={next}
                 getBlocks={getBlocks}
                 scrollView={scrollView}

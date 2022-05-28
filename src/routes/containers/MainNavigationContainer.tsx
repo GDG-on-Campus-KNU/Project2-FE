@@ -21,10 +21,6 @@ const MainNavigationContainer = () => {
 
   const scrollView = useRef<HTMLDivElement>(null);
 
-  const editItemList = (blocks: getBlockType[]) => {
-    setItemList(blocks);
-  };
-
   const editLink = (newcate: string) => {
     setItemList([]);
     setSearchContent("");
@@ -44,7 +40,7 @@ const MainNavigationContainer = () => {
 
   const updateCategory = async () => {
     const blocks = await getBlocks();
-    editItemList(blocks);
+    setItemList(blocks);
   };
 
   useEffect(() => {
@@ -79,7 +75,7 @@ const MainNavigationContainer = () => {
     <MainNavigation
       popUp={popUp}
       itemList={itemList}
-      editItemList={editItemList}
+      setItemList={setItemList}
       next={next}
       editLink={editLink}
       getBlocks={getBlocks}
