@@ -23,7 +23,6 @@ type Props = {
 const BlockContainer = ({ block }: Props) => {
   const { __showPopUpFromHooks, __hidePopUpFromHooks } = usePopUp();
   const [expand, setExpand] = useState(false);
-  const [like, setLike] = useState(false);
   const { token } = useAuth();
 
   const getBlockDetail = async (id: number) => {
@@ -57,22 +56,6 @@ const BlockContainer = ({ block }: Props) => {
     setExpand((current) => !current);
   };
 
-  const postLike = async () => {
-    if (like) {
-      alert("이미 공감하셨습니다.");
-    } else {
-      setLike((current) => !current);
-
-      const { data } = await requestPost<BasicAPIResponseType<getBlockType>>(
-        `${apiOrigin}${apiRoute.board}/${block.id}${apiRoute.like}`,
-        {
-          Authorization: `Bearer ${token}`,
-        },
-        []
-      );
-    }
-  };
-
   const onClickImage = useCallback(
     (index: number) => {
       __showPopUpFromHooks(
@@ -88,8 +71,6 @@ const BlockContainer = ({ block }: Props) => {
       onClickImage={onClickImage}
       expand={expand}
       reverseExpand={reverseExpand}
-      like={like}
-      clickLike={postLike}
     />
   );
 };

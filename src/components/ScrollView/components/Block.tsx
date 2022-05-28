@@ -10,8 +10,6 @@ type Props = {
   onClickImage: (index: number) => void;
   expand: boolean;
   reverseExpand: React.MouseEventHandler<HTMLButtonElement>;
-  like: boolean;
-  clickLike: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 const Block = ({
@@ -20,8 +18,6 @@ const Block = ({
   onClickImage,
   expand,
   reverseExpand,
-  like,
-  clickLike,
 }: Props) => {
   const content_txt_short = block.content.substring(0, 200) + "...";
   return (
@@ -81,13 +77,6 @@ const Block = ({
             : null}
         </div>
         <div>
-          <button onClick={clickLike}>
-            {like ? (
-              <img className="icon" src={images.checkedLike} alt="공감" />
-            ) : (
-              <img className="icon" src={images.uncheckedLike} alt="공감" />
-            )}
-          </button>
           <button onClick={() => loadPopUp(block.id)}>
             <img className="icon" src={images.chat} alt="덧글" />
           </button>
