@@ -33,6 +33,13 @@
           width: 100%;
           line-height: 32px;
           text-align: left;
+          display: flex;
+          justify-content: space-between;
+
+          span:nth-child(2) {
+            color: gray;
+            font-size: 10px;
+          }
         }
       }
     }

@@ -14,9 +14,12 @@ const TopBoard = ({ loadPopUp, itemList }: Props) => {
         {itemList.map((block) => (
           <li className="post-item" key={block.id}>
             <button onClick={() => loadPopUp(block.id)}>
-              {block.content.length > 20
-                ? block.content.slice(0, 20) + "..."
-                : block.content}
+              <span>
+                {block.content.length > 20
+                  ? block.content.slice(0, 20) + "..."
+                  : block.content}
+              </span>
+              <span>{block.voteTotal}</span>
             </button>
           </li>
         ))}
