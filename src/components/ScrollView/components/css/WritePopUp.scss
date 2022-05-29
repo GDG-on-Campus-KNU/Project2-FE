@@ -87,26 +87,53 @@
     .info-area {
       width: 100%;
       height: auto;
-      overflow-y: scroll;
       margin-top: 5px;
       padding: 0 10px;
+      overflow-y: scroll;
 
       .title {
         height: 10%;
+        margin-left: 10px;
+        padding-top: 5px;
+
         font-size: 20px;
         font-weight: bold;
-        padding-top: 5px;
       }
 
       .vote-area {
         width: 100%;
+        text-align: center;
+
         .vote-input-box {
           width: calc(100% - 20px);
           height: 40px;
-          margin: 5px 0px;
+          margin: 5px auto;
           border-radius: 5px;
           padding: 0 10px;
           border: 1px solid black;
+        }
+
+        .add-vote-input-box {
+          width: calc(100% - 80px);
+          height: 40px;
+          margin: 5px auto;
+          padding: 0px 10px;
+          border: 1px solid black;
+          border-right: 0;
+          border-top-left-radius: 5px;
+          border-bottom-left-radius: 5px;
+        }
+
+        .vote-del-btn {
+          width: 60px;
+          height: 40px;
+          margin: 5px 0px;
+          padding: 0px 10px;
+          background-color: rgb(255, 98, 98);
+          color: white;
+          border: 1px solid black;
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
         }
 
         .more-btn {
@@ -114,7 +141,7 @@
           height: 40px;
           margin: 5px 0px;
           border-radius: 5px;
-          padding: 0 10px;
+          padding: 10px;
           border: 1px solid #ccc;
           font-size: 16px;
           color: #ccc;
@@ -127,21 +154,18 @@
             background-color: #cfcfcf;
           }
         }
-
-        .del-btn {
-          margin-left: 10px;
-        }
       }
 
       .image-area {
-        width: 100%;
+        width: calc(100% - 20px);
         display: flex;
+        margin: 0 0 0 5px;
 
         .img-preview {
           position: relative;
 
-          .del-btn {
-            background-color: red;
+          .image-del-btn {
+            background-color: rgb(255, 98, 98);
             width: 20px;
             height: 20px;
             border-radius: 10px;

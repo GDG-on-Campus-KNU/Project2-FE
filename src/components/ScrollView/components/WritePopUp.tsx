@@ -63,22 +63,24 @@ const WritePopUp = ({
           <div className="title">투표 항목</div>
           <div className="vote-area">
             {votes.map((vote, index) => (
-              <div key={vote.id}>
+              <>
                 <input
-                  className="vote-input-box"
+                  className={
+                    index > 1 ? "add-vote-input-box" : "vote-input-box"
+                  }
                   onChange={(e) => changeVoteInput(vote.id, e)}
                   required
                 />
                 {index > 1 ? (
                   <button
-                    className="del-btn"
+                    className="vote-del-btn"
                     type="button"
                     onClick={() => removeVote(vote.id)}
                   >
-                    ❌
+                    삭제
                   </button>
                 ) : null}
-              </div>
+              </>
             ))}
             {votes.length < 4 ? (
               <button type="button" className="more-btn" onClick={addVote}>
@@ -96,7 +98,7 @@ const WritePopUp = ({
                   alt={img.imgFile.name}
                 />
                 <button
-                  className="del-btn"
+                  className="image-del-btn"
                   type="button"
                   onClick={() => removeImg(img.id)}
                 >
@@ -104,8 +106,8 @@ const WritePopUp = ({
                 </button>
               </div>
             ))}
-            {imgs.length < 4 ? (
-              <div>
+            {imgs.length < 1 ? (
+              <>
                 <label htmlFor="temp-btn">
                   <div className="img-add-btn">+</div>
                 </label>
@@ -115,7 +117,7 @@ const WritePopUp = ({
                   className="img-input-box"
                   onChange={(e) => addImg(e)}
                 />
-              </div>
+              </>
             ) : null}
           </div>
         </div>
