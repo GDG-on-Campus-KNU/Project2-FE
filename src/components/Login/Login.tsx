@@ -1,4 +1,5 @@
 import React from "react";
+import Loader from "../Loader/Loader";
 import "./css/login.css";
 
 type Props = {

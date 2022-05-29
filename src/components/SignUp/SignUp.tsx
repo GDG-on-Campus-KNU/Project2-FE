@@ -1,6 +1,7 @@
 import React, { SetStateAction } from "react";
 import "./css/signUp.css";
 import images from "../../assets/images";
+import Loader from "../Loader/Loader";
 
 type Props = {
   isSubmit: boolean;

@@ -46,11 +46,14 @@ const HeaderContainer = ({
   const onSignOut = useCallback(() => {
     const response = window.confirm("로그아웃 하시겠습니까?");
     if (response) {
-      sessionStorage.setItem("@route", "login");
-      __updateRootFromHooks("login");
-      clearAccess();
+      setTimeout(function () {
+        window.location.reload();
+        sessionStorage.setItem("@route", "login");
+        clearAccess();
+        __updateRootFromHooks("login");
+      }, 500);
     }
-  }, [navigate, sessionStorage, clearAccess]);
+  }, [navigate, sessionStorage, clearAccess, __updateRootFromHooks]);
 
   const onUserBoards = useCallback(() => {
     __showPopUpFromHooks(

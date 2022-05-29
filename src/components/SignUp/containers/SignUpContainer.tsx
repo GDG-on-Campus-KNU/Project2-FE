@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/Auth/useAuth";
 import { isSetAccessor } from "typescript";
@@ -23,7 +23,6 @@ const SignUpContainer = () => {
   const onSubmit = useCallback(
     async (e) => {
       e.preventDefault();
-
       setIsSubmit(true);
 
       const signupData = {
@@ -40,6 +39,7 @@ const SignUpContainer = () => {
       setIdState("success");
       window.confirm("회원가입이 완료되었습니다.");
       navigate("/");
+      window.location.reload();
     },
     [id, password, email, navigate, idState, isSubmit]
   );
