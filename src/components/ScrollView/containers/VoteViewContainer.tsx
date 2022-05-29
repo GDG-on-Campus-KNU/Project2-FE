@@ -1,72 +1,88 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import useAuth from "../../../hooks/Auth/useAuth";
 import { apiOrigin, apiRoute, requestPost } from "../../../lib/api/api";
 import {
   BasicAPIResponseType,
   createVoteType,
+  getBlockType,
 } from "../../../typedef/common/common.types";
 import VoteView from "../components/VoteView";
 
 type Props = {
   votedIndex: number;
-  voteText: string;
+  voteList: any;
+  voteTotal: number;
   blockId: number;
+  itemList: getBlockType[];
+  setItemList: React.Dispatch<React.SetStateAction<getBlockType[]>>;
 };
 
-const VoteViewContainer = ({ votedIndex, voteText, blockId }: Props) => {
-  const [voteList, setVoteList] = useState([]);
-  const [voteTotal, setVoteTotal] = useState(0);
-  const [isVote, setIsVote] = useState(votedIndex);
+type vote = {
+  content: string;
+  count: number;
+};
+
+const VoteViewContainer = ({
+  votedIndex,
+  voteList,
+  voteTotal,
+  blockId,
+  itemList,
+  setItemList,
+}: Props) => {
   const { token } = useAuth();
 
-  const changeVote = (index: number) => {
-    if (isVote === index) {
-      setIsVote(-1);
-    } else {
-      setIsVote(index);
-    }
-  };
-
-  const stringToVote = (voteText: string) => {
+  const stringToVote = useCallback((voteText: string) => {
     voteText = voteText.replace(/\\/gi, "");
     voteText = voteText.replace(/'/gi, '"');
     const votes = JSON.parse(voteText).map((vote: Array<string | number>) => {
       return { content: vote[0], count: vote[1] };
     });
-    let tempTotal = 0;
-    votes.map((vote: createVoteType) => {
-      tempTotal += vote.count;
-    });
-    setVoteTotal(tempTotal);
     return votes;
-  };
-
-  useEffect(() => {
-    const votes = stringToVote(voteText);
-    setVoteList(votes);
   }, []);
 
-  const postVote = async (index: number) => {
-    const formData = new FormData();
+  const postVote = useCallback(
+    async (index: number) => {
+      const formData = new FormData();
 
-    formData.append("index", index.toString());
+      formData.append("index", index.toString());
 
-    const { data } = await requestPost<BasicAPIResponseType<string>>(
-      `${apiOrigin}${apiRoute.board}/${blockId}${apiRoute.vote}`,
-      {
-        Authorization: `Bearer ${token}`,
-      },
-      formData
-    );
+      const { data } = await requestPost<BasicAPIResponseType<string>>(
+        `${apiOrigin}${apiRoute.board}/${blockId}${apiRoute.vote}`,
+        {
+          Authorization: `Bearer ${token}`,
+        },
+        formData
+      );
 
-    const votes = stringToVote(data);
-    setVoteList(votes);
-    changeVote(index);
-  };
+      const newVoteList = stringToVote(data);
+      let newVoteTotal = 0;
+      newVoteList.map(({ count }: vote) => {
+        newVoteTotal += count;
+      });
+
+      const changeItemList = itemList.map((item) => {
+        if (item.id === blockId) {
+          console.log(item.votedIndex, index);
+          return {
+            ...item,
+            voteText: newVoteList,
+            votedIndex: votedIndex === index ? -1 : index,
+            voteTotal: newVoteTotal,
+          };
+        } else {
+          return item;
+        }
+      });
+      console.log(changeItemList);
+      setItemList(changeItemList);
+    },
+    [itemList]
+  );
 
   return (
     <VoteView
-      isVote={isVote}
+      votedIndex={votedIndex}
       voteList={voteList}
       voteTotal={voteTotal}
       postVote={postVote}
