@@ -13,9 +13,12 @@ type Props = {
   image: string;
   commentRef: React.RefObject<HTMLTextAreaElement>;
   onWriteComment: React.MouseEventHandler<HTMLButtonElement>;
+  comment: string;
   setComment: React.Dispatch<React.SetStateAction<string>>;
   onHandleHeight: React.FormEventHandler<HTMLTextAreaElement>;
   deleteBlock: (id: number) => Promise<void>;
+  post: boolean;
+  setPost: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const BlockPopUp = ({
@@ -26,10 +29,12 @@ const BlockPopUp = ({
   image,
   commentRef,
   onWriteComment,
+  comment,
   setComment,
   onHandleHeight,
-
   deleteBlock,
+  post,
+  setPost,
 }: Props) => {
   return (
     <div className="pop-up">
@@ -91,7 +96,11 @@ const BlockPopUp = ({
         </div>
         <div className="comment-container">
           <div className="comment-view-box">
-            <CommentScrollViewContainer blockId={block.id} />
+            <CommentScrollViewContainer
+              blockId={block.id}
+              post={post}
+              setPost={setPost}
+            />
           </div>
           <form className="comment-write-box">
             <textarea
@@ -100,6 +109,7 @@ const BlockPopUp = ({
               ref={commentRef}
               onInput={onHandleHeight}
               onChange={(e) => setComment(e.target.value)}
+              value={comment}
             />
             <div className="write-comment-box">
               <button

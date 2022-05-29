@@ -24,6 +24,7 @@ const BlockPopUpContainer = ({ block, closePopUp }: Props) => {
   const [picView, setPicView] = useState(false);
   const [image, setImage] = useState<string>("");
   const [comment, setComment] = useState("");
+  const [post, setPost] = useState(false);
   const picViewToggle = (event: any) => {
     if (event.target.tagName === "IMG") {
       setImage(event.target.src);
@@ -66,7 +67,8 @@ const BlockPopUpContainer = ({ block, closePopUp }: Props) => {
           boardId: block.id,
         }
       );
-      console.log(data);
+      setPost(true);
+      setComment("");
     },
     [comment]
   );
@@ -81,8 +83,11 @@ const BlockPopUpContainer = ({ block, closePopUp }: Props) => {
       onWriteComment={onWriteComment}
       commentRef={commentRef}
       onHandleHeight={onHandleHeight}
+      comment={comment}
       setComment={setComment}
       deleteBlock={deleteBlock}
+      post={post}
+      setPost={setPost}
     />
   );
 };

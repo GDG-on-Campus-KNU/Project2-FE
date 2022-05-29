@@ -6,16 +6,17 @@ import {
   getCommentType,
   LoginTokenType,
 } from "../../../typedef/common/common.types";
-import { TypePredicateKind } from "typescript";
 import { apiOrigin, apiRoute, requestGet } from "../../../lib/api/api";
 
 type Props = {
   blockId: number;
+  post: boolean;
+  setPost: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const CommentScrollViewContainer = ({ blockId }: Props) => {
+const CommentScrollViewContainer = ({ blockId, post, setPost }: Props) => {
   const [next, setNext] = useState(
-    `${apiOrigin}${apiRoute.board}/${blockId}${apiRoute.comment}/?limit=10&offset=0`
+    `${apiOrigin}${apiRoute.board}/${blockId}${apiRoute.comment}?limit=10&offset=0`
   );
   const [target, setTarget] = useState<HTMLElement | null>(null);
   const [end, setEnd] = useState(false);
@@ -33,10 +34,27 @@ const CommentScrollViewContainer = ({ blockId }: Props) => {
       setEnd(true);
     }
 
-    console.log(data);
-
     return data.results;
   };
+
+  const postRefreshComment = async () => {
+    setEnd(false);
+    setNext(
+      `${apiOrigin}${apiRoute.board}/${blockId}${apiRoute.comment}?limit=10&offset=0`
+    );
+
+    setLoading(true);
+
+    const comments = await getComments();
+    setItemList(comments);
+
+    setLoading(false);
+    setPost(false);
+  };
+
+  useEffect(() => {
+    if (post) postRefreshComment();
+  }, [post]);
 
   const addItemList = (comments: getCommentType[]) => {
     setItemList((itemList) => [...itemList, ...comments]);
