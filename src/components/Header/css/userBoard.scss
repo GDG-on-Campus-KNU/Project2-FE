@@ -4,6 +4,12 @@
   border: 1px solid;
   border-radius: 8px;
   text-align: center;
+  max-width: 720px;
+  max-height: 500px;
+
+  @media screen and (max-width: 720px) {
+    margin: 0 5%;
+  }
 
   h2 {
     font-size: 20px;
@@ -20,15 +26,19 @@
       padding-right: 24px;
       border-right: 1px solid#eee;
 
+      @media screen and (max-width: 420px) {
+        display: none;
+      }
+
       span {
         font-weight: normal;
       }
     }
     .board-box {
-      width: 500px;
-      height: 500px;
+      width: 100%;
       overflow: scroll;
       padding: 12px;
+      max-height: 400px;
 
       .board {
         border-bottom: 1px solid #eee;
@@ -46,6 +56,13 @@
           color: #333;
           font-weight: lighter;
           font-size: 12px;
+          align-items: center;
+
+          @media screen and (max-width: 510px) {
+            .create-time {
+              display: none;
+            }
+          }
 
           .username {
             font-weight: normal;
@@ -56,7 +73,12 @@
             height: 40px;
             border-radius: 50%;
             border: 1.5px solid orange;
-            margin-right: 24px;
+            margin-right: 2%;
+
+            @media screen and (max-width: 500px) {
+              width: 28px;
+              height: 28px;
+            }
 
             img {
               width: 100%;

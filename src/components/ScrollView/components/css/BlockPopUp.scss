@@ -7,9 +7,17 @@
   border-radius: 10px;
   overflow: hidden;
 
+  @media screen and (max-width: 820px) {
+    flex-direction: column;
+  }
+
   .pop-up-left {
     width: 70%;
     height: 100%;
+
+    @media screen and (max-width: 820px) {
+      width: 100%;
+    }
 
     .hidden {
       display: none;
@@ -143,6 +151,10 @@
   .pop-up-right {
     width: 30%;
     border-left: 1px solid black;
+
+    @media screen and (max-width: 820px) {
+      width: 100%;
+    }
 
     .header {
       width: 100%;

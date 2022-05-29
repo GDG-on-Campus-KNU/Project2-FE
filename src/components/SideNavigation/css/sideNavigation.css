@@ -4,6 +4,12 @@
           flex: 1;
 }
 
+@media screen and (max-width: 800px) {
+  .side-navigation-wrap {
+    display: none;
+  }
+}
+
 .side-navigation-wrap .side-navigation-container {
   max-width: 300px;
   margin: 0 auto;

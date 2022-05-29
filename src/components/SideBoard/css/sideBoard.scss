@@ -1,5 +1,8 @@
 .side-board-wrap {
   flex: 1;
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
 
   .side-board-container {
     max-width: 300px;

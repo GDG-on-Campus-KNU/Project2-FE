@@ -4,6 +4,12 @@
           flex: 1;
 }
 
+@media screen and (max-width: 600px) {
+  .side-board-wrap {
+    display: none;
+  }
+}
+
 .side-board-wrap .side-board-container {
   max-width: 300px;
   margin: 0 auto;

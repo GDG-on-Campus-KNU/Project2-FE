@@ -1,9 +1,8 @@
 .block {
-  width: 90%;
   height: auto;
   border: 1px solid black;
   border-radius: 8px;
-  margin: 0 auto 15px auto;
+  margin: 0 8px 12px 0;
   overflow: hidden;
 
   .user-area {
@@ -39,7 +38,7 @@
 
   .content-area {
     width: 96%;
-    margin: 2px 2%;
+    margin: 2px 12px;
 
     .content-view {
       word-wrap: break-word;

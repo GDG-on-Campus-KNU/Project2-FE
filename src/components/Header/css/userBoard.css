@@ -4,6 +4,14 @@
   border: 1px solid;
   border-radius: 8px;
   text-align: center;
+  max-width: 720px;
+  max-height: 500px;
+}
+
+@media screen and (max-width: 720px) {
+  .user-board-wrap {
+    margin: 0 5%;
+  }
 }
 
 .user-board-wrap h2 {
@@ -25,15 +33,21 @@
   border-right: 1px solid #eee;
 }
 
+@media screen and (max-width: 420px) {
+  .user-board-wrap .board-container h3 {
+    display: none;
+  }
+}
+
 .user-board-wrap .board-container h3 span {
   font-weight: normal;
 }
 
 .user-board-wrap .board-container .board-box {
-  width: 500px;
-  height: 500px;
+  width: 100%;
   overflow: scroll;
   padding: 12px;
+  max-height: 400px;
 }
 
 .user-board-wrap .board-container .board-box .board {
@@ -55,6 +69,15 @@
   color: #333;
   font-weight: lighter;
   font-size: 12px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@media screen and (max-width: 510px) {
+  .user-board-wrap .board-container .board-box .board .user-area .create-time {
+    display: none;
+  }
 }
 
 .user-board-wrap .board-container .board-box .board .user-area .username {
@@ -66,7 +89,14 @@
   height: 40px;
   border-radius: 50%;
   border: 1.5px solid orange;
-  margin-right: 24px;
+  margin-right: 2%;
+}
+
+@media screen and (max-width: 500px) {
+  .user-board-wrap .board-container .board-box .board .user-area .profile {
+    width: 28px;
+    height: 28px;
+  }
 }
 
 .user-board-wrap .board-container .board-box .board .user-area .profile img {
