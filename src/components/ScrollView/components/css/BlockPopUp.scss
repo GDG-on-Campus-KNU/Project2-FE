@@ -203,9 +203,14 @@
 
       .comment-view-box {
         height: calc(100% - 120px);
+        overflow: scroll;
 
         .comment-threshold {
-          height: 100px;
+          height: 0px;
+
+          @media screen and (max-width: 820px) {
+            height: 100px;
+          }
         }
       }
       .comment-write-box {
