@@ -14,14 +14,14 @@ import {
 import useAuth from "../../../hooks/Auth/useAuth";
 
 type Props = {
-  blockDeatil: getBlockType;
+  blockDetail: getBlockType;
   closePopUp: React.MouseEventHandler<HTMLButtonElement>;
   itemList: getBlockType[];
   setItemList: React.Dispatch<React.SetStateAction<getBlockType[]>>;
 };
 
 const BlockPopUpContainer = ({
-  blockDeatil,
+  blockDetail,
   closePopUp,
   itemList,
   setItemList,
@@ -73,7 +73,7 @@ const BlockPopUpContainer = ({
         },
         {
           content: comment,
-          boardId: blockDeatil.id,
+          boardId: blockDetail.id,
         }
       );
       setPost(true);
@@ -84,7 +84,7 @@ const BlockPopUpContainer = ({
 
   return (
     <BlockPopUp
-      blockDetail={blockDeatil}
+      blockDetail={blockDetail}
       closePopUp={closePopUp}
       picView={picView}
       picViewToggle={picViewToggle}

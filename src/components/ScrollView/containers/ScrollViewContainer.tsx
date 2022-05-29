@@ -85,10 +85,6 @@ const ScrollViewContainer = ({
     onload();
   }, []);
 
-  useEffect(() => {
-    console.log("ScrollViewContainer", itemList);
-  }, [itemList]);
-
   return (
     <ScrollView
       setTarget={setTarget}

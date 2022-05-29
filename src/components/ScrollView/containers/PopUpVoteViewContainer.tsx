@@ -3,7 +3,6 @@ import useAuth from "../../../hooks/Auth/useAuth";
 import { apiOrigin, apiRoute, requestPost } from "../../../lib/api/api";
 import {
   BasicAPIResponseType,
-  createVoteType,
   getBlockType,
 } from "../../../typedef/common/common.types";
 import VoteView from "../components/VoteView";
@@ -22,7 +21,7 @@ type vote = {
   count: number;
 };
 
-const VoteViewContainer = ({
+const PopUpVoteViewContainer = ({
   votedIndex,
   voteList,
   voteTotal,
@@ -31,6 +30,10 @@ const VoteViewContainer = ({
   setItemList,
 }: Props) => {
   const { token } = useAuth();
+
+  const [popUpIndex, setPopUpIndex] = useState(votedIndex);
+  const [popUpList, setPopUpList] = useState(voteList);
+  const [popUpTotal, setPopUpTotal] = useState(voteTotal);
 
   const stringToVote = useCallback((voteText: string) => {
     voteText = voteText.replace(/\\/gi, "");
@@ -56,6 +59,9 @@ const VoteViewContainer = ({
       );
 
       const newVoteList = stringToVote(data);
+
+      let newVotedIndex = popUpIndex === index ? -1 : index;
+
       let newVoteTotal = 0;
       newVoteList.map(({ count }: vote) => {
         newVoteTotal += count;
@@ -67,26 +73,30 @@ const VoteViewContainer = ({
           return {
             ...item,
             voteText: newVoteList,
-            votedIndex: votedIndex === index ? -1 : index,
+            votedIndex: newVotedIndex,
             voteTotal: newVoteTotal,
           };
         } else {
           return item;
         }
       });
+
+      setPopUpIndex(newVotedIndex);
+      setPopUpList(newVoteList);
+      setPopUpTotal(newVoteTotal);
       setItemList(changeItemList);
     },
-    [itemList, votedIndex]
+    [popUpIndex]
   );
 
   return (
     <VoteView
-      votedIndex={votedIndex}
-      voteList={voteList}
-      voteTotal={voteTotal}
+      votedIndex={popUpIndex}
+      voteList={popUpList}
+      voteTotal={popUpTotal}
       postVote={postVote}
     />
   );
 };
 
-export default VoteViewContainer;
+export default PopUpVoteViewContainer;

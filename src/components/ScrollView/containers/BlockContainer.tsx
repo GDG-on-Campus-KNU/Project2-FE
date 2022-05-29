@@ -54,7 +54,7 @@ const BlockContainer = ({ block, itemList, setItemList }: Props) => {
     const blockDetail = await getBlockDetail(id);
     __showPopUpFromHooks(
       <BlockPopUpContainer
-        blockDeatil={blockDetail}
+        blockDetail={blockDetail}
         closePopUp={closePopUp}
         itemList={itemList}
         setItemList={setItemList}
@@ -78,10 +78,6 @@ const BlockContainer = ({ block, itemList, setItemList }: Props) => {
     },
     [__showPopUpFromHooks]
   );
-
-  useEffect(() => {
-    console.log("BlockContainer", itemList);
-  }, [itemList]);
 
   return (
     <Block

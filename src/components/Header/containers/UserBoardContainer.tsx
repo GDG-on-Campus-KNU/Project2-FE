@@ -10,7 +10,12 @@ import {
 import BlockPopUpContainer from "../../ScrollView/containers/BlockPopUpContainer";
 import UserBoard from "../components/UserBoard";
 
-const UserBoardContainer = () => {
+type Props = {
+  itemList: getBlockType[];
+  setItemList: React.Dispatch<React.SetStateAction<getBlockType[]>>;
+};
+
+const UserBoardContainer = ({ itemList, setItemList }: Props) => {
   const { token } = useAuth();
   const { __showPopUpFromHooks, __hidePopUpFromHooks } = usePopUp();
   const [boards, setBoards] = useState<UserBoardType>({
@@ -48,10 +53,31 @@ const UserBoardContainer = () => {
     console.log(data);
   }, []);
 
+  const stringToVote = useCallback((voteText: string) => {
+    voteText = voteText.replace(/\\/gi, "");
+    voteText = voteText.replace(/'/gi, '"');
+    const votes = JSON.parse(voteText).map((vote: Array<string | number>) => {
+      return { content: vote[0], count: vote[1] };
+    });
+
+    return votes;
+  }, []);
+
   const getBlockDetail = useCallback(
     async (blockData: getBlockType) => {
+      const blockDetail = {
+        ...blockData,
+        updatedAt: blockData.updatedAt.split(".")[0].replace("T", " "),
+        image: [blockData.image],
+        voteText: stringToVote(blockData.voteText),
+      };
       __showPopUpFromHooks(
-        <BlockPopUpContainer block={blockData} closePopUp={closePopUp} />
+        <BlockPopUpContainer
+          blockDetail={blockDetail}
+          closePopUp={closePopUp}
+          itemList={itemList}
+          setItemList={setItemList}
+        />
       );
     },
     [__showPopUpFromHooks]
