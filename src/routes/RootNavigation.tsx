@@ -1,5 +1,6 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Loader from "../components/Loader/Loader";
 import LoginNavigationContainer from "./containers/LoginNavigationContainer";
 import MainNavigationContainer from "./containers/MainNavigationContainer";
 
