@@ -41,10 +41,6 @@ const LoginContainer = () => {
     navigate("/signup");
   }, [navigate]);
 
-  useEffect(() => {
-    sessionStorage.setItem("@route", "login");
-  });
-
   return (
     <Login
       setId={setId}

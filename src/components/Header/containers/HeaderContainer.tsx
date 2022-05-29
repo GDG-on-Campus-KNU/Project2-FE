@@ -23,7 +23,7 @@ const HeaderContainer = ({ setSearchContent }: Props) => {
   const navigate = useNavigate();
   const { __updateRootFromHooks } = useRootRoute();
   const { __showPopUpFromHooks } = usePopUp();
-  const { token } = useAuth();
+  const { clearAccess } = useAuth();
 
   const onProfileClick = useCallback(() => {
     setIsDropDown((prev) => !prev);
@@ -44,9 +44,11 @@ const HeaderContainer = ({ setSearchContent }: Props) => {
   const onSignOut = useCallback(() => {
     const response = window.confirm("로그아웃 하시겠습니까?");
     if (response) {
+      sessionStorage.setItem("@route", "login");
       __updateRootFromHooks("login");
+      clearAccess();
     }
-  }, [navigate]);
+  }, [navigate, sessionStorage, clearAccess]);
 
   const onUserBoards = useCallback(() => {
     __showPopUpFromHooks(<UserBoardContainer />);
