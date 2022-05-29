@@ -3,7 +3,7 @@
   -webkit-box-flex: 2;
       -ms-flex: 2;
           flex: 2;
-  padding: 15px;
+  padding: 0 15px;
   position: relative;
 }
 
