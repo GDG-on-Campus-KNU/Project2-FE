@@ -1,6 +1,6 @@
 .wrapper {
-  width: 50vw;
-  height: calc(100vh - 78px);
+  flex: 2;
+  height: calc(100vh - 90px);
   position: relative;
 
   .scroll-view-wrap {

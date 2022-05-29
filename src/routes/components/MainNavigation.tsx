@@ -48,24 +48,28 @@ const MainNavigation = ({
   return (
     <div>
       <HeaderContainer setSearchContent={setSearchContent} />
-      <div style={{ display: "flex", marginTop: "16px" }}>
+      <div
+        style={{ display: "flex", gap: "12px", padding: "12px 12px 0 12px" }}
+      >
         <SideNavigationContainer editLink={editLink} />
-        <Routes>
-          <Route
-            path="/home"
-            element={
-              <ScrollViewContainer
-                itemList={itemList}
-                editItemList={editItemList}
-                next={next}
-                getBlocks={getBlocks}
-                scrollView={scrollView}
-                searchContent={searchContent}
-              />
-            }
-          />
-        </Routes>
-        <SideBoardContainer />
+        <div style={{ flex: "3", display: "flex", gap: "12px" }}>
+          <Routes>
+            <Route
+              path="/home"
+              element={
+                <ScrollViewContainer
+                  itemList={itemList}
+                  editItemList={editItemList}
+                  next={next}
+                  getBlocks={getBlocks}
+                  scrollView={scrollView}
+                  searchContent={searchContent}
+                />
+              }
+            />
+          </Routes>
+          <SideBoardContainer />
+        </div>
       </div>
       {popUp.isShown && <PopUp child={popUp.popUp} />}
     </div>

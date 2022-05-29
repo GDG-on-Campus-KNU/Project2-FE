@@ -1,6 +1,8 @@
 .wrapper {
-  width: 50vw;
-  height: calc(100vh - 78px);
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+  height: calc(100vh - 90px);
   position: relative;
 }
 
