@@ -13,7 +13,7 @@ const RootNavigation = ({ root }: Props) => {
         <Route
           path="*"
           element={
-            root === "login" ? (
+            sessionStorage.getItem("@route") === "login" ? (
               <LoginNavigationContainer />
             ) : (
               <MainNavigationContainer />

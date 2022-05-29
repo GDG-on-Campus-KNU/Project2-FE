@@ -47,7 +47,7 @@ const Block = ({
             ? content_txt_short
             : block.content}
         </div>
-        <button onClick={reverseExpand}>
+        <button className="length-button" onClick={reverseExpand}>
           {block.content.length > 200
             ? expand
               ? "간략히"
