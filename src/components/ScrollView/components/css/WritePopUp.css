@@ -108,29 +108,54 @@
 .write-pop-up .pop-up-right .info-area {
   width: 100%;
   height: auto;
-  overflow-y: scroll;
   margin-top: 5px;
   padding: 0 10px;
+  overflow-y: scroll;
 }
 
 .write-pop-up .pop-up-right .info-area .title {
   height: 10%;
+  margin-left: 10px;
+  padding-top: 5px;
   font-size: 20px;
   font-weight: bold;
-  padding-top: 5px;
 }
 
 .write-pop-up .pop-up-right .info-area .vote-area {
   width: 100%;
+  text-align: center;
 }
 
 .write-pop-up .pop-up-right .info-area .vote-area .vote-input-box {
   width: calc(100% - 20px);
   height: 40px;
-  margin: 5px 0px;
+  margin: 5px auto;
   border-radius: 5px;
   padding: 0 10px;
   border: 1px solid black;
+}
+
+.write-pop-up .pop-up-right .info-area .vote-area .add-vote-input-box {
+  width: calc(100% - 80px);
+  height: 40px;
+  margin: 5px auto;
+  padding: 0px 10px;
+  border: 1px solid black;
+  border-right: 0;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.write-pop-up .pop-up-right .info-area .vote-area .vote-del-btn {
+  width: 60px;
+  height: 40px;
+  margin: 5px 0px;
+  padding: 0px 10px;
+  background-color: #ff6262;
+  color: white;
+  border: 1px solid black;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .write-pop-up .pop-up-right .info-area .vote-area .more-btn {
@@ -138,7 +163,7 @@
   height: 40px;
   margin: 5px 0px;
   border-radius: 5px;
-  padding: 0 10px;
+  padding: 10px;
   border: 1px solid #ccc;
   font-size: 16px;
   color: #ccc;
@@ -153,23 +178,20 @@
   background-color: #cfcfcf;
 }
 
-.write-pop-up .pop-up-right .info-area .vote-area .del-btn {
-  margin-left: 10px;
-}
-
 .write-pop-up .pop-up-right .info-area .image-area {
-  width: 100%;
+  width: calc(100% - 20px);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  margin: 0 0 0 5px;
 }
 
 .write-pop-up .pop-up-right .info-area .image-area .img-preview {
   position: relative;
 }
 
-.write-pop-up .pop-up-right .info-area .image-area .img-preview .del-btn {
-  background-color: red;
+.write-pop-up .pop-up-right .info-area .image-area .img-preview .image-del-btn {
+  background-color: #ff6262;
   width: 20px;
   height: 20px;
   border-radius: 10px;
