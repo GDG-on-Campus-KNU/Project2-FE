@@ -5,7 +5,7 @@ export const apiOrigin = "http://localhost:8000";
 
 export const apiRoute = {
   board: "/boards",
-  comment: "/comments",
+  comment: "/comments/",
   user: "/users",
   categoty: "/category",
   vote: "/vote/",

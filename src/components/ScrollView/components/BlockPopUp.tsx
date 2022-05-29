@@ -12,6 +12,8 @@ type Props = {
   picViewToggle: React.MouseEventHandler<HTMLButtonElement>;
   image: string;
   commentRef: React.RefObject<HTMLTextAreaElement>;
+  onWriteComment: React.MouseEventHandler<HTMLButtonElement>;
+  setComment: React.Dispatch<React.SetStateAction<string>>;
   onHandleHeight: React.FormEventHandler<HTMLTextAreaElement>;
   deleteBlock: (id: number) => Promise<void>;
 };
@@ -23,7 +25,10 @@ const BlockPopUp = ({
   picViewToggle,
   image,
   commentRef,
+  onWriteComment,
+  setComment,
   onHandleHeight,
+
   deleteBlock,
 }: Props) => {
   return (
@@ -88,17 +93,24 @@ const BlockPopUp = ({
           <div className="comment-view-box">
             <CommentScrollViewContainer blockId={block.id} />
           </div>
-          <div className="comment-write-box">
+          <form className="comment-write-box">
             <textarea
               className="comment-input"
               placeholder="댓글 추가..."
               ref={commentRef}
               onInput={onHandleHeight}
-            ></textarea>
+              onChange={(e) => setComment(e.target.value)}
+            />
             <div className="write-comment-box">
-              <button className="write-comment-button">작성</button>
+              <button
+                type="submit"
+                className="write-comment-button"
+                onClick={(e) => onWriteComment(e)}
+              >
+                작성
+              </button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

@@ -5,7 +5,12 @@ import {
   getBlockType,
   LoginTokenType,
 } from "../../../typedef/common/common.types";
-import { apiOrigin, apiRoute, requestDelete } from "../../../lib/api/api";
+import {
+  apiOrigin,
+  apiRoute,
+  requestDelete,
+  requestPost,
+} from "../../../lib/api/api";
 import useAuth from "../../../hooks/Auth/useAuth";
 
 type Props = {
@@ -18,6 +23,7 @@ const BlockPopUpContainer = ({ block, closePopUp }: Props) => {
   const commentRef = React.useRef<HTMLTextAreaElement>(null);
   const [picView, setPicView] = useState(false);
   const [image, setImage] = useState<string>("");
+  const [comment, setComment] = useState("");
   const picViewToggle = (event: any) => {
     if (event.target.tagName === "IMG") {
       setImage(event.target.src);
@@ -47,6 +53,24 @@ const BlockPopUpContainer = ({ block, closePopUp }: Props) => {
     }
   };
 
+  const onWriteComment = useCallback(
+    async (e) => {
+      e.preventDefault();
+      const { data } = await requestPost<BasicAPIResponseType<any>>(
+        apiOrigin + apiRoute.comment,
+        {
+          Authorization: `Bearer ${token}`,
+        },
+        {
+          content: comment,
+          boardId: block.id,
+        }
+      );
+      console.log(data);
+    },
+    [comment]
+  );
+
   return (
     <BlockPopUp
       block={block}
@@ -54,8 +78,10 @@ const BlockPopUpContainer = ({ block, closePopUp }: Props) => {
       picView={picView}
       picViewToggle={picViewToggle}
       image={image}
+      onWriteComment={onWriteComment}
       commentRef={commentRef}
       onHandleHeight={onHandleHeight}
+      setComment={setComment}
       deleteBlock={deleteBlock}
     />
   );

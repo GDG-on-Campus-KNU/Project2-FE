@@ -59,7 +59,7 @@ const MainNavigation = ({
               element={
                 <ScrollViewContainer
                   itemList={itemList}
-                  editItemList={editItemList}
+                  setItemList={setItemList}
                   next={next}
                   getBlocks={getBlocks}
                   scrollView={scrollView}
