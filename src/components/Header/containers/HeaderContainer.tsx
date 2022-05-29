@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/Auth/useAuth";
 import usePopUp from "../../../hooks/usePopUp";
@@ -56,7 +56,7 @@ const HeaderContainer = ({
     __showPopUpFromHooks(
       <UserBoardContainer itemList={itemList} setItemList={setItemList} />
     );
-  }, [__showPopUpFromHooks]);
+  }, [__showPopUpFromHooks, itemList]);
 
   return (
     <Header

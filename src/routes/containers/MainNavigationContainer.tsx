@@ -4,7 +4,6 @@ import usePopUp from "../../hooks/usePopUp";
 import { apiOrigin, apiRoute, requestGet } from "../../lib/api/api";
 import {
   BasicAPIResponseType,
-  createVoteType,
   getBlockResponseType,
   getBlockType,
 } from "../../typedef/common/common.types";
@@ -82,10 +81,6 @@ const MainNavigationContainer = () => {
 
     return blocks;
   }, []);
-
-  useEffect(() => {
-    console.log("MainNavigation", itemList);
-  }, [itemList]);
 
   return (
     <MainNavigation

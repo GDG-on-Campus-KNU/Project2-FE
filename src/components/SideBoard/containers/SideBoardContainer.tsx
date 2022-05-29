@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import useAuth from "../../../hooks/Auth/useAuth";
 import usePopUp from "../../../hooks/usePopUp";
 import { apiOrigin, apiRoute, requestGet } from "../../../lib/api/api";
@@ -46,18 +46,21 @@ const SideBoardContainer = ({ itemList, setItemList }: Props) => {
     return blockDeatil;
   }, []);
 
-  const loadPopUp = useCallback(async (id: number) => {
-    const blockDetail = await getBlockDetail(id);
+  const loadPopUp = useCallback(
+    async (id: number) => {
+      const blockDetail = await getBlockDetail(id);
 
-    __showPopUpFromHooks(
-      <BlockPopUpContainer
-        blockDetail={blockDetail}
-        closePopUp={closePopUp}
-        itemList={itemList}
-        setItemList={setItemList}
-      />
-    );
-  }, []);
+      __showPopUpFromHooks(
+        <BlockPopUpContainer
+          blockDetail={blockDetail}
+          closePopUp={closePopUp}
+          itemList={itemList}
+          setItemList={setItemList}
+        />
+      );
+    },
+    [itemList]
+  );
 
   const closePopUp = useCallback(() => {
     __hidePopUpFromHooks();

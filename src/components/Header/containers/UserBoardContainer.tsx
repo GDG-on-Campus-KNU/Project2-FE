@@ -71,6 +71,7 @@ const UserBoardContainer = ({ itemList, setItemList }: Props) => {
         image: [blockData.image],
         voteText: stringToVote(blockData.voteText),
       };
+
       __showPopUpFromHooks(
         <BlockPopUpContainer
           blockDetail={blockDetail}
@@ -80,7 +81,7 @@ const UserBoardContainer = ({ itemList, setItemList }: Props) => {
         />
       );
     },
-    [__showPopUpFromHooks]
+    [__showPopUpFromHooks, itemList]
   );
 
   const closePopUp = useCallback(() => {
@@ -90,6 +91,7 @@ const UserBoardContainer = ({ itemList, setItemList }: Props) => {
   useEffect(() => {
     onload();
   }, []);
+
   return <UserBoard boards={boards} getBlockDetail={getBlockDetail} />;
 };
 

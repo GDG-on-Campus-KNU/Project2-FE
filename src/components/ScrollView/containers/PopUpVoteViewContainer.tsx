@@ -69,7 +69,6 @@ const PopUpVoteViewContainer = ({
 
       const changeItemList = itemList.map((item) => {
         if (item.id === blockId) {
-          console.log(item.votedIndex, index);
           return {
             ...item,
             voteText: newVoteList,
