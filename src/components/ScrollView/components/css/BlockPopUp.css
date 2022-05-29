@@ -39,6 +39,7 @@
 .block-pop-up-wrap .pop-up-left .content-view {
   max-height: 100%;
   padding: 15px 15px 0px 15px;
+  overflow: scroll;
 }
 
 @media screen and (max-width: 820px) {

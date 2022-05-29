@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useRootRoute from "../../../hooks/useRootRoute";
 import { apiOrigin, apiRoute, requestPost } from "../../../lib/api/api";
@@ -29,15 +29,21 @@ const LoginContainer = () => {
 
       if (status) {
         sessionStorage.setItem("@access", access);
+        sessionStorage.setItem("@route", "main");
         __updateRootFromHooks("main");
         navigate("/home");
       }
     },
     [id, password, __updateRootFromHooks]
   );
+
   const onSignup = useCallback(() => {
     navigate("/signup");
   }, [navigate]);
+
+  useEffect(() => {
+    sessionStorage.setItem("@route", "login");
+  });
 
   return (
     <Login
