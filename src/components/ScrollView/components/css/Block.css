@@ -52,10 +52,12 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: pre-wrap;
 }
 
 .block .content-area .content-view-expand {
   height: auto;
+  white-space: pre-wrap;
 }
 
 .block .etc-area {

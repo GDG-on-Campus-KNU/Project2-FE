@@ -15,8 +15,8 @@ const SideNavigation = ({ selected, setCategory }: Props) => {
         <ul className="category-list">
           <li className="category-item">
             <button
-              className={selected === "" ? "selected" : ""}
-              onClick={() => setCategory("")}
+              className={selected === "all" ? "selected" : ""}
+              onClick={() => setCategory("all")}
             >
               전체
             </button>
@@ -43,6 +43,30 @@ const SideNavigation = ({ selected, setCategory }: Props) => {
               onClick={() => setCategory("Fashion")}
             >
               패션
+            </button>
+          </li>
+          <li className="category-item">
+            <button
+              className={selected === "Political" ? "selected" : ""}
+              onClick={() => setCategory("Political")}
+            >
+              정치
+            </button>
+          </li>
+          <li className="category-item">
+            <button
+              className={selected === "Balance_Game" ? "selected" : ""}
+              onClick={() => setCategory("Balance_Game")}
+            >
+              밸런스 게임
+            </button>
+          </li>
+          <li className="category-item">
+            <button
+              className={selected === "Free" ? "selected" : ""}
+              onClick={() => setCategory("Free")}
+            >
+              마음대로
             </button>
           </li>
         </ul>

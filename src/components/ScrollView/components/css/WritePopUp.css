@@ -4,10 +4,11 @@
 
 .pop-up .pop-up-left .category-section .category {
   border: none;
-  width: 100px;
-  height: 50px;
+  width: 150px;
+  height: 100%;
   font-size: 20px;
   margin-left: 15px;
+  outline: none;
 }
 
 .pop-up .pop-up-left .textarea {

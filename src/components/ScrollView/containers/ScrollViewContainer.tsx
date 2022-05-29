@@ -7,7 +7,7 @@ import useAuth from "../../../hooks/Auth/useAuth";
 
 type Props = {
   itemList: getBlockType[];
-  editItemList: (blocks: getBlockType[]) => void;
+  setItemList: React.Dispatch<React.SetStateAction<getBlockType[]>>;
   next: string;
   getBlocks: () => Promise<
     {
@@ -31,7 +31,7 @@ type Props = {
 
 const ScrollViewContainer = ({
   itemList,
-  editItemList,
+  setItemList,
   next,
   getBlocks,
   scrollView,
@@ -54,7 +54,7 @@ const ScrollViewContainer = ({
   }, []);
 
   const addItemList = (blocks: getBlockType[]) => {
-    editItemList([...itemList, ...blocks]);
+    setItemList([...itemList, ...blocks]);
   };
 
   const intersecting = async ([entry]: IntersectionObserverEntry[]) => {

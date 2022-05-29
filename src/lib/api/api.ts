@@ -7,7 +7,7 @@ export const apiRoute = {
   board: "/boards",
   comment: "/comments",
   user: "/users",
-  like: "/like/",
+  categoty: "/category",
   vote: "/vote/",
   login: "/api/token/",
   register: "/register/",

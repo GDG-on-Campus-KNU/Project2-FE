@@ -27,7 +27,7 @@
 }
 
 .side-board-wrap .side-board-container .post-list .post-item {
-  padding-left: 8px;
+  padding: 0px 8px;
   border-radius: 6px;
 }
 
@@ -39,5 +39,16 @@
   width: 100%;
   line-height: 32px;
   text-align: left;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.side-board-wrap .side-board-container .post-list .post-item button span:nth-child(2) {
+  color: gray;
+  font-size: 10px;
 }
 /*# sourceMappingURL=sideBoard.css.map */

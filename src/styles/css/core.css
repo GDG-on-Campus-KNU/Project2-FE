@@ -45,11 +45,11 @@ button {
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
   background-color: orange;
-  border-radius: 8px;
+  border-radius: 5px;
 }
 /*# sourceMappingURL=core.css.map */

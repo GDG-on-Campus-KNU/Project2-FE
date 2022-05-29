@@ -21,13 +21,16 @@ const MainNavigationContainer = () => {
 
   const scrollView = useRef<HTMLDivElement>(null);
 
-  const editItemList = (blocks: getBlockType[]) => {
-    setItemList(blocks);
-  };
-
   const editLink = (newcate: string) => {
+    setItemList([]);
     setSearchContent("");
-    setNext(`${apiOrigin}${apiRoute.board}/${newcate}?limit=10&offset=0`);
+    if (newcate === "all") {
+      setNext(`${apiOrigin}${apiRoute.board}/?limit=10&offset=0`);
+    } else {
+      setNext(
+        `${apiOrigin}${apiRoute.board}${apiRoute.categoty}/${newcate}?limit=10&offset=0`
+      );
+    }
     setCategory(newcate);
 
     if (scrollView) {
@@ -37,16 +40,16 @@ const MainNavigationContainer = () => {
 
   const updateCategory = async () => {
     const blocks = await getBlocks();
-    editItemList(blocks);
+    setItemList(blocks);
   };
+
+  useEffect(() => {
+    console.log(next);
+  }, [next]);
 
   useEffect(() => {
     updateCategory();
   }, [category]);
-
-  useEffect(() => {
-    console.log("useEffect", searchContent);
-  }, [searchContent]);
 
   const getBlocks = async () => {
     const { data } = await requestGet<
@@ -72,7 +75,7 @@ const MainNavigationContainer = () => {
     <MainNavigation
       popUp={popUp}
       itemList={itemList}
-      editItemList={editItemList}
+      setItemList={setItemList}
       next={next}
       editLink={editLink}
       getBlocks={getBlocks}

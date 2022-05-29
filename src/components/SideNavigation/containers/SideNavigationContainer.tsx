@@ -6,7 +6,7 @@ type Props = {
 };
 
 const SideNavigationContainer = ({ editLink }: Props) => {
-  const [selected, setSelected] = useState("");
+  const [selected, setSelected] = useState("all");
 
   const setCategory = (category: string) => {
     setSelected(category);
