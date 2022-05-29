@@ -37,7 +37,7 @@ const BlockPopUp = ({
   setPost,
 }: Props) => {
   return (
-    <div className="pop-up">
+    <div className="block-pop-up-wrap">
       <div className="pop-up-left">
         <div className={!picView ? "content-view" : "hidden"}>
           <div className="user-area">
@@ -101,6 +101,7 @@ const BlockPopUp = ({
               post={post}
               setPost={setPost}
             />
+            <div className="comment-threshold"></div>
           </div>
           <form className="comment-write-box">
             <textarea
