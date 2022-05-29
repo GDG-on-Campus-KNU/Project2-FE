@@ -21,7 +21,7 @@ const CommentScrollViewContainer = ({ blockId, post, setPost }: Props) => {
   const [target, setTarget] = useState<HTMLElement | null>(null);
   const [end, setEnd] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [itemList, setItemList] = useState<getCommentType[]>([]);
+  const [commentItemList, setCommentItemList] = useState<getCommentType[]>([]);
 
   const getComments = async () => {
     const { data } = await requestGet<
@@ -46,7 +46,7 @@ const CommentScrollViewContainer = ({ blockId, post, setPost }: Props) => {
     setLoading(true);
 
     const comments = await getComments();
-    setItemList(comments);
+    setCommentItemList(comments);
 
     setLoading(false);
     setPost(false);
@@ -56,8 +56,8 @@ const CommentScrollViewContainer = ({ blockId, post, setPost }: Props) => {
     if (post) postRefreshComment();
   }, [post]);
 
-  const addItemList = (comments: getCommentType[]) => {
-    setItemList((itemList) => [...itemList, ...comments]);
+  const addCommentItemList = (comments: getCommentType[]) => {
+    setCommentItemList((commentItemList) => [...commentItemList, ...comments]);
   };
 
   const intersecting = async (
@@ -67,7 +67,7 @@ const CommentScrollViewContainer = ({ blockId, post, setPost }: Props) => {
     if (entry.isIntersecting) {
       const comments = await getComments();
       setLoading(true);
-      addItemList(comments);
+      addCommentItemList(comments);
       setLoading(false);
     }
   };
@@ -84,7 +84,7 @@ const CommentScrollViewContainer = ({ blockId, post, setPost }: Props) => {
     <CommentScrollView
       setTarget={setTarget}
       loading={loading}
-      itemList={itemList}
+      commentItemList={commentItemList}
       end={end}
     />
   );

@@ -4,16 +4,16 @@ import { createVoteType } from "../../../typedef/common/common.types";
 import ProgressBar from "./ProgressBar";
 
 type Props = {
-  isVote: number;
+  votedIndex: number;
   voteList: Array<createVoteType>;
   voteTotal: number;
   postVote: (index: number) => Promise<void>;
 };
 
-const VoteView = ({ isVote, voteList, voteTotal, postVote }: Props) => {
+const VoteView = ({ votedIndex, voteList, voteTotal, postVote }: Props) => {
   return (
     <div className="vote-view">
-      {isVote >= 0
+      {votedIndex >= 0
         ? voteList.map((vote, index) => (
             <div className="vote-box" key={index}>
               <button onClick={() => postVote(index)}>
@@ -24,7 +24,7 @@ const VoteView = ({ isVote, voteList, voteTotal, postVote }: Props) => {
               </button>
               <ProgressBar
                 bgcolor={
-                  isVote === index ? "orange" : "rgba(146, 146, 146, 0.35)"
+                  votedIndex === index ? "orange" : "rgba(146, 146, 146, 0.35)"
                 }
                 progress={Math.round((vote.count / voteTotal) * 100)}
                 content={vote.content}

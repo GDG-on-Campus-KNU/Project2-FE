@@ -3,10 +3,10 @@ import { getBlockType } from "../../../typedef/common/common.types";
 import "./css/BlockPopUp.css";
 import CommentScrollViewContainer from "../containers/CommentScrollViewContainer";
 import images from "../../../assets/images";
-import VoteViewContainer from "../containers/VoteViewContainer";
+import PopUpVoteViewContainer from "../containers/PopUpVoteViewContainer";
 
 type Props = {
-  block: getBlockType;
+  blockDetail: getBlockType;
   closePopUp: React.MouseEventHandler<HTMLButtonElement>;
   picView: boolean;
   picViewToggle: React.MouseEventHandler<HTMLButtonElement>;
@@ -19,10 +19,12 @@ type Props = {
   deleteBlock: (id: number) => Promise<void>;
   post: boolean;
   setPost: React.Dispatch<React.SetStateAction<boolean>>;
+  itemList: getBlockType[];
+  setItemList: React.Dispatch<React.SetStateAction<getBlockType[]>>;
 };
 
 const BlockPopUp = ({
-  block,
+  blockDetail,
   closePopUp,
   picView,
   picViewToggle,
@@ -35,6 +37,8 @@ const BlockPopUp = ({
   deleteBlock,
   post,
   setPost,
+  itemList,
+  setItemList,
 }: Props) => {
   return (
     <div className="block-pop-up-wrap">
@@ -45,18 +49,18 @@ const BlockPopUp = ({
               <img
                 className="profile"
                 src={images.defaultProfile}
-                alt={block.owner}
+                alt={blockDetail.owner}
               />
               <div>
-                <div>{block.owner}</div>
-                <div>{block.updatedAt}</div>
+                <div>{blockDetail.owner}</div>
+                <div>{blockDetail.updatedAt}</div>
               </div>
             </div>
-            {block.owner === block.currentUser ? (
+            {blockDetail.owner === blockDetail.currentUser ? (
               <div>
                 <button
                   className="delete-btn"
-                  onClick={() => deleteBlock(block.id)}
+                  onClick={() => deleteBlock(blockDetail.id)}
                 >
                   삭제
                 </button>
@@ -65,11 +69,14 @@ const BlockPopUp = ({
           </div>
           <div className="content-area">
             <div className="content">
-              {block.content}
-              <VoteViewContainer
-                votedIndex={block.votedIndex}
-                voteText={block.voteText}
-                blockId={block.id}
+              {blockDetail.content}
+              <PopUpVoteViewContainer
+                votedIndex={blockDetail.votedIndex}
+                voteList={blockDetail.voteText}
+                voteTotal={blockDetail.voteTotal}
+                blockId={blockDetail.id}
+                itemList={itemList}
+                setItemList={setItemList}
               />
             </div>
           </div>
@@ -80,9 +87,9 @@ const BlockPopUp = ({
         </div>
         <div className="etc-area">
           <div>
-            {block.image !== null ? (
+            {blockDetail.image !== null ? (
               <button className="img-btn" onClick={picViewToggle}>
-                <img src={block.image} alt="sampleImage" />
+                <img src={blockDetail.image} alt="sampleImage" />
               </button>
             ) : null}
           </div>
@@ -97,7 +104,7 @@ const BlockPopUp = ({
         <div className="comment-container">
           <div className="comment-view-box">
             <CommentScrollViewContainer
-              blockId={block.id}
+              blockId={blockDetail.id}
               post={post}
               setPost={setPost}
             />
@@ -129,7 +136,3 @@ const BlockPopUp = ({
 };
 
 export default BlockPopUp;
-
-function onClickImage(index: number): void {
-  throw new Error("Function not implemented.");
-}

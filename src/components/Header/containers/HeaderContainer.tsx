@@ -1,22 +1,24 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/Auth/useAuth";
 import usePopUp from "../../../hooks/usePopUp";
 import useRootRoute from "../../../hooks/useRootRoute";
-import { apiOrigin, apiRoute, requestDelete } from "../../../lib/api/api";
-import {
-  BasicAPIResponseType,
-  RemoveUserType,
-} from "../../../typedef/common/common.types";
+import { getBlockType } from "../../../typedef/common/common.types";
 import Header from "../Header";
 import UserBoardContainer from "./UserBoardContainer";
 import UserInfoContainer from "./UserInfoContainer";
 
 type Props = {
   setSearchContent: React.Dispatch<React.SetStateAction<string>>;
+  itemList: getBlockType[];
+  setItemList: React.Dispatch<React.SetStateAction<getBlockType[]>>;
 };
 
-const HeaderContainer = ({ setSearchContent }: Props) => {
+const HeaderContainer = ({
+  setSearchContent,
+  itemList,
+  setItemList,
+}: Props) => {
   const [isDropDown, setIsDropDown] = useState(false);
   const [searchInput, setSearchInput] = useState("");
 
@@ -51,8 +53,10 @@ const HeaderContainer = ({ setSearchContent }: Props) => {
   }, [navigate, sessionStorage, clearAccess]);
 
   const onUserBoards = useCallback(() => {
-    __showPopUpFromHooks(<UserBoardContainer />);
-  }, [__showPopUpFromHooks]);
+    __showPopUpFromHooks(
+      <UserBoardContainer itemList={itemList} setItemList={setItemList} />
+    );
+  }, [__showPopUpFromHooks, itemList]);
 
   return (
     <Header

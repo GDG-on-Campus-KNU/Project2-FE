@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import useAuth from "../../hooks/Auth/useAuth";
 import usePopUp from "../../hooks/usePopUp";
 import { apiOrigin, apiRoute, requestGet } from "../../lib/api/api";
@@ -21,7 +21,7 @@ const MainNavigationContainer = () => {
 
   const scrollView = useRef<HTMLDivElement>(null);
 
-  const editLink = (newcate: string) => {
+  const editLink = useCallback((newcate: string) => {
     setItemList([]);
     setSearchContent("");
     if (newcate === "all") {
@@ -36,12 +36,12 @@ const MainNavigationContainer = () => {
     if (scrollView) {
       scrollView.current!.scrollTop = 0;
     }
-  };
+  }, []);
 
-  const updateCategory = async () => {
+  const updateCategory = useCallback(async () => {
     const blocks = await getBlocks();
     setItemList(blocks);
-  };
+  }, []);
 
   useEffect(() => {
     console.log(next);
@@ -51,7 +51,17 @@ const MainNavigationContainer = () => {
     updateCategory();
   }, [category]);
 
-  const getBlocks = async () => {
+  const stringToVote = useCallback((voteText: string) => {
+    voteText = voteText.replace(/\\/gi, "");
+    voteText = voteText.replace(/'/gi, '"');
+    const votes = JSON.parse(voteText).map((vote: Array<string | number>) => {
+      return { content: vote[0], count: vote[1] };
+    });
+
+    return votes;
+  }, []);
+
+  const getBlocks = useCallback(async () => {
     const { data } = await requestGet<
       BasicAPIResponseType<getBlockResponseType>
     >(next, {
@@ -63,13 +73,14 @@ const MainNavigationContainer = () => {
         ...block,
         updatedAt: block.updatedAt.split(".")[0].replace("T", " "),
         image: [block.image],
+        voteText: stringToVote(block.voteText),
       });
     });
 
     setNext(data.next);
 
     return blocks;
-  };
+  }, []);
 
   return (
     <MainNavigation

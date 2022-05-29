@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import BlockPopUp from "../components/BlockPopUp";
 import {
   BasicAPIResponseType,
@@ -14,17 +14,26 @@ import {
 import useAuth from "../../../hooks/Auth/useAuth";
 
 type Props = {
-  block: getBlockType;
+  blockDetail: getBlockType;
   closePopUp: React.MouseEventHandler<HTMLButtonElement>;
+  itemList: getBlockType[];
+  setItemList: React.Dispatch<React.SetStateAction<getBlockType[]>>;
 };
 
-const BlockPopUpContainer = ({ block, closePopUp }: Props) => {
+const BlockPopUpContainer = ({
+  blockDetail,
+  closePopUp,
+  itemList,
+  setItemList,
+}: Props) => {
   const { token } = useAuth();
-  const commentRef = React.useRef<HTMLTextAreaElement>(null);
+
   const [picView, setPicView] = useState(false);
   const [image, setImage] = useState<string>("");
   const [comment, setComment] = useState("");
   const [post, setPost] = useState(false);
+
+  const commentRef = React.useRef<HTMLTextAreaElement>(null);
   const picViewToggle = (event: any) => {
     if (event.target.tagName === "IMG") {
       setImage(event.target.src);
@@ -41,7 +50,7 @@ const BlockPopUpContainer = ({ block, closePopUp }: Props) => {
     }
   }, []);
 
-  const deleteBlock = async (id: number) => {
+  const deleteBlock = useCallback(async (id: number) => {
     const response = window.confirm("삭제하시겠습니까?");
     if (response) {
       const { data } = await requestDelete<
@@ -52,7 +61,7 @@ const BlockPopUpContainer = ({ block, closePopUp }: Props) => {
 
       window.location.replace("/home");
     }
-  };
+  }, []);
 
   const onWriteComment = useCallback(
     async (e) => {
@@ -64,7 +73,7 @@ const BlockPopUpContainer = ({ block, closePopUp }: Props) => {
         },
         {
           content: comment,
-          boardId: block.id,
+          boardId: blockDetail.id,
         }
       );
       setPost(true);
@@ -73,9 +82,13 @@ const BlockPopUpContainer = ({ block, closePopUp }: Props) => {
     [comment]
   );
 
+  useEffect(() => {
+    console.log("blockpopupcontainer", itemList);
+  });
+
   return (
     <BlockPopUp
-      block={block}
+      blockDetail={blockDetail}
       closePopUp={closePopUp}
       picView={picView}
       picViewToggle={picViewToggle}
@@ -88,6 +101,8 @@ const BlockPopUpContainer = ({ block, closePopUp }: Props) => {
       deleteBlock={deleteBlock}
       post={post}
       setPost={setPost}
+      itemList={itemList}
+      setItemList={setItemList}
     />
   );
 };

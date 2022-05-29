@@ -8,6 +8,7 @@ type Props = {
   setTarget: React.LegacyRef<HTMLDivElement>;
   loading: boolean;
   itemList: getBlockType[];
+  setItemList: React.Dispatch<React.SetStateAction<getBlockType[]>>;
   loadPopUp: React.MouseEventHandler<HTMLButtonElement>;
   next: string;
   scrollView: React.RefObject<HTMLDivElement>;
@@ -18,6 +19,7 @@ const ScrollView = ({
   setTarget,
   loading,
   itemList,
+  setItemList,
   loadPopUp,
   next,
   scrollView,
@@ -32,10 +34,20 @@ const ScrollView = ({
         {itemList.map((block, index) =>
           searchContent.length > 0 ? (
             block.content.includes(searchContent) ? (
-              <BlockContainer block={block} key={index} />
+              <BlockContainer
+                block={block}
+                key={index}
+                itemList={itemList}
+                setItemList={setItemList}
+              />
             ) : null
           ) : (
-            <BlockContainer block={block} key={index} />
+            <BlockContainer
+              block={block}
+              key={index}
+              itemList={itemList}
+              setItemList={setItemList}
+            />
           )
         )}
         {next && !loading && (

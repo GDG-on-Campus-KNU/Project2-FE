@@ -10,6 +10,8 @@ type Props = {
   onClickImage: (index: number) => void;
   expand: boolean;
   reverseExpand: React.MouseEventHandler<HTMLButtonElement>;
+  itemList: getBlockType[];
+  setItemList: React.Dispatch<React.SetStateAction<getBlockType[]>>;
 };
 
 const Block = ({
@@ -18,6 +20,8 @@ const Block = ({
   onClickImage,
   expand,
   reverseExpand,
+  itemList,
+  setItemList,
 }: Props) => {
   const content_txt_short = block.content.substring(0, 200) + "...";
   return (
@@ -56,8 +60,11 @@ const Block = ({
         </button>
         <VoteViewContainer
           votedIndex={block.votedIndex}
-          voteText={block.voteText}
+          voteList={block.voteText}
+          voteTotal={block.voteTotal}
           blockId={block.id}
+          itemList={itemList}
+          setItemList={setItemList}
         />
       </div>
       <div className="etc-area">
