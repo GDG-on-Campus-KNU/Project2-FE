@@ -34,7 +34,7 @@ const WritePopUp = ({
   onChangeContent,
 }: Props) => {
   return (
-    <form className="pop-up" onSubmit={postBlock}>
+    <form className="write-pop-up" onSubmit={postBlock}>
       <div className="pop-up-left">
         <div className="category-section">
           <select className="category" onChange={(e) => onChangeCategory(e)}>
@@ -48,6 +48,7 @@ const WritePopUp = ({
         </div>
         <textarea
           className="textarea"
+          placeholder="내용을 입력하세요."
           onChange={(e) => onChangeContent(e)}
           required
         ></textarea>
@@ -81,7 +82,7 @@ const WritePopUp = ({
             ))}
             {votes.length < 4 ? (
               <button type="button" className="more-btn" onClick={addVote}>
-                ✖️
+                +
               </button>
             ) : null}
           </div>
@@ -106,7 +107,7 @@ const WritePopUp = ({
             {imgs.length < 4 ? (
               <div>
                 <label htmlFor="temp-btn">
-                  <div className="img-add-btn">✖️</div>
+                  <div className="img-add-btn">+</div>
                 </label>
                 <input
                   id="temp-btn"

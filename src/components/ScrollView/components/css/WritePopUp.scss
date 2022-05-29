@@ -1,11 +1,33 @@
-.pop-up {
+.write-pop-up {
+  display: flex;
+  background-color: white;
+  width: 80vw;
+  height: 80vh;
+  border: 1px solid black;
+  border-radius: 10px;
+  overflow: hidden;
+
+  @media screen and (max-width: 820px) {
+    flex-direction: column;
+    overflow-y: scroll;
+  }
+
   .pop-up-left {
+    width: 70%;
+    height: 100%;
+
+    @media screen and (max-width: 820px) {
+      width: 100%;
+      height: auto;
+      border-bottom: 1px solid #666;
+    }
+
     .category-section {
-      height: 10%;
+      height: 50px;
+      border-bottom: 1px solid #666;
 
       .category {
         border: none;
-        width: 150px;
         height: 100%;
         font-size: 20px;
         margin-left: 15px;
@@ -15,20 +37,41 @@
 
     .textarea {
       width: 100%;
-      height: 90%;
+      height: calc(100% - 50px);
+      padding: 16px;
       resize: none;
-      overflow-y: scroll;
-      padding: 15px;
+      border: none;
+      vertical-align: top;
+      font-size: 14px;
+
+      @media screen and (max-width: 820px) {
+        min-height: 200px;
+      }
     }
   }
 
   .pop-up-right {
+    width: 30%;
+    height: 100%;
+    border-left: 1px solid black;
+    position: relative;
+
+    @media screen and (max-width: 820px) {
+      width: 100%;
+      height: auto;
+      border-left: none;
+    }
+
     .header {
       width: 100%;
-      height: 10%;
+      height: 50px;
       display: flex;
       justify-content: flex-end;
       padding-right: 20px;
+
+      @media screen and (max-width: 820px) {
+        display: none;
+      }
 
       button {
         font-size: 20px;
@@ -43,36 +86,46 @@
 
     .info-area {
       width: 100%;
-      height: 70%;
+      height: auto;
       overflow-y: scroll;
       margin-top: 5px;
+      padding: 0 10px;
 
       .title {
         height: 10%;
         font-size: 20px;
         font-weight: bold;
         padding-top: 5px;
-        padding-left: 20px;
       }
 
       .vote-area {
         width: 100%;
         .vote-input-box {
-          width: 80%;
+          width: calc(100% - 20px);
           height: 40px;
-          margin: 5px 0px 5px 20px;
+          margin: 5px 0px;
           border-radius: 5px;
           padding: 0 10px;
           border: 1px solid black;
         }
 
         .more-btn {
-          width: 80%;
+          width: calc(100% - 20px);
           height: 40px;
-          margin: 5px 0px 5px 20px;
+          margin: 5px 0px;
           border-radius: 5px;
           padding: 0 10px;
-          border: 1px solid black;
+          border: 1px solid #ccc;
+          font-size: 16px;
+          color: #ccc;
+
+          &:hover {
+            background-color: #ccc;
+            color: #fff;
+          }
+          &:active {
+            background-color: #cfcfcf;
+          }
         }
 
         .del-btn {
@@ -83,7 +136,6 @@
       .image-area {
         width: 100%;
         display: flex;
-        padding-left: 15px;
 
         .img-preview {
           position: relative;
@@ -100,14 +152,25 @@
         }
 
         .img-add-btn {
-          text-align: center;
-          line-height: 55px;
           width: 60px;
           height: 60px;
           margin: 5px 5px;
+          text-align: center;
+          line-height: 55px;
           border-radius: 5px;
-          border: 1px solid black;
           object-fit: cover;
+          border: 1px solid #ccc;
+          font-size: 16px;
+          color: #ccc;
+          cursor: pointer;
+
+          &:hover {
+            background-color: #ccc;
+            color: #fff;
+          }
+          &:active {
+            background-color: #cfcfcf;
+          }
         }
 
         .img-input-box {
@@ -120,6 +183,9 @@
       width: 100%;
       height: 20%;
       position: relative;
+      position: absolute;
+      bottom: 0;
+      left: 0;
 
       .write-btn {
         position: absolute;
@@ -130,6 +196,11 @@
         height: 75px;
         border-radius: 100%;
         box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+
+        @media screen and (max-width: 820px) {
+          right: 20px;
+          bottom: 10px;
+        }
 
         .icon {
           width: 35px;

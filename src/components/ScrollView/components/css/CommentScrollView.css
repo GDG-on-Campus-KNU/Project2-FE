@@ -4,6 +4,7 @@
       -ms-flex: 2;
           flex: 2;
   padding: 15px;
+  position: relative;
 }
 
 .target {
