@@ -13,6 +13,7 @@ const images = {
   popupClose: "assets/images/popup_close.png",
   cancle: "assets/images/cancel.png",
   defaultProfile: "assets/images/defaultProfile.png",
+  closeLight: "assets/images/close-light.png",
 };
 
 export default images;

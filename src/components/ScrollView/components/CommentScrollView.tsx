@@ -18,9 +18,9 @@ const CommentScrollView = ({
   return (
     <div className="comment-scroll-view-wrap">
       {commentItemList.map((comment, index) => (
-        <div key={index}>
+        <div className="comment-box" key={index}>
+          <div className="comment-user">{comment.owner}</div>
           <div className="comment">{comment.content}</div>
-          <div className="comment-info">{comment.owner}</div>
         </div>
       ))}
       {!end && !loading && (
