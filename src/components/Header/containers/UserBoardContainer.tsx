@@ -71,16 +71,6 @@ const UserBoardContainer = ({ itemList, setItemList }: Props) => {
     console.log(data);
   }, []);
 
-  const stringToVote = useCallback((voteText: string) => {
-    voteText = voteText.replace(/\\/gi, "");
-    voteText = voteText.replace(/'/gi, '"');
-    const votes = JSON.parse(voteText).map((vote: Array<string | number>) => {
-      return { content: vote[0], count: vote[1] };
-    });
-
-    return votes;
-  }, []);
-
   const getBlockDetail = useCallback(
     async (blockData: getBlockType) => {
       const blockDetail = {
