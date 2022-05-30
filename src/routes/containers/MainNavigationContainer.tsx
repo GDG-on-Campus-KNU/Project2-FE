@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import useAuth from "../../hooks/Auth/useAuth";
 import usePopUp from "../../hooks/usePopUp";
 import { apiOrigin, apiRoute, requestGet } from "../../lib/api/api";
@@ -16,7 +16,7 @@ const MainNavigationContainer = () => {
   const [next, setNext] = useState(
     `${apiOrigin}${apiRoute.board}?limit=10&offset=0`
   );
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("all");
   const [searchContent, setSearchContent] = useState("");
 
   const scrollView = useRef<HTMLDivElement>(null);
@@ -61,7 +61,8 @@ const MainNavigationContainer = () => {
     updateCategory();
   }, [category]);
 
-  const getBlocks = async () => {
+  const getBlocks = useCallback(async () => {
+    console.log(next);
     const { data } = await requestGet<
       BasicAPIResponseType<getBlockResponseType>
     >(next, {
@@ -80,7 +81,7 @@ const MainNavigationContainer = () => {
     setNext(data.next);
 
     return blocks;
-  };
+  }, [itemList]);
 
   return (
     <MainNavigation
