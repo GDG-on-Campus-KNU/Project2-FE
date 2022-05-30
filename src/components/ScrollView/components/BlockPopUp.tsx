@@ -92,7 +92,7 @@ const BlockPopUp = ({
               <button className="img-btn" onClick={picViewToggle}>
                 <img src={blockDetail.image} alt="sampleImage" />
               </button>
-            )}
+            ) : null}
           </div>
         </div>
       </div>
