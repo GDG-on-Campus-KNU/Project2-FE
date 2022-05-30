@@ -32,9 +32,11 @@ const Block = ({
           src={images.defaultProfile}
           alt={block.owner}
         />
-        <div>
-          <div>{block.owner}</div>
-          <div>{block.updatedAt}</div>
+        <div className="board-info">
+          <div className="user">
+            {block.owner} <span className="category">{block.category}</span>
+          </div>
+          <span className="date">{block.updatedAt}</span>
         </div>
       </div>
       <div className="content-area">
