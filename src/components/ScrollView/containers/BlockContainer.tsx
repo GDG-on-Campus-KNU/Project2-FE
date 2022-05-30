@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import {
   BasicAPIResponseType,
   getBlockType,
@@ -7,12 +7,7 @@ import Block from "../components/Block";
 import usePopUp from "../../../hooks/usePopUp";
 import ImagePopUp from "../components/ImagePopUp";
 import ImagePopUpContainer from "./ImagePopUpContainer";
-import {
-  apiOrigin,
-  apiRoute,
-  requestGet,
-  requestPost,
-} from "../../../lib/api/api";
+import { apiOrigin, apiRoute, requestGet } from "../../../lib/api/api";
 import useAuth from "../../../hooks/Auth/useAuth";
 import BlockPopUpContainer from "./BlockPopUpContainer";
 
@@ -71,9 +66,9 @@ const BlockContainer = ({ block, itemList, setItemList }: Props) => {
     __hidePopUpFromHooks();
   }, []);
 
-  const reverseExpand = () => {
+  const reverseExpand = useCallback(() => {
     setExpand((current) => !current);
-  };
+  }, []);
 
   const onClickImage = useCallback(
     (index: number) => {
@@ -83,6 +78,7 @@ const BlockContainer = ({ block, itemList, setItemList }: Props) => {
     },
     [__showPopUpFromHooks]
   );
+
   return (
     <Block
       block={block}

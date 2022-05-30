@@ -92,14 +92,14 @@ const BlockPopUp = ({
               <button className="img-btn" onClick={picViewToggle}>
                 <img src={blockDetail.image} alt="sampleImage" />
               </button>
-            ) : null}
+            )}
           </div>
         </div>
       </div>
       <div className="pop-up-right">
         <div className="header">
-          <button onClick={closePopUp}>
-            <img className="icon" src={images.popupClose} alt="닫기" />
+          <button className="close-popup-button" onClick={closePopUp}>
+            <img className="icon" src={images.closeLight} alt="닫기" />
           </button>
         </div>
         <div className="comment-container">

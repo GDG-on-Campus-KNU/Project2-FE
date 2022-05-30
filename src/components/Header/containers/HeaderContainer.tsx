@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/Auth/useAuth";
 import usePopUp from "../../../hooks/usePopUp";
@@ -51,17 +51,20 @@ const HeaderContainer = ({
   const onSignOut = useCallback(() => {
     const response = window.confirm("로그아웃 하시겠습니까?");
     if (response) {
-      sessionStorage.setItem("@route", "login");
-      __updateRootFromHooks("login");
-      clearAccess();
+      setTimeout(function () {
+        window.location.reload();
+        sessionStorage.setItem("@route", "login");
+        clearAccess();
+        __updateRootFromHooks("login");
+      }, 500);
     }
-  }, [navigate, sessionStorage, clearAccess]);
+  }, [navigate, sessionStorage, clearAccess, __updateRootFromHooks]);
 
   const onUserBoards = useCallback(() => {
     __showPopUpFromHooks(
       <UserBoardContainer itemList={itemList} setItemList={setItemList} />
     );
-  }, [__showPopUpFromHooks]);
+  }, [__showPopUpFromHooks, itemList]);
 
   return (
     <Header

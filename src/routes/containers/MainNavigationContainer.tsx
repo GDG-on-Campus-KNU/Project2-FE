@@ -21,7 +21,7 @@ const MainNavigationContainer = () => {
 
   const scrollView = useRef<HTMLDivElement>(null);
 
-  const editLink = (newcate: string) => {
+  const editLink = useCallback((newcate: string) => {
     setItemList([]);
     setSearchContent("");
     if (newcate === "all") {
@@ -36,12 +36,12 @@ const MainNavigationContainer = () => {
     if (scrollView) {
       scrollView.current!.scrollTop = 0;
     }
-  };
+  }, []);
 
-  const updateCategory = async () => {
+  const updateCategory = useCallback(async () => {
     const blocks = await getBlocks();
     setItemList(blocks);
-  };
+  }, []);
 
   const stringToVote = (voteText: string) => {
     voteText = voteText.replace(/\\/gi, "");

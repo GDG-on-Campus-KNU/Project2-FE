@@ -1,10 +1,13 @@
 import React, { SetStateAction } from "react";
 import "./css/signUp.css";
 import images from "../../assets/images";
+import Loader from "../Loader/Loader";
 
 type Props = {
+  isSubmit: boolean;
   setId: React.Dispatch<React.SetStateAction<string>>;
   id: string;
+  idState: string;
   setPassword: React.Dispatch<React.SetStateAction<string>>;
   password: string;
   passwordConfirm: string;
@@ -19,8 +22,10 @@ type Props = {
 };
 
 const SignUp = ({
+  isSubmit,
   setId,
   id,
+  idState,
   setPassword,
   password,
   passwordConfirm,
@@ -42,6 +47,9 @@ const SignUp = ({
             placeholder="아이디"
             onChange={(e) => setId(e.target.value)}
           />
+          {id && idState !== "success" && isSubmit && (
+            <span className="incorrect-message">이미 사용된 아이디입니다.</span>
+          )}
           <input
             type="password"
             placeholder="비밀번호"

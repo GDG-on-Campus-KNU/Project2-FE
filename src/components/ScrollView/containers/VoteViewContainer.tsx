@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import useAuth from "../../../hooks/Auth/useAuth";
 import { apiOrigin, apiRoute, requestPost } from "../../../lib/api/api";
 import {
@@ -45,15 +45,15 @@ const VoteViewContainer = ({
   const postVote = async (index: number) => {
     const formData = new FormData();
 
-    formData.append("index", index.toString());
+      formData.append("index", index.toString());
 
-    const { data } = await requestPost<BasicAPIResponseType<string>>(
-      `${apiOrigin}${apiRoute.board}/${blockId}${apiRoute.vote}`,
-      {
-        Authorization: `Bearer ${token}`,
-      },
-      formData
-    );
+      const { data } = await requestPost<BasicAPIResponseType<string>>(
+        `${apiOrigin}${apiRoute.board}/${blockId}${apiRoute.vote}`,
+        {
+          Authorization: `Bearer ${token}`,
+        },
+        formData
+      );
 
     const newVoteList = stringToVote(data);
     let newVoteTotal = 0;
@@ -77,6 +77,24 @@ const VoteViewContainer = ({
     console.log(changeItemList);
     setItemList(changeItemList);
   };
+
+      const changeItemList = itemList.map((item) => {
+        if (item.id === blockId) {
+          console.log(item.votedIndex, index);
+          return {
+            ...item,
+            voteText: newVoteList,
+            votedIndex: votedIndex === index ? -1 : index,
+            voteTotal: newVoteTotal,
+          };
+        } else {
+          return item;
+        }
+      });
+      setItemList(changeItemList);
+    },
+    [itemList, votedIndex]
+  );
 
   return (
     <VoteView

@@ -131,6 +131,11 @@
         li {
           padding: 4px 8px;
           border-radius: 4px;
+
+          button {
+            width: 100%;
+            text-align: left;
+          }
         }
         li:hover {
           background-color: #eee;

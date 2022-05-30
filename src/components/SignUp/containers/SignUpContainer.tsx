@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/Auth/useAuth";
 import { isSetAccessor } from "typescript";
@@ -11,6 +11,8 @@ import SignUp from "../SignUp";
 
 const SignUpContainer = () => {
   const [id, setId] = useState("");
+  const [idState, setIdState] = useState("initial");
+  const [isSubmit, setIsSubmit] = useState(false);
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [isMatch, setIsMatch] = useState(false);
@@ -21,6 +23,8 @@ const SignUpContainer = () => {
   const onSubmit = useCallback(
     async (e) => {
       e.preventDefault();
+      setIsSubmit(true);
+
       const signupData = {
         username: id,
         password: password,
@@ -28,19 +32,18 @@ const SignUpContainer = () => {
         profile: {},
       };
 
-      console.log(signupData);
-
       const { data } = await requestPost<
         BasicAPIResponseType<SignUpResponseType>
       >(`${apiOrigin}${apiRoute.register}`, {}, signupData);
 
-      console.log(`data : ${data}`);
-
-      navigate("/");
+      setIdState("success");
       window.confirm("회원가입이 완료되었습니다.");
+      navigate("/");
+      window.location.reload();
     },
-    [id, password, email, navigate]
+    [id, password, email, navigate, idState, isSubmit]
   );
+
   const onComparePassword = useCallback(
     (confirm: string) => {
       password === confirm ? setIsMatch(true) : setIsMatch(false);
@@ -70,8 +73,10 @@ const SignUpContainer = () => {
 
   return (
     <SignUp
+      isSubmit={isSubmit}
       setId={setId}
       id={id}
+      idState={idState}
       setPassword={setPassword}
       password={password}
       passwordConfirm={passwordConfirm}

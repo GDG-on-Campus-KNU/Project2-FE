@@ -13,13 +13,19 @@
   text-align: center;
 }
 
-.comment {
-  font-size: 18px;
-  word-break: break-all;
+.comment-box {
+  padding: 6px 0;
+  border-top: 1px solid #eee;
 }
 
-.comment-info {
+.comment-box .comment {
+  font-size: 14px;
+  font-weight: lighter;
+}
+
+.comment-box .comment-user {
   font-size: 12px;
-  margin-bottom: 12px;
+  color: orange;
+  font-weight: 500;
 }
 /*# sourceMappingURL=CommentScrollView.css.map */

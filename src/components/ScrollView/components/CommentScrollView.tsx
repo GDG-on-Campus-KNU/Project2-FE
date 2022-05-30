@@ -5,17 +5,22 @@ import "./css/CommentScrollView.css";
 type Props = {
   setTarget: React.LegacyRef<HTMLDivElement>;
   loading: boolean;
-  itemList: getCommentType[];
+  commentItemList: getCommentType[];
   end: boolean;
 };
 
-const CommentScrollView = ({ setTarget, loading, itemList, end }: Props) => {
+const CommentScrollView = ({
+  setTarget,
+  loading,
+  commentItemList,
+  end,
+}: Props) => {
   return (
     <div className="comment-scroll-view-wrap">
-      {itemList.map((comment, index) => (
-        <div key={index}>
+      {commentItemList.map((comment, index) => (
+        <div className="comment-box" key={index}>
+          <div className="comment-user">{comment.owner}</div>
           <div className="comment">{comment.content}</div>
-          <div className="comment-info">{comment.owner}</div>
         </div>
       ))}
       {!end && !loading && (
