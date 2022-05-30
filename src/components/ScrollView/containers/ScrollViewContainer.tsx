@@ -45,7 +45,6 @@ const ScrollViewContainer = ({
   const onload = useCallback(() => {
     console.log(token);
   }, [token]);
-
   const closePopUp = useCallback(() => {
     __hidePopUpFromHooks();
   }, []);
@@ -54,24 +53,18 @@ const ScrollViewContainer = ({
     __showPopUpFromHooks(<WritePopUpContainer closePopUp={closePopUp} />);
   }, []);
 
-  const addItemList = useCallback(
-    (blocks: getBlockType[]) => {
-      setItemList([...itemList, ...blocks]);
-    },
-    [itemList]
-  );
+  const addItemList = (blocks: getBlockType[]) => {
+    setItemList([...itemList, ...blocks]);
+  };
 
-  const intersecting = useCallback(
-    async ([entry]: IntersectionObserverEntry[]) => {
-      if (entry.isIntersecting) {
-        const blocks = await getBlocks();
-        setLoading(true);
-        addItemList(blocks);
-        setLoading(false);
-      }
-    },
-    []
-  );
+  const intersecting = async ([entry]: IntersectionObserverEntry[]) => {
+    if (entry.isIntersecting) {
+      const blocks = await getBlocks();
+      setLoading(true);
+      addItemList(blocks);
+      setLoading(false);
+    }
+  };
 
   const observer = new IntersectionObserver(intersecting, { threshold: 0.4 });
 
