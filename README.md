@@ -286,15 +286,12 @@
 ### Contributors
 
 **박희연**
-
 (https://github.com/abrightkite)
 
 **이장훈**
-
 (https://github.com/bh2980)
 
 **엄지영**
-
 (https://github.com/thumbzzero)
 
 ### Backend Repository
