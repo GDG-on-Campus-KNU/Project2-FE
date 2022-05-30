@@ -26,13 +26,14 @@
     }
 
     .content-view {
+      height: calc(100% - 50px);
       max-height: 100%;
       padding: 15px 15px 0px 15px;
       overflow: scroll;
 
       @media screen and (max-width: 820px) {
         width: 100%;
-        height: auto;
+        height: 300px;
       }
 
       .user-area {
@@ -112,8 +113,14 @@
     }
 
     .picture-view {
-      height: 90%;
+      height: calc(100% - 50px);
+      max-height: 100%;
       background-color: black;
+
+      @media screen and (max-width: 820px) {
+        width: 100%;
+        height: 300px;
+      }
 
       img {
         width: 100%;
@@ -195,7 +202,7 @@
     .comment-container {
       background-color: white;
       width: 100%;
-      height: calc(100% - 56px);
+      height: calc(100% - 50px);
       position: relative;
 
       @media screen and (max-width: 820px) {
@@ -203,7 +210,7 @@
       }
 
       .comment-view-box {
-        height: calc(100% - 120px);
+        height: calc(100% - 100px);
         overflow: scroll;
 
         .comment-threshold {

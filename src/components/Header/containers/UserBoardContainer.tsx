@@ -58,7 +58,15 @@ const UserBoardContainer = ({ itemList, setItemList }: Props) => {
       }
     );
     if (data) {
-      setBoards(data);
+      const newBoard = data.results.map((item) => {
+        return {
+          ...item,
+          createdAt: item.updatedAt.split(".")[0].replace("T", " "),
+          updatedAt: item.updatedAt.split(".")[0].replace("T", " "),
+        };
+      });
+
+      setBoards({ ...data, results: newBoard });
     }
     console.log(data);
   }, []);
