@@ -4,6 +4,12 @@
           flex: 1;
 }
 
+@media screen and (max-width: 800px) {
+  .side-navigation-wrap {
+    display: none;
+  }
+}
+
 .side-navigation-wrap .side-navigation-container {
   max-width: 300px;
   margin: 0 auto;
@@ -30,6 +36,14 @@
 }
 
 .side-navigation-wrap .side-navigation-container .category-list .category-item button {
+  width: 100%;
   line-height: 32px;
+  text-align: left;
+}
+
+.side-navigation-wrap .side-navigation-container .category-list .category-item .selected {
+  font-weight: bold;
+  color: orange;
+  font-size: 15px;
 }
 /*# sourceMappingURL=sideNavigation.css.map */

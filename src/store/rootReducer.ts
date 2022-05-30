@@ -1,7 +1,9 @@
 import { combineReducers } from "redux";
 import popUpReducer from "./popUp/reducers";
+import rootRouteReducer from "./routes/rootRoute/reducers";
 
 const rootReducer = combineReducers({
+  rootRouteReducer,
   popUpReducer,
 });
 

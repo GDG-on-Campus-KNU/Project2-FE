@@ -1,6 +1,10 @@
 .side-navigation-wrap {
   flex: 1;
 
+  @media screen and (max-width: 800px) {
+    display: none;
+  }
+
   .side-navigation-container {
     max-width: 300px;
     margin: 0 auto;
@@ -25,7 +29,15 @@
         }
 
         button {
+          width: 100%;
           line-height: 32px;
+          text-align: left;
+        }
+
+        .selected {
+          font-weight: bold;
+          color: orange;
+          font-size: 15px;
         }
       }
     }

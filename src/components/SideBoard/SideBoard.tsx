@@ -3,11 +3,15 @@ import LastBoardContainer from "./containers/LastBoardContainer";
 import TopBoardContainer from "./containers/TopBoardContainer";
 import "./css/sideBoard.css";
 
-const SideBoard = () => {
+type Props = {
+  loadPopUp: (id: number) => Promise<void>;
+};
+
+const SideBoard = ({ loadPopUp }: Props) => {
   return (
     <div className="side-board-wrap">
-      <TopBoardContainer />
-      <LastBoardContainer />
+      <TopBoardContainer loadPopUp={loadPopUp} />
+      <LastBoardContainer loadPopUp={loadPopUp} />
     </div>
   );
 };

@@ -1,9 +1,9 @@
 .block {
-  width: 90%;
   height: auto;
   border: 1px solid black;
-  border-radius: 5px;
-  margin: 0 auto 15px auto;
+  border-radius: 8px;
+  margin: 0 8px 12px 0;
+  overflow: hidden;
 }
 
 .block .user-area {
@@ -19,48 +19,34 @@
   width: 56px;
   height: 56px;
   background-color: #929292;
+  border: 1.5px solid #929292;
   border-radius: 50%;
   margin: auto 15px;
 }
 
-.block .user-area div:nth-child(2) {
-  margin: auto 0px;
+.block .user-area .board-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
-.block .user-area div:nth-child(2) div:nth-child(1) {
+.block .user-area .board-info .category {
+  font-size: 14px;
+  color: orange;
+  margin-left: 6px;
+}
+
+.block .user-area .board-info .user {
   color: black;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.block .user-area div:nth-child(2) div:nth-child(2) {
-  color: #929292;
-  font-size: 15px;
-}
-
-.block .content-area {
-  width: 96%;
-  margin: 2px 2%;
-}
-
-.block .content-area .content-box {
-  height: auto;
-  max-height: 95px;
-  overflow: hidden;
-}
-
-.block .content-area .vote-container {
-  height: 55%;
-  margin: 15px 0;
-}
-
-.block .content-area .vote-container .vote-box {
-  width: 100%;
-  height: 50px;
-  border-radius: 5px;
-  margin-top: 5px;
-  padding-left: 20px;
-  border: 1px solid black;
+  font-size: 16px;
+  color: #333;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -69,13 +55,39 @@
           align-items: center;
 }
 
-.block .content-area .vote-container .vote-box:hover {
-  background: #eee;
+.block .user-area .board-info .date {
+  color: #929292;
+  font-size: 12px;
+  line-height: 1;
 }
 
-.block .comment-area {
+.block .content-area {
+  width: 96%;
+  margin: 2px 12px;
+}
+
+.block .content-area .content-view {
+  word-wrap: break-word;
+  word-break: keep-all;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: pre-wrap;
+}
+
+.block .content-area .content-view-expand {
+  height: auto;
+  white-space: pre-wrap;
+}
+
+.block .content-area .length-button:hover {
+  text-decoration: underline;
+}
+
+.block .etc-area {
   width: 100%;
-  height: 15%;
+  height: 60px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -84,9 +96,10 @@
           justify-content: space-between;
   border-top: 1px solid black;
   padding-right: 15px;
+  overflow: hidden;
 }
 
-.block .comment-area div {
+.block .etc-area div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -96,18 +109,30 @@
   font-size: 20px;
 }
 
-.block .comment-area div .SamplePicture {
-  width: 70px;
+.block .etc-area div .attached-image {
   height: 60px;
+}
+
+.block .etc-area div .attached-image img {
+  width: 70px;
+  height: 100%;
+}
+
+.block .etc-area div .icon {
+  width: 32px;
+  height: 32px;
+  margin-left: 10px;
+  margin-top: 5px;
+  padding: 5px;
+}
+
+.block .etc-area div .icon .image {
   -o-object-fit: cover;
      object-fit: cover;
 }
 
-.block .comment-area div .icon {
-  width: 40px;
-  height: 40px;
-  background-color: #929292;
-  border-radius: 100%;
-  margin: 5px;
+.block .etc-area div .icon:hover {
+  background-color: #eee;
+  border-radius: 4px;
 }
 /*# sourceMappingURL=Block.css.map */

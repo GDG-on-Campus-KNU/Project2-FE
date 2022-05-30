@@ -1,40 +1,72 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import ScrollView from "../ScrollView";
-import dummyBlocks from "../dummyData";
 import { getBlockType } from "../../../typedef/common/common.types";
+import usePopUp from "../../../hooks/usePopUp";
+import WritePopUpContainer from "./WritePopUpContainer";
+import useAuth from "../../../hooks/Auth/useAuth";
 
-let index = 0;
-
-const getBlocks = (index: number) => {
-  return dummyBlocks.slice(index, index + 10);
+type Props = {
+  itemList: getBlockType[];
+  setItemList: React.Dispatch<React.SetStateAction<getBlockType[]>>;
+  next: string;
+  getBlocks: () => Promise<
+    {
+      updatedAt: string;
+      image: any[];
+      id: number;
+      owner: string;
+      category: string;
+      createdAt: string;
+      content: string;
+      likeCount: number;
+      votedIndex: number;
+      voteText: string;
+      voteTotal: number;
+      currentUser: string;
+    }[]
+  >;
+  scrollView: React.RefObject<HTMLDivElement>;
+  searchContent: string;
 };
 
-const ScrollViewContainer = () => {
+const ScrollViewContainer = ({
+  itemList,
+  setItemList,
+  next,
+  getBlocks,
+  scrollView,
+  searchContent,
+}: Props) => {
+  const { token } = useAuth();
   const [target, setTarget] = useState<HTMLElement | null>(null);
   const [loading, setLoading] = useState(false);
-  const [itemList, setItemList] = useState<getBlockType[]>([]);
+  const { __showPopUpFromHooks, __hidePopUpFromHooks } = usePopUp();
 
-  const addItemList = () => {
-    const blocks = getBlocks(index);
+  const onload = useCallback(() => {
+    console.log(token);
+  }, [token]);
+  const closePopUp = useCallback(() => {
+    __hidePopUpFromHooks();
+  }, []);
 
-    setItemList((itemList) => [...itemList, ...blocks]);
-    index += 10;
+  const loadPopUp = useCallback(() => {
+    __showPopUpFromHooks(<WritePopUpContainer closePopUp={closePopUp} />);
+  }, []);
+
+  const addItemList = (blocks: getBlockType[]) => {
+    setItemList([...itemList, ...blocks]);
   };
 
-  const callback = async (
-    [entry]: IntersectionObserverEntry[],
-    observer: IntersectionObserver
-  ) => {
+  const intersecting = async ([entry]: IntersectionObserverEntry[]) => {
     if (entry.isIntersecting) {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const blocks = await getBlocks();
       setLoading(true);
-      addItemList();
+      addItemList(blocks);
       setLoading(false);
-    } else {
     }
   };
 
-  const observer = new IntersectionObserver(callback, { threshold: 0.4 });
+  const observer = new IntersectionObserver(intersecting, { threshold: 0.4 });
 
   useEffect(() => {
     if (!target) return;
@@ -42,8 +74,21 @@ const ScrollViewContainer = () => {
     observer.observe(target);
   }, [target]);
 
+  useEffect(() => {
+    onload();
+  }, []);
+
   return (
-    <ScrollView setTarget={setTarget} loading={loading} itemList={itemList} />
+    <ScrollView
+      setTarget={setTarget}
+      loading={loading}
+      itemList={itemList}
+      setItemList={setItemList}
+      loadPopUp={loadPopUp}
+      next={next}
+      scrollView={scrollView}
+      searchContent={searchContent}
+    />
   );
 };
 

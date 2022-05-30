@@ -1,29 +1,25 @@
 import React from "react";
+import { getBlockType } from "../../../typedef/common/common.types";
 
 type Props = {
-  onPostClicked: React.MouseEventHandler<HTMLButtonElement>;
+  loadPopUp: (id: number) => Promise<void>;
+  itemList: getBlockType[];
 };
 
-const LastBoard = ({ onPostClicked }: Props) => {
+const LastBoard = ({ loadPopUp, itemList }: Props) => {
   return (
     <div className="side-board-container">
       <h2>최근 투표한 글</h2>
       <ul className="post-list last">
-        <li className="post-item">
-          <button onClick={onPostClicked}>최근 투표한 글1</button>
-        </li>
-        <li className="post-item">
-          <button onClick={onPostClicked}>최근 투표한 글2</button>
-        </li>
-        <li className="post-item">
-          <button onClick={onPostClicked}>최근 투표한 글3</button>
-        </li>
-        <li className="post-item">
-          <button onClick={onPostClicked}>최근 투표한 글4</button>
-        </li>
-        <li className="post-item">
-          <button onClick={onPostClicked}>최근 투표한 글5</button>
-        </li>
+        {itemList.map((block) => (
+          <li className="post-item" key={block.id}>
+            <button onClick={() => loadPopUp(block.id)}>
+              {block.content.length > 20
+                ? block.content.slice(0, 20) + "..."
+                : block.content}
+            </button>
+          </li>
+        ))}
       </ul>
     </div>
   );

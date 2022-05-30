@@ -1,8 +1,21 @@
 import React, { useCallback, useState } from "react";
+import { isTemplateSpan } from "typescript";
 import usePopUp from "../../../hooks/usePopUp";
 import Test from "../Test";
 
+const dummy = [
+  {
+    option: "1",
+  },
+  {
+    option: "1",
+  },
+  {
+    option: "1",
+  },
+];
 const TestContainer = () => {
+  const [items, setItems] = useState(dummy);
   const { __showPopUpFromHooks } = usePopUp();
   const testPopup = useCallback(() => {
     __showPopUpFromHooks(
@@ -15,6 +28,10 @@ const TestContainer = () => {
       </div>
     );
   }, []);
+
+  const addItmes = useCallback(() => {
+    setItems([...items, { option: "" }]);
+  }, [items]);
   return <Test testPopup={testPopup} />;
 };
 

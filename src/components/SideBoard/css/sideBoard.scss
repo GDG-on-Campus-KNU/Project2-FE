@@ -1,13 +1,17 @@
 .side-board-wrap {
   flex: 1;
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
 
   .side-board-container {
     max-width: 300px;
     margin: 0 auto;
-    padding: 1rem;
+    padding: 16px;
     background-color: #fff;
-    border: 1px solid #aaa;
-    border-radius: 0.5rem;
+    border: 1px solid #333;
+    border-radius: 8px;
+    margin-bottom: 1rem;
 
     h2 {
       font-size: 21px;
@@ -17,15 +21,28 @@
     }
 
     .post-list {
+      max-height: 207px;
+      overflow: scroll;
+
       .post-item {
-        padding-left: 8px;
+        padding: 0px 8px;
         border-radius: 6px;
+
         &:hover {
           background-color: #eee;
         }
 
         button {
+          width: 100%;
           line-height: 32px;
+          text-align: left;
+          display: flex;
+          justify-content: space-between;
+
+          span:nth-child(2) {
+            color: gray;
+            font-size: 10px;
+          }
         }
       }
     }

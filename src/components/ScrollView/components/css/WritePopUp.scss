@@ -1,0 +1,237 @@
+.write-pop-up {
+  display: flex;
+  background-color: white;
+  width: 80vw;
+  height: 80vh;
+  border: 1px solid black;
+  border-radius: 10px;
+  overflow: hidden;
+
+  @media screen and (max-width: 820px) {
+    flex-direction: column;
+    overflow-y: scroll;
+  }
+
+  .pop-up-left {
+    width: 70%;
+    height: 100%;
+
+    @media screen and (max-width: 820px) {
+      width: 100%;
+      height: auto;
+      border-bottom: 1px solid #666;
+    }
+
+    .category-section {
+      height: 50px;
+      border-bottom: 1px solid #666;
+
+      .category {
+        border: none;
+        height: 100%;
+        font-size: 20px;
+        margin-left: 15px;
+        outline: none;
+      }
+    }
+
+    .textarea {
+      width: 100%;
+      height: calc(100% - 50px);
+      padding: 16px;
+      resize: none;
+      border: none;
+      vertical-align: top;
+      font-size: 14px;
+
+      @media screen and (max-width: 820px) {
+        min-height: 200px;
+      }
+    }
+  }
+
+  .pop-up-right {
+    width: 30%;
+    height: 100%;
+    border-left: 1px solid black;
+    position: relative;
+
+    @media screen and (max-width: 820px) {
+      width: 100%;
+      height: auto;
+      border-left: none;
+    }
+
+    .header {
+      width: 100%;
+      height: 50px;
+      display: flex;
+      justify-content: flex-end;
+      padding-right: 20px;
+
+      @media screen and (max-width: 820px) {
+        display: none;
+      }
+
+      button {
+        font-size: 20px;
+      }
+
+      .icon {
+        width: 30px;
+        height: 30px;
+        margin-top: 5px;
+      }
+    }
+
+    .info-area {
+      width: 100%;
+      height: auto;
+      margin-top: 5px;
+      padding: 0 10px;
+      overflow-y: scroll;
+
+      .title {
+        height: 10%;
+        margin-left: 10px;
+        padding-top: 5px;
+
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .vote-area {
+        width: 100%;
+        text-align: center;
+
+        .vote-input-box {
+          width: calc(100% - 20px);
+          height: 40px;
+          margin: 5px auto;
+          border-radius: 5px;
+          padding: 0 10px;
+          border: 1px solid black;
+        }
+
+        .add-vote-input-box {
+          width: calc(100% - 80px);
+          height: 40px;
+          margin: 5px auto;
+          padding: 0px 10px;
+          border: 1px solid black;
+          border-right: 0;
+          border-top-left-radius: 5px;
+          border-bottom-left-radius: 5px;
+        }
+
+        .vote-del-btn {
+          width: 60px;
+          height: 40px;
+          margin: 5px 0px;
+          padding: 0px 10px;
+          background-color: rgb(255, 98, 98);
+          color: white;
+          border: 1px solid black;
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+        }
+
+        .more-btn {
+          width: calc(100% - 20px);
+          height: 40px;
+          margin: 5px 0px;
+          border-radius: 5px;
+          padding: 10px;
+          border: 1px solid #ccc;
+          font-size: 16px;
+          color: #ccc;
+
+          &:hover {
+            background-color: #ccc;
+            color: #fff;
+          }
+          &:active {
+            background-color: #cfcfcf;
+          }
+        }
+      }
+
+      .image-area {
+        width: calc(100% - 20px);
+        display: flex;
+        margin: 0 0 0 5px;
+
+        .img-preview {
+          position: relative;
+
+          .image-del-btn {
+            background-color: rgb(255, 98, 98);
+            width: 20px;
+            height: 20px;
+            border-radius: 10px;
+            position: absolute;
+            right: 0px;
+            color: white;
+          }
+        }
+
+        .img-add-btn {
+          width: 60px;
+          height: 60px;
+          margin: 5px 5px;
+          text-align: center;
+          line-height: 55px;
+          border-radius: 5px;
+          object-fit: cover;
+          border: 1px solid #ccc;
+          font-size: 16px;
+          color: #ccc;
+          cursor: pointer;
+
+          &:hover {
+            background-color: #ccc;
+            color: #fff;
+          }
+          &:active {
+            background-color: #cfcfcf;
+          }
+        }
+
+        .img-input-box {
+          display: none;
+        }
+      }
+    }
+
+    .write-btn-area {
+      width: 100%;
+      height: 20%;
+      position: relative;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+
+      .write-btn {
+        position: absolute;
+        right: 25px;
+        bottom: 25px;
+        background-color: orange;
+        width: 75px;
+        height: 75px;
+        border-radius: 100%;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+
+        @media screen and (max-width: 820px) {
+          right: 20px;
+          bottom: 10px;
+        }
+
+        .icon {
+          width: 35px;
+          height: 35px;
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+}

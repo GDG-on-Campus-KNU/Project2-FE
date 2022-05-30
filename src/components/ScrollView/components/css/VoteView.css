@@ -1,0 +1,56 @@
+.vote-view {
+  height: 55%;
+  margin: 15px 0;
+}
+
+.vote-view .vote-box {
+  width: 100%;
+  height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  margin-top: 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.vote-view .vote-box:hover {
+  background: #eee;
+}
+
+.vote-view .vote-box button {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.vote-view .vote-box button .vote-text {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  position: absolue;
+  z-index: 1;
+}
+
+.vote-view .vote-box button .vote-text div {
+  margin: 14.5px 20px;
+  height: 100%;
+}
+
+.vote-view .vote-count {
+  margin-top: 10px;
+}
+
+.vote-view .isvote-false {
+  padding-left: 20px;
+}
+/*# sourceMappingURL=VoteView.css.map */

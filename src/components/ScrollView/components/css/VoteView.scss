@@ -1,0 +1,47 @@
+.vote-view {
+  height: 55%;
+  margin: 15px 0;
+
+  .vote-box {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    position: relative;
+    margin-top: 5px;
+
+    border: 1px solid black;
+    border-radius: 5px;
+    align-items: center;
+    &:hover {
+      background: #eee;
+    }
+
+    button {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+
+      .vote-text {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        position: absolue;
+        z-index: 1;
+
+        div {
+          margin: 14.5px 20px;
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  .vote-count {
+    margin-top: 10px;
+  }
+
+  .isvote-false {
+    padding-left: 20px;
+  }
+}

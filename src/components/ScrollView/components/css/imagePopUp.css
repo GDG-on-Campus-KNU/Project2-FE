@@ -1,0 +1,34 @@
+#root .image-popup-wrap {
+  width: 50%;
+  height: 500px;
+  background-color: #fff;
+  border-radius: 8px;
+  position: relative;
+}
+
+#root .image-popup-wrap .close-button {
+  position: absolute;
+  right: 1.5vw;
+  top: 1.5vw;
+}
+
+#root .image-popup-wrap .close-button img {
+  width: 16px;
+  height: 16px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+#root .image-popup-wrap .image-area {
+  width: 100%;
+  height: 100%;
+  padding: 4vw;
+}
+
+#root .image-popup-wrap .image-area img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+/*# sourceMappingURL=imagePopUp.css.map */

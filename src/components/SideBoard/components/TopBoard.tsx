@@ -1,29 +1,28 @@
 import React from "react";
+import { getBlockType } from "../../../typedef/common/common.types";
 
 type Props = {
-  onPostClicked: React.MouseEventHandler<HTMLButtonElement>;
+  loadPopUp: (id: number) => Promise<void>;
+  itemList: getBlockType[];
 };
 
-const TopBoard = ({ onPostClicked }: Props) => {
+const TopBoard = ({ loadPopUp, itemList }: Props) => {
   return (
     <div className="side-board-container">
       <h2>오늘의 인기글</h2>
       <ul className="post-list top">
-        <li className="post-item">
-          <button onClick={onPostClicked}>오늘의 인기글1</button>
-        </li>
-        <li className="post-item">
-          <button onClick={onPostClicked}>오늘의 인기글2</button>
-        </li>
-        <li className="post-item">
-          <button onClick={onPostClicked}>오늘의 인기글3</button>
-        </li>
-        <li className="post-item">
-          <button onClick={onPostClicked}>오늘의 인기글4</button>
-        </li>
-        <li className="post-item">
-          <button onClick={onPostClicked}>오늘의 인기글5</button>
-        </li>
+        {itemList.map((block) => (
+          <li className="post-item" key={block.id}>
+            <button onClick={() => loadPopUp(block.id)}>
+              <span>
+                {block.content.length > 20
+                  ? block.content.slice(0, 20) + "..."
+                  : block.content}
+              </span>
+              <span>{block.voteTotal}</span>
+            </button>
+          </li>
+        ))}
       </ul>
     </div>
   );
