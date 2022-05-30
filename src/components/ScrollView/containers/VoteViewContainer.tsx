@@ -32,18 +32,18 @@ const VoteViewContainer = ({
 }: Props) => {
   const { token } = useAuth();
 
-  const stringToVote = useCallback((voteText: string) => {
+  const stringToVote = (voteText: string) => {
     voteText = voteText.replace(/\\/gi, "");
     voteText = voteText.replace(/'/gi, '"');
     const votes = JSON.parse(voteText).map((vote: Array<string | number>) => {
       return { content: vote[0], count: vote[1] };
     });
-    return votes;
-  }, []);
 
-  const postVote = useCallback(
-    async (index: number) => {
-      const formData = new FormData();
+    return votes;
+  };
+
+  const postVote = async (index: number) => {
+    const formData = new FormData();
 
       formData.append("index", index.toString());
 
@@ -55,11 +55,28 @@ const VoteViewContainer = ({
         formData
       );
 
-      const newVoteList = stringToVote(data);
-      let newVoteTotal = 0;
-      newVoteList.map(({ count }: vote) => {
-        newVoteTotal += count;
-      });
+    const newVoteList = stringToVote(data);
+    let newVoteTotal = 0;
+    newVoteList.map(({ count }: vote) => {
+      newVoteTotal += count;
+    });
+
+    const changeItemList = itemList.map((item) => {
+      if (item.id === blockId) {
+        console.log(item.votedIndex, index);
+        return {
+          ...item,
+          voteText: newVoteList,
+          votedIndex: votedIndex === index ? -1 : index,
+          voteTotal: newVoteTotal,
+        };
+      } else {
+        return item;
+      }
+    });
+    console.log(changeItemList);
+    setItemList(changeItemList);
+  };
 
       const changeItemList = itemList.map((item) => {
         if (item.id === blockId) {

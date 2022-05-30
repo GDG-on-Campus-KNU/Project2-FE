@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import useAuth from "../../../hooks/Auth/useAuth";
 import { apiOrigin, apiRoute, requestPost } from "../../../lib/api/api";
 import {
@@ -35,58 +35,56 @@ const PopUpVoteViewContainer = ({
   const [popUpList, setPopUpList] = useState(voteList);
   const [popUpTotal, setPopUpTotal] = useState(voteTotal);
 
-  const stringToVote = useCallback((voteText: string) => {
+  const stringToVote = (voteText: string) => {
     voteText = voteText.replace(/\\/gi, "");
     voteText = voteText.replace(/'/gi, '"');
     const votes = JSON.parse(voteText).map((vote: Array<string | number>) => {
       return { content: vote[0], count: vote[1] };
     });
     return votes;
-  }, []);
+  };
 
-  const postVote = useCallback(
-    async (index: number) => {
-      const formData = new FormData();
+  const postVote = async (index: number) => {
+    const formData = new FormData();
 
-      formData.append("index", index.toString());
+    formData.append("index", index.toString());
 
-      const { data } = await requestPost<BasicAPIResponseType<string>>(
-        `${apiOrigin}${apiRoute.board}/${blockId}${apiRoute.vote}`,
-        {
-          Authorization: `Bearer ${token}`,
-        },
-        formData
-      );
+    const { data } = await requestPost<BasicAPIResponseType<string>>(
+      `${apiOrigin}${apiRoute.board}/${blockId}${apiRoute.vote}`,
+      {
+        Authorization: `Bearer ${token}`,
+      },
+      formData
+    );
 
-      const newVoteList = stringToVote(data);
+    const newVoteList = stringToVote(data);
 
-      let newVotedIndex = popUpIndex === index ? -1 : index;
+    let newVotedIndex = popUpIndex === index ? -1 : index;
 
-      let newVoteTotal = 0;
-      newVoteList.map(({ count }: vote) => {
-        newVoteTotal += count;
-      });
+    let newVoteTotal = 0;
+    newVoteList.map(({ count }: vote) => {
+      newVoteTotal += count;
+    });
 
-      const changeItemList = itemList.map((item) => {
-        if (item.id === blockId) {
-          return {
-            ...item,
-            voteText: newVoteList,
-            votedIndex: newVotedIndex,
-            voteTotal: newVoteTotal,
-          };
-        } else {
-          return item;
-        }
-      });
+    const changeItemList = itemList.map((item) => {
+      if (item.id === blockId) {
+        console.log(item.votedIndex, index);
+        return {
+          ...item,
+          voteText: newVoteList,
+          votedIndex: newVotedIndex,
+          voteTotal: newVoteTotal,
+        };
+      } else {
+        return item;
+      }
+    });
 
-      setPopUpIndex(newVotedIndex);
-      setPopUpList(newVoteList);
-      setPopUpTotal(newVoteTotal);
-      setItemList(changeItemList);
-    },
-    [popUpIndex]
-  );
+    setPopUpIndex(newVotedIndex);
+    setPopUpList(newVoteList);
+    setPopUpTotal(newVoteTotal);
+    setItemList(changeItemList);
+  };
 
   return (
     <VoteView

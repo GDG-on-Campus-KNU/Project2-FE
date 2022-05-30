@@ -38,13 +38,7 @@ const UserBoard = ({ boards, getBlockDetail }: Props) => {
                 </div>
                 <div className="content-area">
                   <div className="content">
-                    <div className="content-view">
-                      {board.content} Lorem ipsum dolor sit amet consectetur
-                      adipisicing elit. Ipsum illum modi beatae commodi,
-                      doloremque aliquam. Tenetur ducimus illo cum! Quo eaque
-                      nulla assumenda inventore sapiente corrupti provident
-                      vitae reiciendis adipisci.
-                    </div>
+                    <div className="content-view">{board.content}</div>
                     {board.image ? (
                       <div className="image-area">
                         <img

@@ -18,7 +18,7 @@ const SideBoardContainer = ({ itemList, setItemList }: Props) => {
   const { __showPopUpFromHooks, __hidePopUpFromHooks } = usePopUp();
   const { token } = useAuth();
 
-  const stringToVote = useCallback((voteText: string) => {
+  const stringToVote = (voteText: string) => {
     voteText = voteText.replace(/\\/gi, "");
     voteText = voteText.replace(/'/gi, '"');
     const votes = JSON.parse(voteText).map((vote: Array<string | number>) => {
@@ -26,9 +26,9 @@ const SideBoardContainer = ({ itemList, setItemList }: Props) => {
     });
 
     return votes;
-  }, []);
+  };
 
-  const getBlockDetail = useCallback(async (id: number) => {
+  const getBlockDetail = async (id: number) => {
     const { data } = await requestGet<BasicAPIResponseType<getBlockType>>(
       `${apiOrigin}${apiRoute.board}/${id}/`,
       {
@@ -44,7 +44,7 @@ const SideBoardContainer = ({ itemList, setItemList }: Props) => {
     };
 
     return blockDeatil;
-  }, []);
+  };
 
   const loadPopUp = useCallback(
     async (id: number) => {

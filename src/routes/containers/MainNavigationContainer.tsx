@@ -16,7 +16,7 @@ const MainNavigationContainer = () => {
   const [next, setNext] = useState(
     `${apiOrigin}${apiRoute.board}?limit=10&offset=0`
   );
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("all");
   const [searchContent, setSearchContent] = useState("");
 
   const scrollView = useRef<HTMLDivElement>(null);
@@ -43,6 +43,16 @@ const MainNavigationContainer = () => {
     setItemList(blocks);
   }, []);
 
+  const stringToVote = (voteText: string) => {
+    voteText = voteText.replace(/\\/gi, "");
+    voteText = voteText.replace(/'/gi, '"');
+    const votes = JSON.parse(voteText).map((vote: Array<string | number>) => {
+      return { content: vote[0], count: vote[1] };
+    });
+
+    return votes;
+  };
+
   useEffect(() => {
     console.log(next);
   }, [next]);
@@ -51,17 +61,8 @@ const MainNavigationContainer = () => {
     updateCategory();
   }, [category]);
 
-  const stringToVote = useCallback((voteText: string) => {
-    voteText = voteText.replace(/\\/gi, "");
-    voteText = voteText.replace(/'/gi, '"');
-    const votes = JSON.parse(voteText).map((vote: Array<string | number>) => {
-      return { content: vote[0], count: vote[1] };
-    });
-
-    return votes;
-  }, []);
-
   const getBlocks = useCallback(async () => {
+    console.log(next);
     const { data } = await requestGet<
       BasicAPIResponseType<getBlockResponseType>
     >(next, {
@@ -80,7 +81,7 @@ const MainNavigationContainer = () => {
     setNext(data.next);
 
     return blocks;
-  }, []);
+  }, [itemList]);
 
   return (
     <MainNavigation

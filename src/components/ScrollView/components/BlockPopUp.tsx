@@ -3,6 +3,7 @@ import { getBlockType } from "../../../typedef/common/common.types";
 import "./css/BlockPopUp.css";
 import CommentScrollViewContainer from "../containers/CommentScrollViewContainer";
 import images from "../../../assets/images";
+import VoteViewContainer from "../containers/VoteViewContainer";
 import PopUpVoteViewContainer from "../containers/PopUpVoteViewContainer";
 
 type Props = {
@@ -87,7 +88,7 @@ const BlockPopUp = ({
         </div>
         <div className="etc-area">
           <div>
-            {blockDetail.image && (
+            {blockDetail.image[0] !== null ? (
               <button className="img-btn" onClick={picViewToggle}>
                 <img src={blockDetail.image} alt="sampleImage" />
               </button>

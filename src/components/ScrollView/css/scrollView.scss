@@ -14,7 +14,7 @@
     position: absolute;
     right: 40px;
     bottom: 40px;
-    background-color: orange;
+    background-color: background-color: rgb(255, 104, 17);
     width: 70px;
     height: 70px;
     border-radius: 100%;
@@ -22,7 +22,7 @@
     z-index: 1;
 
     &:hover {
-      background-color: rgb(228, 148, 1);
+      background-color: rgb(219, 62, 0);
     }
 
     .icon {
@@ -41,5 +41,5 @@
 
 .end {
   text-align: center;
-  height: 50px;
+  height: 100px;
 }

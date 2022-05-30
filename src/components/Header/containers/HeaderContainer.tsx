@@ -3,7 +3,12 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/Auth/useAuth";
 import usePopUp from "../../../hooks/usePopUp";
 import useRootRoute from "../../../hooks/useRootRoute";
-import { getBlockType } from "../../../typedef/common/common.types";
+import { apiOrigin, apiRoute, requestDelete } from "../../../lib/api/api";
+import {
+  BasicAPIResponseType,
+  getBlockType,
+  RemoveUserType,
+} from "../../../typedef/common/common.types";
 import Header from "../Header";
 import UserBoardContainer from "./UserBoardContainer";
 import UserInfoContainer from "./UserInfoContainer";

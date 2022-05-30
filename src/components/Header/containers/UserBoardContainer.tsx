@@ -40,6 +40,16 @@ const UserBoardContainer = ({ itemList, setItemList }: Props) => {
     ],
   });
 
+  const stringToVote = (voteText: string) => {
+    voteText = voteText.replace(/\\/gi, "");
+    voteText = voteText.replace(/'/gi, '"');
+    const votes = JSON.parse(voteText).map((vote: Array<string | number>) => {
+      return { content: vote[0], count: vote[1] };
+    });
+
+    return votes;
+  };
+
   const onload = useCallback(async () => {
     const { data } = await requestGet<BasicAPIResponseType<UserBoardType>>(
       apiOrigin + apiRoute.mine,
@@ -48,7 +58,15 @@ const UserBoardContainer = ({ itemList, setItemList }: Props) => {
       }
     );
     if (data) {
-      setBoards(data);
+      const newBoard = data.results.map((item) => {
+        return {
+          ...item,
+          createdAt: item.updatedAt.split(".")[0].replace("T", " "),
+          updatedAt: item.updatedAt.split(".")[0].replace("T", " "),
+        };
+      });
+
+      setBoards({ ...data, results: newBoard });
     }
     console.log(data);
   }, []);
@@ -71,7 +89,6 @@ const UserBoardContainer = ({ itemList, setItemList }: Props) => {
         image: [blockData.image],
         voteText: stringToVote(blockData.voteText),
       };
-
       __showPopUpFromHooks(
         <BlockPopUpContainer
           blockDetail={blockDetail}

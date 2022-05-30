@@ -22,7 +22,7 @@ const BlockContainer = ({ block, itemList, setItemList }: Props) => {
   const [expand, setExpand] = useState(false);
   const { token } = useAuth();
 
-  const stringToVote = useCallback((voteText: string) => {
+  const stringToVote = (voteText: string) => {
     voteText = voteText.replace(/\\/gi, "");
     voteText = voteText.replace(/'/gi, '"');
     const votes = JSON.parse(voteText).map((vote: Array<string | number>) => {
@@ -30,9 +30,9 @@ const BlockContainer = ({ block, itemList, setItemList }: Props) => {
     });
 
     return votes;
-  }, []);
+  };
 
-  const getBlockDetail = useCallback(async (id: number) => {
+  const getBlockDetail = async (id: number) => {
     const { data } = await requestGet<BasicAPIResponseType<getBlockType>>(
       `${apiOrigin}${apiRoute.board}/${id}/`,
       {
@@ -48,7 +48,7 @@ const BlockContainer = ({ block, itemList, setItemList }: Props) => {
     };
 
     return blockDeatil;
-  }, []);
+  };
 
   const loadPopUp = useCallback(async (id: number) => {
     const blockDetail = await getBlockDetail(id);
