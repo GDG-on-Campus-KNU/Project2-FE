@@ -10,12 +10,18 @@
   height: 30px;
   text-align: center;
 }
+.comment-box {
+  padding: 6px 0;
+  border-top: 1px solid #eee;
 
-.comment {
-  font-size: 18px;
-}
+  .comment {
+    font-size: 14px;
+    font-weight: lighter;
+  }
 
-.comment-info {
-  font-size: 12px;
-  margin-bottom: 12px;
+  .comment-user {
+    font-size: 12px;
+    color: orange;
+    font-weight: 500;
+  }
 }
