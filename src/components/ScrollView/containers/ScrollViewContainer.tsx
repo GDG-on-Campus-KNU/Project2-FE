@@ -83,6 +83,7 @@ const ScrollViewContainer = ({
       setTarget={setTarget}
       loading={loading}
       itemList={itemList}
+      setItemList={setItemList}
       loadPopUp={loadPopUp}
       next={next}
       scrollView={scrollView}

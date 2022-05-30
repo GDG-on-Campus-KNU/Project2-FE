@@ -14,11 +14,18 @@ import {
 import useAuth from "../../../hooks/Auth/useAuth";
 
 type Props = {
-  block: getBlockType;
+  blockDetail: getBlockType;
   closePopUp: React.MouseEventHandler<HTMLButtonElement>;
+  itemList: getBlockType[];
+  setItemList: React.Dispatch<React.SetStateAction<getBlockType[]>>;
 };
 
-const BlockPopUpContainer = ({ block, closePopUp }: Props) => {
+const BlockPopUpContainer = ({
+  blockDetail,
+  closePopUp,
+  itemList,
+  setItemList,
+}: Props) => {
   const { token } = useAuth();
   const commentRef = React.useRef<HTMLTextAreaElement>(null);
   const [picView, setPicView] = useState(false);
@@ -64,7 +71,7 @@ const BlockPopUpContainer = ({ block, closePopUp }: Props) => {
         },
         {
           content: comment,
-          boardId: block.id,
+          boardId: blockDetail.id,
         }
       );
       setPost(true);
@@ -75,7 +82,7 @@ const BlockPopUpContainer = ({ block, closePopUp }: Props) => {
 
   return (
     <BlockPopUp
-      block={block}
+      blockDetail={blockDetail}
       closePopUp={closePopUp}
       picView={picView}
       picViewToggle={picViewToggle}
@@ -88,6 +95,8 @@ const BlockPopUpContainer = ({ block, closePopUp }: Props) => {
       deleteBlock={deleteBlock}
       post={post}
       setPost={setPost}
+      itemList={itemList}
+      setItemList={setItemList}
     />
   );
 };

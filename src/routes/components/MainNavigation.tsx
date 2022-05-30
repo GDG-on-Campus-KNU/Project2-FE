@@ -47,7 +47,11 @@ const MainNavigation = ({
 }: Props) => {
   return (
     <div>
-      <HeaderContainer setSearchContent={setSearchContent} />
+      <HeaderContainer
+        setSearchContent={setSearchContent}
+        itemList={itemList}
+        setItemList={setItemList}
+      />
       <div
         style={{ display: "flex", gap: "12px", padding: "12px 12px 0 12px" }}
       >
@@ -68,7 +72,7 @@ const MainNavigation = ({
               }
             />
           </Routes>
-          <SideBoardContainer />
+          <SideBoardContainer itemList={itemList} setItemList={setItemList} />
         </div>
       </div>
       {popUp.isShown && <PopUp child={popUp.popUp} />}

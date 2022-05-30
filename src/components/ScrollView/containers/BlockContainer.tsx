@@ -18,12 +18,24 @@ import BlockPopUpContainer from "./BlockPopUpContainer";
 
 type Props = {
   block: getBlockType;
+  itemList: getBlockType[];
+  setItemList: React.Dispatch<React.SetStateAction<getBlockType[]>>;
 };
 
-const BlockContainer = ({ block }: Props) => {
+const BlockContainer = ({ block, itemList, setItemList }: Props) => {
   const { __showPopUpFromHooks, __hidePopUpFromHooks } = usePopUp();
   const [expand, setExpand] = useState(false);
   const { token } = useAuth();
+
+  const stringToVote = (voteText: string) => {
+    voteText = voteText.replace(/\\/gi, "");
+    voteText = voteText.replace(/'/gi, '"');
+    const votes = JSON.parse(voteText).map((vote: Array<string | number>) => {
+      return { content: vote[0], count: vote[1] };
+    });
+
+    return votes;
+  };
 
   const getBlockDetail = async (id: number) => {
     const { data } = await requestGet<BasicAPIResponseType<getBlockType>>(
@@ -33,18 +45,25 @@ const BlockContainer = ({ block }: Props) => {
       }
     );
 
-    const block = {
+    const blockDeatil = {
       ...data,
       updatedAt: data.updatedAt.split(".")[0].replace("T", " "),
+      image: [data.image],
+      voteText: stringToVote(data.voteText),
     };
 
-    return block;
+    return blockDeatil;
   };
 
   const loadPopUp = useCallback(async (id: number) => {
-    const block = await getBlockDetail(id);
+    const blockDetail = await getBlockDetail(id);
     __showPopUpFromHooks(
-      <BlockPopUpContainer block={block} closePopUp={closePopUp} />
+      <BlockPopUpContainer
+        blockDetail={blockDetail}
+        closePopUp={closePopUp}
+        itemList={itemList}
+        setItemList={setItemList}
+      />
     );
   }, []);
 
@@ -71,6 +90,8 @@ const BlockContainer = ({ block }: Props) => {
       onClickImage={onClickImage}
       expand={expand}
       reverseExpand={reverseExpand}
+      itemList={itemList}
+      setItemList={setItemList}
     />
   );
 };
