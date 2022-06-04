@@ -139,7 +139,7 @@ export type getCommentType = {
 };
 
 export type createVoteType = {
-  id: number;
+  id: string;
   content: string;
   count: number;
 };

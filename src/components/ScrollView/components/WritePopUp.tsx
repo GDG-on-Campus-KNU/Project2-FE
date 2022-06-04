@@ -10,8 +10,8 @@ type Props = {
   closePopUp: React.MouseEventHandler<HTMLButtonElement>;
   votes: createVoteType[];
   addVote: React.MouseEventHandler<HTMLButtonElement>;
-  changeVoteInput: (id: number, e: React.ChangeEvent<HTMLInputElement>) => void;
-  removeVote: (id: number) => void;
+  changeVoteInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  removeVote: (id: string) => void;
   imgs: Array<any>;
   addImg: (e: React.ChangeEvent<HTMLInputElement>) => void;
   removeImg: (id: number) => void;
@@ -63,12 +63,14 @@ const WritePopUp = ({
           <div className="title">투표 항목</div>
           <div className="vote-area">
             {votes.map((vote, index) => (
-              <>
+              <div key={index}>
                 <input
                   className={
                     index > 1 ? "add-vote-input-box" : "vote-input-box"
                   }
-                  onChange={(e) => changeVoteInput(vote.id, e)}
+                  value={vote.content}
+                  id={vote.id}
+                  onChange={(e) => changeVoteInput(e)}
                   required
                 />
                 {index > 1 ? (
@@ -80,7 +82,7 @@ const WritePopUp = ({
                     삭제
                   </button>
                 ) : null}
-              </>
+              </div>
             ))}
             {votes.length < 4 ? (
               <button type="button" className="more-btn" onClick={addVote}>
