@@ -82,10 +82,6 @@ const BlockPopUpContainer = ({
     [comment]
   );
 
-  useEffect(() => {
-    console.log("blockpopupcontainer", itemList);
-  });
-
   return (
     <BlockPopUp
       blockDetail={blockDetail}
