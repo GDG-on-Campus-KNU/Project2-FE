@@ -5,7 +5,6 @@ import {
 } from "../../../typedef/common/common.types";
 import Block from "../components/Block";
 import usePopUp from "../../../hooks/usePopUp";
-import ImagePopUp from "../components/ImagePopUp";
 import ImagePopUpContainer from "./ImagePopUpContainer";
 import { apiOrigin, apiRoute, requestGet } from "../../../lib/api/api";
 import useAuth from "../../../hooks/Auth/useAuth";
