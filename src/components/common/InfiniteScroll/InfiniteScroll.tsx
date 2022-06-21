@@ -24,7 +24,6 @@ const InfiniteScroll = ({ itemList, addItemList, end, spinner }: Props) => {
     [entry]: { isIntersecting: boolean }[],
     observer: IntersectionObserver
   ) => {
-    console.log("intersecting");
     if (!target) return;
 
     if (entry.isIntersecting) {
@@ -34,10 +33,10 @@ const InfiniteScroll = ({ itemList, addItemList, end, spinner }: Props) => {
     }
   };
 
-  const observer = new IntersectionObserver(callback, { threshold: 0.4 });
-
   useEffect(() => {
     if (!target) return;
+
+    const observer = new IntersectionObserver(callback, { threshold: 0.4 });
 
     observer.observe(target);
 
