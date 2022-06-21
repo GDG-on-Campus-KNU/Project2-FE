@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ReactElement } from "react";
 import CommentScrollView from "../components/CommentScrollView";
 import {
   BasicAPIResponseType,
   getCommentResponseType,
-  getCommentType,
-  LoginTokenType,
 } from "../../../typedef/common/common.types";
 import { apiOrigin, apiRoute, requestGet } from "../../../lib/api/api";
 
@@ -18,10 +16,10 @@ const CommentScrollViewContainer = ({ blockId, post, setPost }: Props) => {
   const [next, setNext] = useState(
     `${apiOrigin}${apiRoute.board}/${blockId}${apiRoute.comment}?limit=10&offset=0`
   );
-  const [target, setTarget] = useState<HTMLElement | null>(null);
   const [end, setEnd] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [commentItemList, setCommentItemList] = useState<getCommentType[]>([]);
+  const [commentItemList, setCommentItemList] = useState<
+    ReactElement<any, any>[]
+  >([]);
 
   const getComments = async () => {
     const { data } = await requestGet<
@@ -37,18 +35,31 @@ const CommentScrollViewContainer = ({ blockId, post, setPost }: Props) => {
     return data.results;
   };
 
+  const addComment = async () => {
+    const comments = await getComments();
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    const newComments = comments.map((comment) => {
+      return (
+        <>
+          <div className="comment-box">
+            <div className="comment-user">{comment.owner}</div>
+            <div className="comment">{comment.content}</div>
+          </div>
+        </>
+      );
+    });
+    setCommentItemList((commentItemList) => [
+      ...commentItemList,
+      ...newComments,
+    ]);
+  };
+
   const postRefreshComment = async () => {
-    setEnd(false);
+    setCommentItemList([]);
     setNext(
       `${apiOrigin}${apiRoute.board}/${blockId}${apiRoute.comment}?limit=10&offset=0`
     );
-
-    setLoading(true);
-
-    const comments = await getComments();
-    setCommentItemList(comments);
-
-    setLoading(false);
+    await addComment();
     setPost(false);
   };
 
@@ -56,35 +67,10 @@ const CommentScrollViewContainer = ({ blockId, post, setPost }: Props) => {
     if (post) postRefreshComment();
   }, [post]);
 
-  const addCommentItemList = (comments: getCommentType[]) => {
-    setCommentItemList((commentItemList) => [...commentItemList, ...comments]);
-  };
-
-  const intersecting = async (
-    [entry]: IntersectionObserverEntry[],
-    observer: IntersectionObserver
-  ) => {
-    if (entry.isIntersecting) {
-      const comments = await getComments();
-      setLoading(true);
-      addCommentItemList(comments);
-      setLoading(false);
-    }
-  };
-
-  const observer = new IntersectionObserver(intersecting, { threshold: 0.4 });
-
-  useEffect(() => {
-    if (!target) return;
-
-    observer.observe(target);
-  }, [target]);
-
   return (
     <CommentScrollView
-      setTarget={setTarget}
-      loading={loading}
       commentItemList={commentItemList}
+      addComment={addComment}
       end={end}
     />
   );

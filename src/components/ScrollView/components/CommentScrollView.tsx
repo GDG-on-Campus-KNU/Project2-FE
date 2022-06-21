@@ -1,33 +1,21 @@
-import React from "react";
-import { getCommentType } from "../../../typedef/common/common.types";
+import React, { ReactElement } from "react";
+import InfiniteScroll from "../../common/InfiniteScroll/InfiniteScroll";
 import "./css/CommentScrollView.css";
 
 type Props = {
-  setTarget: React.LegacyRef<HTMLDivElement>;
-  loading: boolean;
-  commentItemList: getCommentType[];
+  commentItemList: ReactElement<any, any>[];
+  addComment: () => Promise<void>;
   end: boolean;
 };
 
-const CommentScrollView = ({
-  setTarget,
-  loading,
-  commentItemList,
-  end,
-}: Props) => {
+const CommentScrollView = ({ commentItemList, addComment, end }: Props) => {
   return (
     <div className="comment-scroll-view-wrap">
-      {commentItemList.map((comment, index) => (
-        <div className="comment-box" key={index}>
-          <div className="comment-user">{comment.owner}</div>
-          <div className="comment">{comment.content}</div>
-        </div>
-      ))}
-      {!end && !loading && (
-        <div className="target" ref={setTarget}>
-          Loading...
-        </div>
-      )}
+      <InfiniteScroll
+        itemList={commentItemList}
+        addItemList={addComment}
+        end={end}
+      />
     </div>
   );
 };
