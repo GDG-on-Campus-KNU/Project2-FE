@@ -3,7 +3,6 @@ import { getBlockType } from "../../../typedef/common/common.types";
 import "./css/BlockPopUp.css";
 import CommentScrollViewContainer from "../containers/CommentScrollViewContainer";
 import images from "../../../assets/images";
-import VoteViewContainer from "../containers/VoteViewContainer";
 import PopUpVoteViewContainer from "../containers/PopUpVoteViewContainer";
 
 type Props = {
