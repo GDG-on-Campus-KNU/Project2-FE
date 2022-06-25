@@ -1,7 +1,7 @@
 import React from "react";
 import { getBlockType } from "../../../typedef/common/common.types";
 import "./css/Block.css";
-import VoteViewContainer from "./containers/VoteViewContainer";
+import VoteViewContainer from "../../common/Block/containers/VoteViewContainer";
 import images from "../../../assets/images";
 
 type Props = {

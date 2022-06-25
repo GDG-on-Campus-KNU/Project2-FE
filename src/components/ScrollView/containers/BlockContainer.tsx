@@ -2,13 +2,13 @@ import React, { useState, useCallback, useEffect } from "react";
 import {
   BasicAPIResponseType,
   getBlockType,
-} from "../../../../typedef/common/common.types";
-import Block from "../Block";
-import usePopUp from "../../../../hooks/usePopUp";
-import ImagePopUpContainer from "./ImagePopUpContainer";
-import { apiOrigin, apiRoute, requestGet } from "../../../../lib/api/api";
-import useAuth from "../../../../hooks/Auth/useAuth";
-import BlockPopUpContainer from "./BlockPopUpContainer";
+} from "../../../typedef/common/common.types";
+import Block from "../components/Block";
+import usePopUp from "../../../hooks/usePopUp";
+import ImagePopUpContainer from "../../common/Block/containers/ImagePopUpContainer";
+import { apiOrigin, apiRoute, requestGet } from "../../../lib/api/api";
+import useAuth from "../../../hooks/Auth/useAuth";
+import BlockPopUpContainer from "../../common/Block/containers/BlockPopUpContainer";
 
 type Props = {
   block: getBlockType;
