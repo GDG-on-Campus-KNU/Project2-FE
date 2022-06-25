@@ -7,7 +7,7 @@ import {
   getBlockType,
   UserBoardType,
 } from "../../../typedef/common/common.types";
-import BlockPopUpContainer from "../../ScrollView/containers/BlockPopUpContainer";
+import BlockPopUpContainer from "../../common/Block/containers/BlockPopUpContainer";
 import UserBoard from "../components/UserBoard";
 
 type Props = {

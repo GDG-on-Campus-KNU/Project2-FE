@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
-import usePopUp from "../../../hooks/usePopUp";
-import ImagePopUp from "../components/ImagePopUp";
+import usePopUp from "../../../../hooks/usePopUp";
+import ImagePopUp from "../ImagePopUp";
 
 type Props = {
   images: string[];

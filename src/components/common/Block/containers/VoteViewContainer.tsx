@@ -1,12 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
-import useAuth from "../../../hooks/Auth/useAuth";
-import { apiOrigin, apiRoute, requestPost } from "../../../lib/api/api";
+import useAuth from "../../../../hooks/Auth/useAuth";
+import { apiOrigin, apiRoute, requestPost } from "../../../../lib/api/api";
 import {
   BasicAPIResponseType,
-  createVoteType,
   getBlockType,
-} from "../../../typedef/common/common.types";
-import VoteView from "../components/VoteView";
+} from "../../../../typedef/common/common.types";
+import VoteView from "../VoteView";
 
 type Props = {
   votedIndex: number;

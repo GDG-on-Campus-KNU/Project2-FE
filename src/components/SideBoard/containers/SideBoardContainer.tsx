@@ -6,7 +6,7 @@ import {
   BasicAPIResponseType,
   getBlockType,
 } from "../../../typedef/common/common.types";
-import BlockPopUpContainer from "../../ScrollView/containers/BlockPopUpContainer";
+import BlockPopUpContainer from "../../common/Block/containers/BlockPopUpContainer";
 import SideBoard from "../SideBoard";
 
 type Props = {

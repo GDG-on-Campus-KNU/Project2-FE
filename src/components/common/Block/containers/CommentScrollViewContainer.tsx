@@ -1,10 +1,10 @@
 import React, { useState, useEffect, ReactElement } from "react";
-import CommentScrollView from "../components/CommentScrollView";
+import CommentScrollView from "../CommentScrollView";
 import {
   BasicAPIResponseType,
   getCommentResponseType,
-} from "../../../typedef/common/common.types";
-import { apiOrigin, apiRoute, requestGet } from "../../../lib/api/api";
+} from "../../../../typedef/common/common.types";
+import { apiOrigin, apiRoute, requestGet } from "../../../../lib/api/api";
 
 type Props = {
   blockId: number;

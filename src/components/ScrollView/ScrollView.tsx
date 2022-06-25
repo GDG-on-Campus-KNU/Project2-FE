@@ -1,6 +1,6 @@
 import React from "react";
 import "./css/scrollView.css";
-import BlockContainer from "./containers/BlockContainer";
+import BlockContainer from "../common/Block/containers/BlockContainer";
 import { getBlockType } from "../../typedef/common/common.types";
 import images from "../../assets/images";
 
