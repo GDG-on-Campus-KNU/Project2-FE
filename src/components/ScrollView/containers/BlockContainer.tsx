@@ -5,10 +5,10 @@ import {
 } from "../../../typedef/common/common.types";
 import Block from "../components/Block";
 import usePopUp from "../../../hooks/usePopUp";
-import ImagePopUpContainer from "../../common/BlockPopUp/containers/ImagePopUpContainer";
+import ImagePopUpContainer from "../../common/PopUp/BlockPopUp/containers/ImagePopUpContainer";
 import { apiOrigin, apiRoute, requestGet } from "../../../lib/api/api";
 import useAuth from "../../../hooks/Auth/useAuth";
-import BlockPopUpContainer from "../../common/BlockPopUp/containers/BlockPopUpContainer";
+import BlockPopUpContainer from "../../common/PopUp/BlockPopUp/containers/BlockPopUpContainer";
 
 type Props = {
   content: getBlockType;

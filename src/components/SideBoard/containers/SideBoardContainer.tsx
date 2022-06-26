@@ -6,7 +6,7 @@ import {
   BasicAPIResponseType,
   getBlockType,
 } from "../../../typedef/common/common.types";
-import BlockPopUpContainer from "../../common/BlockPopUp/containers/BlockPopUpContainer";
+import BlockPopUpContainer from "../../common/PopUp/BlockPopUp/containers/BlockPopUpContainer";
 import SideBoard from "../SideBoard";
 
 const SideBoardContainer = () => {

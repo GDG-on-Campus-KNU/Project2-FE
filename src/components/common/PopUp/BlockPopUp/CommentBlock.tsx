@@ -1,5 +1,5 @@
 import React from "react";
-import { getCommentType } from "../../../typedef/common/common.types";
+import { getCommentType } from "../../../../typedef/common/common.types";
 import "./css/CommentScrollView.css";
 
 type Props = {

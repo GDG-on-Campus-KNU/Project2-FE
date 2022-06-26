@@ -1,5 +1,5 @@
-import { getCommentType } from "../../../typedef/common/common.types";
-import InfiniteScroll from "../InfiniteScroll/InfiniteScroll";
+import { getCommentType } from "../../../../typedef/common/common.types";
+import InfiniteScroll from "../../InfiniteScroll/InfiniteScroll";
 import CommentBlock from "./CommentBlock";
 import "./css/CommentScrollView.css";
 

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import usePopUp from "../../../../hooks/usePopUp";
+import usePopUp from "../../../../../hooks/usePopUp";
 import ImagePopUp from "../ImagePopUp";
 
 type Props = {
