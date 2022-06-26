@@ -3,48 +3,32 @@ import ScrollView from "../ScrollView";
 import { getBlockType } from "../../../typedef/common/common.types";
 import usePopUp from "../../../hooks/usePopUp";
 import WritePopUpContainer from "./WritePopUpContainer";
-import useAuth from "../../../hooks/Auth/useAuth";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../store/rootReducer";
+import { updateItemList } from "../../../store/itemList/actions";
 
 type Props = {
-  itemList: getBlockType[];
-  setItemList: React.Dispatch<React.SetStateAction<getBlockType[]>>;
-  next: string;
-  getBlocks: () => Promise<
-    {
-      updatedAt: string;
-      image: any[];
-      id: number;
-      owner: string;
-      category: string;
-      createdAt: string;
-      content: string;
-      likeCount: number;
-      votedIndex: number;
-      voteText: string;
-      voteTotal: number;
-      currentUser: string;
-    }[]
-  >;
+  getBlocks: (next: string | null) => Promise<getBlockType[]>;
   scrollView: React.RefObject<HTMLDivElement>;
   searchContent: string;
 };
 
 const ScrollViewContainer = ({
-  itemList,
-  setItemList,
-  next,
   getBlocks,
   scrollView,
   searchContent,
 }: Props) => {
-  const { token } = useAuth();
+  const { __showPopUpFromHooks, __hidePopUpFromHooks } = usePopUp();
+  const dispatch = useDispatch();
+  const itemList = useSelector(
+    (root: RootState) => root.itemListReducer.itemList
+  );
+  const next = useSelector((root: RootState) => root.nextReducer.next);
+  console.log("ScrollView is ", next);
+
   const [target, setTarget] = useState<HTMLElement | null>(null);
   const [loading, setLoading] = useState(false);
-  const { __showPopUpFromHooks, __hidePopUpFromHooks } = usePopUp();
 
-  const onload = useCallback(() => {
-    console.log(token);
-  }, [token]);
   const closePopUp = useCallback(() => {
     __hidePopUpFromHooks();
   }, []);
@@ -54,13 +38,12 @@ const ScrollViewContainer = ({
   }, []);
 
   const addItemList = (blocks: getBlockType[]) => {
-    setItemList([...itemList, ...blocks]);
+    dispatch(updateItemList([...itemList, ...blocks]));
   };
 
   const intersecting = async ([entry]: IntersectionObserverEntry[]) => {
     if (entry.isIntersecting) {
-      console.log(next);
-      const blocks = await getBlocks();
+      const blocks = await getBlocks(next);
       setLoading(true);
       addItemList(blocks);
       setLoading(false);
@@ -75,18 +58,13 @@ const ScrollViewContainer = ({
     observer.observe(target);
   }, [target]);
 
-  useEffect(() => {
-    onload();
-  }, []);
-
   return (
     <ScrollView
       setTarget={setTarget}
       loading={loading}
-      itemList={itemList}
-      setItemList={setItemList}
-      loadPopUp={loadPopUp}
       next={next}
+      itemList={itemList}
+      loadPopUp={loadPopUp}
       scrollView={scrollView}
       searchContent={searchContent}
     />

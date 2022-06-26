@@ -19,8 +19,6 @@ type Props = {
   deleteBlock: (id: number) => Promise<void>;
   post: boolean;
   setPost: React.Dispatch<React.SetStateAction<boolean>>;
-  itemList: getBlockType[];
-  setItemList: React.Dispatch<React.SetStateAction<getBlockType[]>>;
 };
 
 const BlockPopUp = ({
@@ -37,8 +35,6 @@ const BlockPopUp = ({
   deleteBlock,
   post,
   setPost,
-  itemList,
-  setItemList,
 }: Props) => {
   return (
     <div className="block-pop-up-wrap">
@@ -75,8 +71,6 @@ const BlockPopUp = ({
                 voteList={blockDetail.voteText}
                 voteTotal={blockDetail.voteTotal}
                 blockId={blockDetail.id}
-                itemList={itemList}
-                setItemList={setItemList}
               />
             </div>
           </div>

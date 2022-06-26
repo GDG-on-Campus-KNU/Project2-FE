@@ -7,10 +7,9 @@ import images from "../../assets/images";
 type Props = {
   setTarget: React.LegacyRef<HTMLDivElement>;
   loading: boolean;
+  next: string | null;
   itemList: getBlockType[];
-  setItemList: React.Dispatch<React.SetStateAction<getBlockType[]>>;
   loadPopUp: React.MouseEventHandler<HTMLButtonElement>;
-  next: string;
   scrollView: React.RefObject<HTMLDivElement>;
   searchContent: string;
 };
@@ -18,10 +17,9 @@ type Props = {
 const ScrollView = ({
   setTarget,
   loading,
-  itemList,
-  setItemList,
-  loadPopUp,
   next,
+  itemList,
+  loadPopUp,
   scrollView,
   searchContent,
 }: Props) => {
@@ -34,20 +32,10 @@ const ScrollView = ({
         {itemList.map((block, index) =>
           searchContent.length > 0 ? (
             block.content.includes(searchContent) ? (
-              <BlockContainer
-                block={block}
-                key={index}
-                itemList={itemList}
-                setItemList={setItemList}
-              />
+              <BlockContainer block={block} key={index} />
             ) : null
           ) : (
-            <BlockContainer
-              block={block}
-              key={index}
-              itemList={itemList}
-              setItemList={setItemList}
-            />
+            <BlockContainer block={block} key={index} />
           )
         )}
         {next && !loading && (

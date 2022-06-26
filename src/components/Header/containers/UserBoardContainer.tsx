@@ -10,12 +10,7 @@ import {
 import BlockPopUpContainer from "../../common/BlockPopUp/containers/BlockPopUpContainer";
 import UserBoard from "../components/UserBoard";
 
-type Props = {
-  itemList: getBlockType[];
-  setItemList: React.Dispatch<React.SetStateAction<getBlockType[]>>;
-};
-
-const UserBoardContainer = ({ itemList, setItemList }: Props) => {
+const UserBoardContainer = () => {
   const { token } = useAuth();
   const { __showPopUpFromHooks, __hidePopUpFromHooks } = usePopUp();
   const [boards, setBoards] = useState<UserBoardType>({
@@ -83,12 +78,10 @@ const UserBoardContainer = ({ itemList, setItemList }: Props) => {
         <BlockPopUpContainer
           blockDetail={blockDetail}
           closePopUp={closePopUp}
-          itemList={itemList}
-          setItemList={setItemList}
         />
       );
     },
-    [__showPopUpFromHooks, itemList]
+    [__showPopUpFromHooks]
   );
 
   const closePopUp = useCallback(() => {

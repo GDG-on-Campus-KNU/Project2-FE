@@ -1,10 +1,10 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import useAuth from "../../../../hooks/Auth/useAuth";
 import { apiOrigin, apiRoute, requestPost } from "../../../../lib/api/api";
-import {
-  BasicAPIResponseType,
-  getBlockType,
-} from "../../../../typedef/common/common.types";
+import { updateItemList } from "../../../../store/itemList/actions";
+import { RootState } from "../../../../store/rootReducer";
+import { BasicAPIResponseType } from "../../../../typedef/common/common.types";
 import VoteView from "../VoteView";
 
 type Props = {
@@ -12,8 +12,6 @@ type Props = {
   voteList: any;
   voteTotal: number;
   blockId: number;
-  itemList: getBlockType[];
-  setItemList: React.Dispatch<React.SetStateAction<getBlockType[]>>;
 };
 
 type vote = {
@@ -26,10 +24,12 @@ const VoteViewContainer = ({
   voteList,
   voteTotal,
   blockId,
-  itemList,
-  setItemList,
 }: Props) => {
   const { token } = useAuth();
+  const dispatch = useDispatch();
+  const itemList = useSelector(
+    (root: RootState) => root.itemListReducer.itemList
+  );
 
   const stringToVote = (voteText: string) => {
     voteText = voteText.replace(/\\/gi, "");
@@ -62,7 +62,6 @@ const VoteViewContainer = ({
 
     const changeItemList = itemList.map((item) => {
       if (item.id === blockId) {
-        console.log(item.votedIndex, index);
         return {
           ...item,
           voteText: newVoteList,
@@ -73,8 +72,8 @@ const VoteViewContainer = ({
         return item;
       }
     });
-    console.log(changeItemList);
-    setItemList(changeItemList);
+
+    dispatch(updateItemList(changeItemList));
   };
 
   return (

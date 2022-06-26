@@ -1,7 +1,8 @@
 import axios, { AxiosError } from "axios";
 
 //메인배너
-export const apiOrigin = "http://3.39.167.118:8000";
+// export const apiOrigin = "http://3.39.167.118:8000";
+export const apiOrigin = "http://localhost:8000";
 
 export const apiRoute = {
   board: "/boards",
@@ -28,13 +29,13 @@ export function requestGet<T>(url: string, header: object) {
         },
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         const returnVal = { ...res } as unknown;
         resolve(returnVal as T);
       })
       .catch((error: AxiosError) => {
-        console.error(error.response?.data);
-        console.error(error.response?.status);
+        // console.error(error.response?.data);
+        // console.error(error.response?.status);
         reject(error);
       });
   });

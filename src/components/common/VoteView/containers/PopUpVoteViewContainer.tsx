@@ -1,10 +1,10 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import useAuth from "../../../../hooks/Auth/useAuth";
 import { apiOrigin, apiRoute, requestPost } from "../../../../lib/api/api";
-import {
-  BasicAPIResponseType,
-  getBlockType,
-} from "../../../../typedef/common/common.types";
+import { updateItemList } from "../../../../store/itemList/actions";
+import { RootState } from "../../../../store/rootReducer";
+import { BasicAPIResponseType } from "../../../../typedef/common/common.types";
 import VoteView from "../VoteView";
 
 type Props = {
@@ -12,8 +12,6 @@ type Props = {
   voteList: any;
   voteTotal: number;
   blockId: number;
-  itemList: getBlockType[];
-  setItemList: React.Dispatch<React.SetStateAction<getBlockType[]>>;
 };
 
 type vote = {
@@ -26,10 +24,12 @@ const PopUpVoteViewContainer = ({
   voteList,
   voteTotal,
   blockId,
-  itemList,
-  setItemList,
 }: Props) => {
   const { token } = useAuth();
+  const itemList = useSelector(
+    (root: RootState) => root.itemListReducer.itemList
+  );
+  const dispatch = useDispatch();
 
   const [popUpIndex, setPopUpIndex] = useState(votedIndex);
   const [popUpList, setPopUpList] = useState(voteList);
@@ -83,7 +83,7 @@ const PopUpVoteViewContainer = ({
     setPopUpIndex(newVotedIndex);
     setPopUpList(newVoteList);
     setPopUpTotal(newVoteTotal);
-    setItemList(changeItemList);
+    dispatch(updateItemList(changeItemList));
   };
 
   return (

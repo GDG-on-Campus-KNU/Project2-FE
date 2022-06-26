@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useState } from "react";
 import BlockPopUp from "../BlockPopUp";
 import {
   BasicAPIResponseType,
@@ -16,16 +16,9 @@ import useAuth from "../../../../hooks/Auth/useAuth";
 type Props = {
   blockDetail: getBlockType;
   closePopUp: React.MouseEventHandler<HTMLButtonElement>;
-  itemList: getBlockType[];
-  setItemList: React.Dispatch<React.SetStateAction<getBlockType[]>>;
 };
 
-const BlockPopUpContainer = ({
-  blockDetail,
-  closePopUp,
-  itemList,
-  setItemList,
-}: Props) => {
+const BlockPopUpContainer = ({ blockDetail, closePopUp }: Props) => {
   const { token } = useAuth();
 
   const [picView, setPicView] = useState(false);
@@ -97,8 +90,6 @@ const BlockPopUpContainer = ({
       deleteBlock={deleteBlock}
       post={post}
       setPost={setPost}
-      itemList={itemList}
-      setItemList={setItemList}
     />
   );
 };
