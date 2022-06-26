@@ -11,6 +11,7 @@ type Props = {
   itemList: getBlockType[];
   loadPopUp: React.MouseEventHandler<HTMLButtonElement>;
   scrollView: React.RefObject<HTMLDivElement>;
+  scrollLoading: boolean;
   searchContent: string;
 };
 
@@ -21,6 +22,7 @@ const ScrollView = ({
   itemList,
   loadPopUp,
   scrollView,
+  scrollLoading,
   searchContent,
 }: Props) => {
   return (
@@ -29,27 +31,25 @@ const ScrollView = ({
         <img className="icon" src={images.pencil} alt="작성" />
       </button>
       <div className="scroll-view-wrap" ref={scrollView}>
-        {itemList.map((block, index) =>
-          searchContent.length > 0 ? (
-            block.content.includes(searchContent) ? (
-              <BlockContainer block={block} key={index} />
-            ) : null
-          ) : (
-            <>
-              <BlockContainer block={block} key={index} />
-            </>
-          )
-        )}
-        {next && !loading && (
-          <div className="target" ref={setTarget}>
-            Loading...
-          </div>
-        )}
-        {!next && itemList.length > 0 && (
-          <div className="end">마지막 게시글입니다.</div>
-        )}
-        {!next && itemList.length == 0 && (
-          <div className="end">게시글이 없습니다.</div>
+        {scrollLoading ? null : (
+          <>
+            {itemList.map((block, index) => (
+              <>
+                <BlockContainer block={block} key={index} />
+              </>
+            ))}
+            {next && !loading && (
+              <div className="target" ref={setTarget}>
+                Loading...
+              </div>
+            )}
+            {!next && itemList.length > 0 && (
+              <div className="end">마지막 게시글입니다.</div>
+            )}
+            {!next && itemList.length == 0 && (
+              <div className="end">게시글이 없습니다.</div>
+            )}
+          </>
         )}
       </div>
     </section>

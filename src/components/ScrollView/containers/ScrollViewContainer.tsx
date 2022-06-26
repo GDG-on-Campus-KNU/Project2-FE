@@ -55,7 +55,7 @@ const ScrollViewContainer = ({
     observer.observe(target);
   }, [target]);
 
-  return scrollLoading ? null : (
+  return (
     <ScrollView
       setTarget={setTarget}
       loading={loading}
@@ -63,6 +63,7 @@ const ScrollViewContainer = ({
       itemList={itemList}
       loadPopUp={loadPopUp}
       scrollView={scrollView}
+      scrollLoading={scrollLoading}
       searchContent={searchContent}
     />
   );
