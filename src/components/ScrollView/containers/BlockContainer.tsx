@@ -11,10 +11,10 @@ import useAuth from "../../../hooks/Auth/useAuth";
 import BlockPopUpContainer from "../../common/BlockPopUp/containers/BlockPopUpContainer";
 
 type Props = {
-  block: getBlockType;
+  content: getBlockType;
 };
 
-const BlockContainer = ({ block }: Props) => {
+const BlockContainer = ({ content }: Props) => {
   const { __showPopUpFromHooks, __hidePopUpFromHooks } = usePopUp();
   const [expand, setExpand] = useState(false);
   const { token } = useAuth();
@@ -65,7 +65,7 @@ const BlockContainer = ({ block }: Props) => {
   const onClickImage = useCallback(
     (index: number) => {
       __showPopUpFromHooks(
-        <ImagePopUpContainer images={block.image} index={index} />
+        <ImagePopUpContainer images={content.image} index={index} />
       );
     },
     [__showPopUpFromHooks]
@@ -73,7 +73,7 @@ const BlockContainer = ({ block }: Props) => {
 
   return (
     <Block
-      block={block}
+      block={content}
       loadPopUp={loadPopUp}
       onClickImage={onClickImage}
       expand={expand}

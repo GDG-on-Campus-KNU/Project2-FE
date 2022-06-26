@@ -28,8 +28,6 @@ const ScrollViewContainer = ({
   );
   const next = useSelector((root: RootState) => root.nextReducer.next);
 
-  const [elementList, setElementList] = useState<ReactElement[]>([]);
-
   const closePopUp = useCallback(() => {
     __hidePopUpFromHooks();
   }, []);
@@ -40,21 +38,14 @@ const ScrollViewContainer = ({
 
   const addItemList = async () => {
     const blocks = await getBlocks();
+    console.log("blocks", blocks);
     dispatch(updateItemList([...itemList, ...blocks]));
   };
-
-  useEffect(() => {
-    const newElementList = itemList.map((block) => {
-      return <BlockContainer block={block} />;
-    });
-
-    setElementList(newElementList);
-  }, [itemList]);
 
   return (
     <ScrollView
       next={next}
-      elementList={elementList}
+      itemList={itemList}
       addItemList={addItemList}
       loadPopUp={loadPopUp}
       scrollView={scrollView}

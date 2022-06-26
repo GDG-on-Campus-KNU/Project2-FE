@@ -3,10 +3,12 @@ import "./css/scrollView.css";
 import BlockContainer from "./containers/BlockContainer";
 import images from "../../assets/images";
 import InfiniteScroll from "../common/InfiniteScroll/InfiniteScroll";
+import { getBlockType } from "../../typedef/common/common.types";
+import Block from "./components/Block";
 
 type Props = {
   next: string | null;
-  elementList: ReactElement[];
+  itemList: getBlockType[];
   addItemList: () => Promise<void>;
   loadPopUp: React.MouseEventHandler<HTMLButtonElement>;
   scrollView: React.RefObject<HTMLDivElement>;
@@ -16,7 +18,7 @@ type Props = {
 
 const ScrollView = ({
   next,
-  elementList,
+  itemList,
   addItemList,
   loadPopUp,
   scrollView,
@@ -31,7 +33,25 @@ const ScrollView = ({
       <div className="scroll-view-wrap" ref={scrollView}>
         {scrollLoading ? null : (
           <InfiniteScroll
-            itemList={elementList}
+            block={
+              <BlockContainer
+                content={{
+                  id: 0,
+                  owner: "",
+                  category: "",
+                  image: undefined,
+                  createdAt: "",
+                  updatedAt: "",
+                  content: "",
+                  likeCount: 0,
+                  votedIndex: 0,
+                  voteText: "",
+                  voteTotal: 0,
+                  currentUser: "",
+                }}
+              />
+            }
+            blockProps={itemList}
             addItemList={addItemList}
             end={!next}
           />
