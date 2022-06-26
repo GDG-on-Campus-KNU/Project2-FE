@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import InfiniteScroll from "../../common/InfiniteScroll/InfiniteScroll";
+import InfiniteScroll from "../InfiniteScroll/InfiniteScroll";
 import "./css/CommentScrollView.css";
 
 type Props = {

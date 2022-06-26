@@ -5,18 +5,16 @@ import {
 } from "../../../typedef/common/common.types";
 import Block from "../components/Block";
 import usePopUp from "../../../hooks/usePopUp";
-import ImagePopUpContainer from "./ImagePopUpContainer";
+import ImagePopUpContainer from "../../common/BlockPopUp/containers/ImagePopUpContainer";
 import { apiOrigin, apiRoute, requestGet } from "../../../lib/api/api";
 import useAuth from "../../../hooks/Auth/useAuth";
-import BlockPopUpContainer from "./BlockPopUpContainer";
+import BlockPopUpContainer from "../../common/BlockPopUp/containers/BlockPopUpContainer";
 
 type Props = {
   block: getBlockType;
-  itemList: getBlockType[];
-  setItemList: React.Dispatch<React.SetStateAction<getBlockType[]>>;
 };
 
-const BlockContainer = ({ block, itemList, setItemList }: Props) => {
+const BlockContainer = ({ block }: Props) => {
   const { __showPopUpFromHooks, __hidePopUpFromHooks } = usePopUp();
   const [expand, setExpand] = useState(false);
   const { token } = useAuth();
@@ -52,12 +50,7 @@ const BlockContainer = ({ block, itemList, setItemList }: Props) => {
   const loadPopUp = useCallback(async (id: number) => {
     const blockDetail = await getBlockDetail(id);
     __showPopUpFromHooks(
-      <BlockPopUpContainer
-        blockDetail={blockDetail}
-        closePopUp={closePopUp}
-        itemList={itemList}
-        setItemList={setItemList}
-      />
+      <BlockPopUpContainer blockDetail={blockDetail} closePopUp={closePopUp} />
     );
   }, []);
 
@@ -85,8 +78,6 @@ const BlockContainer = ({ block, itemList, setItemList }: Props) => {
       onClickImage={onClickImage}
       expand={expand}
       reverseExpand={reverseExpand}
-      itemList={itemList}
-      setItemList={setItemList}
     />
   );
 };

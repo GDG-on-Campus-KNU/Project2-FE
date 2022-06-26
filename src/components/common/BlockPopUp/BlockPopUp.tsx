@@ -1,9 +1,9 @@
 import React from "react";
 import { getBlockType } from "../../../typedef/common/common.types";
 import "./css/BlockPopUp.css";
-import CommentScrollViewContainer from "../containers/CommentScrollViewContainer";
+import CommentScrollViewContainer from "./containers/CommentScrollViewContainer";
 import images from "../../../assets/images";
-import PopUpVoteViewContainer from "../containers/PopUpVoteViewContainer";
+import PopUpVoteViewContainer from "../VoteView/containers/PopUpVoteViewContainer";
 
 type Props = {
   blockDetail: getBlockType;
@@ -19,8 +19,6 @@ type Props = {
   deleteBlock: (id: number) => Promise<void>;
   post: boolean;
   setPost: React.Dispatch<React.SetStateAction<boolean>>;
-  itemList: getBlockType[];
-  setItemList: React.Dispatch<React.SetStateAction<getBlockType[]>>;
 };
 
 const BlockPopUp = ({
@@ -37,8 +35,6 @@ const BlockPopUp = ({
   deleteBlock,
   post,
   setPost,
-  itemList,
-  setItemList,
 }: Props) => {
   return (
     <div className="block-pop-up-wrap">
@@ -75,8 +71,6 @@ const BlockPopUp = ({
                 voteList={blockDetail.voteText}
                 voteTotal={blockDetail.voteTotal}
                 blockId={blockDetail.id}
-                itemList={itemList}
-                setItemList={setItemList}
               />
             </div>
           </div>

@@ -9,70 +9,48 @@ import { getBlockType, PopUpTypes } from "../../typedef/common/common.types";
 
 type Props = {
   popUp: PopUpTypes;
-  itemList: getBlockType[];
-  setItemList: React.Dispatch<React.SetStateAction<getBlockType[]>>;
-  next: string;
-  editLink: (newcate: string) => void;
-  getBlocks: () => Promise<
-    {
-      updatedAt: string;
-      image: any[];
-      id: number;
-      owner: string;
-      category: string;
-      createdAt: string;
-      content: string;
-      likeCount: number;
-      votedIndex: number;
-      voteText: string;
-      voteTotal: number;
-      currentUser: string;
-    }[]
-  >;
+  getBlocks: () => Promise<getBlockType[]>;
   scrollView: React.RefObject<HTMLDivElement>;
+  scrollLoading: boolean;
+  setScrollLoading: React.Dispatch<React.SetStateAction<boolean>>;
   searchContent: string;
   setSearchContent: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const MainNavigation = ({
   popUp,
-  itemList,
-  setItemList,
-  next,
-  editLink,
   getBlocks,
   scrollView,
+  scrollLoading,
+  setScrollLoading,
   searchContent,
   setSearchContent,
 }: Props) => {
   return (
     <div>
-      <HeaderContainer
-        setSearchContent={setSearchContent}
-        itemList={itemList}
-        setItemList={setItemList}
-      />
+      <HeaderContainer setSearchContent={setSearchContent} />
       <div
         style={{ display: "flex", gap: "12px", padding: "12px 12px 0 12px" }}
       >
-        <SideNavigationContainer editLink={editLink} />
+        <SideNavigationContainer
+          getBlocks={getBlocks}
+          setScrollLoading={setScrollLoading}
+        />
         <div style={{ flex: "3", display: "flex", gap: "12px" }}>
           <Routes>
             <Route
               path="/home"
               element={
                 <ScrollViewContainer
-                  itemList={itemList}
-                  setItemList={setItemList}
-                  next={next}
                   getBlocks={getBlocks}
                   scrollView={scrollView}
                   searchContent={searchContent}
+                  scrollLoading={scrollLoading}
                 />
               }
             />
           </Routes>
-          <SideBoardContainer itemList={itemList} setItemList={setItemList} />
+          <SideBoardContainer />
         </div>
       </div>
       {popUp.isShown && <PopUp child={popUp.popUp} />}

@@ -6,15 +6,10 @@ import {
   BasicAPIResponseType,
   getBlockType,
 } from "../../../typedef/common/common.types";
-import BlockPopUpContainer from "../../ScrollView/containers/BlockPopUpContainer";
+import BlockPopUpContainer from "../../common/BlockPopUp/containers/BlockPopUpContainer";
 import SideBoard from "../SideBoard";
 
-type Props = {
-  itemList: getBlockType[];
-  setItemList: React.Dispatch<React.SetStateAction<getBlockType[]>>;
-};
-
-const SideBoardContainer = ({ itemList, setItemList }: Props) => {
+const SideBoardContainer = () => {
   const { __showPopUpFromHooks, __hidePopUpFromHooks } = usePopUp();
   const { token } = useAuth();
 
@@ -46,21 +41,13 @@ const SideBoardContainer = ({ itemList, setItemList }: Props) => {
     return blockDeatil;
   };
 
-  const loadPopUp = useCallback(
-    async (id: number) => {
-      const blockDetail = await getBlockDetail(id);
+  const loadPopUp = useCallback(async (id: number) => {
+    const blockDetail = await getBlockDetail(id);
 
-      __showPopUpFromHooks(
-        <BlockPopUpContainer
-          blockDetail={blockDetail}
-          closePopUp={closePopUp}
-          itemList={itemList}
-          setItemList={setItemList}
-        />
-      );
-    },
-    [itemList]
-  );
+    __showPopUpFromHooks(
+      <BlockPopUpContainer blockDetail={blockDetail} closePopUp={closePopUp} />
+    );
+  }, []);
 
   const closePopUp = useCallback(() => {
     __hidePopUpFromHooks();

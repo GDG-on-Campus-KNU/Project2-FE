@@ -77,6 +77,14 @@ export type PopUpTypes = {
   isShown: boolean;
 };
 
+export type NextTypes = {
+  next: string | null;
+};
+
+export type ItemListTypes = {
+  itemList: getBlockType[];
+};
+
 export type getBlockResponseType = {
   count: number;
   next: string;
