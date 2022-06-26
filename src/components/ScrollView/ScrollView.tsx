@@ -1,14 +1,13 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import "./css/scrollView.css";
 import BlockContainer from "./containers/BlockContainer";
-import { getBlockType } from "../../typedef/common/common.types";
 import images from "../../assets/images";
+import InfiniteScroll from "../common/InfiniteScroll/InfiniteScroll";
 
 type Props = {
-  setTarget: React.LegacyRef<HTMLDivElement>;
-  loading: boolean;
   next: string | null;
-  itemList: getBlockType[];
+  elementList: ReactElement[];
+  addItemList: () => Promise<void>;
   loadPopUp: React.MouseEventHandler<HTMLButtonElement>;
   scrollView: React.RefObject<HTMLDivElement>;
   scrollLoading: boolean;
@@ -16,10 +15,9 @@ type Props = {
 };
 
 const ScrollView = ({
-  setTarget,
-  loading,
   next,
-  itemList,
+  elementList,
+  addItemList,
   loadPopUp,
   scrollView,
   scrollLoading,
@@ -32,24 +30,11 @@ const ScrollView = ({
       </button>
       <div className="scroll-view-wrap" ref={scrollView}>
         {scrollLoading ? null : (
-          <>
-            {itemList.map((block, index) => (
-              <>
-                <BlockContainer block={block} key={index} />
-              </>
-            ))}
-            {next && !loading && (
-              <div className="target" ref={setTarget}>
-                Loading...
-              </div>
-            )}
-            {!next && itemList.length > 0 && (
-              <div className="end">마지막 게시글입니다.</div>
-            )}
-            {!next && itemList.length == 0 && (
-              <div className="end">게시글이 없습니다.</div>
-            )}
-          </>
+          <InfiniteScroll
+            itemList={elementList}
+            addItemList={addItemList}
+            end={!next}
+          />
         )}
       </div>
     </section>

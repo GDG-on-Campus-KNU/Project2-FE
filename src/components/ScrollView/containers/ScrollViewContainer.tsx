@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, ReactElement } from "react";
 import ScrollView from "../ScrollView";
 import { getBlockType } from "../../../typedef/common/common.types";
 import usePopUp from "../../../hooks/usePopUp";
@@ -6,6 +6,7 @@ import WritePopUpContainer from "./WritePopUpContainer";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store/rootReducer";
 import { updateItemList } from "../../../store/itemList/actions";
+import BlockContainer from "./BlockContainer";
 
 type Props = {
   getBlocks: () => Promise<getBlockType[]>;
@@ -27,8 +28,7 @@ const ScrollViewContainer = ({
   );
   const next = useSelector((root: RootState) => root.nextReducer.next);
 
-  const [target, setTarget] = useState<HTMLElement | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [elementList, setElementList] = useState<ReactElement[]>([]);
 
   const closePopUp = useCallback(() => {
     __hidePopUpFromHooks();
@@ -38,29 +38,24 @@ const ScrollViewContainer = ({
     __showPopUpFromHooks(<WritePopUpContainer closePopUp={closePopUp} />);
   }, []);
 
-  const intersecting = async ([entry]: IntersectionObserverEntry[]) => {
-    if (entry.isIntersecting) {
-      setLoading(true);
-      const blocks = await getBlocks();
-      dispatch(updateItemList([...itemList, ...blocks]));
-      setLoading(false);
-    }
+  const addItemList = async () => {
+    const blocks = await getBlocks();
+    dispatch(updateItemList([...itemList, ...blocks]));
   };
 
-  const observer = new IntersectionObserver(intersecting, { threshold: 0.4 });
-
   useEffect(() => {
-    if (!target) return;
+    const newElementList = itemList.map((block) => {
+      return <BlockContainer block={block} />;
+    });
 
-    observer.observe(target);
-  }, [target]);
+    setElementList(newElementList);
+  }, [itemList]);
 
   return (
     <ScrollView
-      setTarget={setTarget}
-      loading={loading}
       next={next}
-      itemList={itemList}
+      elementList={elementList}
+      addItemList={addItemList}
       loadPopUp={loadPopUp}
       scrollView={scrollView}
       scrollLoading={scrollLoading}
