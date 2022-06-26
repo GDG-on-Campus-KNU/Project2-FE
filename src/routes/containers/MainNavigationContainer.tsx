@@ -20,8 +20,6 @@ const MainNavigationContainer = () => {
   const [searchContent, setSearchContent] = useState("");
   const [scrollLoading, setScrollLoading] = useState(false);
 
-  const scrollView = useRef<HTMLDivElement>(null);
-
   const stringToVote = (voteText: string) => {
     voteText = voteText.replace(/\\/gi, "");
     voteText = voteText.replace(/'/gi, '"');
@@ -61,7 +59,6 @@ const MainNavigationContainer = () => {
     <MainNavigation
       popUp={popUp}
       getBlocks={getBlocks}
-      scrollView={scrollView}
       scrollLoading={scrollLoading}
       setScrollLoading={setScrollLoading}
       searchContent={searchContent}

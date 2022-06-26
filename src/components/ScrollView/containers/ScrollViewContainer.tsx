@@ -6,18 +6,15 @@ import WritePopUpContainer from "./WritePopUpContainer";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store/rootReducer";
 import { updateItemList } from "../../../store/itemList/actions";
-import BlockContainer from "./BlockContainer";
 
 type Props = {
   getBlocks: () => Promise<getBlockType[]>;
-  scrollView: React.RefObject<HTMLDivElement>;
   searchContent: string;
   scrollLoading: boolean;
 };
 
 const ScrollViewContainer = ({
   getBlocks,
-  scrollView,
   searchContent,
   scrollLoading,
 }: Props) => {
@@ -48,7 +45,6 @@ const ScrollViewContainer = ({
       itemList={itemList}
       addItemList={addItemList}
       loadPopUp={loadPopUp}
-      scrollView={scrollView}
       scrollLoading={scrollLoading}
       searchContent={searchContent}
     />

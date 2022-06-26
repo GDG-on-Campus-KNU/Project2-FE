@@ -10,7 +10,6 @@ import { getBlockType, PopUpTypes } from "../../typedef/common/common.types";
 type Props = {
   popUp: PopUpTypes;
   getBlocks: () => Promise<getBlockType[]>;
-  scrollView: React.RefObject<HTMLDivElement>;
   scrollLoading: boolean;
   setScrollLoading: React.Dispatch<React.SetStateAction<boolean>>;
   searchContent: string;
@@ -20,7 +19,6 @@ type Props = {
 const MainNavigation = ({
   popUp,
   getBlocks,
-  scrollView,
   scrollLoading,
   setScrollLoading,
   searchContent,
@@ -43,7 +41,6 @@ const MainNavigation = ({
               element={
                 <ScrollViewContainer
                   getBlocks={getBlocks}
-                  scrollView={scrollView}
                   searchContent={searchContent}
                   scrollLoading={scrollLoading}
                 />
