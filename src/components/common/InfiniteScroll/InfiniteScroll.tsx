@@ -1,13 +1,21 @@
+import React from "react";
 import { useState, useEffect, ReactElement, LegacyRef } from "react";
 
 type Props = {
-  itemList: ReactElement[];
+  block: ReactElement;
+  blockProps: any;
   addItemList: () => Promise<void>;
   end: boolean;
   spinner: ReactElement;
 };
 
-const InfiniteScroll = ({ itemList, addItemList, end, spinner }: Props) => {
+const InfiniteScroll = ({
+  block,
+  blockProps,
+  addItemList,
+  end,
+  spinner,
+}: Props) => {
   const [target, setTarget] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -21,9 +29,10 @@ const InfiniteScroll = ({ itemList, addItemList, end, spinner }: Props) => {
   };
 
   const callback = async (
-    [entry]: { isIntersecting: boolean }[],
+    [entry]: IntersectionObserverEntry[],
     observer: IntersectionObserver
   ) => {
+    console.log("intersecting");
     if (!target) return;
 
     if (entry.isIntersecting) {
@@ -33,10 +42,10 @@ const InfiniteScroll = ({ itemList, addItemList, end, spinner }: Props) => {
     }
   };
 
+  const observer = new IntersectionObserver(callback, { threshold: 0.4 });
+
   useEffect(() => {
     if (!target) return;
-
-    const observer = new IntersectionObserver(callback, { threshold: 0.4 });
 
     observer.observe(target);
 
@@ -45,11 +54,8 @@ const InfiniteScroll = ({ itemList, addItemList, end, spinner }: Props) => {
 
   return (
     <>
-      {itemList.map((item, index) => {
-        const Item = () => {
-          return item;
-        };
-        return <Item key={index} />;
+      {blockProps.map((props: any, index: number) => {
+        return React.cloneElement(block, { content: props, key: index });
       })}
       {loading && <Spinner />}
       {!end && !loading && (

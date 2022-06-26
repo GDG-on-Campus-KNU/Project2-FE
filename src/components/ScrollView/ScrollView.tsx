@@ -1,14 +1,15 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import "./css/scrollView.css";
 import BlockContainer from "./containers/BlockContainer";
-import { getBlockType } from "../../typedef/common/common.types";
 import images from "../../assets/images";
+import InfiniteScroll from "../common/InfiniteScroll/InfiniteScroll";
+import { getBlockType } from "../../typedef/common/common.types";
+import Block from "./components/Block";
 
 type Props = {
-  setTarget: React.LegacyRef<HTMLDivElement>;
-  loading: boolean;
   next: string | null;
   itemList: getBlockType[];
+  addItemList: () => Promise<void>;
   loadPopUp: React.MouseEventHandler<HTMLButtonElement>;
   scrollView: React.RefObject<HTMLDivElement>;
   scrollLoading: boolean;
@@ -16,10 +17,9 @@ type Props = {
 };
 
 const ScrollView = ({
-  setTarget,
-  loading,
   next,
   itemList,
+  addItemList,
   loadPopUp,
   scrollView,
   scrollLoading,
@@ -32,24 +32,29 @@ const ScrollView = ({
       </button>
       <div className="scroll-view-wrap" ref={scrollView}>
         {scrollLoading ? null : (
-          <>
-            {itemList.map((block, index) => (
-              <>
-                <BlockContainer block={block} key={index} />
-              </>
-            ))}
-            {next && !loading && (
-              <div className="target" ref={setTarget}>
-                Loading...
-              </div>
-            )}
-            {!next && itemList.length > 0 && (
-              <div className="end">마지막 게시글입니다.</div>
-            )}
-            {!next && itemList.length == 0 && (
-              <div className="end">게시글이 없습니다.</div>
-            )}
-          </>
+          <InfiniteScroll
+            block={
+              <BlockContainer
+                content={{
+                  id: 0,
+                  owner: "",
+                  category: "",
+                  image: undefined,
+                  createdAt: "",
+                  updatedAt: "",
+                  content: "",
+                  likeCount: 0,
+                  votedIndex: 0,
+                  voteText: "",
+                  voteTotal: 0,
+                  currentUser: "",
+                }}
+              />
+            }
+            blockProps={itemList}
+            addItemList={addItemList}
+            end={!next}
+          />
         )}
       </div>
     </section>

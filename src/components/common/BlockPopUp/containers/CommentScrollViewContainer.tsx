@@ -1,8 +1,9 @@
-import React, { useState, useEffect, ReactElement } from "react";
+import React, { useState, useEffect } from "react";
 import CommentScrollView from "../CommentScrollView";
 import {
   BasicAPIResponseType,
   getCommentResponseType,
+  getCommentType,
 } from "../../../../typedef/common/common.types";
 import { apiOrigin, apiRoute, requestGet } from "../../../../lib/api/api";
 
@@ -17,9 +18,7 @@ const CommentScrollViewContainer = ({ blockId, post, setPost }: Props) => {
     `${apiOrigin}${apiRoute.board}/${blockId}${apiRoute.comment}?limit=10&offset=0`
   );
   const [end, setEnd] = useState(false);
-  const [commentItemList, setCommentItemList] = useState<
-    ReactElement<any, any>[]
-  >([]);
+  const [commentItemList, setCommentItemList] = useState<getCommentType[]>([]);
 
   const getComments = async () => {
     const { data } = await requestGet<
@@ -37,21 +36,9 @@ const CommentScrollViewContainer = ({ blockId, post, setPost }: Props) => {
 
   const addComment = async () => {
     const comments = await getComments();
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    const newComments = comments.map((comment) => {
-      return (
-        <>
-          <div className="comment-box">
-            <div className="comment-user">{comment.owner}</div>
-            <div className="comment">{comment.content}</div>
-          </div>
-        </>
-      );
-    });
-    setCommentItemList((commentItemList) => [
-      ...commentItemList,
-      ...newComments,
-    ]);
+    console.log(comments);
+    // await new Promise((resolve) => setTimeout(resolve, 1000));
+    setCommentItemList((commentItemList) => [...commentItemList, ...comments]);
   };
 
   const postRefreshComment = async () => {
