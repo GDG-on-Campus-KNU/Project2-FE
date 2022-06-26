@@ -7,7 +7,7 @@ export const updateNext = (payload: string) => ({
 
 export const resetNext = () => ({
   type: RESET_NEXT,
-  payload: {},
+  payload: null,
 });
 
 export type NextAction =

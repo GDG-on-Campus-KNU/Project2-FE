@@ -9,8 +9,10 @@ import { getBlockType, PopUpTypes } from "../../typedef/common/common.types";
 
 type Props = {
   popUp: PopUpTypes;
-  getBlocks: (next: string | null) => Promise<getBlockType[]>;
+  getBlocks: () => Promise<getBlockType[]>;
   scrollView: React.RefObject<HTMLDivElement>;
+  scrollLoading: boolean;
+  setScrollLoading: React.Dispatch<React.SetStateAction<boolean>>;
   searchContent: string;
   setSearchContent: React.Dispatch<React.SetStateAction<string>>;
 };
@@ -19,6 +21,8 @@ const MainNavigation = ({
   popUp,
   getBlocks,
   scrollView,
+  scrollLoading,
+  setScrollLoading,
   searchContent,
   setSearchContent,
 }: Props) => {
@@ -28,7 +32,10 @@ const MainNavigation = ({
       <div
         style={{ display: "flex", gap: "12px", padding: "12px 12px 0 12px" }}
       >
-        <SideNavigationContainer getBlocks={getBlocks} />
+        <SideNavigationContainer
+          getBlocks={getBlocks}
+          setScrollLoading={setScrollLoading}
+        />
         <div style={{ flex: "3", display: "flex", gap: "12px" }}>
           <Routes>
             <Route
@@ -38,6 +45,7 @@ const MainNavigation = ({
                   getBlocks={getBlocks}
                   scrollView={scrollView}
                   searchContent={searchContent}
+                  scrollLoading={scrollLoading}
                 />
               }
             />

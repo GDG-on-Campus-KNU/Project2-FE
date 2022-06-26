@@ -29,13 +29,13 @@ export function requestGet<T>(url: string, header: object) {
         },
       })
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         const returnVal = { ...res } as unknown;
         resolve(returnVal as T);
       })
       .catch((error: AxiosError) => {
-        // console.error(error.response?.data);
-        // console.error(error.response?.status);
+        console.error(error.response?.data);
+        console.error(error.response?.status);
         reject(error);
       });
   });

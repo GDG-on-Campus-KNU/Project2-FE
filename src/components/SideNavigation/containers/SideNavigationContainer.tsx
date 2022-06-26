@@ -9,9 +9,10 @@ import { updateItemList } from "../../../store/itemList/actions";
 
 type Props = {
   getBlocks: (next: string | null) => Promise<getBlockType[]>;
+  setScrollLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const SideNavigationContainer = ({ getBlocks }: Props) => {
+const SideNavigationContainer = ({ getBlocks, setScrollLoading }: Props) => {
   const [selected, setSelected] = useState("all");
   const dispatch = useDispatch();
   const next = useSelector((root: RootState) => root.nextReducer.next);
@@ -31,8 +32,10 @@ const SideNavigationContainer = ({ getBlocks }: Props) => {
   };
 
   const setBlock = async () => {
+    setScrollLoading(true);
     const blocks = await getBlocks(next);
     dispatch(updateItemList(blocks));
+    setScrollLoading(false);
   };
 
   useEffect(() => {

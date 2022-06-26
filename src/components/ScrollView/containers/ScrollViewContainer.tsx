@@ -8,15 +8,17 @@ import { RootState } from "../../../store/rootReducer";
 import { updateItemList } from "../../../store/itemList/actions";
 
 type Props = {
-  getBlocks: (next: string | null) => Promise<getBlockType[]>;
+  getBlocks: () => Promise<getBlockType[]>;
   scrollView: React.RefObject<HTMLDivElement>;
   searchContent: string;
+  scrollLoading: boolean;
 };
 
 const ScrollViewContainer = ({
   getBlocks,
   scrollView,
   searchContent,
+  scrollLoading,
 }: Props) => {
   const { __showPopUpFromHooks, __hidePopUpFromHooks } = usePopUp();
   const dispatch = useDispatch();
@@ -24,7 +26,6 @@ const ScrollViewContainer = ({
     (root: RootState) => root.itemListReducer.itemList
   );
   const next = useSelector((root: RootState) => root.nextReducer.next);
-  console.log("ScrollView is ", next);
 
   const [target, setTarget] = useState<HTMLElement | null>(null);
   const [loading, setLoading] = useState(false);
@@ -37,15 +38,11 @@ const ScrollViewContainer = ({
     __showPopUpFromHooks(<WritePopUpContainer closePopUp={closePopUp} />);
   }, []);
 
-  const addItemList = (blocks: getBlockType[]) => {
-    dispatch(updateItemList([...itemList, ...blocks]));
-  };
-
   const intersecting = async ([entry]: IntersectionObserverEntry[]) => {
     if (entry.isIntersecting) {
-      const blocks = await getBlocks(next);
       setLoading(true);
-      addItemList(blocks);
+      const blocks = await getBlocks();
+      dispatch(updateItemList([...itemList, ...blocks]));
       setLoading(false);
     }
   };
@@ -58,7 +55,7 @@ const ScrollViewContainer = ({
     observer.observe(target);
   }, [target]);
 
-  return (
+  return scrollLoading ? null : (
     <ScrollView
       setTarget={setTarget}
       loading={loading}

@@ -35,7 +35,9 @@ const ScrollView = ({
               <BlockContainer block={block} key={index} />
             ) : null
           ) : (
-            <BlockContainer block={block} key={index} />
+            <>
+              <BlockContainer block={block} key={index} />
+            </>
           )
         )}
         {next && !loading && (
