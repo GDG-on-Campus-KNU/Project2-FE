@@ -21,7 +21,7 @@ const MainNavigation = ({
   setScrollLoading,
 }: Props) => {
   return (
-    <div>
+    <>
       <HeaderContainer />
       <div
         style={{ display: "flex", gap: "12px", padding: "12px 12px 0 12px" }}
@@ -47,7 +47,7 @@ const MainNavigation = ({
         </div>
       </div>
       {popUp.isShown && <PopUp child={popUp.popUp} />}
-    </div>
+    </>
   );
 };
 
