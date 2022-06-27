@@ -38,7 +38,6 @@ const MainNavigation = ({
                 <ScrollViewContainer
                   getBlocks={getBlocks}
                   scrollLoading={scrollLoading}
-                  setScrollLoading={setScrollLoading}
                 />
               }
             />

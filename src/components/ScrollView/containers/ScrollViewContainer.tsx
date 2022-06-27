@@ -10,13 +10,11 @@ import { updateItemList } from "../../../store/itemList/actions";
 type Props = {
   getBlocks: () => Promise<getBlockType[]>;
   scrollLoading: boolean;
-  setScrollLoading: any;
 };
 
 const ScrollViewContainer = ({
   getBlocks,
   scrollLoading,
-  setScrollLoading,
 }: Props) => {
   const { __showPopUpFromHooks, __hidePopUpFromHooks } = usePopUp();
   const dispatch = useDispatch();
