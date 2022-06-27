@@ -7,16 +7,13 @@ import { RootState } from "../../../../store/rootReducer";
 import {
   BasicAPIResponseType,
   getBlockType,
+  VoteType,
 } from "../../../../typedef/common/common.types";
+import stringToVote from "../../../stringToVote/stringToVote";
 import VoteView from "../VoteView";
 
 type Props = {
   blockDetail: getBlockType;
-};
-
-type vote = {
-  content: string;
-  count: number;
 };
 
 const VoteViewContainer = ({ blockDetail }: Props) => {
@@ -27,16 +24,6 @@ const VoteViewContainer = ({ blockDetail }: Props) => {
   );
 
   const [block, setBlock] = useState<getBlockType>(blockDetail);
-
-  const stringToVote = (voteText: string) => {
-    voteText = voteText.replace(/\\/gi, "");
-    voteText = voteText.replace(/'/gi, '"');
-    const votes = JSON.parse(voteText).map((vote: Array<string | number>) => {
-      return { content: vote[0], count: vote[1] };
-    });
-
-    return votes;
-  };
 
   const postVote = async (index: number) => {
     const formData = new FormData();
@@ -53,7 +40,7 @@ const VoteViewContainer = ({ blockDetail }: Props) => {
 
     const newVoteList = stringToVote(data);
     let newVoteTotal = 0;
-    newVoteList.map(({ count }: vote) => {
+    newVoteList.map(({ count }: VoteType) => {
       newVoteTotal += count;
     });
 
@@ -87,7 +74,7 @@ const VoteViewContainer = ({ blockDetail }: Props) => {
   return (
     <VoteView
       votedIndex={block.votedIndex}
-      voteList={block.voteText}
+      voteList={block.voteText as VoteType[]}
       voteTotal={block.voteTotal}
       postVote={postVote}
     />

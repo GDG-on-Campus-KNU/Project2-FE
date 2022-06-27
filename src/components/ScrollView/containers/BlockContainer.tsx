@@ -9,6 +9,7 @@ import ImagePopUpContainer from "../../common/PopUp/BlockPopUp/containers/ImageP
 import { apiOrigin, apiRoute, requestGet } from "../../../lib/api/api";
 import useAuth from "../../../hooks/Auth/useAuth";
 import BlockPopUpContainer from "../../common/PopUp/BlockPopUp/containers/BlockPopUpContainer";
+import stringToVote from "../../stringToVote/stringToVote";
 
 type Props = {
   content: getBlockType;
@@ -18,16 +19,6 @@ const BlockContainer = ({ content }: Props) => {
   const { __showPopUpFromHooks, __hidePopUpFromHooks } = usePopUp();
   const [expand, setExpand] = useState(false);
   const { token } = useAuth();
-
-  const stringToVote = (voteText: string) => {
-    voteText = voteText.replace(/\\/gi, "");
-    voteText = voteText.replace(/'/gi, '"');
-    const votes = JSON.parse(voteText).map((vote: Array<string | number>) => {
-      return { content: vote[0], count: vote[1] };
-    });
-
-    return votes;
-  };
 
   const getBlockDetail = async (id: number) => {
     const { data } = await requestGet<BasicAPIResponseType<getBlockType>>(
@@ -41,7 +32,7 @@ const BlockContainer = ({ content }: Props) => {
       ...data,
       updatedAt: data.updatedAt.split(".")[0].replace("T", " "),
       image: [data.image],
-      voteText: stringToVote(data.voteText),
+      voteText: stringToVote(data.voteText as string),
     };
 
     return blockDeatil;

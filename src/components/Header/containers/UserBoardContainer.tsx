@@ -8,6 +8,7 @@ import {
   UserBoardType,
 } from "../../../typedef/common/common.types";
 import BlockPopUpContainer from "../../common/PopUp/BlockPopUp/containers/BlockPopUpContainer";
+import stringToVote from "../../stringToVote/stringToVote";
 import UserBoard from "../components/UserBoard";
 
 const UserBoardContainer = () => {
@@ -34,16 +35,6 @@ const UserBoardContainer = () => {
       },
     ],
   });
-
-  const stringToVote = (voteText: string) => {
-    voteText = voteText.replace(/\\/gi, "");
-    voteText = voteText.replace(/'/gi, '"');
-    const votes = JSON.parse(voteText).map((vote: Array<string | number>) => {
-      return { content: vote[0], count: vote[1] };
-    });
-
-    return votes;
-  };
 
   const onload = useCallback(async () => {
     const { data } = await requestGet<BasicAPIResponseType<UserBoardType>>(
@@ -72,7 +63,7 @@ const UserBoardContainer = () => {
         ...blockData,
         updatedAt: blockData.updatedAt.split(".")[0].replace("T", " "),
         image: [blockData.image],
-        voteText: stringToVote(blockData.voteText),
+        voteText: stringToVote(blockData.voteText as string),
       };
       __showPopUpFromHooks(
         <BlockPopUpContainer

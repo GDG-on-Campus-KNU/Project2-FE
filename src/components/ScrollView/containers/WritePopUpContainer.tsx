@@ -5,7 +5,7 @@ import { apiOrigin, apiRoute, requestFormPost } from "../../../lib/api/api";
 import {
   BasicAPIResponseType,
   createImageType,
-  createVoteType,
+  VoteType,
   postBlockResponseType,
 } from "../../../typedef/common/common.types";
 import WritePopUp from "../components/WritePopUp";
@@ -29,14 +29,12 @@ const WritePopUpContainer = ({ closePopUp }: Props) => {
     voteText: "",
   });
   const [imgs, setImgs] = useState<createImageType[]>([]);
-  const [votes, setVotes] = useState<createVoteType[]>([
+  const [votes, setVotes] = useState<VoteType[]>([
     {
-      id: new Date().valueOf().toString(),
       content: "",
       count: 0,
     },
     {
-      id: (new Date().valueOf() + 1).toString(),
       content: "",
       count: 0,
     },
@@ -46,23 +44,25 @@ const WritePopUpContainer = ({ closePopUp }: Props) => {
     setVotes([
       ...votes,
       {
-        id: new Date().valueOf().toString(),
         content: "",
         count: 0,
       },
     ]);
   };
 
-  const changeVoteInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newVotes = votes.map((vote) => {
-      if (vote.id === e.target.id) return { ...vote, content: e.target.value };
+  const changeVoteInput = (e: any) => {
+    console.log(typeof e);
+    const newVotes = votes.map((vote, index) => {
+      if ("vote" + index === e.target.parentNode.id)
+        return { ...vote, content: e.target.value };
       else return vote;
     });
     setVotes(newVotes);
   };
 
-  const removeVote = (id: string) => {
-    setVotes(votes.filter((vote) => vote.id !== id));
+  const removeVote = (e: any) => {
+    const delIndex = e.target.parentNode.id;
+    setVotes(votes.filter((vote, index) => "vote" + index !== delIndex));
   };
 
   const addImage = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -137,13 +137,6 @@ const WritePopUpContainer = ({ closePopUp }: Props) => {
     });
     setFormInfo({ ...formInfo, voteText: JSON.stringify(stringVotes) });
   }, [votes]);
-
-  // useEffect(() => {
-  //   const findIndex = votes.findIndex((element) => element.id === voteInput.id);
-  //   let newVotes = [...votes];
-  //   newVotes[findIndex] = { ...newVotes[findIndex], content: voteInput.value };
-  //   setVotes(newVotes);
-  // }, [voteInput]);
 
   useEffect(() => {
     const imgFiles = imgs.map((img) => {
