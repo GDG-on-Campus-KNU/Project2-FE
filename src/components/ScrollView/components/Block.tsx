@@ -56,12 +56,7 @@ const Block = ({
               : "자세히 보기"
             : null}
         </button>
-        <VoteViewContainer
-          votedIndex={block.votedIndex}
-          voteList={block.voteText}
-          voteTotal={block.voteTotal}
-          blockId={block.id}
-        />
+        <VoteViewContainer blockDetail={block} />
       </div>
       <div className="etc-area">
         <div>
