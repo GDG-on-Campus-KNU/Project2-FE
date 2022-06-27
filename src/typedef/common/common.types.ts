@@ -85,6 +85,10 @@ export type ItemListTypes = {
   itemList: getBlockType[];
 };
 
+export type SearchContentTypes = {
+  searchContent: string;
+};
+
 export type getBlockResponseType = {
   count: number;
   next: string;

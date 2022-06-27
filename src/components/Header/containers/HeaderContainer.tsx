@@ -1,21 +1,24 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/Auth/useAuth";
 import usePopUp from "../../../hooks/usePopUp";
 import useRootRoute from "../../../hooks/useRootRoute";
+import { RootState } from "../../../store/rootReducer";
+import { updateSearchContent } from "../../../store/searchContent/actions";
 import Header from "../Header";
 import UserBoardContainer from "./UserBoardContainer";
 import UserInfoContainer from "./UserInfoContainer";
 
-type Props = {
-  setSearchContent: React.Dispatch<React.SetStateAction<string>>;
-};
-
-const HeaderContainer = ({ setSearchContent }: Props) => {
+const HeaderContainer = () => {
   const [isDropDown, setIsDropDown] = useState(false);
   const [searchInput, setSearchInput] = useState("");
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const searchString = useSelector(
+    (root: RootState) => root.searchContentReducer.searchContent
+  );
   const { __updateRootFromHooks } = useRootRoute();
   const { __showPopUpFromHooks } = usePopUp();
   const { clearAccess } = useAuth();
@@ -25,11 +28,11 @@ const HeaderContainer = ({ setSearchContent }: Props) => {
   }, [isDropDown]);
 
   const onSearch = useCallback(() => {
-    setSearchContent(searchInput);
+    dispatch(updateSearchContent(searchInput));
   }, [searchInput]);
 
   const goSearch = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") setSearchContent(searchInput);
+    if (e.key === "Enter") dispatch(updateSearchContent(searchInput));
   };
 
   const onUserInfo = useCallback(() => {
@@ -52,12 +55,17 @@ const HeaderContainer = ({ setSearchContent }: Props) => {
     __showPopUpFromHooks(<UserBoardContainer />);
   }, [__showPopUpFromHooks]);
 
+  useEffect(() => {
+    setSearchInput(searchString);
+  }, [searchString]);
+
   return (
     <Header
       isDropDown={isDropDown}
       onProfileClick={onProfileClick}
       onSearch={onSearch}
       goSearch={goSearch}
+      searchInput={searchInput}
       setSearchInput={setSearchInput}
       onUserInfo={onUserInfo}
       onUserBoards={onUserBoards}

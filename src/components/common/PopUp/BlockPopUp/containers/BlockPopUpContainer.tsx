@@ -4,14 +4,14 @@ import {
   BasicAPIResponseType,
   getBlockType,
   LoginTokenType,
-} from "../../../../typedef/common/common.types";
+} from "../../../../../typedef/common/common.types";
 import {
   apiOrigin,
   apiRoute,
   requestDelete,
   requestPost,
-} from "../../../../lib/api/api";
-import useAuth from "../../../../hooks/Auth/useAuth";
+} from "../../../../../lib/api/api";
+import useAuth from "../../../../../hooks/Auth/useAuth";
 
 type Props = {
   blockDetail: getBlockType;

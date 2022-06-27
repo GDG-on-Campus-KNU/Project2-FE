@@ -7,7 +7,7 @@ import {
   getBlockType,
   UserBoardType,
 } from "../../../typedef/common/common.types";
-import BlockPopUpContainer from "../../common/BlockPopUp/containers/BlockPopUpContainer";
+import BlockPopUpContainer from "../../common/PopUp/BlockPopUp/containers/BlockPopUpContainer";
 import UserBoard from "../components/UserBoard";
 
 const UserBoardContainer = () => {

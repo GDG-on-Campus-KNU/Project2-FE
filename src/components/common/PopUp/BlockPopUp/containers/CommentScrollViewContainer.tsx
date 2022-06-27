@@ -4,8 +4,8 @@ import {
   BasicAPIResponseType,
   getCommentResponseType,
   getCommentType,
-} from "../../../../typedef/common/common.types";
-import { apiOrigin, apiRoute, requestGet } from "../../../../lib/api/api";
+} from "../../../../../typedef/common/common.types";
+import { apiOrigin, apiRoute, requestGet } from "../../../../../lib/api/api";
 
 type Props = {
   blockId: number;

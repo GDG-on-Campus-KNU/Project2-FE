@@ -1,9 +1,9 @@
 import React from "react";
-import { getBlockType } from "../../../typedef/common/common.types";
+import { getBlockType } from "../../../../typedef/common/common.types";
 import "./css/BlockPopUp.css";
 import CommentScrollViewContainer from "./containers/CommentScrollViewContainer";
-import images from "../../../assets/images";
-import PopUpVoteViewContainer from "../VoteView/containers/PopUpVoteViewContainer";
+import images from "../../../../assets/images";
+import PopUpVoteViewContainer from "../../VoteView/containers/PopUpVoteViewContainer";
 
 type Props = {
   blockDetail: getBlockType;

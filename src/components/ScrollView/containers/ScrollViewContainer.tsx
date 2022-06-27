@@ -6,20 +6,17 @@ import WritePopUpContainer from "./WritePopUpContainer";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store/rootReducer";
 import { updateItemList } from "../../../store/itemList/actions";
-import BlockContainer from "./BlockContainer";
 
 type Props = {
   getBlocks: () => Promise<getBlockType[]>;
-  scrollView: React.RefObject<HTMLDivElement>;
-  searchContent: string;
   scrollLoading: boolean;
+  setScrollLoading: any;
 };
 
 const ScrollViewContainer = ({
   getBlocks,
-  scrollView,
-  searchContent,
   scrollLoading,
+  setScrollLoading,
 }: Props) => {
   const { __showPopUpFromHooks, __hidePopUpFromHooks } = usePopUp();
   const dispatch = useDispatch();
@@ -27,6 +24,11 @@ const ScrollViewContainer = ({
     (root: RootState) => root.itemListReducer.itemList
   );
   const next = useSelector((root: RootState) => root.nextReducer.next);
+  const searchString = useSelector(
+    (root: RootState) => root.searchContentReducer.searchContent
+  );
+
+  const [blockList, setBlockList] = useState<getBlockType[]>(itemList);
 
   const closePopUp = useCallback(() => {
     __hidePopUpFromHooks();
@@ -37,20 +39,29 @@ const ScrollViewContainer = ({
   }, []);
 
   const addItemList = async () => {
-    const blocks = await getBlocks();
-    console.log("blocks", blocks);
-    dispatch(updateItemList([...itemList, ...blocks]));
+    const items = await getBlocks();
+    dispatch(updateItemList([...itemList, ...items]));
   };
+
+  useEffect(() => {
+    if (searchString.length > 0) {
+      const newBlockList = itemList.filter((item) => {
+        if (item.content.includes(searchString)) return item;
+      });
+
+      setBlockList(newBlockList);
+    } else {
+      setBlockList(itemList);
+    }
+  }, [searchString, itemList]);
 
   return (
     <ScrollView
       next={next}
-      itemList={itemList}
+      itemList={blockList}
       addItemList={addItemList}
       loadPopUp={loadPopUp}
-      scrollView={scrollView}
       scrollLoading={scrollLoading}
-      searchContent={searchContent}
     />
   );
 };
