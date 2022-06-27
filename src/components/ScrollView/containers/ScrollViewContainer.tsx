@@ -9,14 +9,14 @@ import { updateItemList } from "../../../store/itemList/actions";
 
 type Props = {
   getBlocks: () => Promise<getBlockType[]>;
-  searchContent: string;
   scrollLoading: boolean;
+  setScrollLoading: any;
 };
 
 const ScrollViewContainer = ({
   getBlocks,
-  searchContent,
   scrollLoading,
+  setScrollLoading,
 }: Props) => {
   const { __showPopUpFromHooks, __hidePopUpFromHooks } = usePopUp();
   const dispatch = useDispatch();
@@ -24,6 +24,9 @@ const ScrollViewContainer = ({
     (root: RootState) => root.itemListReducer.itemList
   );
   const next = useSelector((root: RootState) => root.nextReducer.next);
+  const searchString = useSelector(
+    (root: RootState) => root.searchContentReducer.searchContent
+  );
 
   const closePopUp = useCallback(() => {
     __hidePopUpFromHooks();
@@ -35,9 +38,15 @@ const ScrollViewContainer = ({
 
   const addItemList = async () => {
     const blocks = await getBlocks();
-    console.log("blocks", blocks);
     dispatch(updateItemList([...itemList, ...blocks]));
   };
+
+  useEffect(() => {
+    const newItemList = itemList.filter((item) => {
+      if (item.content.includes(searchString)) return item;
+    });
+    dispatch(updateItemList([...newItemList]));
+  }, [searchString]);
 
   return (
     <ScrollView
@@ -46,7 +55,6 @@ const ScrollViewContainer = ({
       addItemList={addItemList}
       loadPopUp={loadPopUp}
       scrollLoading={scrollLoading}
-      searchContent={searchContent}
     />
   );
 };

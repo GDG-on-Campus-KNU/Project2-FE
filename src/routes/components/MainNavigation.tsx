@@ -12,8 +12,6 @@ type Props = {
   getBlocks: () => Promise<getBlockType[]>;
   scrollLoading: boolean;
   setScrollLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  searchContent: string;
-  setSearchContent: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const MainNavigation = ({
@@ -21,12 +19,10 @@ const MainNavigation = ({
   getBlocks,
   scrollLoading,
   setScrollLoading,
-  searchContent,
-  setSearchContent,
 }: Props) => {
   return (
     <div>
-      <HeaderContainer setSearchContent={setSearchContent} />
+      <HeaderContainer />
       <div
         style={{ display: "flex", gap: "12px", padding: "12px 12px 0 12px" }}
       >
@@ -41,8 +37,8 @@ const MainNavigation = ({
               element={
                 <ScrollViewContainer
                   getBlocks={getBlocks}
-                  searchContent={searchContent}
                   scrollLoading={scrollLoading}
+                  setScrollLoading={setScrollLoading}
                 />
               }
             />

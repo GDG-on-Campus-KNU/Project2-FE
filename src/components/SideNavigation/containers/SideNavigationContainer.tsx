@@ -6,6 +6,10 @@ import SideNavigation from "../SideNavigation";
 import { RootState } from "../../../store/rootReducer";
 import { getBlockType } from "../../../typedef/common/common.types";
 import { updateItemList } from "../../../store/itemList/actions";
+import {
+  resetSearchContent,
+  updateSearchContent,
+} from "../../../store/searchContent/actions";
 
 type Props = {
   getBlocks: (next: string | null) => Promise<getBlockType[]>;
@@ -29,6 +33,8 @@ const SideNavigationContainer = ({ getBlocks, setScrollLoading }: Props) => {
         )
       );
     }
+
+    dispatch(resetSearchContent());
   };
 
   const setBlock = async () => {

@@ -11,7 +11,6 @@ type Props = {
   addItemList: () => Promise<void>;
   loadPopUp: React.MouseEventHandler<HTMLButtonElement>;
   scrollLoading: boolean;
-  searchContent: string;
 };
 
 const ScrollView = ({

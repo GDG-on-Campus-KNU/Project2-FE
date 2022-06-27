@@ -17,7 +17,6 @@ const MainNavigationContainer = () => {
   const dispatch = useDispatch();
   const next = useSelector((root: RootState) => root.nextReducer.next);
 
-  const [searchContent, setSearchContent] = useState("");
   const [scrollLoading, setScrollLoading] = useState(false);
 
   const stringToVote = (voteText: string) => {
@@ -61,8 +60,6 @@ const MainNavigationContainer = () => {
       getBlocks={getBlocks}
       scrollLoading={scrollLoading}
       setScrollLoading={setScrollLoading}
-      searchContent={searchContent}
-      setSearchContent={setSearchContent}
     />
   );
 };
