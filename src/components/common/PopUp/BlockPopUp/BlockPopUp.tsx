@@ -3,7 +3,7 @@ import { getBlockType } from "../../../../typedef/common/common.types";
 import "./css/BlockPopUp.css";
 import CommentScrollViewContainer from "./containers/CommentScrollViewContainer";
 import images from "../../../../assets/images";
-import PopUpVoteViewContainer from "../../VoteView/containers/PopUpVoteViewContainer";
+import VoteViewContainer from "../../VoteView/containers/VoteViewContainer";
 
 type Props = {
   blockDetail: getBlockType;
@@ -66,12 +66,7 @@ const BlockPopUp = ({
           <div className="content-area">
             <div className="content">
               {blockDetail.content}
-              <PopUpVoteViewContainer
-                votedIndex={blockDetail.votedIndex}
-                voteList={blockDetail.voteText}
-                voteTotal={blockDetail.voteTotal}
-                blockId={blockDetail.id}
-              />
+              <VoteViewContainer blockDetail={blockDetail} />
             </div>
           </div>
         </div>

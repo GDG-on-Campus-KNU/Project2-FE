@@ -106,7 +106,7 @@ export type getBlockType = {
   content: string;
   likeCount: number;
   votedIndex: number;
-  voteText: string;
+  voteText: string | VoteType[];
   voteTotal: number;
   currentUser: string;
 };
@@ -150,8 +150,7 @@ export type getCommentType = {
   content: string;
 };
 
-export type createVoteType = {
-  id: string;
+export type VoteType = {
   content: string;
   count: number;
 };

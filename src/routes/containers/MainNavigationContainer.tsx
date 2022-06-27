@@ -10,6 +10,7 @@ import MainNavigation from "../components/MainNavigation";
 import { useDispatch, useSelector } from "react-redux";
 import { updateNext } from "../../store/next/actions";
 import { RootState } from "../../store/rootReducer";
+import stringToVote from "../../components/stringToVote/stringToVote";
 
 const MainNavigationContainer = () => {
   const { token } = useAuth();
@@ -18,16 +19,6 @@ const MainNavigationContainer = () => {
   const next = useSelector((root: RootState) => root.nextReducer.next);
 
   const [scrollLoading, setScrollLoading] = useState(false);
-
-  const stringToVote = (voteText: string) => {
-    voteText = voteText.replace(/\\/gi, "");
-    voteText = voteText.replace(/'/gi, '"');
-    const votes = JSON.parse(voteText).map((vote: Array<string | number>) => {
-      return { content: vote[0], count: vote[1] };
-    });
-
-    return votes;
-  };
 
   const getBlocks = async () => {
     const { data } = await requestGet<
@@ -41,7 +32,7 @@ const MainNavigationContainer = () => {
         ...block,
         updatedAt: block.updatedAt.split(".")[0].replace("T", " "),
         image: [block.image],
-        voteText: stringToVote(block.voteText),
+        voteText: stringToVote(block.voteText as string),
       });
     });
 

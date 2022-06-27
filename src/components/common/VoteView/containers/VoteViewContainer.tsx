@@ -1,45 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useAuth from "../../../../hooks/Auth/useAuth";
 import { apiOrigin, apiRoute, requestPost } from "../../../../lib/api/api";
 import { updateItemList } from "../../../../store/itemList/actions";
 import { RootState } from "../../../../store/rootReducer";
-import { BasicAPIResponseType } from "../../../../typedef/common/common.types";
+import {
+  BasicAPIResponseType,
+  getBlockType,
+  VoteType,
+} from "../../../../typedef/common/common.types";
+import stringToVote from "../../../stringToVote/stringToVote";
 import VoteView from "../VoteView";
 
 type Props = {
-  votedIndex: number;
-  voteList: any;
-  voteTotal: number;
-  blockId: number;
+  blockDetail: getBlockType;
 };
 
-type vote = {
-  content: string;
-  count: number;
-};
-
-const VoteViewContainer = ({
-  votedIndex,
-  voteList,
-  voteTotal,
-  blockId,
-}: Props) => {
+const VoteViewContainer = ({ blockDetail }: Props) => {
   const { token } = useAuth();
   const dispatch = useDispatch();
   const itemList = useSelector(
     (root: RootState) => root.itemListReducer.itemList
   );
 
-  const stringToVote = (voteText: string) => {
-    voteText = voteText.replace(/\\/gi, "");
-    voteText = voteText.replace(/'/gi, '"');
-    const votes = JSON.parse(voteText).map((vote: Array<string | number>) => {
-      return { content: vote[0], count: vote[1] };
-    });
-
-    return votes;
-  };
+  const [block, setBlock] = useState<getBlockType>(blockDetail);
 
   const postVote = async (index: number) => {
     const formData = new FormData();
@@ -47,7 +31,7 @@ const VoteViewContainer = ({
     formData.append("index", index.toString());
 
     const { data } = await requestPost<BasicAPIResponseType<string>>(
-      `${apiOrigin}${apiRoute.board}/${blockId}${apiRoute.vote}`,
+      `${apiOrigin}${apiRoute.board}/${block.id}${apiRoute.vote}`,
       {
         Authorization: `Bearer ${token}`,
       },
@@ -56,16 +40,16 @@ const VoteViewContainer = ({
 
     const newVoteList = stringToVote(data);
     let newVoteTotal = 0;
-    newVoteList.map(({ count }: vote) => {
+    newVoteList.map(({ count }: VoteType) => {
       newVoteTotal += count;
     });
 
     const changeItemList = itemList.map((item) => {
-      if (item.id === blockId) {
+      if (item.id === block.id) {
         return {
           ...item,
           voteText: newVoteList,
-          votedIndex: votedIndex === index ? -1 : index,
+          votedIndex: block.votedIndex === index ? -1 : index,
           voteTotal: newVoteTotal,
         };
       } else {
@@ -73,14 +57,25 @@ const VoteViewContainer = ({
       }
     });
 
+    setBlock({
+      ...block,
+      voteText: newVoteList,
+      votedIndex: block.votedIndex === index ? -1 : index,
+      voteTotal: newVoteTotal,
+    });
     dispatch(updateItemList(changeItemList));
   };
 
+  useEffect(() => {
+    const newBlock = itemList.find((block) => block.id === blockDetail.id);
+    if (newBlock) setBlock(newBlock);
+  }, [itemList]);
+
   return (
     <VoteView
-      votedIndex={votedIndex}
-      voteList={voteList}
-      voteTotal={voteTotal}
+      votedIndex={block.votedIndex}
+      voteList={block.voteText as VoteType[]}
+      voteTotal={block.voteTotal}
       postVote={postVote}
     />
   );

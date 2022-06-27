@@ -2,16 +2,16 @@ import React from "react";
 import images from "../../../assets/images";
 import {
   createImageType,
-  createVoteType,
+  VoteType,
 } from "../../../typedef/common/common.types";
 import "./css/WritePopUp.css";
 
 type Props = {
   closePopUp: React.MouseEventHandler<HTMLButtonElement>;
-  votes: createVoteType[];
+  votes: VoteType[];
   addVote: React.MouseEventHandler<HTMLButtonElement>;
-  changeVoteInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  removeVote: (id: string) => void;
+  changeVoteInput: any;
+  removeVote: any;
   imgs: Array<any>;
   addImg: (e: React.ChangeEvent<HTMLInputElement>) => void;
   removeImg: (id: number) => void;
@@ -63,21 +63,20 @@ const WritePopUp = ({
           <div className="title">투표 항목</div>
           <div className="vote-area">
             {votes.map((vote, index) => (
-              <div key={index}>
+              <div key={index} id={"vote" + index}>
                 <input
                   className={
                     index > 1 ? "add-vote-input-box" : "vote-input-box"
                   }
                   value={vote.content}
-                  id={vote.id}
-                  onChange={(e) => changeVoteInput(e)}
+                  onChange={changeVoteInput}
                   required
                 />
                 {index > 1 ? (
                   <button
                     className="vote-del-btn"
                     type="button"
-                    onClick={() => removeVote(vote.id)}
+                    onClick={removeVote}
                   >
                     삭제
                   </button>
