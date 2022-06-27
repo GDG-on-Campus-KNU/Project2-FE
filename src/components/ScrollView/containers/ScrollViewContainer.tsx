@@ -28,6 +28,8 @@ const ScrollViewContainer = ({
     (root: RootState) => root.searchContentReducer.searchContent
   );
 
+  const [blockList, setBlockList] = useState<getBlockType[]>(itemList);
+
   const closePopUp = useCallback(() => {
     __hidePopUpFromHooks();
   }, []);
@@ -37,21 +39,26 @@ const ScrollViewContainer = ({
   }, []);
 
   const addItemList = async () => {
-    const blocks = await getBlocks();
-    dispatch(updateItemList([...itemList, ...blocks]));
+    const items = await getBlocks();
+    dispatch(updateItemList([...itemList, ...items]));
   };
 
   useEffect(() => {
-    const newItemList = itemList.filter((item) => {
-      if (item.content.includes(searchString)) return item;
-    });
-    dispatch(updateItemList([...newItemList]));
-  }, [searchString]);
+    if (searchString.length > 0) {
+      const newBlockList = itemList.filter((item) => {
+        if (item.content.includes(searchString)) return item;
+      });
+
+      setBlockList(newBlockList);
+    } else {
+      setBlockList(itemList);
+    }
+  }, [searchString, itemList]);
 
   return (
     <ScrollView
       next={next}
-      itemList={itemList}
+      itemList={blockList}
       addItemList={addItemList}
       loadPopUp={loadPopUp}
       scrollLoading={scrollLoading}
