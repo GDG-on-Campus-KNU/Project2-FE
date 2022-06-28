@@ -32,7 +32,6 @@ const InfiniteScroll = ({
     [entry]: IntersectionObserverEntry[],
     observer: IntersectionObserver
   ) => {
-    console.log("intersecting");
     if (!target) return;
 
     if (entry.isIntersecting) {

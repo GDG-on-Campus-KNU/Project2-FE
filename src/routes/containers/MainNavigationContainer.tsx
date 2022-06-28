@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import useAuth from "../../hooks/Auth/useAuth";
 import usePopUp from "../../hooks/usePopUp";
 import { requestGet } from "../../lib/api/api";
@@ -40,10 +40,6 @@ const MainNavigationContainer = () => {
 
     return blocks;
   };
-
-  useEffect(() => {
-    console.log(next);
-  }, [next]);
 
   return (
     <MainNavigation
