@@ -6,17 +6,15 @@ import WritePopUpContainer from "./WritePopUpContainer";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store/rootReducer";
 import { updateItemList } from "../../../store/itemList/actions";
+import useBlock from "../../../hooks/useBlock";
 
 type Props = {
-  getBlocks: () => Promise<getBlockType[]>;
   scrollLoading: boolean;
 };
 
-const ScrollViewContainer = ({
-  getBlocks,
-  scrollLoading,
-}: Props) => {
+const ScrollViewContainer = ({ scrollLoading }: Props) => {
   const { __showPopUpFromHooks, __hidePopUpFromHooks } = usePopUp();
+  const { getBlocks } = useBlock();
   const dispatch = useDispatch();
   const itemList = useSelector(
     (root: RootState) => root.itemListReducer.itemList

@@ -34,7 +34,7 @@ const ScrollView = ({
                   id: 0,
                   owner: "",
                   category: "",
-                  image: undefined,
+                  image: null,
                   createdAt: "",
                   updatedAt: "",
                   content: "",

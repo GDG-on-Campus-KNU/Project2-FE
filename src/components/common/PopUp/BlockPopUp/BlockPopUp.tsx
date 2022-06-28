@@ -19,6 +19,7 @@ type Props = {
   deleteBlock: (id: number) => Promise<void>;
   post: boolean;
   setPost: React.Dispatch<React.SetStateAction<boolean>>;
+  loadWritePopUp: any;
 };
 
 const BlockPopUp = ({
@@ -35,6 +36,7 @@ const BlockPopUp = ({
   deleteBlock,
   post,
   setPost,
+  loadWritePopUp,
 }: Props) => {
   return (
     <div className="block-pop-up-wrap">
@@ -54,6 +56,9 @@ const BlockPopUp = ({
             </div>
             {blockDetail.owner === blockDetail.currentUser ? (
               <div>
+                <button className="update-btn" onClick={loadWritePopUp}>
+                  수정
+                </button>
                 <button
                   className="delete-btn"
                   onClick={() => deleteBlock(blockDetail.id)}
@@ -76,9 +81,9 @@ const BlockPopUp = ({
         </div>
         <div className="etc-area">
           <div>
-            {blockDetail.image[0] !== null ? (
+            {blockDetail.image !== null ? (
               <button className="img-btn" onClick={picViewToggle}>
-                <img src={blockDetail.image} alt="sampleImage" />
+                <img src={blockDetail.image} alt={blockDetail.image} />
               </button>
             ) : null}
           </div>

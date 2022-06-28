@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useAuth from "../../../../hooks/Auth/useAuth";
+import useBlock from "../../../../hooks/useBlock";
 import { apiOrigin, apiRoute, requestPost } from "../../../../lib/api/api";
 import { updateItemList } from "../../../../store/itemList/actions";
 import { RootState } from "../../../../store/rootReducer";
@@ -9,7 +10,6 @@ import {
   getBlockType,
   VoteType,
 } from "../../../../typedef/common/common.types";
-import stringToVote from "../../../stringToVote/stringToVote";
 import VoteView from "../VoteView";
 
 type Props = {
@@ -18,6 +18,7 @@ type Props = {
 
 const VoteViewContainer = ({ blockDetail }: Props) => {
   const { token } = useAuth();
+  const { stringToVote } = useBlock();
   const dispatch = useDispatch();
   const itemList = useSelector(
     (root: RootState) => root.itemListReducer.itemList
