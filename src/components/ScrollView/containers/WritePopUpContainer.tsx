@@ -7,11 +7,13 @@ import {
   createImageType,
   VoteType,
   postBlockResponseType,
+  getBlockType,
 } from "../../../typedef/common/common.types";
 import WritePopUp from "../components/WritePopUp";
 
 type Props = {
   closePopUp: React.MouseEventHandler<HTMLButtonElement>;
+  block: getBlockType | null;
 };
 
 type formType = {
@@ -21,18 +23,27 @@ type formType = {
   voteText: VoteType[];
 };
 
-const WritePopUpContainer = ({ closePopUp }: Props) => {
+const WritePopUpContainer = ({ closePopUp, block }: Props) => {
   const { token } = useAuth();
   const { __hidePopUpFromHooks } = usePopUp();
-  const [formInfo, setFormInfo] = useState<formType>({
-    category: "Love",
-    image: null,
-    content: "",
-    voteText: [
-      { content: "", count: 0 },
-      { content: "", count: 0 },
-    ],
-  });
+  const [formInfo, setFormInfo] = useState<formType>(
+    block
+      ? {
+          category: block.category,
+          image: null,
+          content: block.content,
+          voteText: block.voteText as VoteType[],
+        }
+      : {
+          category: "Love",
+          image: null,
+          content: "",
+          voteText: [
+            { content: "", count: 0 },
+            { content: "", count: 0 },
+          ],
+        }
+  );
 
   const [imgs, setImgs] = useState<createImageType[]>([]);
 
@@ -123,7 +134,6 @@ const WritePopUpContainer = ({ closePopUp }: Props) => {
     );
     formData.append("voteText", postVoteString);
     console.log(postVoteString);
-
     const { data } = await requestFormPost<
       BasicAPIResponseType<postBlockResponseType>
     >(
@@ -133,7 +143,6 @@ const WritePopUpContainer = ({ closePopUp }: Props) => {
       },
       formData
     );
-
     if (data) {
       __hidePopUpFromHooks();
     }
@@ -164,3 +173,7 @@ const WritePopUpContainer = ({ closePopUp }: Props) => {
 };
 
 export default WritePopUpContainer;
+
+WritePopUpContainer.defaultProps = {
+  block: null,
+};

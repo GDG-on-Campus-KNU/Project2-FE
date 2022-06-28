@@ -37,7 +37,11 @@ const WritePopUp = ({
     <form className="write-pop-up" onSubmit={postBlock}>
       <div className="pop-up-left">
         <div className="category-section">
-          <select className="category" onChange={(e) => onChangeCategory(e)}>
+          <select
+            className="category"
+            value={formInfo.category}
+            onChange={onChangeCategory}
+          >
             <option value="Love">연애</option>
             <option value="Travel">여행</option>
             <option value="Fashion">패션</option>

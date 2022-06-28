@@ -12,6 +12,8 @@ import {
   requestPost,
 } from "../../../../../lib/api/api";
 import useAuth from "../../../../../hooks/Auth/useAuth";
+import usePopUp from "../../../../../hooks/usePopUp";
+import WritePopUpContainer from "../../../../ScrollView/containers/WritePopUpContainer";
 
 type Props = {
   blockDetail: getBlockType;
@@ -20,6 +22,7 @@ type Props = {
 
 const BlockPopUpContainer = ({ blockDetail, closePopUp }: Props) => {
   const { token } = useAuth();
+  const { __showPopUpFromHooks } = usePopUp();
 
   const [picView, setPicView] = useState(false);
   const [image, setImage] = useState<string>("");
@@ -75,6 +78,12 @@ const BlockPopUpContainer = ({ blockDetail, closePopUp }: Props) => {
     [comment]
   );
 
+  const loadWritePopUp = useCallback(() => {
+    __showPopUpFromHooks(
+      <WritePopUpContainer block={blockDetail} closePopUp={closePopUp} />
+    );
+  }, []);
+
   return (
     <BlockPopUp
       blockDetail={blockDetail}
@@ -90,6 +99,7 @@ const BlockPopUpContainer = ({ blockDetail, closePopUp }: Props) => {
       deleteBlock={deleteBlock}
       post={post}
       setPost={setPost}
+      loadWritePopUp={loadWritePopUp}
     />
   );
 };
