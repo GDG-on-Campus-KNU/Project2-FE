@@ -107,40 +107,37 @@ const WritePopUpContainer = ({ closePopUp }: Props) => {
     setFormInfo({ ...formInfo, content: e.target.value });
   };
 
-  const postBlock = useCallback(
-    async (e) => {
-      e.preventDefault();
-      const formData = new FormData();
-      formData.append("category", formInfo.category);
-      if (formInfo.image !== null) {
-        formInfo.image.map((file, index) => {
-          formData.append("image", file);
-        });
-      }
-      formData.append("content", formInfo.content);
-      formData.append("voteText", JSON.stringify(formInfo.voteText));
-      console.log(
-        JSON.stringify(formInfo.voteText)
-          .replaceAll("{", "[")
-          .replaceAll("}", "]")
-      );
+  const postBlock = useCallback(async () => {
+    const formData = new FormData();
+    formData.append("category", formInfo.category);
+    if (formInfo.image !== null) {
+      formInfo.image.map((file, index) => {
+        formData.append("image", file);
+      });
+    }
+    formData.append("content", formInfo.content);
+    const postVoteString = JSON.stringify(
+      formInfo.voteText.map((vote) => {
+        return [vote.content, vote.count];
+      })
+    );
+    formData.append("voteText", postVoteString);
+    console.log(postVoteString);
 
-      const { data } = await requestFormPost<
-        BasicAPIResponseType<postBlockResponseType>
-      >(
-        `${apiOrigin}${apiRoute.board}/`,
-        {
-          Authorization: `Bearer ${token}`,
-        },
-        formData
-      );
+    const { data } = await requestFormPost<
+      BasicAPIResponseType<postBlockResponseType>
+    >(
+      `${apiOrigin}${apiRoute.board}/`,
+      {
+        Authorization: `Bearer ${token}`,
+      },
+      formData
+    );
 
-      if (data) {
-        __hidePopUpFromHooks();
-      }
-    },
-    [formInfo, __hidePopUpFromHooks]
-  );
+    if (data) {
+      __hidePopUpFromHooks();
+    }
+  }, [formInfo, __hidePopUpFromHooks]);
 
   useEffect(() => {
     const imgFiles = imgs.map((img) => {
