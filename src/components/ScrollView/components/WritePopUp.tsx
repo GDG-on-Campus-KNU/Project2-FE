@@ -11,7 +11,7 @@ type Props = {
   removeVote: any;
   addImg: (e: React.ChangeEvent<HTMLInputElement>) => void;
   removeImg: (e: any) => void;
-  postBlock: React.FormEventHandler<HTMLFormElement>;
+  uploadBlock: React.FormEventHandler<HTMLFormElement>;
   onChangeCategory: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   onChangeContent: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 };
@@ -24,12 +24,12 @@ const WritePopUp = ({
   removeVote,
   addImg,
   removeImg,
-  postBlock,
+  uploadBlock,
   onChangeCategory,
   onChangeContent,
 }: Props) => {
   return (
-    <form className="write-pop-up" onSubmit={postBlock}>
+    <form className="write-pop-up" onSubmit={uploadBlock}>
       <div className="pop-up-left">
         <div className="category-section">
           <select

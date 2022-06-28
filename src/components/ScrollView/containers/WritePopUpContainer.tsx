@@ -1,7 +1,13 @@
 import React, { useCallback, useState, useEffect } from "react";
 import useAuth from "../../../hooks/Auth/useAuth";
 import usePopUp from "../../../hooks/usePopUp";
-import { apiOrigin, apiRoute, requestFormPost } from "../../../lib/api/api";
+import {
+  apiOrigin,
+  apiRoute,
+  requestFormPatch,
+  requestFormPost,
+  requestFormPut,
+} from "../../../lib/api/api";
 import {
   BasicAPIResponseType,
   ImageType,
@@ -33,10 +39,12 @@ const WritePopUpContainer = ({ closePopUp, block }: Props) => {
     block
       ? {
           category: block.category,
-          image: {
-            imgBase64: block.image,
-            imgFile: null,
-          },
+          image: block.image
+            ? {
+                imgBase64: block.image,
+                imgFile: null,
+              }
+            : null,
           content: block.content,
           voteText: block.voteText as VoteType[],
         }
@@ -50,6 +58,7 @@ const WritePopUpContainer = ({ closePopUp, block }: Props) => {
           ],
         }
   );
+  const [changeImage, setChangeImage] = useState(false);
 
   const addVote = () => {
     setFormInfo({
@@ -97,6 +106,7 @@ const WritePopUpContainer = ({ closePopUp, block }: Props) => {
       if (e.target.files === null) return;
 
       const base64 = reader.result;
+      setChangeImage(true);
       setFormInfo({
         ...formInfo,
         image: {
@@ -110,6 +120,7 @@ const WritePopUpContainer = ({ closePopUp, block }: Props) => {
   };
 
   const removeImg = (e: any) => {
+    setChangeImage(true);
     setFormInfo({
       ...formInfo,
       image: null,
@@ -124,9 +135,41 @@ const WritePopUpContainer = ({ closePopUp, block }: Props) => {
     setFormInfo({ ...formInfo, content: e.target.value });
   };
 
+  const patchBlock = useCallback(async () => {
+    const formData = new FormData();
+    formData.append("category", formInfo.category);
+
+    formData.append("content", formInfo.content);
+    const postVoteString = JSON.stringify(
+      formInfo.voteText.map((vote) => {
+        return [vote.content, vote.count];
+      })
+    );
+
+    formData.append("voteText", postVoteString);
+
+    if (changeImage && formInfo.image !== null) {
+      formData.append("image", formInfo.image.imgFile!);
+    }
+
+    const { data } = await requestFormPatch<
+      BasicAPIResponseType<postBlockResponseType>
+    >(
+      `${apiOrigin}${apiRoute.board}/${block!.id}/`,
+      {
+        Authorization: `Bearer ${token}`,
+      },
+      formData
+    );
+    if (data) {
+      __hidePopUpFromHooks();
+    }
+  }, [formInfo, __hidePopUpFromHooks]);
+
   const postBlock = useCallback(async () => {
     const formData = new FormData();
     formData.append("category", formInfo.category);
+    console.log(formInfo.image);
     if (formInfo.image !== null) {
       formData.append("image", formInfo.image.imgFile!);
     }
@@ -138,7 +181,7 @@ const WritePopUpContainer = ({ closePopUp, block }: Props) => {
       })
     );
     formData.append("voteText", postVoteString);
-    console.log(postVoteString);
+
     const { data } = await requestFormPost<
       BasicAPIResponseType<postBlockResponseType>
     >(
@@ -162,7 +205,7 @@ const WritePopUpContainer = ({ closePopUp, block }: Props) => {
       removeVote={removeVote}
       addImg={addImage}
       removeImg={removeImg}
-      postBlock={postBlock}
+      uploadBlock={block ? patchBlock : postBlock}
       onChangeCategory={onChangeCategory}
       onChangeContent={onChangeContent}
     />

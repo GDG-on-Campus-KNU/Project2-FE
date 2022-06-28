@@ -157,5 +157,5 @@ export type VoteType = {
 
 export type ImageType = {
   imgBase64: string | ArrayBuffer | null;
-  imgFile: File;
+  imgFile: string | Blob | null;
 };
