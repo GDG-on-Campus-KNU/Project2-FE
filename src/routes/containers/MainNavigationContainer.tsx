@@ -1,7 +1,6 @@
 import { useState } from "react";
 import usePopUp from "../../hooks/usePopUp";
 import MainNavigation from "../components/MainNavigation";
-import useBlock from "../../hooks/useBlock";
 
 const MainNavigationContainer = () => {
   const { popUp } = usePopUp();

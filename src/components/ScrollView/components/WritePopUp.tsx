@@ -9,7 +9,6 @@ type Props = {
   addVote: React.MouseEventHandler<HTMLButtonElement>;
   changeVoteInput: any;
   removeVote: any;
-  imgs: Array<any>;
   addImg: (e: React.ChangeEvent<HTMLInputElement>) => void;
   removeImg: (e: any) => void;
   postBlock: React.FormEventHandler<HTMLFormElement>;
@@ -23,7 +22,6 @@ const WritePopUp = ({
   addVote,
   changeVoteInput,
   removeVote,
-  imgs,
   addImg,
   removeImg,
   postBlock,
@@ -93,12 +91,12 @@ const WritePopUp = ({
           </div>
           <div className="title">이미지</div>
           <div className="image-area">
-            {imgs.map((img: ImageType, index: number) => (
-              <div className="img-preview" id={"image" + index} key={index}>
+            {formInfo.image ? (
+              <div className="img-preview" id={"image"}>
                 <img
                   className="img-add-btn"
-                  src={img.imgBase64 as string}
-                  alt={img.imgFile.name}
+                  src={formInfo.image.imgBase64 as string}
+                  alt="sampleImage"
                 />
                 <button
                   className="image-del-btn"
@@ -108,8 +106,8 @@ const WritePopUp = ({
                   X
                 </button>
               </div>
-            ))}
-            {imgs.length < 1 ? (
+            ) : null}
+            {!formInfo.image ? (
               <>
                 <label htmlFor="temp-btn">
                   <div className="img-add-btn">+</div>

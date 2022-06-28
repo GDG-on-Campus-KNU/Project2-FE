@@ -18,7 +18,10 @@ type Props = {
 
 type formType = {
   category: string;
-  image: (string | File)[] | null;
+  image: {
+    imgBase64: string | ArrayBuffer | null;
+    imgFile: string | Blob | null;
+  } | null;
   content: string;
   voteText: VoteType[];
 };
@@ -30,7 +33,10 @@ const WritePopUpContainer = ({ closePopUp, block }: Props) => {
     block
       ? {
           category: block.category,
-          image: null,
+          image: {
+            imgBase64: block.image,
+            imgFile: null,
+          },
           content: block.content,
           voteText: block.voteText as VoteType[],
         }
@@ -46,24 +52,6 @@ const WritePopUpContainer = ({ closePopUp, block }: Props) => {
   );
 
   const [imgs, setImgs] = useState<ImageType[]>([]);
-
-  // const makeBase64Img = (img: string) => {
-  //   let reader = new FileReader();
-
-  //   if (img) {
-  //     reader.readAsDataURL(img);
-  //   }
-
-  //   reader.onloadend = () => {
-  //     if (img === null) return;
-
-  //     const base64 = reader.result;
-  //     return {
-  //       imgBase64: base64,
-  //       imgFile: img,
-  //     };
-  //   };
-  // };
 
   const addVote = () => {
     setFormInfo({
@@ -111,13 +99,13 @@ const WritePopUpContainer = ({ closePopUp, block }: Props) => {
       if (e.target.files === null) return;
 
       const base64 = reader.result;
-      setImgs([
-        ...imgs,
-        {
+      setFormInfo({
+        ...formInfo,
+        image: {
           imgBase64: base64,
           imgFile: e.target.files[0],
         },
-      ]);
+      });
 
       e.target.value = ""; //같은 파일을 올리면 인식 못하므로 여기서 초기화
     };
@@ -144,10 +132,9 @@ const WritePopUpContainer = ({ closePopUp, block }: Props) => {
     const formData = new FormData();
     formData.append("category", formInfo.category);
     if (formInfo.image !== null) {
-      formInfo.image.map((file, index) => {
-        formData.append("image", file);
-      });
+      formData.append("image", formInfo.image.imgFile!);
     }
+
     formData.append("content", formInfo.content);
     const postVoteString = JSON.stringify(
       formInfo.voteText.map((vote) => {
@@ -170,16 +157,6 @@ const WritePopUpContainer = ({ closePopUp, block }: Props) => {
     }
   }, [formInfo, __hidePopUpFromHooks]);
 
-  useEffect(() => {
-    const imgFiles = imgs.map((img) => {
-      return img.imgFile;
-    });
-
-    console.log(imgs);
-
-    setFormInfo({ ...formInfo, image: imgFiles.length > 0 ? imgFiles : null });
-  }, [imgs]);
-
   return (
     <WritePopUp
       closePopUp={closePopUp}
@@ -187,7 +164,6 @@ const WritePopUpContainer = ({ closePopUp, block }: Props) => {
       addVote={addVote}
       changeVoteInput={changeVoteInput}
       removeVote={removeVote}
-      imgs={imgs}
       addImg={addImage}
       removeImg={removeImg}
       postBlock={postBlock}

@@ -3,7 +3,6 @@ import { getBlockType } from "../../../typedef/common/common.types";
 import Block from "../components/Block";
 import usePopUp from "../../../hooks/usePopUp";
 import ImagePopUpContainer from "../../common/PopUp/BlockPopUp/containers/ImagePopUpContainer";
-import useAuth from "../../../hooks/Auth/useAuth";
 import BlockPopUpContainer from "../../common/PopUp/BlockPopUp/containers/BlockPopUpContainer";
 import useBlock from "../../../hooks/useBlock";
 
@@ -19,7 +18,6 @@ const BlockContainer = ({ content }: Props) => {
 
   const loadPopUp = useCallback(async (id: number) => {
     const blockDetail = await getBlockDetail(id);
-    console.log(blockDetail);
     __showPopUpFromHooks(
       <BlockPopUpContainer blockDetail={blockDetail} closePopUp={closePopUp} />
     );
