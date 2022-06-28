@@ -81,9 +81,9 @@ const BlockPopUp = ({
         </div>
         <div className="etc-area">
           <div>
-            {blockDetail.image[0] !== null ? (
+            {blockDetail.image !== null ? (
               <button className="img-btn" onClick={picViewToggle}>
-                <img src={blockDetail.image} alt="sampleImage" />
+                <img src={blockDetail.image} alt={blockDetail.image} />
               </button>
             ) : null}
           </div>

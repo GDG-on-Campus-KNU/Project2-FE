@@ -10,14 +10,15 @@ import {
   resetSearchContent,
   updateSearchContent,
 } from "../../../store/searchContent/actions";
+import useBlock from "../../../hooks/useBlock";
 
 type Props = {
-  getBlocks: (next: string | null) => Promise<getBlockType[]>;
   setScrollLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const SideNavigationContainer = ({ getBlocks, setScrollLoading }: Props) => {
+const SideNavigationContainer = ({ setScrollLoading }: Props) => {
   const [selected, setSelected] = useState("all");
+  const { getBlocks } = useBlock();
   const dispatch = useDispatch();
   const next = useSelector((root: RootState) => root.nextReducer.next);
 
@@ -39,7 +40,7 @@ const SideNavigationContainer = ({ getBlocks, setScrollLoading }: Props) => {
 
   const setBlock = async () => {
     setScrollLoading(true);
-    const blocks = await getBlocks(next);
+    const blocks = await getBlocks();
     dispatch(updateItemList(blocks));
     setScrollLoading(false);
   };

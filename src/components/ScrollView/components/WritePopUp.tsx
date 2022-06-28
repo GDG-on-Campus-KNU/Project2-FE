@@ -1,9 +1,6 @@
 import React from "react";
 import images from "../../../assets/images";
-import {
-  createImageType,
-  VoteType,
-} from "../../../typedef/common/common.types";
+import { ImageType, VoteType } from "../../../typedef/common/common.types";
 import "./css/WritePopUp.css";
 
 type Props = {
@@ -14,7 +11,7 @@ type Props = {
   removeVote: any;
   imgs: Array<any>;
   addImg: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  removeImg: (id: number) => void;
+  removeImg: (e: any) => void;
   postBlock: React.FormEventHandler<HTMLFormElement>;
   onChangeCategory: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   onChangeContent: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
@@ -96,8 +93,8 @@ const WritePopUp = ({
           </div>
           <div className="title">이미지</div>
           <div className="image-area">
-            {imgs.map((img: createImageType) => (
-              <div className="img-preview" key={img.id}>
+            {imgs.map((img: ImageType, index: number) => (
+              <div className="img-preview" id={"image" + index} key={index}>
                 <img
                   className="img-add-btn"
                   src={img.imgBase64 as string}
@@ -106,7 +103,7 @@ const WritePopUp = ({
                 <button
                   className="image-del-btn"
                   type="button"
-                  onClick={() => removeImg(img.id)}
+                  onClick={removeImg}
                 >
                   X
                 </button>

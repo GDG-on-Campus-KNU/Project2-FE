@@ -4,7 +4,7 @@ import usePopUp from "../../../hooks/usePopUp";
 import { apiOrigin, apiRoute, requestFormPost } from "../../../lib/api/api";
 import {
   BasicAPIResponseType,
-  createImageType,
+  ImageType,
   VoteType,
   postBlockResponseType,
   getBlockType,
@@ -18,7 +18,7 @@ type Props = {
 
 type formType = {
   category: string;
-  image: File[] | null;
+  image: (string | File)[] | null;
   content: string;
   voteText: VoteType[];
 };
@@ -45,7 +45,25 @@ const WritePopUpContainer = ({ closePopUp, block }: Props) => {
         }
   );
 
-  const [imgs, setImgs] = useState<createImageType[]>([]);
+  const [imgs, setImgs] = useState<ImageType[]>([]);
+
+  // const makeBase64Img = (img: string) => {
+  //   let reader = new FileReader();
+
+  //   if (img) {
+  //     reader.readAsDataURL(img);
+  //   }
+
+  //   reader.onloadend = () => {
+  //     if (img === null) return;
+
+  //     const base64 = reader.result;
+  //     return {
+  //       imgBase64: base64,
+  //       imgFile: img,
+  //     };
+  //   };
+  // };
 
   const addVote = () => {
     setFormInfo({
@@ -96,7 +114,6 @@ const WritePopUpContainer = ({ closePopUp, block }: Props) => {
       setImgs([
         ...imgs,
         {
-          id: new Date().valueOf(),
           imgBase64: base64,
           imgFile: e.target.files[0],
         },
@@ -106,8 +123,13 @@ const WritePopUpContainer = ({ closePopUp, block }: Props) => {
     };
   };
 
-  const removeImg = (id: number) => {
-    setImgs(imgs.filter((img: createImageType) => img.id !== id));
+  const removeImg = (e: any) => {
+    setImgs(
+      imgs.filter(
+        (img: ImageType, index: number) =>
+          "image" + index !== e.target.parentNode.id
+      )
+    );
   };
 
   const onChangeCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -152,6 +174,9 @@ const WritePopUpContainer = ({ closePopUp, block }: Props) => {
     const imgFiles = imgs.map((img) => {
       return img.imgFile;
     });
+
+    console.log(imgs);
+
     setFormInfo({ ...formInfo, image: imgFiles.length > 0 ? imgFiles : null });
   }, [imgs]);
 

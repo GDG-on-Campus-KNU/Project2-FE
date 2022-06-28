@@ -1,15 +1,11 @@
 import React, { useState, useCallback } from "react";
-import {
-  BasicAPIResponseType,
-  getBlockType,
-} from "../../../typedef/common/common.types";
+import { getBlockType } from "../../../typedef/common/common.types";
 import Block from "../components/Block";
 import usePopUp from "../../../hooks/usePopUp";
 import ImagePopUpContainer from "../../common/PopUp/BlockPopUp/containers/ImagePopUpContainer";
-import { apiOrigin, apiRoute, requestGet } from "../../../lib/api/api";
 import useAuth from "../../../hooks/Auth/useAuth";
 import BlockPopUpContainer from "../../common/PopUp/BlockPopUp/containers/BlockPopUpContainer";
-import stringToVote from "../../stringToVote/stringToVote";
+import useBlock from "../../../hooks/useBlock";
 
 type Props = {
   content: getBlockType;
@@ -17,29 +13,13 @@ type Props = {
 
 const BlockContainer = ({ content }: Props) => {
   const { __showPopUpFromHooks, __hidePopUpFromHooks } = usePopUp();
+  const { getBlockDetail } = useBlock();
+
   const [expand, setExpand] = useState(false);
-  const { token } = useAuth();
-
-  const getBlockDetail = async (id: number) => {
-    const { data } = await requestGet<BasicAPIResponseType<getBlockType>>(
-      `${apiOrigin}${apiRoute.board}/${id}/`,
-      {
-        Authorization: `Bearer ${token}`,
-      }
-    );
-
-    const blockDeatil = {
-      ...data,
-      updatedAt: data.updatedAt.split(".")[0].replace("T", " "),
-      image: [data.image],
-      voteText: stringToVote(data.voteText as string),
-    };
-
-    return blockDeatil;
-  };
 
   const loadPopUp = useCallback(async (id: number) => {
     const blockDetail = await getBlockDetail(id);
+    console.log(blockDetail);
     __showPopUpFromHooks(
       <BlockPopUpContainer blockDetail={blockDetail} closePopUp={closePopUp} />
     );
@@ -53,14 +33,9 @@ const BlockContainer = ({ content }: Props) => {
     setExpand((current) => !current);
   }, []);
 
-  const onClickImage = useCallback(
-    (index: number) => {
-      __showPopUpFromHooks(
-        <ImagePopUpContainer images={content.image} index={index} />
-      );
-    },
-    [__showPopUpFromHooks]
-  );
+  const onClickImage = useCallback(() => {
+    __showPopUpFromHooks(<ImagePopUpContainer image={content.image!} />);
+  }, [__showPopUpFromHooks]);
 
   return (
     <Block

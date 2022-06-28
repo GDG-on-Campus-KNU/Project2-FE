@@ -36,8 +36,6 @@ const CommentScrollViewContainer = ({ blockId, post, setPost }: Props) => {
 
   const addComment = async () => {
     const comments = await getComments();
-    console.log(comments);
-    // await new Promise((resolve) => setTimeout(resolve, 1000));
     setCommentItemList((commentItemList) => [...commentItemList, ...comments]);
   };
 

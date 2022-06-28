@@ -7,7 +7,7 @@ import images from "../../../assets/images";
 type Props = {
   block: getBlockType;
   loadPopUp: (id: number) => Promise<void>;
-  onClickImage: (index: number) => void;
+  onClickImage: () => void;
   expand: boolean;
   reverseExpand: React.MouseEventHandler<HTMLButtonElement>;
 };
@@ -60,19 +60,16 @@ const Block = ({
       </div>
       <div className="etc-area">
         <div>
-          {block.image[0] !== null
-            ? block.image.map((image: string, index: number) => (
-                <button className="attached-image" key={index}>
-                  <img
-                    className="SamplePicture"
-                    src={image}
-                    alt={image}
-                    key={index}
-                    onClick={() => onClickImage(index)}
-                  />
-                </button>
-              ))
-            : null}
+          {block.image !== null ? (
+            <button className="attached-image">
+              <img
+                className="SamplePicture"
+                src={block.image}
+                alt={block.image}
+                onClick={onClickImage}
+              />
+            </button>
+          ) : null}
         </div>
         <div>
           <button onClick={() => loadPopUp(block.id)}>

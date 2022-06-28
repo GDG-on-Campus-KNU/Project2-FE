@@ -100,7 +100,7 @@ export type getBlockType = {
   id: number;
   owner: string;
   category: string;
-  image: any;
+  image: string | null;
   createdAt: string;
   updatedAt: string;
   content: string;
@@ -125,7 +125,7 @@ export type postBlockResponseType = {
   id: number;
   owner: string;
   category: "Love" | "Travel" | "Hot";
-  image: "string";
+  image: "string" | null;
   createdAt: string;
   updatedAt: string;
   content: "string";
@@ -155,8 +155,7 @@ export type VoteType = {
   count: number;
 };
 
-export type createImageType = {
-  id: number;
+export type ImageType = {
   imgBase64: string | ArrayBuffer | null;
   imgFile: File;
 };

@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import useAuth from "../../../hooks/Auth/useAuth";
+import useBlock from "../../../hooks/useBlock";
 import usePopUp from "../../../hooks/usePopUp";
 import { apiOrigin, apiRoute, requestGet } from "../../../lib/api/api";
 import {
@@ -8,12 +9,12 @@ import {
   UserBoardType,
 } from "../../../typedef/common/common.types";
 import BlockPopUpContainer from "../../common/PopUp/BlockPopUp/containers/BlockPopUpContainer";
-import stringToVote from "../../stringToVote/stringToVote";
 import UserBoard from "../components/UserBoard";
 
 const UserBoardContainer = () => {
   const { token } = useAuth();
   const { __showPopUpFromHooks, __hidePopUpFromHooks } = usePopUp();
+  const { stringToVote } = useBlock();
   const [boards, setBoards] = useState<UserBoardType>({
     count: 0,
     next: null,
@@ -54,7 +55,6 @@ const UserBoardContainer = () => {
 
       setBoards({ ...data, results: newBoard });
     }
-    console.log(data);
   }, []);
 
   const getBlockDetail = useCallback(
@@ -62,7 +62,6 @@ const UserBoardContainer = () => {
       const blockDetail = {
         ...blockData,
         updatedAt: blockData.updatedAt.split(".")[0].replace("T", " "),
-        image: [blockData.image],
         voteText: stringToVote(blockData.voteText as string),
       };
       __showPopUpFromHooks(
