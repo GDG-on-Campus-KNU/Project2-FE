@@ -51,8 +51,6 @@ const WritePopUpContainer = ({ closePopUp, block }: Props) => {
         }
   );
 
-  const [imgs, setImgs] = useState<ImageType[]>([]);
-
   const addVote = () => {
     setFormInfo({
       ...formInfo,
@@ -112,12 +110,10 @@ const WritePopUpContainer = ({ closePopUp, block }: Props) => {
   };
 
   const removeImg = (e: any) => {
-    setImgs(
-      imgs.filter(
-        (img: ImageType, index: number) =>
-          "image" + index !== e.target.parentNode.id
-      )
-    );
+    setFormInfo({
+      ...formInfo,
+      image: null,
+    });
   };
 
   const onChangeCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
