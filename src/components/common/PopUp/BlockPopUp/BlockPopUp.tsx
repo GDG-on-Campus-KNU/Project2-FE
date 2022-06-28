@@ -56,9 +56,6 @@ const BlockPopUp = ({
             </div>
             {blockDetail.owner === blockDetail.currentUser ? (
               <div>
-                <button className="update-btn" onClick={loadWritePopUp}>
-                  수정
-                </button>
                 <button
                   className="delete-btn"
                   onClick={() => deleteBlock(blockDetail.id)}
