@@ -8,7 +8,7 @@ import "./css/WritePopUp.css";
 
 type Props = {
   closePopUp: React.MouseEventHandler<HTMLButtonElement>;
-  votes: VoteType[];
+  formInfo: any;
   addVote: React.MouseEventHandler<HTMLButtonElement>;
   changeVoteInput: any;
   removeVote: any;
@@ -22,7 +22,7 @@ type Props = {
 
 const WritePopUp = ({
   closePopUp,
-  votes,
+  formInfo,
   addVote,
   changeVoteInput,
   removeVote,
@@ -49,7 +49,8 @@ const WritePopUp = ({
         <textarea
           className="textarea"
           placeholder="내용을 입력하세요."
-          onChange={(e) => onChangeContent(e)}
+          value={formInfo.content}
+          onChange={onChangeContent}
           required
         ></textarea>
       </div>
@@ -62,7 +63,7 @@ const WritePopUp = ({
         <div className="info-area">
           <div className="title">투표 항목</div>
           <div className="vote-area">
-            {votes.map((vote, index) => (
+            {formInfo.voteText.map((vote: VoteType, index: number) => (
               <div key={index} id={"vote" + index}>
                 <input
                   className={
@@ -83,7 +84,7 @@ const WritePopUp = ({
                 ) : null}
               </div>
             ))}
-            {votes.length < 4 ? (
+            {formInfo.voteText.length < 4 ? (
               <button type="button" className="more-btn" onClick={addVote}>
                 +
               </button>

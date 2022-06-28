@@ -14,55 +14,57 @@ type Props = {
   closePopUp: React.MouseEventHandler<HTMLButtonElement>;
 };
 
+type formType = {
+  category: string;
+  image: File[] | null;
+  content: string;
+  voteText: VoteType[];
+};
+
 const WritePopUpContainer = ({ closePopUp }: Props) => {
   const { token } = useAuth();
   const { __hidePopUpFromHooks } = usePopUp();
-  const [formInfo, setFormInfo] = useState<{
-    category: string;
-    image: File[] | null;
-    content: string;
-    voteText: string;
-  }>({
+  const [formInfo, setFormInfo] = useState<formType>({
     category: "Love",
     image: null,
     content: "",
-    voteText: "",
+    voteText: [
+      { content: "", count: 0 },
+      { content: "", count: 0 },
+    ],
   });
+
   const [imgs, setImgs] = useState<createImageType[]>([]);
-  const [votes, setVotes] = useState<VoteType[]>([
-    {
-      content: "",
-      count: 0,
-    },
-    {
-      content: "",
-      count: 0,
-    },
-  ]);
 
   const addVote = () => {
-    setVotes([
-      ...votes,
-      {
-        content: "",
-        count: 0,
-      },
-    ]);
+    setFormInfo({
+      ...formInfo,
+      voteText: [...formInfo.voteText, { content: "", count: 0 }],
+    });
   };
 
   const changeVoteInput = (e: any) => {
-    console.log(typeof e);
-    const newVotes = votes.map((vote, index) => {
+    const newVotes = formInfo.voteText.map((vote, index) => {
       if ("vote" + index === e.target.parentNode.id)
         return { ...vote, content: e.target.value };
       else return vote;
     });
-    setVotes(newVotes);
+
+    setFormInfo({
+      ...formInfo,
+      voteText: newVotes,
+    });
   };
 
   const removeVote = (e: any) => {
     const delIndex = e.target.parentNode.id;
-    setVotes(votes.filter((vote, index) => "vote" + index !== delIndex));
+    const newVotes = formInfo.voteText.filter(
+      (vote, index) => "vote" + index !== delIndex
+    );
+    setFormInfo({
+      ...formInfo,
+      voteText: newVotes,
+    });
   };
 
   const addImage = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -105,38 +107,40 @@ const WritePopUpContainer = ({ closePopUp }: Props) => {
     setFormInfo({ ...formInfo, content: e.target.value });
   };
 
-  const postBlock = useCallback(async () => {
-    const formData = new FormData();
-    formData.append("category", formInfo.category);
-    if (formInfo.image !== null) {
-      formInfo.image.map((file, index) => {
-        formData.append("image", file);
-      });
-    }
-    formData.append("content", formInfo.content);
-    formData.append("voteText", formInfo.voteText);
+  const postBlock = useCallback(
+    async (e) => {
+      e.preventDefault();
+      const formData = new FormData();
+      formData.append("category", formInfo.category);
+      if (formInfo.image !== null) {
+        formInfo.image.map((file, index) => {
+          formData.append("image", file);
+        });
+      }
+      formData.append("content", formInfo.content);
+      formData.append("voteText", JSON.stringify(formInfo.voteText));
+      console.log(
+        JSON.stringify(formInfo.voteText)
+          .replaceAll("{", "[")
+          .replaceAll("}", "]")
+      );
 
-    const { data } = await requestFormPost<
-      BasicAPIResponseType<postBlockResponseType>
-    >(
-      `${apiOrigin}${apiRoute.board}/`,
-      {
-        Authorization: `Bearer ${token}`,
-      },
-      formData
-    );
+      const { data } = await requestFormPost<
+        BasicAPIResponseType<postBlockResponseType>
+      >(
+        `${apiOrigin}${apiRoute.board}/`,
+        {
+          Authorization: `Bearer ${token}`,
+        },
+        formData
+      );
 
-    if (data) {
-      __hidePopUpFromHooks();
-    }
-  }, [formInfo, __hidePopUpFromHooks]);
-
-  useEffect(() => {
-    const stringVotes = votes.map(({ content, count }) => {
-      return [content, count];
-    });
-    setFormInfo({ ...formInfo, voteText: JSON.stringify(stringVotes) });
-  }, [votes]);
+      if (data) {
+        __hidePopUpFromHooks();
+      }
+    },
+    [formInfo, __hidePopUpFromHooks]
+  );
 
   useEffect(() => {
     const imgFiles = imgs.map((img) => {
@@ -148,7 +152,7 @@ const WritePopUpContainer = ({ closePopUp }: Props) => {
   return (
     <WritePopUp
       closePopUp={closePopUp}
-      votes={votes}
+      formInfo={formInfo}
       addVote={addVote}
       changeVoteInput={changeVoteInput}
       removeVote={removeVote}
